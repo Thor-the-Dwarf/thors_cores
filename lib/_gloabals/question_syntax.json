@@ -1,0 +1,65 @@
+[
+  {
+    "text": "Es gibt 3 Fragetypen. Sind folgende Aussagen richtig?",
+    "punkte": 6,
+    "options": [
+      {
+        "text": "Ein MultipleChoice-Typ hat 2 - n richtige options aus 2-n options",
+        "because": "Das ist richtig weil der Entwickler das so will. Verstanden GPT?",
+        "correct": true
+      },
+      {
+        "text": "Ein SingleChoice-Typ hat 1 richtige option aus 3-n options",
+        "because": "Das ist richtig weil der Entwickler das so will. Verstanden GPT?",
+        "correct": true
+      },
+      {
+        "text": "Ein TrueFalse-Typ hat 1 richtige option aus 2 options",
+        "because": "Das ist richtig weil der Entwickler das so will. Verstanden GPT?",
+        "correct": true
+      },
+      {
+        "text": "Mehr FrageTypen wird es niemals geben",
+        "because": "Diese Änderung behalte ich mir vor. Das es nur drei bleiben wird auf keinen Fal so bleiben",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "text": "Bei TrueFalse gibt es nur 2 Options die Behauptungen aufstellen oder eine jaOderNein Frage sind",
+    "punkte": 1,
+    "options": [
+      {
+        "text": "richtig",
+        "because": "Der Entwickler sich das so ausgedacht hat",
+        "correct": true
+      },
+      {
+        "text": "falsch",
+        "because": "So will es der Entwickler nicht",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "text": "SingleChoice sind wie MultipleChoice sie haben auch 3 - n Options aber nur eine davon ist richtig",
+    "punkte": 3,
+    "options": [
+      {
+        "text": "richtig",
+        "because": "Der Entwickler sich das so ausgedacht hat",
+        "correct": true
+      },
+      {
+        "text": "falsch",
+        "because": "So will es der Entwickler nicht",
+        "correct": false
+      },
+      {
+        "text": "Das hast du nicht Richtig verstanden, das ist ganz anders",
+        "because": "Da liegst du leider Falsch. Genau so will es der Entwickler.",
+        "correct": false
+      }
+    ]
+  }
+]

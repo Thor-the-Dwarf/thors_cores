@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neon_thors_cores/quiz_screen/Test.dart';
 import 'package:neon_thors_cores/quiz_screen/home.dart';
 import 'package:neon_thors_cores/_gloabals/theme_toggler.dart';
 import 'package:provider/provider.dart';
@@ -83,7 +84,10 @@ class HomeScreen extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const HomeWidget(),
+                builder: (context) =>
+                // const HomeWidget(),
+                Swiper(),
+                // const AllQuestionsPage(),
               ),
             );
           },

@@ -11,24 +11,22 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  late Controller controller;
+  late Controller controller = Controller()
+  ..addListener(_handleCallbackEvent);
   final SupabaseClient supabase = Supabase.instance.client;
-
   List<Question> questions = [];
 
   @override
   void initState() {
     super.initState();
-    controller = Controller()..addListener(_handleCallbackEvent);
     _loadInitialQuestions();
   }
 
-  /// 🔹 Lädt 3 zufällige Fragen beim Start
+  /// 🔹 Lädt 3 Fragen beim Start
   Future<void> _loadInitialQuestions() async {
     final data = await supabase
         .from('question')
         .select()
-        .order('question_pk') // RANDOM() nicht in Supabase nutzbar
         .limit(3);
 
     setState(() {
@@ -36,8 +34,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     });
   }
 
-
-  /// 🔹 Lädt eine neue zufällige Frage & fügt sie zur Liste hinzu
+  /// 🔹 Lädt eine neue Frage & fügt sie zur Liste hinzu
   Future<void> _loadNewQuestion() async {
     final data = await supabase
         .from('question')
@@ -46,7 +43,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         .single();
 
     setState(() {
-      questions.add(Question.fromSupaBase(data));
+      questions.add(Question.fromSupaBase(data)); // Vorne einfügen
     });
   }
 
@@ -54,7 +51,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: questions.isEmpty
-          ? const Center(child: CircularProgressIndicator()) // Ladeanzeige
+          ? const Center(child: CircularProgressIndicator())
           : TikTokStyleFullPageScroller(
         contentSize: questions.length,
         swipePositionThreshold: 0.2,
@@ -62,7 +59,12 @@ class _HomeWidgetState extends State<HomeWidget> {
         animationDuration: const Duration(milliseconds: 400),
         controller: controller,
         builder: (BuildContext context, int index) {
-          if (index == questions.length - 2) _loadNewQuestion(); // Dynamisches Laden
+          if (index == 0) { // Sobald am Anfang, neue Frage laden
+            _loadNewQuestion();
+            Future.delayed(const Duration(milliseconds: 50), () {
+              controller.animateToPosition(1); // Springt auf die nächste Frage
+            });
+          }
 
           return Container(
             padding: const EdgeInsets.all(16),
@@ -81,6 +83,8 @@ class _HomeWidgetState extends State<HomeWidget> {
   }
 
   void _handleCallbackEvent(ScrollEvent event) {
-    print("ScrollEvent: {direction: ${event.direction}, page: ${event.pageNo}}");
+    if (event.direction == ScrollDirection.FORWARD) {
+      _loadNewQuestion(); // Neue Frage nur bei Swipe nach vorne
+    }
   }
 }

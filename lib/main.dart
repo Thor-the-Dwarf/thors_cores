@@ -1,19 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:neon_thors_cores/quiz_screen/Test.dart';
-import 'package:neon_thors_cores/quiz_screen/home.dart';
+import 'package:neon_thors_cores/quiz_screen/quiz_screen.dart';
 import 'package:neon_thors_cores/_gloabals/theme_toggler.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:shared_preferences_web/shared_preferences_web.dart';
-
 import '_gloabals/debug_prints.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/material.dart';
-import 'package:neon_thors_cores/quiz_screen/home.dart';
-import 'package:neon_thors_cores/_gloabals/theme_toggler.dart';
-import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
@@ -32,7 +22,8 @@ Future<void> main() async {
   try {
     await Supabase.initialize(
       url: 'https://ecwnrkrknjirkvkmdbsq.supabase.co', // 🛑 Deine Supabase URL
-      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjd25ya3Jrbmppcmt2a21kYnNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMDEwMTQsImV4cCI6MjA1NjU3NzAxNH0.Jc2Adsk7-py5kxAtN83zBPvpouWfahBekPVFKiAFEcc', // 🛑 Dein API Key
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjd25ya3Jrbmppcmt2a21kYnNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMDEwMTQsImV4cCI6MjA1NjU3NzAxNH0.Jc2Adsk7-py5kxAtN83zBPvpouWfahBekPVFKiAFEcc', // 🛑 Dein API Key
     );
     print("✅ Supabase erfolgreich initialisiert!");
 
@@ -40,7 +31,6 @@ Future<void> main() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("testKey", "Testwert");
     print("✅ SharedPreferences erfolgreich gespeichert!");
-
   } catch (e) {
     print("❌ Fehler bei Supabase- oder SharedPreferences-Init: $e");
   }
@@ -56,8 +46,6 @@ Future<void> main() async {
 
   debug("App gestartet!");
 }
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -84,9 +72,10 @@ class HomeScreen extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) =>
-                // const HomeWidget(),
-                Swiper(),
+                builder:
+                    (context) =>
+                        // const HomeWidget(),
+                        Swiper(),
                 // const AllQuestionsPage(),
               ),
             );

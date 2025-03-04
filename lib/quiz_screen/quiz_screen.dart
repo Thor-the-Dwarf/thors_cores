@@ -1,174 +1,164 @@
-// import 'dart:math';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:provider/provider.dart';
-// import 'package:tiktoklikescroller/tiktoklikescroller.dart';
-// import '../_gloabals/debug_prints.dart';
-// import '../_gloabals/key_map.dart';
-// import '../_gloabals/my_background.dart';
-//
-// void debug(String text) {
-//   if (false || DEBUG_EVERYTHING) printYellow("[QuizScreen] $text");
-// }
-//
-// class QuizScreen extends StatefulWidget {
-//   const QuizScreen({super.key});
-//
-//   @override
-//   _QuizScreenState createState() => _QuizScreenState();
-// }
-//
-// class _QuizScreenState extends State<QuizScreen> {
-//   final RegExp filter = RegExp(
-//     r'^[a-z]$|enter|arrow up|arrow down',
-//     caseSensitive: false,
-//   );
-//   final FocusNode _focusNode = FocusNode();
-//   final Controller ticTokController = Controller();
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     Future.delayed(Duration.zero, () => _focusNode.requestFocus());
-//   }
-//
-//   @override
-//   void dispose() {
-//     _focusNode.dispose();
-//     super.dispose();
-//   }
-//
-//   void _handleKey(RawKeyEvent event) {
-//     debug("_handleKey(){");
-//
-//     if (event is RawKeyDownEvent) {
-//       LogicalKeyboardKey logicalKey = event.logicalKey;
-//       String keyLabel = logicalKey.keyLabel.toLowerCase();
-//
-//       // Falls keyLabel leer ist, verwende debugName als Fallback
-//       if (keyLabel.isEmpty) {
-//         keyLabel = logicalKey.debugName?.toLowerCase() ?? "";
-//       }
-//
-//       debug("\tTaste gedrückt: $keyLabel");
-//
-//       // Navigation mit Pfeiltasten
-//       if (logicalKey == LogicalKeyboardKey.arrowUp) {
-//         _arrowUpEvent();
-//       } else if (logicalKey == LogicalKeyboardKey.arrowDown) {
-//         _arrowDownEvent();
-//       }
-//       // Enter zum Locken
-//       else if (logicalKey == LogicalKeyboardKey.enter) {
-//         final quizmaster = Provider.of<QuizVM>(context, listen: false);
-//         final currentQuestion =
-//             quizmaster.question_history[quizmaster.currentQuestionIndex];
-//         debug("\t⏎ Enter-Taste erkannt!");
-//         currentQuestion.lock();
-//       }
-//       // Auswahl einer Antwort per Buchstaben
-//       else if (RegExp(r'^[a-z]$', caseSensitive: false).hasMatch(keyLabel)) {
-//         final quizmaster = Provider.of<QuizVM>(context, listen: false);
-//         final currentQuestion =
-//             quizmaster.question_history[quizmaster.currentQuestionIndex];
-//         debug("\t🔤 Buchstabe erkannt: $keyLabel");
-//
-//         if (keyMap.containsKey(logicalKey.keyId)) {
-//           int selectedIndex = keyMap[logicalKey.keyId]!;
-//           if (selectedIndex < currentQuestion.questionSelections.length) {
-//             currentQuestion.selectQuestion(selectedIndex);
-//           }
-//         }
-//       }
-//     }
-//
-//     debug("}");
-//   }
-//
-//   void _arrowDownEvent() {
-//     final quizmaster = Provider.of<QuizVM>(context, listen: false);
-//     final currentQuestion =
-//         quizmaster.question_history[quizmaster.currentQuestionIndex];
-//     debug("\t⬇️ Pfeil nach unten erkannt!");
-//     if (quizmaster.currentQuestionIndex > 0) {
-//       // **Fix: Kein negatives Index**
-//       quizmaster.currentQuestionIndex -= 1;
-//       debug(
-//         "🛑 TikTokController soll sich bewegen zu: ${quizmaster.currentQuestionIndex}",
-//       );
-//       ticTokController.animateToPosition(quizmaster.currentQuestionIndex);
-//     } else {
-//       debug("⚠️ Erste Frage erreicht – kann nicht weiter zurück.");
-//     }
-//   }
-//
-//   void _arrowUpEvent() {
-//     final quizmaster = Provider.of<QuizVM>(context, listen: false);
-//     final currentQuestion =
-//         quizmaster.question_history[quizmaster.currentQuestionIndex];
-//     debug("\t⬆️ Pfeil nach oben erkannt!");
-//     if (quizmaster.currentQuestionIndex <
-//         quizmaster.question_history.length - 1) {
-//       quizmaster.currentQuestionIndex += 1;
-//       debug(
-//         "🛑 TikTokController soll sich bewegen zu: ${quizmaster.currentQuestionIndex}",
-//       );
-//       ticTokController.animateToPosition(quizmaster.currentQuestionIndex);
-//     } else {
-//       debug("⚠️ Kein weiteres Element mehr – Grenze erreicht.");
-//     }
-//   }
-//
-//   int? lastPopupIndex; // 🛑 Speichert den letzten gezeigten Index
-//
-//   void checkAndShowPopup(BuildContext context, int index, QuizVM vm) {
-//     if (index % 10 == 0 && index != 0 && !vm.question_history[index].isLocked) {
-//       if (lastPopupIndex != index) {
-//         // 🔥 Nur anzeigen, wenn noch nicht passiert
-//         lastPopupIndex = index;
-//         Future.delayed(Duration.zero, () => showFullscreenPopup(context));
-//       }
-//     }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: RawKeyboardListener(
-//         onKey: _handleKey,
-//         focusNode: _focusNode..requestFocus(),
-//         autofocus: true,
-//         child: MyBackGround(
-//           content: Consumer<QuizVM>(
-//             builder: (context, vm, _) {
-//               return vm.question_history.isEmpty
-//                   ? const Center(child: Text("Keine Fragen verfügbar"))
-//                   : TikTokStyleFullPageScroller(
-//                     contentSize: vm.question_history.length,
-//                     swipePositionThreshold: 0.2,
-//                     swipeVelocityThreshold: 2000,
-//                     animationDuration: const Duration(milliseconds: 400),
-//                     controller: ticTokController,
-//                     builder: (context, index) {
-//                       checkAndShowPopup(context, index, vm);
-//                       return ChangeNotifierProvider.value(
-//                         value: vm.question_history[vm.currentQuestionIndex],
-//                         child: Consumer<QuizQuestion>(
-//                           builder: (context, currentQVM, _) {
-//                             return FrageWidget(
-//                               currentQVM: currentQVM,
-//                               onArrowUp: () => _arrowUpEvent(),
-//                               onArrowDown: () => _arrowDownEvent(),
-//                             ); // NEUES WIDGET HIER!
-//                           },
-//                         ),
-//                       );
-//                     },
-//                   );
-//             },
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+import 'package:flutter/material.dart';
+import 'package:neon_thors_cores/quiz_screen/question_vm.dart';
+import 'package:neon_thors_cores/quiz_screen/question_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:tiktoklikescroller/tiktoklikescroller.dart';
+import 'db_question.dart';
+import 'package:tiktoklikescroller/controller.dart';
+
+class Swiper extends StatefulWidget {
+  late final SupabaseClient supabase;
+  late Controller tikTokController;
+  List<QuestionWidget> questions = [];
+
+  Swiper({Key? key}) : super(key: key);
+
+  @override
+  State<Swiper> createState() => _SwiperState();
+}
+
+class _SwiperState extends State<Swiper> {
+  int currentIndex = 0;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.supabase = Supabase.instance.client;
+    widget.tikTokController = Controller();
+
+    _loadNewQuestions();
+  }
+
+  Future<void> _loadNewQuestions() async {
+    await getRandomQuestion();
+    await getRandomQuestion();
+    await getRandomQuestion();
+    setState(() {
+      isLoading = false;
+      print("🟡 Fragen geladen, Anzahl: ${widget.questions.length}");
+    });
+  }
+
+  Future<void> getRandomQuestion() async {
+    final response =
+        await Supabase.instance.client.rpc('get_random_question').maybeSingle();
+
+    if (response != null) {
+      setState(() {
+        widget.questions.add(
+          QuestionWidget(
+
+            questionVM: QuestionVM(question: Question.fromSupaBase(response)),
+          ),
+        );
+        print(
+          "🟢 Neue Frage hinzugefügt: ${widget.questions.last.questionVM.question.text}",
+        );
+      });
+    } else {
+      print("⚠️ Keine Frage gefunden!");
+    }
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body:
+          isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : TikTokStyleFullPageScroller(
+                contentSize: widget.questions.length,
+                swipePositionThreshold: 0.2,
+                swipeVelocityThreshold: 2000,
+                animationDuration: const Duration(milliseconds: 300),
+                controller: widget.tikTokController,
+                builder: (BuildContext context, int index) {
+                  print(
+                    "🔵 Builder aufgerufen für Index: $index, aktueller currentIndex: $currentIndex",
+                  );
+                  return Stack(
+                    children: [
+                      widget.questions[currentIndex],
+                      Positioned(
+                        bottom: 30,
+                        left: 0,
+                        right: 0,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                child: Text("up", key: Key('btn_animateUp')),
+                                onPressed: () {
+                                  if (currentIndex == 0) {
+                                    print(
+                                      "🟣 'Up' gedrückt, aber bereits bei Index 0",
+                                    );
+                                    return;
+                                  }
+                                  setState(() {
+                                    currentIndex--;
+                                    print(
+                                      "🟣 'Up' gedrückt, neuer currentIndex: $currentIndex",
+                                    );
+                                  });
+                                  widget.tikTokController.animateToPosition(
+                                    currentIndex,
+                                  );
+                                },
+                              ),
+                            ),
+                            ChangeNotifierProvider.value(
+                              value: widget.questions[currentIndex].questionVM,
+                              child: Consumer<QuestionVM>(
+                                  builder: (context, vm, child) {
+                                    return Visibility(
+                                    visible: ! vm.isLocked,
+                                    child: Expanded(
+                                      child: TextButton(
+                                      child: Text("lock", key: Key('btn_lock()')),
+                                      onPressed: () => vm.lock(),
+                                                                                ),
+                                    ),
+                                  );
+                                }
+                              ),
+                            ),
+                            Expanded(
+                              child: TextButton(
+                                child: Text(
+                                  "down",
+                                  key: Key('btn_animateDown'),
+                                ),
+                                onPressed: () async {
+                                  if (currentIndex ==
+                                      widget.questions.length - 2) {
+                                    print(
+                                      "🟣 'Down' gedrückt, lade neue Frage...",
+                                    );
+                                    await getRandomQuestion();
+                                  }
+                                  setState(() {
+                                    currentIndex++;
+                                    print(
+                                      "🟣 'Down' gedrückt, neuer currentIndex: $currentIndex",
+                                    );
+                                  });
+                                  widget.tikTokController.animateToPosition(
+                                    currentIndex,
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+    );
+  }
+}

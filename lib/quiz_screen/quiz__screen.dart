@@ -112,6 +112,10 @@ class _QuizScreenState extends State<QuizScreen> {
     widget.tikTokController.animateToPosition(currentIndex);
   }
 
+  void _lockEvent(){
+    widget.questions[currentIndex].questionVM.lock();
+  }
+
   int? lastPopupIndex; // 🛑 Speichert den letzten gezeigten Index
 
   // void checkAndShowPopup(BuildContext context, int index, QuizVM vm) {
@@ -185,23 +189,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               children: [
                                 Expanded(
                                   child: InkWell(
-                                    onTap: () {
-                                      if (currentIndex == 0) {
-                                        print(
-                                          "🟣 'Up' gedrückt, aber bereits bei Index 0",
-                                        );
-                                        return;
-                                      }
-                                      setState(() {
-                                        currentIndex--;
-                                        print(
-                                          "🟣 'Up' gedrückt, neuer currentIndex: $currentIndex",
-                                        );
-                                      });
-                                      widget.tikTokController.animateToPosition(
-                                        currentIndex,
-                                      );
-                                    },
+                                    onTap: () => _arrowUpEvent(),
                                     child: Center(
                                       child: Icon(Icons.arrow_drop_up),
                                     ),
@@ -216,7 +204,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                         visible: !vm.isLocked,
                                         child: Expanded(
                                           child: InkWell(
-                                            onTap: ()=> vm.lock(),
+                                            onTap: () => _lockEvent(),
                                             child: Center(
                                               child: Icon(Icons.lock),
                                             ),
@@ -229,25 +217,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 Expanded(
                                   child: InkWell(
                                     child: Center(child: Icon(Icons.arrow_drop_down)),
-                                    onTap: () async {
-                                      if (currentIndex ==
-                                          widget.questions.length - 2) {
-                                        print(
-                                          "🟣 'Down' gedrückt, lade neue Frage...",
-                                        );
-                                        await _bufferQuestion();
-                                      }
-                                      setState(() {
-                                        currentIndex++;
-                                        print(
-                                          "🟣 'Down' gedrückt, neuer currentIndex: $currentIndex",
-                                        );
-                                      });
-                                      widget.tikTokController.animateToPosition(
-                                        currentIndex,
-                                      );
-                                    },
-                                  ),
+                                    onTap: () => _arrowDownEvent(),                                  ),
                                 ),
                               ],
                             ),

@@ -10,7 +10,6 @@ class QuestionVM with ChangeNotifier {
 
   Question question;
   List<bool> _questionSelections = [];
-  List<bool> _showReasons = []; // Neu: Speichert Sichtbarkeit der Begründungen
   bool _isLocked = false;
 
   List<bool> get questionSelections => _questionSelections;
@@ -19,7 +18,6 @@ class QuestionVM with ChangeNotifier {
   QuestionVM({required this.question}) {
     debug("QuizQuestion(){");
     _questionSelections = List.generate(question.options.length, (index) => false);
-    _showReasons = List.generate(question.options.length, (index) => false); // Neu: Init
     debug("\tInitialisierte Selections: $_questionSelections");
     debug("}");
   }
@@ -28,8 +26,6 @@ class QuestionVM with ChangeNotifier {
     debug("selectQuestion($index){");
 
     if (_isLocked) {
-      _showReasons[index] = !_showReasons[index];
-      debug("\tErklärung toggled: ${_showReasons[index]}");
     } else {
       final newSelections = List<bool>.from(questionSelections);
       debug("\tnewSelections = $newSelections");
@@ -53,12 +49,9 @@ class QuestionVM with ChangeNotifier {
 
 
   void lock() {
+    _isLocked = true;
+    notifyListeners();
     debug("lock(){");
-  }
-
-
-  bool shouldShowReason(int index) {
-    return _isLocked && _showReasons[index];
   }
 
   QuestionVM clone() {

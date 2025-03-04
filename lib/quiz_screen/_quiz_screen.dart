@@ -32,16 +32,16 @@ class _SwiperState extends State<Swiper> {
   }
 
   Future<void> _loadNewQuestions() async {
-    await getRandomQuestion();
-    await getRandomQuestion();
-    await getRandomQuestion();
+    await _bufferQuestion();
+    await _bufferQuestion();
+    await _bufferQuestion();
     setState(() {
       isLoading = false;
       print("🟡 Fragen geladen, Anzahl: ${widget.questions.length}");
     });
   }
 
-  Future<void> getRandomQuestion() async {
+  Future<void> _bufferQuestion() async {
     final response =
         await Supabase.instance.client.rpc('get_random_question').maybeSingle();
 
@@ -138,7 +138,7 @@ class _SwiperState extends State<Swiper> {
                                     print(
                                       "🟣 'Down' gedrückt, lade neue Frage...",
                                     );
-                                    await getRandomQuestion();
+                                    await _bufferQuestion();
                                   }
                                   setState(() {
                                     currentIndex++;

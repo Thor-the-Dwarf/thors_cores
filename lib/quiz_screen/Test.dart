@@ -1,46 +1,75 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tiktoklikescroller/tiktoklikescroller.dart';
 
 import 'db_question.dart';
 
-class Swiper extends StatefulWidget {
+Controller tikTokController = Controller();
 
-  late Controller controller;
+class Swiper extends StatefulWidget {
+  // Controller controller = Controller()..addListener(_handleCallbackEvent);
+
+
+
   late final SupabaseClient supabase;
   List<Question> questions = [];
 
-
-  Swiper({
-    Key? key,
-  }) : super(key: key);
+  Swiper({Key? key}) : super(key: key);
 
   @override
   State<Swiper> createState() => _SwiperState();
 }
 
 class _SwiperState extends State<Swiper> {
-
+  bool isLoading = true; // ✅ Ladezustand
 
   @override
-  initState() {
-    widget.controller = Controller()
-      ..addListener((event) {
-        _handleCallbackEvent(event);
-      });
-    widget.supabase = Supabase.instance.client;
-
-    _loadNewQuestions();
+  void initState() {
     super.initState();
+    tikTokController = Controller()..addListener(_handleCallbackEvent);
+    widget.supabase = Supabase.instance.client;
+    _loadNewQuestions();
   }
+
 
   Future<void> _loadNewQuestions() async {
-    final data = await widget.supabase.from('question').select();
-
+    // try {
+    //   final data = await widget.supabase.from('question').select();
+    //   setState(() {
+    //     widget.questions = data.map((q) => Question.fromSupaBase(q)).toList();
+    //     widget.questions.shuffle(Random());
+    //     isLoading = false; // ✅ Ladezustand aktualisieren
+    //   });
+    // } catch (e) {
+    //   print("Fehler beim Laden der Fragen: $e");
+    //   setState(() {
+    //     isLoading = false; // Fehler trotzdem beenden
+    //   });
+    // }
+    await getRandomQuestion();
+    await getRandomQuestion();
+    await getRandomQuestion();
     setState(() {
-      widget.questions = data.map((q) => Question.fromSupaBase(q)).toList(); // Alle Fragen laden
+      isLoading = false; // 🔥 Ladezustand deaktivieren, wenn alle Fragen geladen sind
     });
   }
+
+  Future<void> getRandomQuestion() async {
+    final response = await Supabase.instance.client
+        .rpc('get_random_question')
+        .maybeSingle(); // Falls keine Zeile existiert, gibt es NULL zurück
+
+    if (response != null) {
+      setState(() {
+        widget.questions.add(Question.fromSupaBase(response));
+      });
+    } else {
+      print("⚠️ Keine Frage gefunden!");
+    }
+  }
+
 
 
   int currentIndex = 0;
@@ -48,19 +77,17 @@ class _SwiperState extends State<Swiper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TikTokStyleFullPageScroller(
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator()) // ✅ Anzeige während des Ladens
+          : TikTokStyleFullPageScroller(
         contentSize: widget.questions.length,
         swipePositionThreshold: 0.2,
-        // ^ the fraction of the screen needed to scroll
         swipeVelocityThreshold: 2000,
-        // ^ the velocity threshold for smaller scrolls
-        animationDuration: const Duration(milliseconds: 400),
-        // ^ how long the animation will take
-        controller: widget.controller,
-        // ^ registering our own function to listen to page changes
+        animationDuration: const Duration(milliseconds: 300),
+        controller: tikTokController,
         builder: (BuildContext context, int index) {
-          return Container(
-            child: Stack(children: [
+          return Stack(
+            children: [
               Center(
                 child: Text(
                   widget.questions[currentIndex].text,
@@ -72,38 +99,42 @@ class _SwiperState extends State<Swiper> {
                 bottom: 30,
                 left: 0,
                 right: 0,
-                child: Container(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  color: Colors.white.withAlpha(125),
-                  child: Column(
-                    children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ...Iterable<int>.generate(widget.questions.length)
-                                .toList()
-                                .map(
-                                  (newIndex) => MaterialButton(
-                                color: Colors.white.withAlpha(125),
-                                child: Text(
-                                  newIndex.toString(),
-                                  key: Key('$newIndex-animate'),
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    currentIndex = newIndex;
-                                  });
-                                      widget.controller.animateToPosition(currentIndex);
-                                }
-                              ),
-                            )
-                                .toList(),
-                          ]),
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        child: Text(
+                          "up",
+                          key: Key('btn_animateUp'),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            currentIndex--;
+                          });
+                          tikTokController.animateToPosition(currentIndex);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        child: Text(
+                          "down",
+                          key: Key('btn_animateDown'),
+                        ),
+                        onPressed: () async {
+                          if(currentIndex == widget.questions.length-2)
+                            await getRandomQuestion();
+                          setState(() {
+                            currentIndex++;
+                          });
+                          tikTokController.animateToPosition(currentIndex);
+                        },
+                      ),
+                    ),
+                  ]
                 ),
               ),
-            ]),
+            ],
           );
         },
       ),

@@ -77,40 +77,49 @@ class _QuizScreenState extends State<QuizScreen> {
         _lockEvent();
       }
       // Auswahl einer Antwort per Buchstaben
-      // else if (RegExp(r'^[a-z]$', caseSensitive: false).hasMatch(keyLabel)) {
-      //   if (keyMap.containsKey(logicalKey.keyId)) {
-      //     int selectedIndex = keyMap[logicalKey.keyId]!;
-      //     if (selectedIndex < currentQuestion.questionSelections.length) {
-      //       currentQuestion.selectQuestion(selectedIndex);
-      //     }
-      //   }
-      // }
+      else if (RegExp(r'^[a-z]$', caseSensitive: false).hasMatch(keyLabel)) {
+        if (keyMap.containsKey(logicalKey.keyId)) {
+          int selectedIndex = keyMap[logicalKey.keyId]!;
+          widget.questions[currentIndex].questionVM.selectQuestion(selectedIndex);
+        }
+      }
     }
 
     debug("}");
   }
 
   void _arrowDownEvent() {
-    if (currentIndex >= widget.questions.length - 2)
-      _bufferQuestion();
-    setState(() {
-      currentIndex++;
-      print("🟣 'Down' gedrückt, neuer currentIndex: $currentIndex");
-    });
-    widget.tikTokController.animateToPosition(currentIndex);
+
+    if (!widget.questions[currentIndex].questionVM.isLocked) {
+      return;
+    }
+
+    if (currentIndex < widget.questions.length - 1) {
+      setState(() {
+        currentIndex++;
+      });
+      widget.tikTokController.animateToPosition(currentIndex);
+    } else {
+      _bufferQuestion().then((_) {
+        setState(() {
+          currentIndex++;
+        });
+        widget.tikTokController.animateToPosition(currentIndex);
+      });
+    }
   }
+
 
   void _arrowUpEvent() {
     if (currentIndex == 0) return; // 🔥 Verhindert negatives Springen
     setState(() {
       currentIndex--;
-      print("🟣 'Up' gedrückt, neuer currentIndex: $currentIndex");
     });
     widget.tikTokController.animateToPosition(currentIndex);
   }
 
   void _lockEvent(){
-    widget.questions[currentIndex].questionVM.lock();
+      widget.questions[currentIndex].questionVM.lock();
   }
 
   int? lastPopupIndex; // 🛑 Speichert den letzten gezeigten Index
@@ -128,7 +137,7 @@ class _QuizScreenState extends State<QuizScreen> {
   bool isLoading = true;
 
   Future<void> _loadNewQuestions() async {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
       await _bufferQuestion();
     }
     setState(() {
@@ -148,12 +157,7 @@ class _QuizScreenState extends State<QuizScreen> {
             questionVM: QuestionVM(question: Question.fromSupaBase(response)),
           ),
         );
-        print(
-          "🟢 Neue Frage hinzugefügt: ${widget.questions.last.questionVM.question.text}",
-        );
       });
-    } else {
-      print("⚠️ Keine Frage gefunden!");
     }
   }
 

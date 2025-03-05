@@ -49,6 +49,7 @@ class QuestionVM with ChangeNotifier {
 
 
   void lock() {
+    if(!questionSelections.contains(true)) return;
     _isLocked = true;
     notifyListeners();
     debug("lock(){");

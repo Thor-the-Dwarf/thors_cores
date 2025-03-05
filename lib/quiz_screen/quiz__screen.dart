@@ -74,26 +74,25 @@ class _QuizScreenState extends State<QuizScreen> {
       }
       // Enter zum Locken
       else if (logicalKey == LogicalKeyboardKey.enter) {
+        _lockEvent();
       }
       // Auswahl einer Antwort per Buchstaben
-      else if (RegExp(r'^[a-z]$', caseSensitive: false).hasMatch(keyLabel)) {
-        // if (keyMap.containsKey(logicalKey.keyId)) {
-        //   int selectedIndex = keyMap[logicalKey.keyId]!;
-        //   if (selectedIndex < currentQuestion.questionSelections.length) {
-        //     currentQuestion.selectQuestion(selectedIndex);
-        //   }
-        // }
-      }
+      // else if (RegExp(r'^[a-z]$', caseSensitive: false).hasMatch(keyLabel)) {
+      //   if (keyMap.containsKey(logicalKey.keyId)) {
+      //     int selectedIndex = keyMap[logicalKey.keyId]!;
+      //     if (selectedIndex < currentQuestion.questionSelections.length) {
+      //       currentQuestion.selectQuestion(selectedIndex);
+      //     }
+      //   }
+      // }
     }
 
     debug("}");
   }
 
   void _arrowDownEvent() {
-    if (currentIndex == widget.questions.length - 2) {
-      print("🟣 'Down' gedrückt, lade neue Frage...");
+    if (currentIndex >= widget.questions.length - 2)
       _bufferQuestion();
-    }
     setState(() {
       currentIndex++;
       print("🟣 'Down' gedrückt, neuer currentIndex: $currentIndex");
@@ -102,9 +101,7 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void _arrowUpEvent() {
-    if (currentIndex == 0) {
-      return;
-    }
+    if (currentIndex == 0) return; // 🔥 Verhindert negatives Springen
     setState(() {
       currentIndex--;
       print("🟣 'Up' gedrückt, neuer currentIndex: $currentIndex");
@@ -131,9 +128,9 @@ class _QuizScreenState extends State<QuizScreen> {
   bool isLoading = true;
 
   Future<void> _loadNewQuestions() async {
-    await _bufferQuestion();
-    await _bufferQuestion();
-    await _bufferQuestion();
+    for (int i = 0; i < 3; i++) {
+      await _bufferQuestion();
+    }
     setState(() {
       isLoading = false;
       print("🟡 Fragen geladen, Anzahl: ${widget.questions.length}");
@@ -158,6 +155,15 @@ class _QuizScreenState extends State<QuizScreen> {
     } else {
       print("⚠️ Keine Frage gefunden!");
     }
+  }
+
+  Widget _buildButton(IconData icon, VoidCallback onTap) {
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        child: Center(child: Icon(icon)),
+      ),
+    );
   }
 
   @override
@@ -187,17 +193,9 @@ class _QuizScreenState extends State<QuizScreen> {
                           Expanded(
                             child: Row(
                               children: [
-                                Expanded(
-                                  child: InkWell(
-                                    onTap: () => _arrowUpEvent(),
-                                    child: Center(
-                                      child: Icon(Icons.arrow_drop_up),
-                                    ),
-                                  ),
-                                ),
+                                _buildButton(Icons.arrow_drop_up, _arrowUpEvent),
                                 ChangeNotifierProvider.value(
-                                  value:
-                                      widget.questions[currentIndex].questionVM,
+                                  value: widget.questions[currentIndex].questionVM,
                                   child: Consumer<QuestionVM>(
                                     builder: (context, vm, child) {
                                       return Visibility(
@@ -214,11 +212,13 @@ class _QuizScreenState extends State<QuizScreen> {
                                     },
                                   ),
                                 ),
-                                Expanded(
-                                  child: InkWell(
-                                    child: Center(child: Icon(Icons.arrow_drop_down)),
-                                    onTap: () => _arrowDownEvent(),                                  ),
-                                ),
+                                _buildButton(Icons.arrow_drop_down, _arrowDownEvent),
+
+                                // Expanded(
+                                //   child: InkWell(
+                                //     child: Center(child: Icon(Icons.arrow_drop_down)),
+                                //     onTap: () => _arrowDownEvent(),                                  ),
+                                // ),
                               ],
                             ),
                           ),

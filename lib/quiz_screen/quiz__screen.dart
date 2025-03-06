@@ -1,12 +1,10 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:neon_thors_cores/quiz_screen/question_vm.dart';
 import 'package:neon_thors_cores/quiz_screen/question_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:tiktoklikescroller/tiktoklikescroller.dart';
 import '../_gloabals/debug_prints.dart';
 import '../_gloabals/key_map.dart';
 import '../_gloabals/my_background.dart';
@@ -18,7 +16,7 @@ void debug(String text) {
 
 class QuizScreen extends StatefulWidget {
   late final SupabaseClient supabase;
-  late Controller tikTokController;
+  List<QuestionWidget> history = [];
   List<QuestionWidget> questions = [];
 
   QuizScreen({super.key});
@@ -28,210 +26,217 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  final RegExp filter = RegExp(
-    r'^[a-z]$|enter|arrow up|arrow down',
-    caseSensitive: false,
-  );
   final FocusNode _focusNode = FocusNode();
-  final Controller ticTokController = Controller();
+  final PageController _pageController = PageController();
+  int currentIndex = 0;
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-
+    _load10Questions();
     widget.supabase = Supabase.instance.client;
-    widget.tikTokController = Controller();
-
-    _loadNewQuestions();
     Future.delayed(Duration.zero, () => _focusNode.requestFocus());
   }
 
   @override
   void dispose() {
     _focusNode.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
   void _handleKey(RawKeyEvent event) {
-    debug("_handleKey(){");
-
     if (event is RawKeyDownEvent) {
       LogicalKeyboardKey logicalKey = event.logicalKey;
-      String keyLabel = logicalKey.keyLabel.toLowerCase();
-      //
-      // // Falls keyLabel leer ist, verwende debugName als Fallback
-      // if (keyLabel.isEmpty) {
-      //   keyLabel = logicalKey.debugName?.toLowerCase() ?? "";
-      // }
-      //
-      // debug("\tTaste gedrückt: $keyLabel");
 
-      // Navigation mit Pfeiltasten
       if (logicalKey == LogicalKeyboardKey.arrowUp) {
-        _arrowUpEvent();
+        _scrollUp();
       } else if (logicalKey == LogicalKeyboardKey.arrowDown) {
-        _arrowDownEvent();
-      }
-      // Enter zum Locken
-      else if (logicalKey == LogicalKeyboardKey.enter) {
+        _scrollDown();
+      } else if (logicalKey == LogicalKeyboardKey.enter) {
         _lockEvent();
-      }
-      // Auswahl einer Antwort per Buchstaben
-      else if (RegExp(r'^[a-z]$', caseSensitive: false).hasMatch(keyLabel)) {
+      } else if (RegExp(r'^[a-z]$', caseSensitive: false)
+          .hasMatch(logicalKey.keyLabel.toLowerCase())) {
         if (keyMap.containsKey(logicalKey.keyId)) {
           int selectedIndex = keyMap[logicalKey.keyId]!;
-          widget.questions[currentIndex].questionVM.selectQuestion(selectedIndex);
+          widget.history[currentIndex].questionVM.selectQuestion(selectedIndex);
         }
       }
     }
-
-    debug("}");
   }
 
-  void _arrowDownEvent() {
-
-    if (!widget.questions[currentIndex].questionVM.isLocked) {
-      return;
-    }
-
-    if (currentIndex < widget.questions.length - 1) {
-      setState(() {
-        currentIndex++;
-      });
-      widget.tikTokController.animateToPosition(currentIndex);
-    } else {
-      _bufferQuestion().then((_) {
+  void _scrollUp() {
+    // Nur weiterscrollen, wenn die aktuelle Frage locked ist
+    if (widget.history[currentIndex].questionVM.isLocked) {
+      if (currentIndex < widget.history.length - 1) {
         setState(() {
           currentIndex++;
+          _pageController.animateToPage(
+            currentIndex,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
         });
-        widget.tikTokController.animateToPosition(currentIndex);
-      });
+      } else if (widget.history.length < 10 && widget.questions.isNotEmpty) {
+        setState(() {
+          widget.history.add(widget.questions.removeAt(0));
+          currentIndex++;
+          _pageController.animateToPage(
+            currentIndex,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        });
+      }
     }
   }
 
-
-  void _arrowUpEvent() {
-    if (currentIndex == 0) return; // 🔥 Verhindert negatives Springen
-    setState(() {
-      currentIndex--;
-    });
-    widget.tikTokController.animateToPosition(currentIndex);
-  }
-
-  void _lockEvent(){
-      widget.questions[currentIndex].questionVM.lock();
-  }
-
-  int? lastPopupIndex; // 🛑 Speichert den letzten gezeigten Index
-
-  // void checkAndShowPopup(BuildContext context, int index, QuizVM vm) {
-  //   if (index % 10 == 0 && index != 0 && !vm.question_history[index].isLocked) {
-  //     if (lastPopupIndex != index) { // 🔥 Nur anzeigen, wenn noch nicht passiert
-  //       lastPopupIndex = index;
-  //       Future.delayed(Duration.zero, () => showFullscreenPopup(context));
-  //     }
-  //   }
-  // }
-
-  int currentIndex = 0;
-  bool isLoading = true;
-
-  Future<void> _loadNewQuestions() async {
-    for (int i = 0; i < 2; i++) {
-      await _bufferQuestion();
-    }
-    setState(() {
-      isLoading = false;
-      print("🟡 Fragen geladen, Anzahl: ${widget.questions.length}");
-    });
-  }
-
-  Future<void> _bufferQuestion() async {
-    final response =
-        await Supabase.instance.client.rpc('get_random_question').maybeSingle();
-
-    if (response != null) {
+  void _scrollDown() {
+    // Zurückscrollen immer möglich, solange currentIndex > 0
+    if (currentIndex > 0) {
       setState(() {
-        widget.questions.add(
-          QuestionWidget(
-            questionVM: QuestionVM(question: Question.fromSupaBase(response)),
-          ),
+        currentIndex--;
+        _pageController.animateToPage(
+          currentIndex,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
         );
       });
     }
   }
 
-  Widget _buildButton(IconData icon, VoidCallback onTap) {
-    return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        child: Center(child: Icon(icon)),
-      ),
-    );
+  void _lockEvent() {
+    widget.history[currentIndex].questionVM.lock();
+  }
+
+  Future<void> _load10Questions() async {
+    List<QuestionWidget> list = [];
+    while (list.length < 10) {
+      final response =
+      await Supabase.instance.client.rpc('get_random_question').maybeSingle();
+      if (response != null) {
+        list.add(
+          QuestionWidget(
+            questionVM: QuestionVM(question: Question.fromSupaBase(response)),
+          ),
+        );
+      }
+    }
+
+    setState(() {
+      widget.questions = list;
+      widget.history.add(
+        widget.questions.removeAt(Random().nextInt(widget.questions.length)),
+      );
+      isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
+      body: Stack(
+        children: [
+          // Statischer Hintergrund
+          MyBackGround(
+            content: const SizedBox(), // Kein Content im Hintergrund
+          ),
+          // Scrollender Inhalt
           isLoading
               ? const Center(child: CircularProgressIndicator())
               : RawKeyboardListener(
-                onKey: _handleKey,
-                focusNode: _focusNode..requestFocus(),
-                autofocus: true,
-                child: TikTokStyleFullPageScroller(
-                  contentSize: widget.questions.length,
-                  swipePositionThreshold: 0.2,
-                  swipeVelocityThreshold: 2000,
-                  animationDuration: const Duration(milliseconds: 300),
-                  controller: widget.tikTokController,
-                  builder: (BuildContext context, int index) {
-                    print(
-                      "🔵 Builder aufgerufen für Index: $index, aktueller currentIndex: $currentIndex",
-                    );
-                    return MyBackGround(
-                      content: Column(
-                        children: [
-                          widget.questions[currentIndex],
-                          Expanded(
-                            child: Row(
-                              children: [
-                                _buildButton(Icons.arrow_drop_up, _arrowUpEvent),
-                                ChangeNotifierProvider.value(
-                                  value: widget.questions[currentIndex].questionVM,
-                                  child: Consumer<QuestionVM>(
-                                    builder: (context, vm, child) {
-                                      return Visibility(
-                                        visible: !vm.isLocked,
-                                        child: Expanded(
-                                          child: InkWell(
-                                            onTap: () => _lockEvent(),
-                                            child: Center(
-                                              child: Icon(Icons.lock),
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
+            onKey: _handleKey,
+            focusNode: _focusNode..requestFocus(),
+            autofocus: true,
+            child: GestureDetector(
+              onVerticalDragEnd: (details) {
+                if (details.primaryVelocity! > 0) {
+                  _scrollDown(); // Nach unten swipen (zurück)
+                } else if (details.primaryVelocity! < 0 && widget.history[currentIndex].questionVM.isLocked) {
+                  _scrollUp(); // Nach oben swipen (weiter), nur wenn locked
+                }
+              },
+              child: PageView.builder(
+                controller: _pageController,
+                scrollDirection: Axis.vertical,
+                itemCount: widget.history.length,
+                physics: const PageScrollPhysics(), // Snap-Effekt
+                onPageChanged: (index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Expanded(child: widget.history[index]),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: _scrollDown,
+                                  hoverColor: Colors.grey.withOpacity(0.1),
+                                  highlightColor: Colors.grey.withOpacity(0.1),
+                                  splashColor: Colors.grey.withOpacity(0.1),
+                                  child: const Center(
+                                    child: Icon(Icons.arrow_drop_down),
                                   ),
                                 ),
-                                _buildButton(Icons.arrow_drop_down, _arrowDownEvent),
-
-                                // Expanded(
-                                //   child: InkWell(
-                                //     child: Center(child: Icon(Icons.arrow_drop_down)),
-                                //     onTap: () => _arrowDownEvent(),                                  ),
-                                // ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                            ChangeNotifierProvider.value(
+                              value: widget.history[index].questionVM,
+                              child: Consumer<QuestionVM>(
+                                builder: (context, vm, child) {
+                                  return Visibility(
+                                    visible: !vm.isLocked,
+                                    child: Expanded(
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                          onTap: _lockEvent,
+                                          hoverColor: Colors.grey.withOpacity(0.1),
+                                          highlightColor: Colors.grey.withOpacity(0.1),
+                                          splashColor: Colors.grey.withOpacity(0.1),
+                                          child: const Center(
+                                            child: Icon(Icons.lock),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: _scrollUp,
+                                  hoverColor: Colors.grey.withOpacity(0.1),
+                                  highlightColor: Colors.grey.withOpacity(0.1),
+                                  splashColor: Colors.grey.withOpacity(0.1),
+                                  child: const Center(
+                                    child: Icon(Icons.arrow_drop_up),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    );
-                  },
-                ),
+                    ],
+                  );
+                },
               ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

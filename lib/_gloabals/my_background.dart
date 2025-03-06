@@ -93,11 +93,7 @@ class _MyBackGroundState extends State<MyBackGround> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     debug("build() {");
 
-    final widgetTree = Scaffold(
-      appBar: AppBar(
-        leading: const ThemeToggler(),
-      ),
-      body: Stack(
+    final widgetTree = Stack(
         children: [
           CustomPaint(
             size: Size.infinite,
@@ -112,8 +108,7 @@ class _MyBackGroundState extends State<MyBackGround> with SingleTickerProviderSt
             child: _currentContent,
           ),
         ],
-      ),
-    );
+      );
 
     debug("}");
     return widgetTree;

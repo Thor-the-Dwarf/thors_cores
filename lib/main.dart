@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:neon_thors_cores/quiz_screen/_quiz_screen.dart';
 import 'package:neon_thors_cores/_gloabals/theme_toggler.dart';
@@ -10,11 +12,29 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import '_gloabals/debug_prints.dart';
 
+
+
+
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import '_gloabals/firebase_options.dart';
+
 void debug(String text) {
   if (false || DEBUG_EVERYTHING) printRed("[main] $text");
 }
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseFirestore.instance.settings = const Settings( // macht alles kostengünstiger
+    persistenceEnabled: true,
+    cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
+  );
   WidgetsFlutterBinding.ensureInitialized();
 
   // ✅ Web-Plugins explizit registrieren

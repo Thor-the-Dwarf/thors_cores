@@ -8,6 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../_gloabals/debug_prints.dart';
 import '../_gloabals/key_map.dart';
 import '../_gloabals/my_background.dart';
+import '../_gloabals/theme_toggler.dart';
 import 'db_question.dart';
 
 void debug(String text) {
@@ -136,6 +137,9 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: const ThemeToggler(),
+      ),
       body: Stack(
         children: [
           // Statischer Hintergrund
@@ -168,69 +172,149 @@ class _QuizScreenState extends State<QuizScreen> {
                   });
                 },
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Expanded(child: widget.history[index]),
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: _scrollDown,
-                                  hoverColor: Colors.grey.withOpacity(0.1),
-                                  highlightColor: Colors.grey.withOpacity(0.1),
-                                  splashColor: Colors.grey.withOpacity(0.1),
-                                  child: const Center(
-                                    child: Icon(Icons.arrow_drop_down),
+                  return
+                    Column(
+                      children: [
+                        // Obere Widget soll sich ausdehnen, aber scrollbar werden, wenn nötig
+                        Flexible(
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: 0,
+                              maxHeight: MediaQuery.of(context).size.height * 0.7, // Max 70% der Bildschirmhöhe
+                            ),
+                            child: Scrollbar(
+                              child: SingleChildScrollView(
+                                child: widget.history[index],
+                              ),
+                            ),
+                          ),
+                        ),
+                        // Untere Row bleibt erreichbar
+                        SizedBox(
+                          height: 60, // Feste Höhe für die Buttons, anpassbar
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: _scrollDown,
+                                    hoverColor: Colors.grey.withOpacity(0.1),
+                                    highlightColor: Colors.grey.withOpacity(0.1),
+                                    splashColor: Colors.grey.withOpacity(0.1),
+                                    child: const Center(
+                                      child: Icon(Icons.arrow_drop_down),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            ChangeNotifierProvider.value(
-                              value: widget.history[index].questionVM,
-                              child: Consumer<QuestionVM>(
-                                builder: (context, vm, child) {
-                                  return Visibility(
-                                    visible: !vm.isLocked,
-                                    child: Expanded(
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        child: InkWell(
-                                          onTap: _lockEvent,
-                                          hoverColor: Colors.grey.withOpacity(0.1),
-                                          highlightColor: Colors.grey.withOpacity(0.1),
-                                          splashColor: Colors.grey.withOpacity(0.1),
-                                          child: const Center(
-                                            child: Icon(Icons.lock),
+                              ChangeNotifierProvider.value(
+                                value: widget.history[index].questionVM,
+                                child: Consumer<QuestionVM>(
+                                  builder: (context, vm, child) {
+                                    return Visibility(
+                                      visible: !vm.isLocked,
+                                      child: Expanded(
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            onTap: _lockEvent,
+                                            hoverColor: Colors.grey.withOpacity(0.1),
+                                            highlightColor: Colors.grey.withOpacity(0.1),
+                                            splashColor: Colors.grey.withOpacity(0.1),
+                                            child: const Center(
+                                              child: Icon(Icons.lock),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: _scrollUp,
-                                  hoverColor: Colors.grey.withOpacity(0.1),
-                                  highlightColor: Colors.grey.withOpacity(0.1),
-                                  splashColor: Colors.grey.withOpacity(0.1),
-                                  child: const Center(
-                                    child: Icon(Icons.arrow_drop_up),
+                              Expanded(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: _scrollUp,
+                                    hoverColor: Colors.grey.withOpacity(0.1),
+                                    highlightColor: Colors.grey.withOpacity(0.1),
+                                    splashColor: Colors.grey.withOpacity(0.1),
+                                    child: const Center(
+                                      child: Icon(Icons.arrow_drop_up),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  );
+                      ],
+                    );
+
+                  //   Column(
+                  //   children: [
+                  //     Expanded(child: widget.history[index]),
+                  //     Expanded(
+                  //       child: Row(
+                  //         children: [
+                  //           Expanded(
+                  //             child: Material(
+                  //               color: Colors.transparent,
+                  //               child: InkWell(
+                  //                 onTap: _scrollDown,
+                  //                 hoverColor: Colors.grey.withOpacity(0.1),
+                  //                 highlightColor: Colors.grey.withOpacity(0.1),
+                  //                 splashColor: Colors.grey.withOpacity(0.1),
+                  //                 child: const Center(
+                  //                   child: Icon(Icons.arrow_drop_down),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           ChangeNotifierProvider.value(
+                  //             value: widget.history[index].questionVM,
+                  //             child: Consumer<QuestionVM>(
+                  //               builder: (context, vm, child) {
+                  //                 return Visibility(
+                  //                   visible: !vm.isLocked,
+                  //                   child: Expanded(
+                  //                     child: Material(
+                  //                       color: Colors.transparent,
+                  //                       child: InkWell(
+                  //                         onTap: _lockEvent,
+                  //                         hoverColor: Colors.grey.withOpacity(0.1),
+                  //                         highlightColor: Colors.grey.withOpacity(0.1),
+                  //                         splashColor: Colors.grey.withOpacity(0.1),
+                  //                         child: const Center(
+                  //                           child: Icon(Icons.lock),
+                  //                         ),
+                  //                       ),
+                  //                     ),
+                  //                   ),
+                  //                 );
+                  //               },
+                  //             ),
+                  //           ),
+                  //           Expanded(
+                  //             child: Material(
+                  //               color: Colors.transparent,
+                  //               child: InkWell(
+                  //                 onTap: _scrollUp,
+                  //                 hoverColor: Colors.grey.withOpacity(0.1),
+                  //                 highlightColor: Colors.grey.withOpacity(0.1),
+                  //                 splashColor: Colors.grey.withOpacity(0.1),
+                  //                 child: const Center(
+                  //                   child: Icon(Icons.arrow_drop_up),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ],
+                  // );
                 },
               ),
             ),

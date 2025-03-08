@@ -1,9 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:neon_thors_cores/_gloabals/theme_toggler.dart';
 import 'dart:math';
-import '../../main.dart';
-import 'debug_prints.dart';
+import '../debug_prints.dart';
 
 void debug(String text) {
   if (false) printBlue("[MyBackGround] $text");

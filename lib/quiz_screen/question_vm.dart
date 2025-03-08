@@ -4,7 +4,8 @@ import 'db_question.dart';
 
 class QuestionVM with ChangeNotifier {
   void debug(String text) {
-    if (false || DEBUG_EVERYTHING) printCyan("[QuestionViewModel] ${question.text} $text");
+    if (false || DEBUG_EVERYTHING)
+      printCyan("[QuestionViewModel] ${question.text} $text");
   }
 
   Question question;
@@ -12,11 +13,15 @@ class QuestionVM with ChangeNotifier {
   bool _isLocked = false;
 
   List<bool> get questionSelections => _questionSelections;
+
   bool get isLocked => _isLocked;
 
   QuestionVM({required this.question}) {
     debug("QuizQuestion(){");
-    _questionSelections = List.generate(question.options.length, (index) => false);
+    _questionSelections = List.generate(
+      question.options.length,
+      (index) => false,
+    );
     debug("\tInitialisierte Selections: $_questionSelections");
     debug("}");
   }
@@ -24,7 +29,7 @@ class QuestionVM with ChangeNotifier {
   void selectQuestion(int index) {
     debug("selectQuestion($index){");
 
-    if (_isLocked || index > questionSelections.length-1) {
+    if (_isLocked || index > questionSelections.length - 1) {
       debug("\tFrage ist gesperrt, keine Änderung möglich");
       return;
     }
@@ -33,7 +38,8 @@ class QuestionVM with ChangeNotifier {
     debug("\tnewSelections = $newSelections");
 
     // Prüfen, ob es eine SingleChoice- oder MultipleChoice-Frage ist
-    bool isSingleChoice = question.options.where((opt) => opt.correct).length == 1;
+    bool isSingleChoice =
+        question.options.where((opt) => opt.correct).length == 1;
 
     if (isSingleChoice) {
       // RadioButton-Verhalten: Nur eine Option kann ausgewählt sein
@@ -62,9 +68,8 @@ class QuestionVM with ChangeNotifier {
 
   QuestionVM clone() {
     debug("clone(){");
-    final clone = QuestionVM(
-      question: this.question,
-    ).._questionSelections = List.from(this._questionSelections);
+    final clone = QuestionVM(question: this.question)
+      .._questionSelections = List.from(this._questionSelections);
     debug("\tErstellter Clone: $clone");
     debug("}");
     return clone;

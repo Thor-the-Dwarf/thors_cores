@@ -1,28 +1,22 @@
-import 'dart:convert';
-
 class Question {
   final String text;
   final int points;
   final List<Option> options;
 
-  Question({
-    required this.text,
-    required this.points,
-    required this.options,
-  });
+  Question({required this.text, required this.points, required this.options});
 
   /// 🔹 Konvertiert Supabase-Daten in eine Question-Instanz
   factory Question.fromSupaBase(Map<String, dynamic> data) {
     return Question(
       text: data['text'] ?? 'Keine Frage gefunden',
       points: data['points'] ?? 0, // Hier war vorher `punkte`
-      options: (data['options'] as List<dynamic>)
-          .map((opt) => Option.fromJson(opt))
-          .toList(),
+      options:
+          (data['options'] as List<dynamic>)
+              .map((opt) => Option.fromJson(opt))
+              .toList(),
     );
   }
 }
-
 
 /// 🔹 `Option` Datenklasse für JSON-Parsing in `options`
 class Option {
@@ -41,10 +35,6 @@ class Option {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'text': text,
-      'because': because,
-      'correct': correct,
-    };
+    return {'text': text, 'because': because, 'correct': correct};
   }
 }

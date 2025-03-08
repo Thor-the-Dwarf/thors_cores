@@ -22,7 +22,8 @@ class ThemeController extends ChangeNotifier {
   void toggleTheme() {
     debug("toggleTheme() {");
     debug("\tVorheriges ThemeMode: $_themeMode");
-    _themeMode = _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+    _themeMode =
+        _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
     debug("\tNeues ThemeMode: $_themeMode");
     notifyListeners();
     debug("}");
@@ -46,13 +47,19 @@ class ThemeToggler extends StatelessWidget {
       value: ThemeController(),
       child: Consumer<ThemeController>(
         builder: (context, vm, child) {
-          debug("\tConsumer wird neu aufgebaut. Aktuelles Theme: ${vm.themeMode}");
+          debug(
+            "\tConsumer wird neu aufgebaut. Aktuelles Theme: ${vm.themeMode}",
+          );
           return IconButton(
             onPressed: () {
               debug("\tTheme-Toggle-Button gedrückt.");
               vm.toggleTheme();
             },
-            icon: Icon(vm.themeMode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode),
+            icon: Icon(
+              vm.themeMode == ThemeMode.dark
+                  ? Icons.dark_mode
+                  : Icons.light_mode,
+            ),
           );
         },
       ),

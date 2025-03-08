@@ -146,7 +146,7 @@ class _QuizScreenState extends State<QuizScreen> {
         children: [
           // Statischer Hintergrund
           MyBackGround(
-            content: const SizedBox(), // Kein Content im Hintergrund
+            key: BG_KEY,
           ),
           // Scrollender Inhalt
           isLoading

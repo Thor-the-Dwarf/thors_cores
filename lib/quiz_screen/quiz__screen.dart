@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:neon_thors_cores/quiz_screen/question_vm.dart';
 import 'package:neon_thors_cores/quiz_screen/question_widget.dart';
+import 'package:neon_thors_cores/quiz_screen/tenth_q_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../_gloabals/debug_prints.dart';
@@ -91,6 +92,12 @@ class _QuizScreenState extends State<QuizScreen> {
             curve: Curves.easeInOut,
           );
         });
+      } else if (currentIndex == 9){
+        // todo navigiere zu ArchievmentScreen()
+        // Navigiere zu AchievementScreen
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => ArchivemendScreen()),
+        );
       }
     }
   }

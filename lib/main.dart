@@ -59,7 +59,10 @@ class MyApp extends StatelessWidget {
             theme: ThemeData.light(), // Light Mode Theme
             darkTheme: ThemeData.dark(), // Dark Mode Theme
             themeMode: themeController.themeMode, // Dynamisch vom Controller
-            home: const ArchivemendScreen(),
+            home:
+
+            // const ArchivemendScreen(),
+            QuizScreen(),
           );
         },
       ),

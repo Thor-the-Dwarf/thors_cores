@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import '_gloabals/widgets/theme_toggler.dart';
 import 'firebase_options.dart';
+import 'level_screen/level_screen.dart';
 import 'level_screen/tree_node.dart';
 
 void debug(String text) {

@@ -1,19 +1,25 @@
 class Question {
+  final String question_pk; // Neu: Entspricht der Supabase-ID (question_pk)
   final String text;
   final int points;
   final List<Option> options;
 
-  Question({required this.text, required this.points, required this.options});
+  Question({
+    required this.question_pk, // Neu hinzugefügt
+    required this.text,
+    required this.points,
+    required this.options,
+  });
 
   /// 🔹 Konvertiert Supabase-Daten in eine Question-Instanz
   factory Question.fromSupaBase(Map<String, dynamic> data) {
     return Question(
-      text: data['text'] ?? 'Keine Frage gefunden',
-      points: data['points'] ?? 0, // Hier war vorher `punkte`
-      options:
-          (data['options'] as List<dynamic>)
-              .map((opt) => Option.fromJson(opt))
-              .toList(),
+      question_pk: data['question_pk']?.toString() ?? 'unknown', // Entspricht der ID aus Supabase
+      text: data['question_text'] ?? 'Keine Frage gefunden', // Angepasst an SQL-Funktion
+      points: data['points'] ?? 0,
+      options: (data['options'] as List<dynamic>)
+          .map((opt) => Option.fromJson(opt))
+          .toList(),
     );
   }
 }

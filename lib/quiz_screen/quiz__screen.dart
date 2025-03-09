@@ -17,11 +17,12 @@ void debug(String text) {
 }
 
 class QuizScreen extends StatefulWidget {
+  final String selected_level_pk;
   late final SupabaseClient supabase;
   List<QuestionWidget> history = [];
   List<QuestionWidget> questions = [];
 
-  QuizScreen({super.key});
+  QuizScreen({super.key, required this.selected_level_pk});
 
   @override
   _QuizScreenState createState() => _QuizScreenState();
@@ -36,7 +37,7 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void initState() {
     super.initState();
-    _load10Questions();
+    _load10Questions(widget.selected_level_pk);
     widget.supabase = Supabase.instance.client;
     Future.delayed(Duration.zero, () => _focusNode.requestFocus());
   }
@@ -120,13 +121,54 @@ class _QuizScreenState extends State<QuizScreen> {
     widget.history[currentIndex].questionVM.lock();
   }
 
-  Future<void> _load10Questions() async {
+  // Future<void> _load10Questions() async {
+  //   List<QuestionWidget> list = [];
+  //   while (list.length < 10) {
+  //     final response =
+  //         await Supabase.instance.client
+  //             .rpc('get_random_question')
+  //             .maybeSingle();
+  //     if (response != null) {
+  //       list.add(
+  //         QuestionWidget(
+  //           questionVM: QuestionVM(question: Question.fromSupaBase(response)),
+  //         ),
+  //       );
+  //     }
+  //   }
+
+    // Future<void> _load10Questions(String levelPk) async {
+    //   List<QuestionWidget> list = [];
+    //   while (list.length < 10) {
+    //     final response = await Supabase.instance.client
+    //         .rpc('get_random_question', params: {
+    //       'level_id': levelPk,          // Level-PK als Parameter
+    //       'excluded_question_pks': widget.history,  // todo hier soll der histopry alle ids entnommen werden
+    //     })
+    //         .maybeSingle();
+    //     if (response != null) {
+    //       list.add(
+    //         QuestionWidget(
+    //           questionVM: QuestionVM(question: Question.fromSupaBase(response)),
+    //         ),
+    //       );
+    //     }
+    //   }
+    // }
+
+  Future<void> _load10Questions(String levelPk) async {
     List<QuestionWidget> list = [];
     while (list.length < 10) {
-      final response =
-          await Supabase.instance.client
-              .rpc('get_random_question')
-              .maybeSingle();
+      List<String> excludedPks = widget.history
+          .map((qw) => qw.questionVM.question.question_pk)
+          .toList();
+      final response = await Supabase.instance.client.rpc(
+        'get_random_question',
+        params: {
+          'level_id': levelPk,
+          'excluded_question_pks': excludedPks,
+        },
+      ).maybeSingle();
       if (response != null) {
         list.add(
           QuestionWidget(
@@ -135,7 +177,6 @@ class _QuizScreenState extends State<QuizScreen> {
         );
       }
     }
-
     setState(() {
       widget.questions = list;
       widget.history.add(

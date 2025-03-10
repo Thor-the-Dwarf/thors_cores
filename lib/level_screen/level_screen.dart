@@ -157,7 +157,7 @@ class _LevelScreenState extends State<LevelScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: const ThemeToggler(),
-        title: const Text('Levels'),
+        title: const Text('Wiederholung ist die Mutter des Lernens'),
         elevation: 0,
       ),
       body: Container(
@@ -215,7 +215,6 @@ class _LevelScreenState extends State<LevelScreen> {
           itemCount: nodes.length,
           itemBuilder: (context, index) {
             final node = nodes[index];
-            final Color randomColor = getRandomColor();
             return InkWell(
               onTap: () => _updateColumns(node, columnIndex),
               child: Container(
@@ -243,7 +242,7 @@ class _LevelScreenState extends State<LevelScreen> {
                             ? Icons.quiz_outlined
                             : Icons.folder,
                         color: node.isCore
-                            ? (node.color ?? randomColor)
+                            ? (node.color ?? getRandomColor())
                             : node.hasCores
                             ? Colors.yellow
                             : Colors.lightBlue,
@@ -287,7 +286,6 @@ Color getRandomColor() {
 List<TreeNode> buildTree(List<Map<String, dynamic>> rawData, Map<String, Set<String>> levelCoreConnections) {
   final Map<String, TreeNode> nodes = {};
   final Map<String, List<String>> childMap = {};
-  final Color randomCollor = getRandomColor();
 
   // Schritt 1: Erstelle alle Knoten (Levels, Sub-Levels, Cores, Essences)
   for (var row in rawData) {
@@ -296,30 +294,36 @@ List<TreeNode> buildTree(List<Map<String, dynamic>> rawData, Map<String, Set<Str
       name: row['name'],
       isCore: row['is_core'],
       hasCores: levelCoreConnections.containsKey(row['id']),
-      color: levelCoreConnections.containsKey(row['id']) ? randomCollor: null,
+      color: row['is_core'] ? getRandomColor() : (levelCoreConnections.containsKey(row['id']) ? getRandomColor() : null),
     );
     if (row['parent_id'] != null) {
       childMap.putIfAbsent(row['parent_id'], () => []).add(row['id']);
     }
   }
 
-  // Schritt 2: Verknüpfe Kinder mit ihren Eltern
+  // Schritt 2: Verknüpfe Kinder mit ihren Eltern, vermeide Duplikate mit einem Set
   List<TreeNode> roots = [];
   nodes.forEach((id, node) {
-    // Füge Kinder hinzu (Sub-Levels, Cores, Essences)
+    // Verwende ein Set, um Kinder-IDs eindeutig zu halten
+    final Set<String> uniqueChildIds = {};
+
+    // Füge Kinder hinzu (Sub-Levels, Cores, Essences) aus childMap
     if (childMap.containsKey(id)) {
-      for (var childId in childMap[id]!) {
+      uniqueChildIds.addAll(childMap[id]!);
+    }
+
+    // Füge Cores hinzu aus levelCoreConnections
+    if (levelCoreConnections.containsKey(id)) {
+      uniqueChildIds.addAll(levelCoreConnections[id]!);
+    }
+
+    // Konvertiere uniqueChildIds in TreeNode-Liste und füge sie zu children hinzu
+    for (var childId in uniqueChildIds) {
+      if (nodes.containsKey(childId)) {
         node.children.add(nodes[childId]!);
       }
     }
-    // Füge Cores direkt hinzu, falls sie über levelCoreConnections verknüpft sind
-    if (levelCoreConnections.containsKey(id)) {
-      for (var coreId in levelCoreConnections[id]!) {
-        if (nodes.containsKey(coreId)) {
-          node.children.add(nodes[coreId]!);
-        }
-      }
-    }
+
     // Wurzelknoten finden
     if (!rawData.any((row) => row['id'] == id && row['parent_id'] != null)) {
       roots.add(node);

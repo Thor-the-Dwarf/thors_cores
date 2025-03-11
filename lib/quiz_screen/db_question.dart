@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Question {
   final String question_pk; // Neu: Entspricht der Supabase-ID (question_pk)
   final String text;
@@ -11,15 +13,21 @@ class Question {
     required this.options,
   });
 
-  /// 🔹 Konvertiert Supabase-Daten in eine Question-Instanz
+  /// 🔹 Konvertiert Supabase-Daten in eine Question-Instanz und mischt die Optionen
   factory Question.fromSupaBase(Map<String, dynamic> data) {
+    // Erstelle die Liste der Optionen aus den Supabase-Daten
+    List<Option> options = (data['options'] as List<dynamic>)
+        .map((opt) => Option.fromJson(opt))
+        .toList();
+
+    // Mische die Optionen direkt nach der Erstellung
+    options.shuffle(Random());
+
     return Question(
-      question_pk: data['question_pk']?.toString() ?? 'unknown', // Entspricht der ID aus Supabase
-      text: data['question_text'] ?? 'Keine Frage gefunden', // Angepasst an SQL-Funktion
+      question_pk: data['question_pk']?.toString() ?? 'unknown',
+      text: data['question_text'] ?? 'Keine Frage gefunden',
       points: data['points'] ?? 0,
-      options: (data['options'] as List<dynamic>)
-          .map((opt) => Option.fromJson(opt))
-          .toList(),
+      options: options,
     );
   }
 }

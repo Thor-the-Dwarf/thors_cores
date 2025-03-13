@@ -301,26 +301,30 @@ List<TreeNode> buildTree(List<Map<String, dynamic>> rawData, Map<String, Set<Str
     }
   }
 
-  // Schritt 2: Verknüpfe Kinder mit ihren Eltern, vermeide Duplikate mit einem Set
+  // Schritt 2: Verknüpfe Kinder mit ihren Eltern, aber filtere Essences heraus
   List<TreeNode> roots = [];
   nodes.forEach((id, node) {
-    // Verwende ein Set, um Kinder-IDs eindeutig zu halten
     final Set<String> uniqueChildIds = {};
 
-    // Füge Kinder hinzu (Sub-Levels, Cores, Essences) aus childMap
+    // Kinder aus childMap (Sub-Levels und Essences) hinzufügen
     if (childMap.containsKey(id)) {
       uniqueChildIds.addAll(childMap[id]!);
     }
 
-    // Füge Cores hinzu aus levelCoreConnections
+    // Cores aus levelCoreConnections hinzufügen
     if (levelCoreConnections.containsKey(id)) {
       uniqueChildIds.addAll(levelCoreConnections[id]!);
     }
 
-    // Konvertiere uniqueChildIds in TreeNode-Liste und füge sie zu children hinzu
+    // Kinder hinzufügen, aber Essences ausschließen
     for (var childId in uniqueChildIds) {
       if (nodes.containsKey(childId)) {
-        node.children.add(nodes[childId]!);
+        final childNode = nodes[childId]!;
+        // Essence ist ein Knoten mit isCore = true, der nicht in levelCoreConnections vorkommt
+        bool isEssence = childNode.isCore && !levelCoreConnections.values.any((coreSet) => coreSet.contains(childId));
+        if (!isEssence) {
+          node.children.add(childNode);
+        }
       }
     }
 

@@ -14,6 +14,7 @@ class TreeNode {
   final List<TreeNode> children;
   final bool hasCores;
   final Color? color;
+  bool isExpanded; // Zustand für Aufklappen/Zuklappen
 
   TreeNode({
     required this.id,
@@ -22,6 +23,7 @@ class TreeNode {
     List<TreeNode>? children,
     this.hasCores = false,
     this.color,
+    this.isExpanded = false, // Standardmäßig zugeklappt
   }) : children = children ?? [];
 }
 
@@ -36,8 +38,6 @@ class _LevelScreenState extends State<LevelScreen> {
   bool isLoading = true;
   List<TreeNode> tree = [];
   late final SupabaseClient supabase;
-  List<List<TreeNode>> columns = [[]];
-  final Map<int, TreeNode?> selectedNodesByColumn = {};
 
   @override
   void initState() {
@@ -56,7 +56,7 @@ class _LevelScreenState extends State<LevelScreen> {
 
       List<Map<String, dynamic>> rawData = [];
 
-      if (levelsResponse != null && levelsResponse is List) {
+      if (levelsResponse != null) {
         rawData.addAll(levelsResponse.map((row) => {
           'id': row['level_pk'] as String,
           'name': row['name'] as String,
@@ -65,7 +65,7 @@ class _LevelScreenState extends State<LevelScreen> {
         }).toList());
       }
 
-      if (subLevelsResponse != null && subLevelsResponse is List) {
+      if (subLevelsResponse != null) {
         rawData.addAll(subLevelsResponse.map((row) => {
           'id': row['child_level_fk'] as String,
           'name': '',
@@ -74,7 +74,7 @@ class _LevelScreenState extends State<LevelScreen> {
         }).toList());
       }
 
-      if (coresResponse != null && coresResponse is List) {
+      if (coresResponse != null) {
         rawData.addAll(coresResponse.map((row) => {
           'id': row['core_pk'] as String,
           'name': row['name'] as String,
@@ -83,7 +83,7 @@ class _LevelScreenState extends State<LevelScreen> {
         }).toList());
       }
 
-      if (essenceResponse != null && essenceResponse is List) {
+      if (essenceResponse != null) {
         rawData.addAll(essenceResponse.map((row) => {
           'id': row['essence_pk'] as String,
           'name': row['name'] as String,
@@ -93,7 +93,7 @@ class _LevelScreenState extends State<LevelScreen> {
       }
 
       Map<String, Set<String>> levelCoreConnections = {};
-      if (levelCoresResponse != null && levelCoresResponse is List) {
+      if (levelCoresResponse != null) {
         for (var row in levelCoresResponse) {
           final parentId = row['parent_level_fk'] as String;
           final coreId = row['core_fk'] as String;
@@ -112,7 +112,6 @@ class _LevelScreenState extends State<LevelScreen> {
 
       setState(() {
         tree = buildTree(rawData, levelCoreConnections);
-        columns = [tree];
         isLoading = false;
       });
     } catch (e) {
@@ -123,37 +122,27 @@ class _LevelScreenState extends State<LevelScreen> {
     }
   }
 
-  void _updateColumns(TreeNode node, int columnIndex) {
-    setState(() {
-      if (selectedNodesByColumn[columnIndex] == node) {
-        selectedNodesByColumn[columnIndex] = null;
-        if (columnIndex + 1 < columns.length) {
-          columns.removeRange(columnIndex + 1, columns.length);
-          selectedNodesByColumn.removeWhere((key, value) => key > columnIndex);
-        }
-        if (columnIndex == 0) {
-          columns = [tree];
-          selectedNodesByColumn.clear();
-        }
-      } else {
-        selectedNodesByColumn[columnIndex] = node;
-        if (columnIndex + 1 < columns.length) {
-          columns.removeRange(columnIndex + 1, columns.length);
-          selectedNodesByColumn.removeWhere((key, value) => key > columnIndex);
-        }
-        if (node.children.isNotEmpty) {
-          columns.add(node.children);
-        }
+  List<Map<String, dynamic>> _buildVisibleNodes(List<TreeNode> nodes, int depth) {
+    List<Map<String, dynamic>> visibleNodes = [];
+    for (var node in nodes) {
+      visibleNodes.add({'node': node, 'depth': depth});
+      if (node.isExpanded && node.children.isNotEmpty) {
+        visibleNodes.addAll(_buildVisibleNodes(node.children, depth + 1));
       }
-    });
+    }
+    return visibleNodes;
   }
 
-  bool _isNodeSelected(TreeNode node) {
-    return selectedNodesByColumn.values.contains(node);
+  void _toggleNode(TreeNode node) {
+    setState(() {
+      node.isExpanded = !node.isExpanded;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final visibleNodes = _buildVisibleNodes(tree, 0);
+
     return Scaffold(
       appBar: AppBar(
         leading: const ThemeToggler(),
@@ -166,25 +155,11 @@ class _LevelScreenState extends State<LevelScreen> {
             MyBackGround(),
             isLoading
                 ? const Center(child: CircularProgressIndicator())
-                : columns.isEmpty
+                : visibleNodes.isEmpty
                 ? const Center(child: Text('Keine Daten verfügbar'))
-                : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    reverse: true,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: List.generate(columns.length, (index) {
-                        return _buildColumn(columns[index], index);
-                      }).reversed.toList(),
-                    ),
-                  ),
-                ),
-              ],
+                : Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: _buildNodeList(visibleNodes),
             ),
           ],
         ),
@@ -192,78 +167,80 @@ class _LevelScreenState extends State<LevelScreen> {
     );
   }
 
-  Widget _buildColumn(List<TreeNode> nodes, int columnIndex) {
+  Widget _buildNodeList(List<Map<String, dynamic>> visibleNodes) {
     return Container(
-      width: MediaQuery.of(context).size.width / 3,
-      padding: const EdgeInsets.fromLTRB(0, 32, 64, 32),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8.0),
-        boxShadow: selectedNodesByColumn[columnIndex] != null && nodes.contains(selectedNodesByColumn[columnIndex])
-            ? [
+        boxShadow: [
           BoxShadow(
             color: Theme.of(context).shadowColor.withOpacity(0.3),
             blurRadius: 4.0,
             offset: const Offset(0, 2),
           ),
-        ]
-            : null,
+        ],
       ),
-      child: SizedBox(
-        height: 300,
-        child: ListView.builder(
-          itemCount: nodes.length,
-          itemBuilder: (context, index) {
-            final node = nodes[index];
-            return InkWell(
-              onTap: () => _updateColumns(node, columnIndex),
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-                color: _isNodeSelected(node) ? Colors.cyan.withOpacity(0.5) : Colors.transparent,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        if (node.hasCores && !node.isCore) {
-                          print('Level mit Kreis-Icon geklickt: ${node.name} (ID: ${node.id})');
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => QuizScreen(selected_level_pk: node.id),
-                            ),
-                          );
-                        }
-                      },
-                      child: Icon(
-                        node.isCore
-                            ? Icons.circle_outlined
-                            : node.hasCores
-                            ? Icons.quiz_outlined
-                            : Icons.folder,
-                        color: node.isCore
-                            ? (node.color ?? getRandomColor())
-                            : node.hasCores
-                            ? Colors.yellow
-                            : Colors.lightBlue,
-                      ),
+      child: ListView.builder(
+        itemCount: visibleNodes.length,
+        itemBuilder: (context, index) {
+          final node = visibleNodes[index]['node'] as TreeNode;
+          final depth = visibleNodes[index]['depth'] as int;
+
+          return InkWell(
+            onTap: () => _toggleNode(node), // Nur für Expand/Collapse
+            child: Container(
+              padding: EdgeInsets.fromLTRB(16.0 + depth * 16.0, 8.0, 16.0, 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  if (node.children.isNotEmpty)
+                    Icon(
+                      node.isExpanded ? Icons.expand_more : Icons.chevron_right,
+                      color: Colors.grey,
+                    )
+                  else
+                    const SizedBox(width: 24), // Platzhalter für Ausrichtung
+                  const SizedBox(width: 8),
+                  GestureDetector(
+                    onTap: () {
+                      if (node.hasCores && !node.isCore) {
+                        print('Level mit Kreis-Icon geklickt: ${node.name} (ID: ${node.id})');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => QuizScreen(selected_level_pk: node.id),
+                          ),
+                        );
+                      }
+                    },
+                    child: Icon(
+                      node.isCore
+                          ? Icons.circle_outlined
+                          : node.hasCores
+                          ? Icons.quiz_outlined
+                          : Icons.folder,
+                      color: node.isCore
+                          ? (node.color ?? getRandomColor())
+                          : node.hasCores
+                          ? Colors.yellow
+                          : Colors.lightBlue,
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        node.name,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        softWrap: true,
-                        overflow: TextOverflow.visible,
-                        textAlign: TextAlign.left,
-                      ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      node.name,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      softWrap: true,
+                      overflow: TextOverflow.visible,
+                      textAlign: TextAlign.left,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -287,7 +264,6 @@ List<TreeNode> buildTree(List<Map<String, dynamic>> rawData, Map<String, Set<Str
   final Map<String, TreeNode> nodes = {};
   final Map<String, List<String>> childMap = {};
 
-  // Schritt 1: Erstelle alle Knoten (Levels, Sub-Levels, Cores, Essences)
   for (var row in rawData) {
     nodes[row['id']] = TreeNode(
       id: row['id'],
@@ -301,26 +277,21 @@ List<TreeNode> buildTree(List<Map<String, dynamic>> rawData, Map<String, Set<Str
     }
   }
 
-  // Schritt 2: Verknüpfe Kinder mit ihren Eltern, aber filtere Essences heraus
   List<TreeNode> roots = [];
   nodes.forEach((id, node) {
     final Set<String> uniqueChildIds = {};
 
-    // Kinder aus childMap (Sub-Levels und Essences) hinzufügen
     if (childMap.containsKey(id)) {
       uniqueChildIds.addAll(childMap[id]!);
     }
 
-    // Cores aus levelCoreConnections hinzufügen
     if (levelCoreConnections.containsKey(id)) {
       uniqueChildIds.addAll(levelCoreConnections[id]!);
     }
 
-    // Kinder hinzufügen, aber Essences ausschließen
     for (var childId in uniqueChildIds) {
       if (nodes.containsKey(childId)) {
         final childNode = nodes[childId]!;
-        // Essence ist ein Knoten mit isCore = true, der nicht in levelCoreConnections vorkommt
         bool isEssence = childNode.isCore && !levelCoreConnections.values.any((coreSet) => coreSet.contains(childId));
         if (!isEssence) {
           node.children.add(childNode);
@@ -328,7 +299,6 @@ List<TreeNode> buildTree(List<Map<String, dynamic>> rawData, Map<String, Set<Str
       }
     }
 
-    // Wurzelknoten finden
     if (!rawData.any((row) => row['id'] == id && row['parent_id'] != null)) {
       roots.add(node);
     }

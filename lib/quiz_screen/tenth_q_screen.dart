@@ -15,7 +15,8 @@ String zufaelliger_btn_spruch() {
 }
 
 class ArchivemendScreen extends StatefulWidget {
-  const ArchivemendScreen({super.key});
+  final String selected_level_pk;
+  const ArchivemendScreen({super.key, required this.selected_level_pk});
 
   @override
   State<ArchivemendScreen> createState() => _ArchivemendScreenState();
@@ -95,7 +96,7 @@ class _ArchivemendScreenState extends State<ArchivemendScreen> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => QuizScreen(selected_level_pk: "188de553-db8e-499e-8bf5-049884b88a05",)),
+                      MaterialPageRoute(builder: (context) => QuizScreen(selected_level_pk: widget.selected_level_pk,)),
                     );
                   },
                   child: Text(btn_text),

@@ -97,7 +97,7 @@ class _QuizScreenState extends State<QuizScreen> {
         // todo navigiere zu ArchievmentScreen()
         // Navigiere zu AchievementScreen
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => ArchivemendScreen()),
+          MaterialPageRoute(builder: (context) => ArchivemendScreen(selected_level_pk: widget.selected_level_pk)),
         );
       }
     }

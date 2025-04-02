@@ -1,0 +1,9 @@
+
+
+-- Projektmanagement: Temporäre Organisation nach PRINCE2
+INSERT INTO temporary_questions (essence_fk, text, points, options) VALUES
+('00000000-0000-0000-0000-000000000000', 'Ist die temporäre Organisation nach PRINCE2 eine dauerhafte Unternehmensstruktur?', 2, '[{"text": "Nein", "correct": true, "because": "Sie wird nur für die Projektlaufzeit gebildet"}, {"text": "Ja", "correct": false, "because": "Sie löst sich nach Projektende auf"}]'),
+('00000000-0000-0000-0000-000000000000', 'Welche Rolle gehört zur temporären Organisation nach PRINCE2?', 3, '[{"text": "Projektleitung (Project Board)", "correct": true, "because": "Steuert das Projekt"}, {"text": "Abteilungsleiter der Buchhaltung", "correct": false, "because": "Keine projektbezogene Rolle"}, {"text": "Externer Lieferant", "correct": false, "because": "Nicht zwingend Teil"}]'),
+('00000000-0000-0000-0000-000000000000', 'Sind diese Aussagen zur temporären Organisation nach PRINCE2 korrekt? a) Sie wird für die Dauer des Projekts eingerichtet. b) Sie ist unabhängig vom Projektmanager.', 3, '[{"text": "Nur a) stimmt", "correct": true, "because": "Projektmanager ist Teil der Struktur"}, {"text": "Beides stimmt", "correct": false, "because": "b) ist falsch"}, {"text": "Nur b) stimmt", "correct": false, "because": "a) ist zentral"}, {"text": "Beides falsch", "correct": false, "because": "a) ist richtig"}]'),
+('00000000-0000-0000-0000-000000000000', 'Welche Merkmale beschreiben die temporäre Organisation nach PRINCE2?', 4, '[{"text": "Flexibilität für das Projekt", "correct": true, "because": "Passt sich dem Projekt an"}, {"text": "Feste Hierarchie im Unternehmen", "correct": false, "because": "Nicht temporär"}, {"text": "Klare Verantwortlichkeiten", "correct": true, "because": "Rollen sind definiert"}, {"text": "Unendliche Laufzeit", "correct": false, "because": "Nur für Projektlaufzeit"}]');
+

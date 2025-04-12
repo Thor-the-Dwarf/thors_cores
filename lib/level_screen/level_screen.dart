@@ -34,7 +34,8 @@ class LevelScreen extends StatefulWidget {
   _LevelScreenState createState() => _LevelScreenState();
 }
 
-class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStateMixin {
+class _LevelScreenState extends State<LevelScreen>
+    with SingleTickerProviderStateMixin {
   bool isLoading = true;
   List<TreeNode> tree = [];
   late final SupabaseClient supabase;
@@ -42,7 +43,8 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
   bool _isMenuOpen = false;
   late AnimationController _animationController;
   late Animation<Offset> _slideAnimation;
-  String? _selectedLevelId; // Speichert die ID des angeklickten Levels für Cores-Anzeige
+  String?
+  _selectedLevelId; // Speichert die ID des angeklickten Levels für Cores-Anzeige
 
   @override
   void initState() {
@@ -55,10 +57,9 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
     _slideAnimation = Tween<Offset>(
       begin: const Offset(-1.0, 0.0),
       end: const Offset(0.0, 0.0),
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
     _loadTreeData();
   }
 
@@ -70,30 +71,51 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
 
   Future<void> _loadTreeData() async {
     try {
-      final levelsResponse = await supabase.from('levels').select('level_pk, name').order('name');
-      final subLevelsResponse = await supabase.from('sub_levels').select('parent_level_fk, child_level_fk');
+      final levelsResponse = await supabase
+          .from('levels')
+          .select('level_pk, name')
+          .order('name');
+      final subLevelsResponse = await supabase
+          .from('sub_levels')
+          .select('parent_level_fk, child_level_fk');
       final coresResponse = await supabase.from('core').select('core_pk, name');
-      final levelCoresResponse = await supabase.from('level_cores').select('parent_level_fk, core_fk');
-      final essenceResponse = await supabase.from('essence').select('essence_pk, core_fk, name');
+      final levelCoresResponse = await supabase
+          .from('level_cores')
+          .select('parent_level_fk, core_fk');
+      final essenceResponse = await supabase
+          .from('essence')
+          .select('essence_pk, core_fk, name');
 
       List<Map<String, dynamic>> rawData = [];
 
       if (levelsResponse != null) {
-        rawData.addAll(levelsResponse.map((row) => {
-          'id': row['level_pk'] as String,
-          'name': row['name'] as String,
-          'parent_id': null,
-          'is_core': false,
-        }).toList());
+        rawData.addAll(
+          levelsResponse
+              .map(
+                (row) => {
+                  'id': row['level_pk'] as String,
+                  'name': row['name'] as String,
+                  'parent_id': null,
+                  'is_core': false,
+                },
+              )
+              .toList(),
+        );
       }
 
       if (subLevelsResponse != null) {
-        rawData.addAll(subLevelsResponse.map((row) => {
-          'id': row['child_level_fk'] as String,
-          'name': '',
-          'parent_id': row['parent_level_fk'] as String,
-          'is_core': false,
-        }).toList());
+        rawData.addAll(
+          subLevelsResponse
+              .map(
+                (row) => {
+                  'id': row['child_level_fk'] as String,
+                  'name': '',
+                  'parent_id': row['parent_level_fk'] as String,
+                  'is_core': false,
+                },
+              )
+              .toList(),
+        );
       }
 
       if (coresResponse != null) {
@@ -123,7 +145,7 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
           levelCoreConnections.putIfAbsent(parentId, () => {}).add(coreId);
           if (coreData.containsKey('unassigned')) {
             var core = coreData['unassigned']!.firstWhere(
-                  (c) => c['id'] == coreId,
+              (c) => c['id'] == coreId,
               orElse: () => {},
             );
             if (core.isNotEmpty) {
@@ -134,9 +156,11 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
         }
       }
 
-      for (var subLevel in rawData.where((row) => row['parent_id'] != null && !row['is_core'])) {
+      for (var subLevel in rawData.where(
+        (row) => row['parent_id'] != null && !row['is_core'],
+      )) {
         final levelData = rawData.firstWhere(
-              (row) => row['id'] == subLevel['id'] && row['parent_id'] == null,
+          (row) => row['id'] == subLevel['id'] && row['parent_id'] == null,
           orElse: () => {'name': 'Unknown Level'},
         );
         subLevel['name'] = levelData['name'];
@@ -175,7 +199,10 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
     });
   }
 
-  List<Map<String, dynamic>> _collectAllCores(String levelId, List<TreeNode> tree) {
+  List<Map<String, dynamic>> _collectAllCores(
+    String levelId,
+    List<TreeNode> tree,
+  ) {
     List<Map<String, dynamic>> allCores = [];
 
     // Finde den Knoten mit der gegebenen ID
@@ -207,7 +234,10 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
     return allCores;
   }
 
-  List<Map<String, dynamic>> _buildVisibleNodes(List<TreeNode> nodes, int depth) {
+  List<Map<String, dynamic>> _buildVisibleNodes(
+    List<TreeNode> nodes,
+    int depth,
+  ) {
     List<Map<String, dynamic>> visibleNodes = [];
     for (var node in nodes) {
       visibleNodes.add({'node': node, 'depth': depth});
@@ -344,7 +374,6 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
   //     ),
   //   );
   // }
-
   Widget _buildNodeList(List<Map<String, dynamic>> visibleNodes) {
     return Container(
       decoration: BoxDecoration(
@@ -369,41 +398,52 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
           return InkWell(
             onTap: () {
               if (node.children.isNotEmpty) {
-                _toggleNode(node); // Einklappen/Ausklappen bei Klick auf leeren Bereich
+                _toggleNode(
+                  node,
+                ); // Einklappen/Ausklappen bei Klick auf leeren Bereich
               }
             },
             child: Container(
               padding: EdgeInsets.fromLTRB(16.0 + depth * 16.0, 8.0, 16.0, 8.0),
-              color: isSelected
-                  ? (isDarkMode ? Colors.white.withOpacity(0.2) : Colors.yellow.withOpacity(0.2))
-                  : Colors.transparent,
+              color:
+                  isSelected
+                      ? (isDarkMode
+                          ? Colors.white.withOpacity(0.2)
+                          : Colors.black.withOpacity(0.2))
+                      : Colors.transparent,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
                     width: 24,
-                    child: node.children.isNotEmpty
-                        ? GestureDetector(
-                      onTap: () => _toggleNode(node), // Einklappen/Ausklappen bei Klick auf Icon
-                      child: Icon(
-                        node.isExpanded ? Icons.expand_more : Icons.chevron_right,
-                        color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                            : Colors.black
-                      ),
-                    )
-                        : null,
+                    child:
+                        node.children.isNotEmpty
+                            ? GestureDetector(
+                              onTap: () => _toggleNode(node),
+                              // Einklappen/Ausklappen bei Klick auf Icon
+                              child: Icon(
+                                node.isExpanded
+                                    ? Icons.expand_more
+                                    : Icons.chevron_right,
+                                color: isDarkMode ? Colors.white : Colors.black,
+                              ),
+                            )
+                            : null,
                   ),
                   const SizedBox(width: 8),
                   GestureDetector(
                     onTap: () {
                       if (node.hasCores && !node.isCore) {
-                        print('Level mit Core-Verbindung geklickt: ${node.name} (ID: ${node.id})');
+                        print(
+                          'Level mit Core-Verbindung geklickt: ${node.name} (ID: ${node.id})',
+                        );
                         print('Zugehörige Cores: ${coreData[node.id]}');
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => QuizScreen(selected_level_pk: node.id),
+                            builder:
+                                (context) =>
+                                    QuizScreen(selected_level_pk: node.id),
                           ),
                         );
                       }
@@ -417,15 +457,24 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        _toggleCores(node.id, tree); // Cores togglen bei Klick auf Text
+                        _toggleCores(
+                          node.id,
+                          tree,
+                        ); // Cores togglen bei Klick auf Text
                       },
                       child: Text(
                         node.name,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                          color: isSelected
-                              ? (isDarkMode ? Colors.white : Colors.yellow.shade700)
-                              : Theme.of(context).textTheme.bodyMedium!.color,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          color:
+                              isSelected
+                                  ? (isDarkMode
+                                      ? Colors.white
+                                      : Colors.black)
+                                  : Theme.of(
+                                    context,
+                                  ).textTheme.bodyMedium!.color,
                         ),
                         softWrap: true,
                         overflow: TextOverflow.visible,
@@ -474,10 +523,13 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
                   ),
                   itemCount: _collectAllCores(_selectedLevelId!, tree).length,
                   itemBuilder: (context, index) {
-                    final core = _collectAllCores(_selectedLevelId!, tree)[index];
+                    final core =
+                        _collectAllCores(_selectedLevelId!, tree)[index];
                     return GestureDetector(
                       onTap: () {
-                        print('Core geklickt: ${core['name']} (ID: ${core['id']})');
+                        print(
+                          'Core geklickt: ${core['name']} (ID: ${core['id']})',
+                        );
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -492,9 +544,11 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
                           ],
                         ),
                         child: Center(
-                          child: 
-                            HaloSphere(text: core['name'] as String, color: getRandomColor(),)
-                          
+                          child: HaloSphere(
+                            text: core['name'] as String,
+                            color: getRandomColor(),
+                          ),
+
                           // Text(
                           //   core['name'] as String,
                           //   style: Theme.of(context).textTheme.bodyMedium,
@@ -515,17 +569,21 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: GestureDetector(
-                    onTap: () {}, // Verhindert, dass Klicks durch die Ordnerstruktur gehen
+                    onTap: () {},
+                    // Verhindert, dass Klicks durch die Ordnerstruktur gehen
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.8,
-                      child: isLoading
-                          ? const Center(child: CircularProgressIndicator())
-                          : visibleNodes.isEmpty
-                          ? const Center(child: Text('Keine Daten verfügbar'))
-                          : Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: _buildNodeList(visibleNodes),
-                      ),
+                      child:
+                          isLoading
+                              ? const Center(child: CircularProgressIndicator())
+                              : visibleNodes.isEmpty
+                              ? const Center(
+                                child: Text('Keine Daten verfügbar'),
+                              )
+                              : Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: _buildNodeList(visibleNodes),
+                              ),
                     ),
                   ),
                 ),
@@ -541,17 +599,23 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
                   FloatingActionButton(
                     heroTag: 'theme_toggler',
                     onPressed: () {
-                      Provider.of<ThemeController>(context, listen: false).toggleTheme();
+                      Provider.of<ThemeController>(
+                        context,
+                        listen: false,
+                      ).toggleTheme();
                     },
                     mini: true,
                     backgroundColor: Colors.transparent,
                     elevation: 0,
                     child: Consumer<ThemeController>(
-                      builder: (context, controller, _) => Icon(
-                        controller.themeMode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode,
-                        color: Theme.of(context).iconTheme.color,
-                        size: 48.0,
-                      ),
+                      builder:
+                          (context, controller, _) => Icon(
+                            controller.themeMode == ThemeMode.dark
+                                ? Icons.dark_mode
+                                : Icons.light_mode,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 48.0,
+                          ),
                     ),
                   ),
                   const SizedBox(height: 40.0),
@@ -591,7 +655,10 @@ Color getRandomColor() {
   return solidColors[random.nextInt(solidColors.length)];
 }
 
-List<TreeNode> buildTree(List<Map<String, dynamic>> rawData, Map<String, Set<String>> levelCoreConnections) {
+List<TreeNode> buildTree(
+  List<Map<String, dynamic>> rawData,
+  Map<String, Set<String>> levelCoreConnections,
+) {
   final Map<String, TreeNode> nodes = {};
   final Map<String, List<String>> childMap = {};
 
@@ -604,7 +671,8 @@ List<TreeNode> buildTree(List<Map<String, dynamic>> rawData, Map<String, Set<Str
       name: row['name'],
       isCore: row['is_core'],
       hasCores: levelCoreConnections.containsKey(row['id']),
-      color: levelCoreConnections.containsKey(row['id']) ? getRandomColor() : null,
+      color:
+          levelCoreConnections.containsKey(row['id']) ? getRandomColor() : null,
     );
     if (row['parent_id'] != null) {
       childMap.putIfAbsent(row['parent_id'], () => []).add(row['id']);

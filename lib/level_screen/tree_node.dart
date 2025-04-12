@@ -1,18 +1,24 @@
 
 // Datenklasse für die Baumstruktur
+import 'dart:ui';
+
 class TreeNode {
-  final String id;          // UUID aus level_pk oder core_pk
-  final String name;        // Name des Levels oder Cores
-  final bool isCore;        // Unterscheidet Core (true) von Level (false)
-  final List<TreeNode> children; // Liste der Unterknoten (Sublevels oder Cores)
-  final bool hasCores;      // Neue Eigenschaft: Hat dieses Level/Sublevel Cores?
+  final String id;
+  final String name;
+  final bool isCore;
+  final List<TreeNode> children;
+  final bool hasCores;
+  final Color? color;
+  bool isExpanded;
 
   TreeNode({
     required this.id,
     required this.name,
     this.isCore = false,
     List<TreeNode>? children,
-    this.hasCores = false, // Standardmäßig false
+    this.hasCores = false,
+    this.color,
+    this.isExpanded = false,
   }) : children = children ?? [];
 }
 

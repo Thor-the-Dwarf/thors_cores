@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:neon_thors_cores/_gloabals/widgets/my_background.dart';
-import 'package:neon_thors_cores/quiz_screen/quiz__screen.dart';
-import 'package:neon_thors_cores/quiz_screen/tenth_q_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '_gloabals/debug_prints.dart';
@@ -12,7 +9,6 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import '_gloabals/widgets/theme_toggler.dart';
 import 'firebase_options.dart';
 import 'level_screen/level_screen.dart';
-import 'level_screen/tree_node.dart';
 
 void debug(String text) {
   if (false || DEBUG_EVERYTHING) printRed("[main] $text");

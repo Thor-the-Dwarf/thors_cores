@@ -387,7 +387,9 @@ class _LevelScreenState extends State<LevelScreen> with SingleTickerProviderStat
                       onTap: () => _toggleNode(node), // Einklappen/Ausklappen bei Klick auf Icon
                       child: Icon(
                         node.isExpanded ? Icons.expand_more : Icons.chevron_right,
-                        color: Colors.transparent
+                        color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                            : Colors.black
                       ),
                     )
                         : null,

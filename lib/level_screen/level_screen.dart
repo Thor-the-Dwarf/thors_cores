@@ -255,125 +255,6 @@ class _LevelScreenState extends State<LevelScreen>
   }
 
   @override
-  // Widget build(BuildContext context) {
-  //   final visibleNodes = _buildVisibleNodes(tree, 0);
-  //
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       title: const Text('Wiederholung ist die Mutter des Lernens'),
-  //       elevation: 0,
-  //     ),
-  //     body: Stack(
-  //       children: [
-  //         MyBackGround(),
-  //         // Durchsichtiges Grid für Cores, wenn ein Level ausgewählt ist
-  //         if (_selectedLevelId != null)
-  //           Container(
-  //             color: Colors.black.withOpacity(0.3),
-  //             child: GridView.builder(
-  //               padding: const EdgeInsets.all(16.0),
-  //               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-  //                 crossAxisCount: 2,
-  //                 crossAxisSpacing: 16.0,
-  //                 mainAxisSpacing: 16.0,
-  //                 childAspectRatio: 3 / 2,
-  //               ),
-  //               itemCount: _collectAllCores(_selectedLevelId!, tree).length,
-  //               itemBuilder: (context, index) {
-  //                 final core = _collectAllCores(_selectedLevelId!, tree)[index];
-  //                 return GestureDetector(
-  //                   onTap: () {
-  //                     print('Core geklickt: ${core['name']} (ID: ${core['id']})');
-  //                   },
-  //                   child: Container(
-  //                     decoration: BoxDecoration(
-  //                       color: Theme.of(context).cardColor.withOpacity(0.5),
-  //                       borderRadius: BorderRadius.circular(8.0),
-  //                       boxShadow: [
-  //                         BoxShadow(
-  //                           color: Theme.of(context).shadowColor.withOpacity(0.2),
-  //                           blurRadius: 4.0,
-  //                           offset: const Offset(0, 2),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                     child: Center(
-  //                       child: Text(
-  //                         core['name'] as String,
-  //                         style: Theme.of(context).textTheme.bodyMedium,
-  //                         textAlign: TextAlign.center,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 );
-  //               },
-  //             ),
-  //           ),
-  //         SlideTransition(
-  //           position: _slideAnimation,
-  //           child: Container(
-  //             width: MediaQuery.of(context).size.width,
-  //             height: MediaQuery.of(context).size.height,
-  //             color: Colors.transparent,
-  //             child: Align(
-  //               alignment: Alignment.centerLeft,
-  //               child: Container(
-  //                 width: MediaQuery.of(context).size.width * 0.8,
-  //                 child: isLoading
-  //                     ? const Center(child: CircularProgressIndicator())
-  //                     : visibleNodes.isEmpty
-  //                     ? const Center(child: Text('Keine Daten verfügbar'))
-  //                     : Padding(
-  //                   padding: const EdgeInsets.all(16.0),
-  //                   child: _buildNodeList(visibleNodes),
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //         Positioned(
-  //           bottom: 24.0,
-  //           right: MediaQuery.of(context).size.width * 0.025,
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             children: [
-  //               const SizedBox(height: 40.0),
-  //               FloatingActionButton(
-  //                 heroTag: 'theme_toggler',
-  //                 onPressed: () {
-  //                   Provider.of<ThemeController>(context, listen: false).toggleTheme();
-  //                 },
-  //                 mini: true,
-  //                 backgroundColor: Colors.transparent,
-  //                 elevation: 0,
-  //                 child: Consumer<ThemeController>(
-  //                   builder: (context, controller, _) => Icon(
-  //                     controller.themeMode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode,
-  //                     color: Theme.of(context).iconTheme.color,
-  //                     size: 48.0,
-  //                   ),
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 40.0),
-  //               FloatingActionButton(
-  //                 heroTag: 'menu_toggle',
-  //                 onPressed: _toggleMenu,
-  //                 backgroundColor: Colors.transparent,
-  //                 elevation: 0,
-  //                 child: Icon(
-  //                   _isMenuOpen ? Icons.close : Icons.menu,
-  //                   color: Theme.of(context).iconTheme.color,
-  //                   size: 48.0,
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 40.0),
-  //             ],
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
   Widget _buildNodeList(List<Map<String, dynamic>> visibleNodes) {
     return Container(
       decoration: BoxDecoration(
@@ -499,6 +380,7 @@ class _LevelScreenState extends State<LevelScreen>
       appBar: AppBar(
         title: const Text('Wiederholung ist die Mutter des Lernens'),
         elevation: 0,
+        automaticallyImplyLeading: false,
       ),
       body: GestureDetector(
         onTap: () {

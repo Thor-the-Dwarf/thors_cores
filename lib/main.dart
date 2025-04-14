@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:neon_thors_cores/start_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '_gloabals/debug_prints.dart';
@@ -61,7 +62,8 @@ class MyApp extends StatelessWidget {
 
             // const ArchivemendScreen(),
             // QuizScreen(selected_level_pk: "188de553-db8e-499e-8bf5-049884b88a05"),
-            const LevelScreen()
+            // const LevelScreen()
+            const StartScreen()
           );
         },
       ),

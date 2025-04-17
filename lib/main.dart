@@ -64,9 +64,9 @@ class MyApp extends StatelessWidget {
 
             // const ArchivemendScreen(),
             // QuizScreen(selected_level_pk: "188de553-db8e-499e-8bf5-049884b88a05"),
-            // const LevelScreen()
+            const LevelScreen()
             // const StartScreen()
-            const PayScreen()
+            // const PayScreen()
           );
         },
       ),

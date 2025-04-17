@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:neon_thors_cores/_globals/widgets/theme_controller.dart';
 import 'package:provider/provider.dart';
 
-// Placeholder for missing imports (replace with actual paths)
+import 'package:url_launcher/url_launcher.dart';
 import '_globals/widgets/my_background.dart';
 
 class PayScreen extends StatelessWidget {
@@ -111,13 +111,14 @@ class PayScreen extends StatelessWidget {
                       commingUp: [],
                     ),
                     CoolLoadingBar(
-                      progress: 0.86,
+                      progress: 0,
                       head: "Good Job! Thanks Thor",
                       body: "Bezahlte Entwicklungszeit: 0 / 1238 Stunden",
                       commingUp: [],
                     ),
                     SizedBox(height: 16,),
-                    Text("Noch erfolgt die länge der Fortschrittsbalken nicht in Echtzeit. Ich mach das manuell.")
+                    Text("Noch erfolgt die länge der Fortschrittsbalken nicht in Echtzeit. Ich mach das manuell."),
+                    Text("Restgeld wird auf alle Unternehmensziele verteilt")
                   ],
                 ),
               ],
@@ -256,9 +257,13 @@ class _CoolLoadingBarState extends State<CoolLoadingBar> {
                 ),
               ),
               IconButton(
-                onPressed: () {
-                  // TODO: Implement donation functionality
-                },
+                onPressed: () async {
+                  const url = 'https://paypal.com/ncp/payment/UXHHNB4MWUGQS';
+                  if (await canLaunch(url)) {
+                  await launch(url);
+                  } else {
+                  throw 'Konnte PayPal nicht öffnen';
+                  }                },
                 icon: const Icon(Icons.paypal),
                 iconSize: 48,
               )

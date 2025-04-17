@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:neon_thors_cores/level_screen/core_button.dart';
+import 'package:neon_thors_cores/pay_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../_globals/widgets/my_background.dart';
@@ -514,6 +515,22 @@ class _LevelScreenState extends State<LevelScreen>
                     ),
                   ),
                   const SizedBox(height: 40.0),
+                  FloatingActionButton(
+                    heroTag: 'support_me',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PayScreen()),
+                      );
+                    },
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    child: Icon(
+                      Icons.handshake,
+                      color: Theme.of(context).iconTheme.color,
+                      size: 48.0,
+                    ),
+                  ),
                 ],
               ),
             ),

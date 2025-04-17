@@ -6,10 +6,10 @@ import 'package:neon_thors_cores/quiz_screen/question_widget.dart';
 import 'package:neon_thors_cores/quiz_screen/tenth_q_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../_gloabals/debug_prints.dart';
-import '../_gloabals/key_map.dart';
-import '../_gloabals/widgets/my_background.dart';
-import '../_gloabals/widgets/theme_toggler.dart';
+import '../_globals/debug_prints.dart';
+import '../_globals/key_map.dart';
+import '../_globals/widgets/my_background.dart';
+import '../_globals/widgets/theme_toggler.dart';
 import 'db_question.dart';
 
 void debug(String text) {

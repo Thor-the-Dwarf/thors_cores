@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:neon_thors_cores/_globals/widgets/theme_controller.dart';
+import 'package:neon_thors_cores/pay_screen.dart';
 import 'package:neon_thors_cores/start_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '_gloabals/debug_prints.dart';
+import '_globals/debug_prints.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import '_gloabals/widgets/theme_toggler.dart';
+import '_globals/widgets/theme_toggler.dart';
 import 'firebase_options.dart';
 import 'level_screen/level_screen.dart';
 
@@ -63,7 +65,8 @@ class MyApp extends StatelessWidget {
             // const ArchivemendScreen(),
             // QuizScreen(selected_level_pk: "188de553-db8e-499e-8bf5-049884b88a05"),
             // const LevelScreen()
-            const StartScreen()
+            // const StartScreen()
+            const PayScreen()
           );
         },
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../_gloabals/debug_prints.dart';
+import '../_globals/debug_prints.dart';
 import 'db_question.dart';
 
 class QuestionVM with ChangeNotifier {

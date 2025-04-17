@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:neon_thors_cores/_gloabals/widgets/my_background.dart';
-import 'package:neon_thors_cores/_gloabals/widgets/theme_toggler.dart';
+import 'package:neon_thors_cores/_globals/widgets/my_background.dart';
+import 'package:neon_thors_cores/_globals/widgets/theme_toggler.dart';
 import 'package:neon_thors_cores/quiz_screen/quiz__screen.dart';
 
 List<String> btn_sprueche = [

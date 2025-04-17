@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:neon_thors_cores/level_screen/core_button.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../_gloabals/widgets/my_background.dart';
-import '../_gloabals/widgets/theme_toggler.dart';
+import '../_globals/widgets/my_background.dart';
+import '../_globals/widgets/theme_controller.dart';
+import '../_globals/widgets/theme_toggler.dart';
 import '../quiz_screen/quiz__screen.dart';
 
 class TreeNode {

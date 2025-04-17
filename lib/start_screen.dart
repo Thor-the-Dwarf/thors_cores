@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:neon_thors_cores/_gloabals/widgets/my_background.dart';
+import 'package:neon_thors_cores/_globals/widgets/my_background.dart';
+import 'package:neon_thors_cores/_globals/widgets/theme_controller.dart';
 import 'package:neon_thors_cores/level_screen/level_screen.dart';
 import 'package:provider/provider.dart';
-import '_gloabals/widgets/theme_toggler.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});

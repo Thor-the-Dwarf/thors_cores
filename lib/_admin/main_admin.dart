@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark(),
             themeMode: themeController.themeMode,
-            home: const SqlExecutionPage(),
+            // home: const SqlExecutionPage(),
           );
         },
       ),

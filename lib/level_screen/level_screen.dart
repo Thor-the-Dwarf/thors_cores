@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../_globals/widgets/my_background.dart';
 import '../_globals/widgets/theme_controller.dart';
-import '../_globals/widgets/theme_toggler.dart';
 import '../quiz_screen/quiz__screen.dart';
 
 class TreeNode {
@@ -37,14 +36,21 @@ class LevelScreen extends StatefulWidget {
 }
 
 class _LevelScreenState extends State<LevelScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   bool isLoading = true;
   List<TreeNode> tree = [];
   late final SupabaseClient supabase;
   Map<String, List<Map<String, dynamic>>> coreData = {};
   bool _isMenuOpen = false;
+  bool _isPayScreenOpen = false; // Neue Variable für PayScreen
+
   late AnimationController _animationController;
+  late AnimationController
+  _payAnimationController; // Neuer Controller für PayScreen
+
   late Animation<Offset> _slideAnimation;
+  late Animation<Offset> _paySlideAnimation; // Neue Animation für PayScreen
+
   String?
   _selectedLevelId; // Speichert die ID des angeklickten Levels für Cores-Anzeige
 
@@ -56,11 +62,21 @@ class _LevelScreenState extends State<LevelScreen>
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
+    _payAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    ); // Neuer Controller
     _slideAnimation = Tween<Offset>(
       begin: const Offset(-1.0, 0.0),
       end: const Offset(0.0, 0.0),
     ).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+    _paySlideAnimation = Tween<Offset>(
+      begin: const Offset(1.0, 0.0), // Von rechts einsliden
+      end: const Offset(0.0, 0.0),
+    ).animate(
+      CurvedAnimation(parent: _payAnimationController, curve: Curves.easeInOut),
     );
     _loadTreeData();
   }
@@ -68,6 +84,7 @@ class _LevelScreenState extends State<LevelScreen>
   @override
   void dispose() {
     _animationController.dispose();
+    _payAnimationController.dispose(); // Neuen Controller entsorgen
     super.dispose();
   }
 
@@ -178,6 +195,17 @@ class _LevelScreenState extends State<LevelScreen>
         isLoading = false;
       });
     }
+  }
+
+  void _togglePayScreen() {
+    setState(() {
+      _isPayScreenOpen = !_isPayScreenOpen;
+      if (_isPayScreenOpen) {
+        _payAnimationController.forward();
+      } else {
+        _payAnimationController.reverse();
+      }
+    });
   }
 
   void _toggleMenu() {
@@ -352,9 +380,7 @@ class _LevelScreenState extends State<LevelScreen>
                               isSelected ? FontWeight.bold : FontWeight.normal,
                           color:
                               isSelected
-                                  ? (isDarkMode
-                                      ? Colors.white
-                                      : Colors.black)
+                                  ? (isDarkMode ? Colors.white : Colors.black)
                                   : Theme.of(
                                     context,
                                   ).textTheme.bodyMedium!.color,
@@ -389,8 +415,12 @@ class _LevelScreenState extends State<LevelScreen>
           if (_isMenuOpen) {
             _toggleMenu(); // Schließt das Slide-Menü bei Klick außerhalb
           }
+          if (_isPayScreenOpen) {
+            _togglePayScreen(); // Schließt PayScreen bei Klick außerhalb
+          }
         },
-        child: Stack(
+        child:
+        Stack(
           children: [
             MyBackGround(),
             // Durchsichtiges Grid für Cores, wenn ein Level ausgewählt ist
@@ -407,8 +437,7 @@ class _LevelScreenState extends State<LevelScreen>
                   ),
                   itemCount: _collectAllCores(_selectedLevelId!, tree).length,
                   itemBuilder: (context, index) {
-                    final core =
-                        _collectAllCores(_selectedLevelId!, tree)[index];
+                    final core = _collectAllCores(_selectedLevelId!, tree)[index];
                     return GestureDetector(
                       onTap: () {
                         print(
@@ -432,12 +461,6 @@ class _LevelScreenState extends State<LevelScreen>
                             text: core['name'] as String,
                             color: getRandomColor(),
                           ),
-
-                          // Text(
-                          //   core['name'] as String,
-                          //   style: Theme.of(context).textTheme.bodyMedium,
-                          //   textAlign: TextAlign.center,
-                          // ),
                         ),
                       ),
                     );
@@ -457,19 +480,28 @@ class _LevelScreenState extends State<LevelScreen>
                     // Verhindert, dass Klicks durch die Ordnerstruktur gehen
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.8,
-                      child:
-                          isLoading
-                              ? const Center(child: CircularProgressIndicator())
-                              : visibleNodes.isEmpty
-                              ? const Center(
-                                child: Text('Keine Daten verfügbar'),
-                              )
-                              : Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: _buildNodeList(visibleNodes),
-                              ),
+                      child: isLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : visibleNodes.isEmpty
+                          ? const Center(child: Text('Keine Daten verfügbar'))
+                          : Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: _buildNodeList(visibleNodes),
+                      ),
                     ),
                   ),
+                ),
+              ),
+            ),
+            SlideTransition(
+              position: _paySlideAnimation,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: Colors.transparent,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: const PayScreen(),
                 ),
               ),
             ),
@@ -492,14 +524,13 @@ class _LevelScreenState extends State<LevelScreen>
                     backgroundColor: Colors.transparent,
                     elevation: 0,
                     child: Consumer<ThemeController>(
-                      builder:
-                          (context, controller, _) => Icon(
-                            controller.themeMode == ThemeMode.dark
-                                ? Icons.dark_mode
-                                : Icons.light_mode,
-                            color: Theme.of(context).iconTheme.color,
-                            size: 48.0,
-                          ),
+                      builder: (context, controller, _) => Icon(
+                        controller.themeMode == ThemeMode.dark
+                            ? Icons.dark_mode
+                            : Icons.light_mode,
+                        color: Theme.of(context).iconTheme.color,
+                        size: 48.0,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 40.0),
@@ -517,16 +548,11 @@ class _LevelScreenState extends State<LevelScreen>
                   const SizedBox(height: 40.0),
                   FloatingActionButton(
                     heroTag: 'support_me',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => PayScreen()),
-                      );
-                    },
+                    onPressed: _togglePayScreen, // Toggle PayScreen statt Navigation
                     backgroundColor: Colors.transparent,
                     elevation: 0,
                     child: Icon(
-                      Icons.handshake,
+                      _isPayScreenOpen ? Icons.close : Icons.handshake, // Icon wechselt
                       color: Theme.of(context).iconTheme.color,
                       size: 48.0,
                     ),

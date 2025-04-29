@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:neon_thors_cores/_globals/widgets/theme_controller.dart';
 import 'package:neon_thors_cores/pay_screen.dart';
+import 'package:neon_thors_cores/paypal/subscriptionpage.dart';
 import 'package:neon_thors_cores/start_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -11,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import '_globals/widgets/theme_toggler.dart';
 import 'firebase_options.dart';
+import 'level_screen/new_levelScreen.dart';
 import 'level_screen/level_screen.dart';
 
 void debug(String text) {
@@ -64,9 +66,11 @@ class MyApp extends StatelessWidget {
 
             // const ArchivemendScreen(),
             // QuizScreen(selected_level_pk: "188de553-db8e-499e-8bf5-049884b88a05"),
-            const LevelScreen()
+            // const LevelScreen()
+            // const NewLevelScreen(unlocked: ["c08583af-357b-44e5-9173-4a1e1d3f9d7d"],)
             // const StartScreen()
             // const PayScreen()
+            SubscriptionPage()
           );
         },
       ),

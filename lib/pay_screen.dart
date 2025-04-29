@@ -1,8 +1,6 @@
 // pay_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:neon_thors_cores/_globals/widgets/theme_controller.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '_globals/widgets/my_background.dart';
 

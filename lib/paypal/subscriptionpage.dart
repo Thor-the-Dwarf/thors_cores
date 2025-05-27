@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SubscriptionPage extends StatelessWidget {
-  final String subscriptionUrl = 'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-0PE02144XN4893049NAEAMKY';
-
+  final String subscriptionUrl = 'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-7G230830CD9983044NAM7V4I';
   Future<void> startSubscription() async {
     final Uri uri = Uri.parse(subscriptionUrl);
     if (await canLaunchUrl(uri)) {
@@ -37,3 +36,5 @@ class SubscriptionPage extends StatelessWidget {
     );
   }
 }
+
+

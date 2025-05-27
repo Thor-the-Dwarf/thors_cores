@@ -1,0 +1,109 @@
+@startuml
+' Entitäten definieren
+entity "LEVELS" {
+  * level_pk : uuid
+  --
+  name : text
+  details : text
+}
+
+entity "LEVEL_CORES" {
+  * level_core_pk : uuid
+  --
+  parent_level_fk : uuid
+  core_fk : uuid
+}
+
+entity "SUB_LEVELS" {
+  * sublevel_pk : uuid
+  --
+  parent_level_fk : uuid
+  child_level_fk : uuid
+}
+
+entity "CORE" {
+  * core_pk : uuid
+  --
+  name : text
+  details : text
+}
+
+entity "QUESTION" {
+  * question_pk : uuid
+  --
+  essence_fk : uuid
+  text : text
+  points : int4
+  options : jsonb
+}
+
+entity "ESSENCE" {
+  * essence_pk : uuid
+  --
+  core_fk : uuid
+  name : text
+}
+
+entity "User" {
+  * user_pk : uuid
+  --
+  valid_til : TimeStamp
+  name : text
+  email : text
+  transaction_id_passowrd : text
+  unlocked_levels : json
+  locked_levels : json
+  correct_answers : json
+  wrong_answers : json
+}
+
+entity "Correct_Answers" {
+  * correct_answer_pk : uuid
+  --
+  user_fk : uuid
+  question_fk : uuid
+}
+
+entity "Wrong_Answers" {
+  * wrong_answer_pk : uuid
+  --
+  user_fk : uuid
+  question_fk : uuid
+}
+
+entity "Unlocked_Levels" {
+  * unlocked_level_pk : uuid
+  --
+  user_fk : uuid
+  level_fk : uuid
+}
+
+entity "Locked_Levels" {
+  * locked_level_pk : uuid
+  --
+  user_fk : uuid
+  level_fk : uuid
+}
+
+entity "Key" {
+  * key_pk : uuid
+  --
+  unlocks_levels : json
+}
+
+' Beziehungen definieren
+LEVELS ||--o{ SUB_LEVELS
+LEVELS ||--o{ Unlocked_Levels
+LEVELS ||--o{ Locked_Levels
+LEVELS ||--o{ LEVEL_CORES
+CORE ||--o{ LEVEL_CORES
+CORE ||--o{ ESSENCE
+ESSENCE ||--o{ QUESTION
+Correct_Answers ||--o{ QUESTION
+Correct_Answers ||--o{ User
+Wrong_Answers ||--o{ QUESTION
+Wrong_Answers ||--o{ User
+User ||--o{ Unlocked_Levels
+User ||--o{ Locked_Levels
+
+@enduml

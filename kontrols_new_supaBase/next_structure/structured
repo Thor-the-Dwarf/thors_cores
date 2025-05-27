@@ -1,0 +1,1178 @@
+
+core_pk,name,details
+0074efdf-2472-4b04-a01c-ff3769654014,unstrukturierte Daten,Apokryphen
+00c9cd50-64ee-4b5e-b128-57b27cc39d5c,Decorator-Pattern,a
+00fa5c1d-a7e2-43ac-9179-131cf5f5e145,Beschaffungsprozesse & -planung,LF01
+012b4753-c19c-42ab-99e6-dfa962456f2c,Berufsbildungsgesetz (BBiG),LF01_
+013b97f8-2f89-49b2-990e-0f0d22c4b47c,Green-IT,Apokryphen
+014049c0-ab06-4883-896c-39a4acbf020b,Arbeitsspeicher,a
+018a0841-3c88-4f20-8dd0-886eb0f99430,nicht funktionale Anforderungen,Apokryphen
+018b76f2-320c-4e2e-9f94-864a832984ea,SSD,Apokryphen
+019fe4a9-7092-4bbe-8d34-a2368d24a449,TCO,Apokryphen
+01eae027-13da-4d04-b6c0-ef731e9f0911,Vertragssarten,LF01
+01fe9d97-4282-49f4-b85d-2ae0832cb1a4,Text-Stream,Apokryphen
+02015df7-a3e6-4007-9999-bdec15ddf1d6,objektrelationale Datenbank,Apokryphen
+021419a9-e747-4e1a-aafc-addeb78237a2,Performance-Tests durchführen,a
+022077ef-8f2a-41d5-b151-8f5b29613f58,Kündigungsschutzgesetz (KSchG) Anwendung,Wirtschafts und -Sozialkunde
+02f013db-45c6-48c7-9d30-b9f97764e861,Rastergrafik,Apokryphen
+02fb3174-9f67-4ff2-844a-c4298ee24fd1,Prozessoren,LF01
+030ae0ad-2961-4849-846a-2a29f7716c45,konzeptionelles Schema,Apokryphen
+032dfb90-9842-4b93-92ae-f33c706c6e8b,Käufermarkt,Apokryphen
+033f68b8-b188-4de1-9eca-86dc935752f8,NAS,Apokryphen
+0344ff59-c00f-48ca-a9a6-7bfc63e36f55,"Normen: ISO 9421(Ergonomie), WCAG(Accessibility)",a
+035f2bb1-9d51-4de5-8665-40cdac17e3bc,kollaborierende Roboter,Apokryphen
+036bf9b2-857d-4db1-9a0f-ece9d5a4910e,IT-Sicherheit,Apokryphen
+0372b210-7505-43fd-af10-ca6eb12eb2ea,Laserdrucker,LF01
+03828048-ceb4-4182-900b-b218e060acbc,Microservices,PV2a
+038444bc-27e1-4679-a562-f73326991680,Kundenberatung IT-Sicherheit,PV2a
+038d0b8c-fe4b-4d41-bd68-8ac4146f80d7,"Adresstypen (Unicast, Multicast, Anycast)",Netzwerktechnik
+03bbc8fb-a631-4a79-8fcb-3aba7b4a4b0f,andere Dateiformate,PV2a
+0432242e-e7fa-428b-b3a7-b98c529a774f,Namensauflösung,LF03
+0451434e-7f71-4025-8bc6-799e9b1dab2e,MS Access,Apokryphen
+04ab8d80-d8fa-44ef-9b3f-e3cd8f797138,Authentifizierungssysteme,Prüfungsvorbereitung AP1
+04acdf5b-e1fd-4ded-aa91-9f5a2ada9ee1,Anspruch auf Arbeitsmittel Bereitstellung (§ 14 Abs. 1 BBiG),Wirtschafts und -Sozialkunde
+04b94459-e920-453c-9c76-2a1e7b843301,Quellcode kommentieren,LF05
+04eb5da7-179d-4e95-a2e2-de1b7205f8d2,Anwendungsentwicklung,LF01_
+04fd6d69-137d-4a12-8d61-50f06d299729,vorbeugende Wartung,Apokryphen
+052f6709-4b7e-40de-ba97-25b5061f59c2,Tablets,Prüfungsvorbereitung AP1
+05b26b18-acba-4c99-89b0-7d6dd5b2ec8e,Data Control Language,Apokryphen
+05d09ca4-146b-4d05-aa53-7a0acde48f9c,Multi-Prozessor,Apokryphen
+06543131-2468-4b5e-a723-0e40af7632e4,Mitbestimmungsgesetze,Apokryphen
+067c717d-201e-4aec-94ee-1f5554c26b10,CPU,Prüfungsvorbereitung AP1
+06e4a1a2-53c8-4694-bf30-b1f4857ac7e1,Social Engineering,LF04
+0700b9ae-4d1c-4e4e-a1e8-7227dd20a163,agiles Vorgehensmodell,Apokryphen
+07158993-6058-43fa-b614-fa012252243f,DQL Data Qery Language,a
+073f281f-395b-43a7-adf3-ba2c84ad0cbd,Projektplanung,Apokryphen
+077e8517-adb5-44bd-93b3-f68af54f2987,Schutzziele,LF04
+07a86a63-751d-4927-ae4f-bed4475bb2e4,Versionsverwaltung,a
+07aeac10-2cf1-4152-a8ad-0e191e9a01c5,Primärdaten,Apokryphen
+07e41870-05aa-498b-b8e4-7329cc5f0ab9,(3) Netzwerkschicht,Prüfungsvorbereitung AP1
+08186aa8-32b4-4db3-ab4f-724e1eee5c35,Netzwerksicherheit,Apokryphen
+081fa2b0-c6d3-458a-9a5d-adf6c2ad0f0f,dynamische Testverfahren,Apokryphen
+083f93d6-aee8-4693-8ac4-84895fb40872,Anspruch auf Zeugnis bei Beendigung (§ 16 BBiG),Wirtschafts und -Sozialkunde
+08465460-506c-4c5b-aa71-2599cec5822a,WLAN-Einrichtung,LF03
+08883624-536d-4363-9806-9dd16b01324c,internes Schema,Apokryphen
+08b4753a-dd92-481a-bffb-7c82efc7b0c3,End-to-End-VPN,Apokryphen
+08f57dc1-2f24-486c-bdbc-bb1a054a71eb,"Ergebnisse bewerten (Ziele, Kundenzufriedenheit)",a
+09121764-91da-4438-bb1e-54a389567429,JSON,LF08
+0950e709-1984-4ab2-9be4-230960d91df4,Support-Dokumente bereitstellen,a
+095a348e-6af1-4d67-8938-fd2f24441724,Systemüberwachung,Apokryphen
+097d9723-af32-41aa-acad-6332c8ec6742,E-Procurement,Apokryphen
+09c5cda4-f98e-44d7-86b0-713ad1523b3f,Kündigungsschutzgesetz,Apokryphen
+09db824f-8a73-470d-a0ca-8732b41e313d,arithmetische Operatoren,Apokryphen
+0a0c7703-2dec-47c3-b735-14128fedd519,Creative-Commons-Lizenz,Apokryphen
+0a10891d-ec1c-463b-b7fe-3bdc0cbd1fae,Betatest,Apokryphen
+0a10f1f2-6e63-4586-8d4d-127aee3938f6,Schnittstellen,Apokryphen
+0a6beabb-865d-484f-a4d3-4fd3df87dd5e,Zentraleinheit,Apokryphen
+0aae8d06-1133-489f-a59f-f4449b3cb3cd,Bericht archivieren,a
+0ac66b70-5686-4b27-99ad-be8a569c6b43,IP-Konfiguration,Apokryphen
+0b1b2592-0bff-4971-ab31-249c8dac26fa,"DHCPFehlererkennung (Lease-Probleme, Serverausfall)",LF08
+0b5763ac-1f0c-43a7-b205-0ddb109aecc7,Strukturanalyse,Apokryphen
+0b5e79a3-b268-4140-b3ad-ee4667464cef,Systemtest,Apokryphen
+0b8ffd36-42bc-4da5-9ca8-7277700377b0,IHK,LF01_
+0baeb52b-d504-4d7a-96a7-244d6be17e74,Subnetzgrenzen (Hexadezimalzählung),Netzwerktechnik
+0bbf48c1-d8d7-4f0a-9c79-57c20610bac7,Netzwerkgeräte,Apokryphen
+0bc8a9d3-daf9-4e0d-8bff-15f9ff0610b7,Soft-Schlüsselwörter,Apokryphen
+0bd4f6d7-6ec4-4092-8b86-683cf3222dc3,Accounting,Apokryphen
+0bd87ee1-4c2d-4365-b2f6-7dfd0e22be30,Trojaner,Apokryphen
+0bde88fe-5f57-468a-bbfd-c2802253fa40,You Aren’t Gonna Need It (YAGNI - Du wirst es nicht brauchen),a
+0bfbcc85-6db8-4a12-b66f-7014d4ddf6ed,Mikroprozessor,Apokryphen
+0bfecb3c-ee78-401c-9455-ad4825f45abb,Ressourcenschonung,Wirtschafts und -Sozialkunde
+0c35ac1c-ac94-4a3e-ae71-8294e753cde9,Strategy-Pattern,a
+0c465fd4-97e7-4afe-919c-500683af0d1b,Kundenorientierung,LF06
+0ca90432-618d-4650-8451-78a6d8633f44,Ping Befehl,Apokryphen
+0ccf1663-358b-4ef8-b5da-df5fffedfd4b,Prozess Anforderungsanalyse,LF01
+0ce0eed4-e307-496e-b5b1-31c0e7e1e264,Regelungen zur Ausbildungszeit,Wirtschafts und -Sozialkunde
+0d24b79e-f4dd-4412-a1f4-c2a39929f491,Bürgerliches Gesetzbuch (BGB),LF01_
+0d604486-cbad-4e28-8c3e-e8d74902beb8,externes Schema,Apokryphen
+0dd091b7-065d-4ee4-a848-d998e38b4a1e,Änderungsanomalie,Apokryphen
+0dd14063-3158-4a04-8026-e16c368c07ba,Anforderungsabgleich,a
+0ddbe108-c052-47ae-9d70-00666e091570,IT-Sicherheitsbeauftragte,Apokryphen
+0e205186-631d-466f-9c0c-69cba8f50a2a,Sockel,Apokryphen
+0e23627f-7753-40f2-aa7f-5c0f381f3e82,"BinäreDarstellung (32 Bits, 0 und 1)",Netzwerktechnik
+0eb466d5-da92-4243-a03a-e3c15053ce04,Zuschlagskalkulation,Apokryphen
+0eb6bf9d-0a17-46e0-8d26-bcc01697023b,Teamentwicklung,Apokryphen
+0ebf72cd-dbca-4f42-8ab6-3c6afe508bce,Datenmigration,Apokryphen
+0f037054-7faa-495d-a431-7658d0b64d68,Thin Client,Apokryphen
+0f0987ee-5ba0-4825-a29a-5b3c9c5606d8,Euklidischer Algorithmus,Apokryphen
+0f0b60aa-56f9-4bd6-8401-2ca67b9fe79c,Wettbewerb,Wirtschafts und -Sozialkunde
+0f1ed315-4fc5-4fb8-a8b9-43a0cbcc9fbc,Schutzmaßnahmen bei Containern,Apokryphen
+0f1f1bce-1dad-4f3e-9756-10eed9fda126,Phishing,Apokryphen
+0f29d708-2707-484f-8ce0-b1109b1a94f5,Gewinn,Prüfungsvorbereitung AP1
+0f596318-f684-45fd-955a-e6a52aad1682,Testprotokoll,Apokryphen
+0f671fe9-a953-4f43-bf45-20fcae634e4d,HTTPS,LF03
+0f6b6ead-e38d-4d7f-a34d-3401e28513fe,Skripte zur Prozessautomatisierung erstellen,a
+0feb21f2-7f46-4432-a29c-3172b7ed8e91,Rechtliche Rahmenbedingungen abklären,a
+0ff160fc-1a17-49bf-ac3f-386287d67202,Integrations Tests,LF08
+10562109-33f9-4029-9dd8-01ab2d12085f,Verfügbarkeit,Prüfungsvorbereitung AP1
+106361ce-1009-40f1-98e0-d73a3483ca60,Produktionsfaktoren,Apokryphen
+109e39f0-33e4-4c83-a810-19f032c6a9f1,NAND,Apokryphen
+10e74386-d134-49ac-9603-04d0938f9d5d,Scanner,LF01
+119f3f04-833d-4d47-8473-3d35a611d5d0,unvollständige Masche (Incomplete Mesh,Apokryphen
+119fc4e6-4e27-499e-b896-63422d7f9139,Schichtenmodelle,Apokryphen
+11a36ea7-3e6a-49cb-a845-a7f5474f02bf,Zero Client,Apokryphen
+11cd76a8-97de-458c-af10-89bc39bc79a5,Release Candidate,Apokryphen
+12055517-9a1c-4e9d-bb6f-3b61a1fe5bb6,"MulticastAdressen (FF00::#8, Scope)",Netzwerktechnik
+12470026-8948-4cd4-977f-a4e25d46c433,Marktarten,Apokryphen
+1247aa38-eac4-43af-8806-127cbddd8d4b,Cyberangriffe,Apokryphen
+1258fec6-af11-4ed4-97d4-674214e0fcce,Sicherheitsvorschriften,Wirtschafts und -Sozialkunde
+126c574e-7916-4cf9-98a7-c97ab9f80cd3,"Routenverfolgung (Pfadanalyse, Engpässe)",Netzwerktechnik
+127aa3bb-d6a9-4315-94dc-fe59b5cb9c3b,Betriebssystem,Prüfungsvorbereitung AP1
+1296011c-af9a-4867-b1f7-c5e792f2f9f4,testgetriebene Entwicklung,Apokryphen
+12e031b6-763f-4e41-902c-ababde69c432,Vorbereitung Abnahme Produkte & Leistungen,LF01
+133934b5-0064-4eb1-b819-dcbdb267b0a3,Istaufnahmetechniken,Apokryphen
+135ced06-9969-4075-8274-ffd9e496e061,Anpassung bzw. Weiterentwicklung bestehender Software an eine neue Umgebung,PV2a
+1363dc25-abec-471f-8649-0e2d6f3e0091,Grenzwerte prüfen,a
+137436a9-62fa-4a2f-827a-4109416e5744,"InterfaceID (Hostanteil, 64 Bits)",Netzwerktechnik
+13a33fce-b106-43f4-ba4f-ebaadbd58234,Videokonferenzsysteme,Apokryphen
+14098cfd-f05f-482b-a7d9-b4bd9dcbf549,Schulungen anbieten,a
+14bde094-d61b-43b7-aea9-bbd277a39736,Updates und Patch-Management,Prüfungsvorbereitung AP1
+14d464a0-0017-480e-ae8e-734dc9fd9f8a,Dateiendungen,Apokryphen
+14e05833-669e-48a7-9bcd-0aa5fc52e9fc,Zoneneinträge,LF03
+154c5401-ef9e-435c-bc89-7b85b299a626,AG,Wirtschafts und -Sozialkunde
+1579167e-b6b4-4b30-a7ca-a1a052b6edf5,Bilanzierung,Wirtschafts und -Sozialkunde
+15a448ca-78d6-4bb2-82a6-f5c4363241dc,Identitätsoperator,Apokryphen
+16080391-ba98-4b36-b0f0-e2ecbd4bf61a,"IPGrundlagen (128-Bit-Adressen, Header)",Netzwerktechnik
+162664f0-c6b1-42d6-8c3f-a9e88e25c749,Adapter-Pattern,a
+166e938d-ee55-4e08-ad8d-8d748de34a55,Plotter,LF01
+16fe6e7e-1311-4f7c-b0ea-905578a501e5,Wirtschaftszweig,Apokryphen
+1702a757-7601-47ef-bf3e-c72471128ab7,Thunderbolt,Apokryphen
+170ce66f-e89a-4435-9188-6a8ee148f6c6,Testprozess,Apokryphen
+172912bf-f7eb-49d6-8f74-65b9c4019bf0,Softwareentwicklung,Apokryphen
+1789edc4-abe8-423c-b222-fa5b717c8f60,DevOps-Ansatz,Apokryphen
+17a53d6d-c683-4cdd-8e09-40c27e57cb13,Graph-Datenbank,Apokryphen
+17dfab06-aa4e-4582-bd52-e6e82fe987bd,Benutzerdokumentation,a
+180cd965-b0e9-4857-a1c0-cdd0a24ba2c4,Sicherungskonzepte,a
+189115ef-a367-4838-a175-250c79df9f61,Recht auf angemessene Ausbildung (§ 13 BBiG),Wirtschafts und -Sozialkunde
+189d53d0-7c2b-436c-9092-a5ce18ad2728,Aufgabenanalyse,Apokryphen
+18d4b64e-e0b5-4791-9744-8d93c08219f9,Use Case,Prüfungsvorbereitung AP1
+18e150bc-dcdf-4d3b-9b53-26875dd7a490,Tablet,Apokryphen
+1916a851-0655-419e-93e4-fa717d1bb813,Auswahl,LF05
+19a0eeb4-30c9-4fc0-9ee5-88bd59470d75,LED,Apokryphen
+19f896aa-fa31-4c8b-afe3-f0f48fa8cff2,jailbreak,Apokryphen
+1a31aca0-8c7d-4f67-8a44-a0f6c8edf238,Gesetze,LF04
+1afa2464-34d9-4fc9-bc72-6c1c1bd8045e,Informatikkaufmann,LF01_
+1b052248-783c-4137-a96c-379e6cbd1a75,Cloud,Apokryphen
+1b1cbfb1-c895-4776-a542-b73037b4616f,Pflichtenhefte erstellen,LF01
+1b797e43-9960-4c86-9d86-71f85cb3b40e,Cloud-Computing,Apokryphen
+1bc40987-03a4-4da7-adca-2df89759e9f3,Verbindungsprobleme,LF01
+1be11f01-1716-4e35-943a-59470af887b4,ISO-27001,a
+1bea2fac-64f7-476f-b40a-ab9d1f2ed708,Störungen,LF06
+1c63a100-727b-4991-95da-75bd311d5f1b,Projektdokumentation,Apokryphen
+1c824445-77ef-4a85-865e-4412bf73e623,Arbeitszeitmodelle,Apokryphen
+1cbeb08b-88e7-4022-980c-14a88eb2c9a6,Datenstrom,Apokryphen
+1cd2f416-7d97-441d-a469-b5507e63360f,Verhaltensdiagramme,Apokryphen
+1d85ddfc-f118-4bac-9426-b12a27e9f0c0,Betriebsrat,LF01_
+1d95cb2f-55fc-4d9a-9edb-f47f2c43e466,Pipelining,Apokryphen
+1db86bc3-7c2c-48fe-8473-691870662e66,Remarketing,Apokryphen
+1dbd04b0-c6d4-4269-89fa-8680069ab703,Arbeitsspeicher RAM,LF01
+1e188549-0194-4c67-9f7b-dc207e24bc9b,binare Literale,Apokryphen
+1ecbcf47-8b01-4184-b2b2-163f46a8a160,DIN 66261,Apokryphen
+1eeda6aa-e33a-4377-8c72-2324ad180026,Projektmerkmale,Apokryphen
+1f1af376-b8e3-4b80-9b52-119a176855f5,TracerouteGrundlagen (Routennachverfolgung),Netzwerktechnik
+1f256dce-dd64-4558-938d-c00e6bb35943,(1) Bitübertragungsschicht,Prüfungsvorbereitung AP1
+1fac0f55-e201-437d-b0b9-3f9da4ba03fa,uniform,Apokryphen
+203303f5-8d2f-417b-bcd1-33ec8c8a38ca,Sozialpartner,Apokryphen
+205ef159-44f5-424e-abee-ed695c9f97de,Site-to-Site-VPN,Apokryphen
+20bcd759-31c8-4e26-a3c2-abd40d33dad5,Preisbildung,Wirtschafts und -Sozialkunde
+21071e0c-3aa8-4668-b7ee-047769ead36b,Arbeitszeitgesetz,Apokryphen
+21364d9b-62a7-4f9c-8038-f38acd7c21ea,Trunk,Apokryphen
+21471cd7-fdcf-46ee-8e51-3f64d5d042b7,PHP,Apokryphen
+215910d7-b89a-4b09-979c-5a8d1b25820b,"ICMPv6 (Echo Request, Neighbor Discovery)",Netzwerktechnik
+2188b800-8e86-48b6-8717-44e733ca0090,Sicherheitsprozess BSI Grundschutz,LF04
+21e244fc-5eb9-40fd-8a16-26825c6b2495,Stundensatzkalkulation,Apokryphen
+21feaf40-b1cc-4b31-9fe5-489d3700a5b8,Lenkungsausschuss,Apokryphen
+22411c2e-1b22-49ea-8183-55c09e47a08f,hierarchische Datenbank,Apokryphen
+22503d76-2689-4821-b4be-a3f79489586b,COBOL,Apokryphen
+22b87297-397e-4973-a101-2b7e52611d96,Datenübertragungsrate,Apokryphen
+22c5ae76-2d84-4a17-a769-2051b429a754,"Subnetzanzahl (2^n, n = geliehene Bits)",Netzwerktechnik
+22e54f17-ab49-4bd1-abeb-4e0690d1dbe9,Kontrolle der Arbeitsleistung (§ 14 Abs. 2 BBiG),Wirtschafts und -Sozialkunde
+22fcdfe6-8069-4bc9-8ec1-995bb2a87f80,Office-Pakete,Prüfungsvorbereitung AP1
+22fff5d3-6c3e-4d12-8862-6d2802732045,Einzelkosten,Wirtschafts und -Sozialkunde
+2318c18b-6989-4a09-bbe8-4f42b6301c88,"KlassenDefinition (A, B, C, D, E)",Netzwerktechnik
+231b4101-dfcd-4594-996d-a7d4d9a917e3,Desktops,Prüfungsvorbereitung AP1
+231feed3-2c57-46db-8f36-db4c002a62b9,Speicherbegrenzung,PV2a
+233d85e4-b0ce-4a54-9dce-e2f888af1333,BackupTools,a
+234cfebc-9a14-4471-ab8a-190f5993c28a,Individualsoftware,Apokryphen
+2356855d-8f70-4e56-9990-bb4034ed1f22,APT,Apokryphen
+23d6857f-6b9a-4225-b4f3-e04083d5eb2f,Sorgfalt bei der Arbeit (§ 13 BBiG),Wirtschafts und -Sozialkunde
+24027352-a5ae-424d-9654-b410f56beb71,Schichtenmodell (Layers),PV2a
+2411f968-fad1-42d1-9e13-9f6a9d090313,Hardware zur Barrierefreiheit,LF01
+2424f434-fb0d-47ec-b2f0-966126063556,DSGVO,Prüfungsvorbereitung AP1
+24871c08-1258-4a56-be63-d67b3889f387,Internationale Märkte,Wirtschafts und -Sozialkunde
+248c028b-bd37-40ab-b84a-86153f3740c7,Serverdienste,Apokryphen
+24ac21d6-7d91-4c51-a3dd-4865fcac9600,Arbeitssicherheit & Gesundheitsschutz,LF01
+24b42ef3-cf4f-49aa-a5ac-1df6de2cab4b,Dependency Inversion Principle (Abhängigkeitsumkehr-Prinzip),a
+2566b08b-b0ca-42eb-8665-b6eed608b781,Framework,Apokryphen
+2586deb8-6025-4dab-a328-407b0fc4992d,Mehrlinienorganisation,Apokryphen
+2588e7c6-054e-42e7-9250-208d8531f754,Eigenkapital,Wirtschafts und -Sozialkunde
+25a62304-2349-478f-80a3-c6dad9d15f3a,Chipsatz,Apokryphen
+25c73200-a076-4bf8-9374-4d1e3c05a615,Identitätsdiebstahl (Phishing),PV2a
+264dc3b9-1d83-4904-9400-12082f5fa6a8,Von-Neumann-Rechner-Architektur,Apokryphen
+26f067d0-442a-4873-a6c7-36fadbc0eff1,Transformationsregeln,Apokryphen
+2700cdde-1e98-4c1d-846a-9ded211c75ed,Anwendungslösungen unter Berücksichtigung der bestehenden Systemarchitektur entwerfen sowie realisieren,PV2a
+276c4659-5bc0-49fe-957e-93741e358608,JSON-Dateien exportieren und WebServices nutzen,a
+2794f501-f846-4701-b053-2fdf9301d86d,Informationssicherheitsbeauftragte,Apokryphen
+27b11f74-e823-4197-858a-c2efcf6cea99,Freeware,Apokryphen
+27bc72d2-005c-4aad-91ea-90e78da324b9,Europäische Sozialcharta,Apokryphen
+27c18e70-635d-43ec-8e89-a19058b3a567,Ethernet,Prüfungsvorbereitung AP1
+27d4ad11-1456-47ec-8505-b319a69aeb17,Nutzwertanalyse,Apokryphen
+27f08232-a02a-4535-8ee0-f7791c7683d2,Hashfunktionen (SHA-256),a
+287c9a45-6302-4969-a296-5490b679c243,analoge Daten,Apokryphen
+28ad779f-65d3-43ed-a2e9-3805468dac58,BASE-Prinzipien,PV2a
+28bfa0a7-bad8-4c67-a0fd-9f597ae32008,Fremdschlüssel,Apokryphen
+2923a0ee-d6cb-4326-9897-90445c2f0a37,IDLE,Apokryphen
+293ce58e-c49b-4206-bb8a-4c590316ebae,Projektabschluss,Apokryphen
+296740a2-8427-436b-8f50-4f88ee8b26b7,Ermitteln des Kundenbedarfs,Prüfungsvorbereitung AP1
+298431ea-4a30-49d0-b31c-313fdfc866aa,Technologische Entwicklungstrends,PV2a
+2991f69e-a492-4dba-aded-7ac624925403,Kundenzufriedenheit,LF06
+29a17c79-fc97-492f-ad9f-faac4deda859,Firewire,Apokryphen
+29a39058-5417-425a-8e47-1ba680cabc39,Festplatte,Apokryphen
+29b8624e-edcc-411e-832d-a0f05ced418e,Netzbereiche,Apokryphen
+29c01efc-55b5-4ac7-85a0-188601e82b9d,Signalgeschwindigkeit,Apokryphen
+29d90a8e-e190-4eed-981c-9ceb8b2c7742,Sequenzdiagramm,a
+29ee479a-4bd5-41ff-aaf0-83854f7db572,Einhaltung von Arbeitsschutzvorschriften (ArbSchG),Wirtschafts und -Sozialkunde
+29fe5897-da30-4a80-a67a-a5804e68fc45,Primärschlüssel,Apokryphen
+29fefc42-585d-4081-b3ee-dfd26cb99ea4,Recht auf Widerspruch,PV2a
+2a515d3c-665c-4be9-bc2d-e7a2d02dbdbb,UTC,Apokryphen
+2a6d165b-55d9-4f53-be42-816903586fe8,Testdurchführung,Apokryphen
+2a829648-3869-4668-bb13-aeea6c1472a9,Standardgateway (Routing zwischen Netzen),Netzwerktechnik
+2a8901fe-fbbc-470d-b409-0a58b1d2fed3,LCD,Apokryphen
+2ad98903-a6bc-42ed-a012-f5496ce66b0e,IMS,Apokryphen
+2aea15d6-123e-4dcc-a7bf-211b391ead41,File-Storage,Apokryphen
+2b55e2e6-53a9-482f-a36f-b454f1a457c8,Testauswertung,Apokryphen
+2b97e05b-aa8d-4d02-9c6c-4c99a45a3610,Industrie 4.0,Apokryphen
+2c08a618-f6f7-441c-8169-f7f057735000,Transmission Control Protocol,Apokryphen
+2d4c0b8c-aa06-427f-a158-807fb0d4a789,Top-down-Methode,Apokryphen
+2d5c67ef-7188-4760-8de8-a0607ead1af2,TCL Transaction Control Language,a
+2d694ddb-7c1e-4999-ae71-47533752ad46,Support bei Softwareproblemen,a
+2d8b3621-51b5-4ef9-bf57-e82119c06fe5,Handelskauf,Apokryphen
+2dd8ad10-3d9c-44a9-b78d-2497931f0791,strukturierte Verkabelung,Apokryphen
+2e277b96-990a-47a3-a428-8c4499b727bb,Datenübertragung,Apokryphen
+2e9959e7-7438-4f17-8b95-c32550008b31,Güterarten,Apokryphen
+2ea1ff75-e6b3-4b67-84ee-d0e21dbc1ff8,Überwachung,LF03
+2ebc5be3-a866-4399-9836-e61880922715,PCI-Steckplätze,Apokryphen
+2ee7a501-d8f4-4a37-9c6f-469cfb7d1615,Proxy,Apokryphen
+2eefca01-f4c2-42f9-a28e-5a5d3c4c658d,ITK-Branche,Apokryphen
+2f05c1fa-0ee3-477a-9041-1b8df7d9e192,Trigger,a
+2f2154ac-987f-43c6-8085-5f41bd3afef8,Fernabsatzvertrag,Apokryphen
+2f2504c1-4962-4213-aef4-f8451dcb7d3b,Malware,Apokryphen
+2f4a694b-2d73-4998-825b-a6680c87f600,Credential Stuffing,Apokryphen
+2f601f45-3b62-4f35-a11f-f5ab2268c544,UEFI,Apokryphen
+2f779b6e-2be0-4c9d-bcc9-dc536f77621b,Datensicherheit,Apokryphen
+2f7aa42e-b275-4d00-85e5-f7d603c33df0,"Ablauf (Anforderungen Festlegen, System entwerfen, Code implementieren, Tests durchführen, Produkt warten",a
+2fbe9179-8790-4cbd-aa68-de5c3341b1ad,marktgängige IT-Systeme,Apokryphen
+2fccaf2d-7a23-4438-9aa8-6fca4ac00c8d,Managed-Services,Apokryphen
+3010fafe-ba81-4936-8fe5-b4e8ebf2d10e,"Prinzipien (Zusammenarbeit, Automatisierung, kontinuierliche Verbesserung)",a
+3056eaf2-8417-402a-8776-5f16baa25517,referenzielle Integrität,Apokryphen
+305b1ea8-07a4-4318-8be3-c0ffc4570697,Unterschiede,LF05
+307bb3b7-f093-4022-8418-5093adbb2534,Kundenarten,Apokryphen
+30bcbdb8-c862-469a-9c08-f39d3336442b,Authentizität,Prüfungsvorbereitung AP1
+30d27f67-26db-4fb0-a3f0-2b8d8d3794a9,Konsequente Kundenausrichtung (Relationship Marketing),PV2a
+30fe4a5a-f530-48d5-9bf2-77050cea64a6,Umwelt- und Prüfzeichen,Apokryphen
+3100a59d-d53b-46b5-a810-da6ab4a8b429,Multi-Threading,Apokryphen
+311fb25a-987e-4aab-b458-39ce6575ace4,Don’t Repeat Yourself (DRY - Wiederhole dich nicht),a
+313d44ce-32df-47ad-bda4-1a630757a715,Object-Storage,Apokryphen
+313f54a9-321b-4b1e-b2ef-8545c6db2408,Hardware-Fehler,LF01
+3186cc48-6270-435c-b9b6-7d9ad3efbad3,IT-Zubehör,Apokryphen
+31992c12-1881-4667-882c-f889fc068314,Optimierungen festhalten,a
+319f24cf-e782-4f9d-86f6-519526c080b6,Computernetz,Apokryphen
+31e6f6d8-b9d0-46a2-9a32-7e3a56f24a80,Dienst-Protokolle,Apokryphen
+31e8ab96-b9ee-480c-8917-dd5ad236096f,Unittest,Apokryphen
+31eb066b-6243-45d8-aec6-a4e0496bd409,Gefährdungen,LF04
+32052a2e-5ed6-4bdf-96eb-b442cc0213d3,Budget kalkulieren,a
+3218f85e-0227-4bc8-9083-7fda4eadd7f1,Marktumfeld,Apokryphen
+3260bb1a-4c67-4da5-bee6-8f537e02ff46,USB-Sticks,Apokryphen
+32632496-6977-439b-a183-4ec27ca5ec79,KVP,Apokryphen
+3268e891-6b77-42b4-9f92-3194dbafdfc2,Wirtschaftlichkeit,Apokryphen
+32695bdc-aafe-4115-a0c9-7ce6d9693e9b,Dokumentation und Verwaltung (CRM),PV2a
+3281ce98-1059-458b-9c0b-fc914da30de5,Kommanditgesellschaft (KG),LF01_
+32ac0387-62d0-4748-9842-06e43a22ba64,Franchise,Apokryphen
+32e231d8-1384-4cc4-8162-3012eceee988,Log Analyse,LF08
+338ddd4b-a9d4-484c-a091-521b8791cf3d,ANSI SPARC-Architektur,Apokryphen
+33e155a9-8f54-4482-8f08-db2f23b2e41d,"Rollen (Product Owner, Scrum Master, Entwickler)",a
+34228438-5283-4a73-b3e9-63c2fb20ee1f,Kundenstruktur,Apokryphen
+3444ff23-f33d-4d83-a7be-37d25aa953fc,Agiles Manifest,a
+34488cf5-a697-4fe1-8dc8-afb0597536e1,Marktgängige IT-Systeme & Lösungen,LF01
+34707e18-698a-470a-ab4c-0f1b47871793,Review,Apokryphen
+348f4f4b-3196-47b4-8c6f-f7a1383d2b2e,CIDRDefinition (z. B. #24),Netzwerktechnik
+3495d68f-ff43-4aa3-a6cd-ef8b22fcfb24,Router,Prüfungsvorbereitung AP1
+34a0eee2-5401-4cf7-ab6b-280730375d20,Organigramm,Apokryphen
+34d33fd9-53d8-4f99-b7ae-4c3b9137a9ab,Soziale Marktwirtschaft,Apokryphen
+34ea3910-3fba-48c1-86f4-346aecaa252a,Handelskalkulation,Apokryphen
+34efd4e3-8f13-474e-b8d7-6208b2960714,"Wireframes (Sketch, Erster Entwurf, Strukturplanung)",a
+354f0fe8-4e38-4081-892b-49b64953e8bf,Dateiformate,LF05
+35589c8d-7fa6-452b-9d8e-fd9b693ccedb,Walkthrough,Apokryphen
+355c1c9c-2a7b-450a-87d9-4a79d8422677,"TracerouteOptionen (traceroute6, -n)",Netzwerktechnik
+3573490f-85c9-4e51-a1d2-3ca08a65d550,Taktfrequenz,Apokryphen
+357d27bd-00fc-4f6d-9e8a-b3e0172b6463,Präfixaufteilung (z. B. #48 zu #64),Netzwerktechnik
+36aefe31-df6e-4ac5-93d3-99eb09b41048,Additionsmethode,Apokryphen
+37431900-2ff8-480f-a23e-bdb706ce4a8e,"Software übergeben (Installation, Schulung)",a
+3785053f-0162-4212-8861-88b1dbbad659,Schnittstellenbeschreibungen,a
+381576cd-e340-45b6-9d2e-2d009e61458c,Problemanalyse,LF06
+38457ef3-c033-4543-b29e-72e5f824fc59,Versicherungen,Apokryphen
+385acc97-4ccc-4b7b-a856-408a855449bf,Skripte,LF06
+38b5c559-5283-4c68-92a3-654148771bc9,ForSchleife,raw
+390102ef-9eda-465c-9127-8dc3882c6712,"Zyklen (Risikoanalyse, Prototyping, Bewertung)",a
+394fc7c6-36b6-43d1-8cfa-47a369f38372,Blackbox-Test,Apokryphen
+39de4355-1b84-42d7-9493-da3fbc36f907,HDMI,Apokryphen
+39ff5e91-86a7-4dea-9671-6b20732da134,"Methoden (Value Stream Mapping, Build-Measure-Learn)",a
+3a015b06-2dc2-4c37-96c8-79c1ccf67694,well known Ports,Apokryphen
+3a057a80-3be1-40e1-ad2e-fefab15f4af1,Verkabelungsklassen,Apokryphen
+3a16d9e8-3d71-4602-9617-34e176c2daa0,Verkäufermarkt,Apokryphen
+3a7ce0a2-cac9-4b22-9eb3-2c73c819e26b,TCP/IP,Apokryphen
+3ac5fd60-72eb-463e-90a3-02e88b1cdc8d,Systeme,LF05
+3acdb75d-b467-4f5f-bb5a-1dd510d8502e,Standardmasken (z. B. 255.255.255.0),Netzwerktechnik
+3ad82df9-290d-4977-ab7e-4fef3e72c2dd,Struktogramm,a
+3af290e8-ba93-4b35-b9ea-602c1a9228b3,Übertragbarkeit,Apokryphen
+3b37bf6f-0abb-44cc-8c15-c5fa466a583e,IT-Sicherheitsgesetz,a
+3c8badd4-526f-4b83-9e41-429feafadc2a,Freistellung für Berufsschule Prüfungen (§ 15 BBiG),Wirtschafts und -Sozialkunde
+3cd8c838-170c-4031-ba75-3475470a4cf6,Zahlensysteme,LF05
+3d05ed8c-242e-4649-89ca-7adcffa1da9d,Topologien,a
+3d27ebe7-ec92-4b7b-aa70-1e83b916c2c6,Stream,Apokryphen
+3dc7c573-7e64-4dda-b464-17af2e2ee384,IT-Systemkaufmann,LF01_
+3e088dd7-3bb5-4cf3-97a4-9c4a7720f38a,Vergütungsvereinbarung,Wirtschafts und -Sozialkunde
+3e3e8721-d516-48c9-844c-f5080022366d,ipconfig,Apokryphen
+3e5e862e-2cae-45d9-9153-3deb2984dd3a,ISO OSI-Schichtenmodell,Apokryphen
+3e5eec80-1abd-4adc-8d3b-66a78d9f6230,Marketing,Apokryphen
+3e64e76f-e028-4b6c-b947-3cb62eec22d8,DDL Data Definition Language,a
+3e872ff9-30f6-4796-8d99-f75b4d4097df,"SubnetzmaskeGrundlagen (32 Bits, Netzwerktrennung)",Netzwerktechnik
+3f71a1a6-0da5-4aab-957b-6316361cf8ad,UnitTests,LF08
+3f8f3660-cbd8-4dc0-814d-0feada049941,Rentabilität und Amortisation bewerten,a
+3fd04140-a2c7-4788-8d30-3dced7a59046,ERM (Entity-Relationship-Modell),a
+3fe56bee-b526-4900-8148-51ef52b3d096,Monolith,PV2a
+3febebc4-21ce-483f-8d96-726da5d8ab63,Ist-Analyse,Apokryphen
+3ff9956d-7482-49ac-b527-641409f6dc32,Bit,Apokryphen
+408617c8-ab8d-4503-9f58-f7884da20058,"HexadezimaleDarstellung (128 Bits, 8 Blöcke)",Netzwerktechnik
+4099d0d8-28e6-460d-88a8-020a4b0bdc8e,klassische Vorgehensmodelle,Apokryphen
+40de2c90-9d43-48a3-bc0a-b402ed16f402,DIN 66001,Apokryphen
+412fd0ab-daff-4fb8-83e2-d7775c07e74e,Arbeitszeit einhalten (§ 13 BBiG),Wirtschafts und -Sozialkunde
+41555581-e94d-4f37-90d5-c75c0557c286,Quelltext,Apokryphen
+41d15715-d495-42b9-af75-839b93818220,Vertragsarten,Apokryphen
+41d538c4-de38-46d8-a50c-855e6a28d53e,Vergütung und Urlaub,LF01_
+41ef5590-f896-48e3-9595-420d87e82bee,Privacy by Design,Apokryphen
+41f74d61-d932-401e-8a7f-9a71082f4cb8,Sozialgerichtsbarkeit,Apokryphen
+4203ccfa-9326-49ee-b1b8-700a465d0085,Multifunktionsdrucker,LF01
+42cba8e2-1b87-499a-b267-05e7c1952db6,Organisation,LF05
+42f74f35-a806-4ed0-8b42-35bb70716e46,"Aufteilung (z. B. /26, 4 Subnetze)",Netzwerktechnik
+433788f0-a111-4afb-abd4-1a6a582f645f,Kündigungsfristen (§ 22 BBiG),Wirtschafts und -Sozialkunde
+43875103-06b0-48d5-9fcb-5f34d1dc8f9b,Wi-Fi,Apokryphen
+43b75779-8e94-4aab-9258-bf5b1210232b,Leitbild,Apokryphen
+44074cfe-3e7f-479a-8245-f64633b07567,Software,LF04
+446c69ec-2daf-4e67-926c-0470c19f4a2e,Methode Fünf Warum,Apokryphen
+4473c0d9-03f1-4a22-9115-9187157deb65,Autokonfiguration SLAAC und DHCPv6,LF03
+44836df4-730a-4bff-9680-b795aad30581,Schriftform,Wirtschafts und -Sozialkunde
+448755e3-31c7-449c-9f0f-c43203713641,Handlungsvollmachten,Apokryphen
+44c89425-a3cb-467b-9070-d7d67b9bb643,Gesundheitsschutz,Apokryphen
+44dcc52f-b8f3-4a8e-8e5f-ff925896c8f5,doppelte Buchführung,Apokryphen
+45000914-910c-4489-a06d-085d3b87a0f9,"Ablauf (wert definieren, Prozesse analysierenm MVP entwickeln, Feedback sammeln, Verbesserungen umsetzen)",a
+459db4ea-e595-48b1-9ae6-54252db91d5b,Unicode,Apokryphen
+459ed769-c49f-4bb9-bb3b-9be7d4a63006,"MulticastNutzung (Netzwerkübersicht, Debugging)",Netzwerktechnik
+45d5b9a6-9b7b-4bf2-9179-5f8c8ad73755,Mängelanzeige,Apokryphen
+45f6f9ea-c66f-44d4-b6c7-902443e1295a,Off-Premises,Apokryphen
+462538a9-5ab3-4b2b-8348-997de386aed7,Desktop-PC,Apokryphen
+46299228-6ff3-4894-94ba-dc55ee7a2532,Fehleranalyse,LF03
+46864370-4b4e-4890-86b3-85ec4d8efc36,Einliniensystem,a
+468b4f96-cc04-44ba-bb88-99c52284ee1f,"Praktiken (Continuous Integration (CI), Continuous Deployment (CD), Infrastruktur als Code (IaC))",a
+473101ef-6d4b-4896-b4da-ddae228e03f7,UI UX-Optimierungen,a
+47551930-6aac-456d-9e93-1fff2c454719,Miete,Wirtschafts und -Sozialkunde
+475c7c3f-ca69-4871-9aa8-bc58fa23282b,Fixkosten,Wirtschafts und -Sozialkunde
+488df4d3-f167-423e-b234-eb6ad3763877,Authentifizierung,PV2a
+489ba0c1-3c29-4e48-83cf-70439d8a2a7b,Unterlagen,LF05
+48b7acae-4490-4f61-bff8-ae0d82c16ea7,Arbeitssicherheit,Wirtschafts und -Sozialkunde
+48d91593-760e-4952-a0f2-fa4f70ddb84e,Sponsoring,Apokryphen
+48edfdff-104b-46b0-a6df-8a686999e3bb,GWB,Apokryphen
+4914b615-b1b9-4346-b219-52938e9177bc,Verbindung zur Softwarestruktur,a
+494c96fc-e48b-4606-b9b4-432b0efeec3c,HTTP,LF03
+496d9093-3b15-4775-9ac8-6ff446d971f6,SRM,Apokryphen
+499b23f3-a799-46fb-86af-fed92a4a612e,Treiber,a
+49a1821b-b559-4fc2-9582-06cfb93cf372,Schutzmaßnahmen für Office-Produkte,Apokryphen
+49c6a3d3-2799-4845-bb2a-dd2ed3dc0933,Verschlüsselungsverfahren (AES),a
+4a02db6d-1f2f-4133-a37c-90fc0adc563b,Vergütung zahlen (§ 17 BBiG),Wirtschafts und -Sozialkunde
+4a6bd2db-d414-4c31-839f-21e96355a5ab,"Bitanzahl (Netzwerkbits, Hostbits)",Netzwerktechnik
+4ab3a7b2-2a89-4c1e-b87f-0b1aac0592de,Berufsschule,LF01_
+4acbc6c9-d149-4fa5-b5a7-7135dbb52064,Informationsschutz & Datenschutz,LF01
+4adf64f3-c31d-458f-af31-c86a4de161a9,Motherboard,Prüfungsvorbereitung AP1
+4b1693bb-ea21-424d-8eda-742ae5afd255,Services,LF06
+4b2fa5fd-fd09-4d63-bdb0-391ef0e6f559,Audits-und-Überprüfungen,a
+4b6b5776-2942-4660-a19a-17ac64057132,Quantitative Angebotsvergleiche,LF01
+4b7d3177-40a4-4f93-9c6f-4f82237f7875,ABC-Analyse,Apokryphen
+4ba49f35-f0b0-4f64-b0ca-526556a18fb4,Nachhaltigkeitstrends,Wirtschafts und -Sozialkunde
+4bce0b3c-6a32-4ba1-8500-765b4dd2ed1d,Unternehmenssoftware,Apokryphen
+4c89a96c-8acf-4770-a8f1-aee12943929b,BSI-Grundschutz,a
+4ca4f2c4-8f15-477e-b724-cc78ddaa747b,SMART,Apokryphen
+4caf3b54-dee4-4ff2-9cd5-187bd9a4e16f,Optimierungspotenziale erkennen,a
+4cb44164-65ad-45d1-9adf-5682c8ab8d2e,Kundenbeziehungen aus rechtilicher Sicht,PV2a
+4d23151e-9d33-4814-a985-3bee3968155f,MVC (Model-View-Controller),a
+4d3fb5b5-c6cc-4fbe-9a3e-b3846f7316df,Datentypen,PV2a
+4d899545-1830-4d7f-ad61-76d20ae14895,Sicherheitsrichtlinien,a
+4de1da36-1e14-4749-8bb4-c63dbcd0fe2a,Sicherheitsunterweisung,Wirtschafts und -Sozialkunde
+4e084cf2-f495-486c-a3d0-28b9edec36c4,Jugendvertretung,LF01_
+4e2d9d8f-38e9-4da1-b11d-5f08fe423708,kollektives Vertragsrecht,Apokryphen
+4e622861-f60f-49f8-9b1f-5b91147fc4fa,Interpreter,Apokryphen
+4e8aa9d5-03f5-4b96-afb9-7ea2af3c4c92,Anschaffungskosten,Apokryphen
+4efabdf7-0a8b-4d6b-9514-5ec96b231aa4,Recht auf Datenübertragbarkeit,PV2a
+4f0d4f06-d1da-4460-97e2-7d70003bf5be,Ausbildungsplan,Apokryphen
+4f228d68-e13e-4469-aa68-3c1029991607,Risikoanalyse,Apokryphen
+4f4ca65f-8d9d-4c02-aa7b-73cd6bac538e,Komprimierungsverfahren (Huffman-Codierung),a
+4f66072f-becd-4d8c-be4d-4fc163d9c8b8,Vier-Seiten-Modell.sql,LF06
+4f714fec-b910-4ca2-b424-a09d0152f676,Programmierung,LF06
+4f8d689a-ecc5-4a0c-949e-fabfa5f9547a,Sekundärdaten,Apokryphen
+4fb51330-a77b-49c8-8dc2-de250b797b31,Datenintegration,a
+4fb6fad6-f1b1-46ca-968b-3b6904ffe311,Übertragungsarten,Apokryphen
+4ff11408-b842-421b-b499-1ce087e9b111,JOINS,PV2a
+50104952-ed20-4c88-b5cc-32eb23daf27c,Informationssicherheit,Apokryphen
+501b69be-6575-4ef4-98e8-2f525798822d,On-Premises,Apokryphen
+503acc4c-9bc5-45cc-ac60-ac5059276981,Vollmachten,Apokryphen
+50a65aa6-f840-4caa-bf34-550d45a4c2cd,Sampling-Tiefe,Apokryphen
+50c07ce6-5aa5-4e48-aa87-14b0500517a8,UML-Diagrammarten,Apokryphen
+50cadde3-a4e8-4845-89a8-567476f50dbf,VDI Connection Broker,Apokryphen
+51cb0b75-8070-479f-a4e8-67121537e287,ER-Modelle,LF05
+51cf1359-31b8-48c7-b16c-d52595ab62dc,relationale Datenbank,Apokryphen
+51e24322-61c6-43c8-b494-f8729390ec7b,Customizing,Apokryphen
+521e5355-e833-478f-92a8-1e0e551909ba,Blacklisting,Apokryphen
+52207a9b-e9b8-4f7d-abc5-71d51d162b15,Maschinensprache,Apokryphen
+52238186-1306-486f-8e3a-3b6dd3818189,Aufteilung (z. B. in #64-Subnetze),Netzwerktechnik
+52261982-fa3a-41d2-9af6-bca664673da7,User Datagram Protocol (UDP),Apokryphen
+5232a789-8412-4432-90a6-1ece1394f355,Standards,LF06
+52387bea-4930-486a-8bb1-ab569b9b5e99,Benutzeroberfläche,a
+52691e38-cdb9-4b8d-baa8-6d1b074eae5d,Frame-Aufbau,Apokryphen
+529300be-f5cb-40b7-9509-0d2174a477dc,Performance und Funktionalität bewerten,a
+52c41af1-4301-4280-8ca9-7d74bb10b1a3,Standarts,LF04
+52ff0e92-396c-4984-883f-42fd5a5bc51f,Vertrauensdienste,Apokryphen
+53220f77-db84-4b74-a667-0f024edba4f2,TDP,Apokryphen
+532866a3-5795-4e8a-be6d-fd09dfaa874a,Unfallverhütung,Wirtschafts und -Sozialkunde
+53651df6-b040-41fc-9fa2-ab413404fc80,PPS,Apokryphen
+536c4965-56d6-4b67-8b5e-156437acc25f,Systemarchitekturen,LF01
+5397e7d9-6c21-4086-8e59-a1aa41794245,(6) Darstellungsschicht,Prüfungsvorbereitung AP1
+539c8b0c-7b3d-42fb-8c5c-f58655c4aa69,Sampling-Rate,Apokryphen
+53eb845f-da52-4a87-8bfc-c4370f1082df,VPN,Apokryphen
+53eca493-afa3-44cb-b7f7-5a0f6d893c12,Frameworks,LF05
+54518981-06c7-47b5-b68f-08320bd39bbe,Kauf,Wirtschafts und -Sozialkunde
+5451e7a7-e266-4ec2-92ec-92cc356739d1,Quellcode,Apokryphen
+54590166-cb4a-4cb3-a7fc-c6f0ce59e1eb,Quantencomputer,Apokryphen
+5467f5ec-b834-4ca7-94f5-8f8b66b18940,boolescher Datentyp,Apokryphen
+546f35d8-c3d3-4116-b716-b03d297e2f19,"MulticastVerwendung (Gerätesuche, NDP)",Netzwerktechnik
+54a31896-bf8f-4930-84b2-6cfe87136c66,Verbesserungen (Design und Code optimieren),a
+54ebcbd2-b467-42c0-8827-98dfec4fe0b8,Normalisierung,PV2a
+55018490-16fc-4ad7-be8f-4122a7d5af87,Festlegung des Ausbildungsplans (§ 11 BBiG),Wirtschafts und -Sozialkunde
+5548b114-7550-4f71-b3f5-b952f9383c7e,Firewall,Prüfungsvorbereitung AP1
+554f830f-e0a6-4a9c-a0bc-4b8ed30b6278,Marktanalyse,Apokryphen
+5551c820-dbab-4908-81fe-802b5989dd05,Kumulationseffekt,Apokryphen
+55675456-9c44-43ca-8035-369e9943a182,Projektteam,Apokryphen
+559aef4b-60e7-4641-b639-73c46c119a75,lokales Rechenzentrum,Apokryphen
+55beae5f-3af8-4a87-8dbd-f1bee19df3f6,Dezimalpräfixe,Apokryphen
+5610e1a3-18d3-406c-8a44-0312e962f0ae,Leasing,Wirtschafts und -Sozialkunde
+56b6a321-1aee-4431-ab7c-dafe9cf2bad8,"Ablauf (visualisieren, priorisieren, kontinuierlich- bearbteiten, analysieren, anpassen",a
+56dc111c-893f-495d-ab54-c08316391857,Netzwerkkarte,LF03
+56e738cf-47aa-404c-8169-79ee8663c32d,StoredProcedures,a
+5711f7ac-b35a-43df-836c-72721b6a16d4,"DezimaleDarstellung (4 Oktette, 0-255)",Netzwerktechnik
+57482e0a-8495-447c-88fd-e50ed58a17c2,Digitalisierung,Apokryphen
+57520ffb-6487-4e2c-9507-3556155c9df2,Unified Modeling Language (UML),Apokryphen
+579fdc93-294f-4cbd-b896-960334cb956f,Softwareentwurf,Apokryphen
+57f3fae1-2fa7-4866-89a5-8c464db495fa,Testen,Apokryphen
+57f847a8-5607-43c1-a366-74868651f33f,Testdokumentation,a
+5802540f-e2e2-4ae4-8072-bf585d506c26,Programmablaufplan,a
+58131e14-117d-4cef-801b-d632e798f644,Polypol,Apokryphen
+586e8146-139d-430d-872e-1225f09e5c58,Betrieb,LF01_
+58809e08-5cbf-4b7d-b69a-1988563ff2b9,Prävention,LF06
+58842eda-5583-49ab-8a65-2c776222907a,Bearbeitung,LF06
+5895476c-ea8a-4fac-94f0-78dead97c02b,Netzwerkprotokollstapel,Apokryphen
+595d2f0c-7c25-4d28-935c-0bd0035ff836,Objektdatenbank,Apokryphen
+595d6504-d273-4334-8ca3-9a979dbcb310,Adressierung,a
+5982781d-0d18-44e0-96d7-20c261040704,Emissionsreduktion,Wirtschafts und -Sozialkunde
+59b902f3-db9f-4144-baff-05550c58640a,Tertiarverkabelung,Apokryphen
+59ebae1d-e073-4bf2-8ad9-2b38b1951f3d,REST,PV2a
+5a26f1ec-f03b-4a30-a420-309439ac9946,ROI,Apokryphen
+5aefc9d0-df6d-49c4-98ed-bc127c9ab201,Komponentendiagramm,a
+5b08a9c2-9429-4231-af87-9f047e3ee0ef,Adresszuweisung,LF03
+5b14c3d8-4241-47d2-b404-08a6f68aff4c,"Autokonfiguration (SLAAC, DHCPv6)",Netzwerktechnik
+5b6b299b-1df4-4a98-9fa6-635544b42662,Anforderungen untersuchen,LF03
+5b7a8900-642a-4d48-b58f-4ca596955495,Handelsabkommen,Wirtschafts und -Sozialkunde
+5ba52fe8-c528-4229-9a0c-f78fd65a905b,relationales Datenmodell,Apokryphen
+5c120447-926a-4a3a-ab9b-977258a9f92f,Umweltmanagement,Apokryphen
+5c197eb8-d214-4ec1-9982-0b9f3c1f317a,PCle,Apokryphen
+5c76f259-b5ff-4200-8478-0e88babb61e5,Marketingunterlagen,Apokryphen
+5c77b2ba-5f95-4f0a-aa79-72b6701b2cf7,"Verantwortlichkeiten (Projektleiter, Entwickler, Tester)",a
+5c82a52c-0ca5-4153-9022-3fdde112bb3f,"Mockdaten (Realisitische Testdaten, Inhaltssimulation)",a
+5d072ada-57c6-4bb5-a405-b45df60282b1,Vergleichsoperatoren,Apokryphen
+5d1702cd-4e39-4cf8-9178-b8b65608293e,Schleifensteuerung,raw
+5d22558f-7d85-4c50-9560-6680b6dd041f,Rezession,Apokryphen
+5d35b4d9-9fdc-41cf-a386-5fa45ec68e7d,Mit Stakeholdern abstimmen und Feedback einholen,a
+5d4fb031-0669-44cc-ac77-32ac7773ed37,Datenschutz,Apokryphen
+5d7e3993-dee1-4c20-94d9-8b8c42389813,Stand-Alone-Datenbank,Apokryphen
+5d829820-fab5-4b44-8fad-26d6f530f061,Schutzmaßnahmen für Clients,Apokryphen
+5da8539d-cf37-46aa-bfdf-92f5741f3a39,ECC,Apokryphen
+5dd76758-aee5-4766-bb73-92d99b26169a,Output-Stream,Apokryphen
+5de0d92a-b8de-4b77-b361-c1384873ed88,Verschlüsselung,Prüfungsvorbereitung AP1
+5de9eabb-603d-40d7-8a5c-9fd66b996e9d,Zielformulierung,Apokryphen
+5dee79b5-3632-4ab1-a9af-4959a64c68e8,vertrauliche Daten,Apokryphen
+5e4f0b10-ddd2-463d-adf8-8a21f8776cf0,File-Share-Datenbank,Apokryphen
+5e57188d-94bc-42b4-9eb2-634d8623a6d9,Anwendung von IT-Systemen auf neue Einsatzgebiete prüfen,PV2a
+5e6925d8-b571-43d3-bcae-4727a5d32dff,Beschaffungsprozess,Apokryphen
+5e94c9de-6e25-45c6-ab58-c6f48d1f281a,Beleuchtung,Apokryphen
+5eb76b8a-e775-4069-9668-d17dfa363c4a,Lohnsteuer,Apokryphen
+5ebf1c2d-a40c-4d1f-9b5d-d4defb391d0a,Bereichsbestimmung (z. B. Klasse A: 1.0.0.0 - 127.255.255.255),Netzwerktechnik
+5efa4881-8dbf-4be4-96be-3491a358b593,Warenannahme,Apokryphen
+5f498db3-7f8f-4d60-9fa7-caeaf9d227c8,Office-Produkte,Apokryphen
+5f867cdc-e5a9-468a-97e4-d8bface5ac56,"Prinzipien (Visualisierung, Abgrenzung und Optimierung - des Workflows)",a
+5f8719c3-86b3-48e0-bf81-8c9e5e769b1f,Updates und Patches implementieren,a
+5fb696da-3980-4201-ba94-8770b0767d78,Raspberry Pi,Apokryphen
+5fbe2cde-dc90-433e-be98-c45a7d1b8126,Unit Tests,LF08
+6040b5a1-2731-472c-9d4f-9e66207326db,Ist-Aufnahme,Apokryphen
+608366c2-782b-4d44-912d-7863ce7fe004,Datensicherheit gewährleisten,Wirtschafts und -Sozialkunde
+60915032-9582-4979-81f5-eb50ae2139e7,Testbericht,Apokryphen
+60b18aca-dcab-4b43-8f0f-7833eaf80545,Teilnahme an Prüfungen (§ 14 Abs. 1 BBiG),Wirtschafts und -Sozialkunde
+61433f4c-b207-4b30-86c3-bb6fc6302ffe,Disposition,Apokryphen
+6189ca88-51e5-4aa7-9d31-840fb30bcefc,Vertragsfreiheit,Apokryphen
+62698431-9d89-412a-a200-0df41691ab89,Datenminimierung,PV2a
+62aa0cea-4b26-4857-a6c3-4aa428d19bc6,Umsatz,Prüfungsvorbereitung AP1
+62bcda2d-94c9-4463-9738-3063daca44f6,PostgreSQL,Apokryphen
+62fe8e91-5301-427c-bb99-6136858f38cb,Tastatur,Apokryphen
+6326f13a-c5d3-4288-9989-2ea6ff3e07bc,Ticketsystem,LF04
+63363caa-4b26-4485-ae73-88a01b806144,Risikobewertung,a
+635c1094-7ba3-4ec4-b8a5-d518b7fe77a7,Schadensszenarien,LF04
+6364734c-c838-4eb1-8b22-6375e2faca5d,Wartung,LF06
+636e5a1d-4cf7-468b-9c28-9efeeb369fa8,Entscheidungstabelle,a
+637e16f6-9b20-45c5-bf46-b4db2f60ab62,IPv4-Adressen,Apokryphen
+63c68e9f-a37b-4254-ba8e-ca4c682bcb48,"Prototyping (Interaktive Modelle, Validierung mit Nutzern)",a
+63e4c62a-0971-432d-907e-8d244d2b7245,Netzwerk,Apokryphen
+6414b82f-3bea-435c-ac00-8b94d2614cbd,Vorgehensmodelle,LF05
+646cf5aa-88c2-4fb4-a6ab-1b64baed68b2,ER zu relational,LF05
+64862020-b2e8-4dff-8a1d-5c59a71e6af7,OEM,Apokryphen
+6496945d-c2e8-4e5f-a279-b3dd41fac432,Assessment,Apokryphen
+64a95c34-31d1-4043-ab4f-1f607bc388ba,Responsives Design,a
+64ad736f-aa93-40f4-b572-c8f2b983c99a,Assembler,Apokryphen
+64b60f1b-f995-488d-9004-4b223a422783,Arbeitspakete und Meilensteine definieren,a
+64c52fb2-1884-4f51-834c-482f4ca4e626,Servervirtualisierung,a
+652d8e38-3568-4d11-94fe-7385263f6d62,Abschlussprüfung,Apokryphen
+65503825-8fbf-44d4-ae14-a718f94ac097,Notfallmanagement,a
+658f7db6-b1e2-4326-9d2f-2d2852daf1ee,Softwarearten,Apokryphen
+65b2bbe1-504a-4802-bb24-9c84a67ddf9d,Schulungen-Mitarbeiter,a
+660f47d5-1c73-45cc-94e6-ee70ca01f5c7,Lasswell-Formel,LF06
+6643a633-d3e1-4c51-9d3d-dc5e45f465c7,ip-Befehl,Apokryphen
+6653c15b-a929-4560-85a1-d53d3cc42f5d,Wertschöpfung,Apokryphen
+6667acf6-4405-42de-994c-a2218bcd06e3,Nachfrage,Wirtschafts und -Sozialkunde
+66aa4e28-dbc0-4391-8f16-b4a5799c650e,IPERKA,Apokryphen
+66b7e979-81e8-4de6-83a2-e0e50636e9db,Einfügeanomalie,Apokryphen
+672aba36-9506-4018-acf3-a6d15373a247,Shareware,Apokryphen
+679c7a53-ec82-4164-98bc-9413002b3ed1,Objektorientierung (Definieren von Klassen),Prüfungsvorbereitung AP1
+67a685fa-d2be-421c-9402-12f910badf12,Bedrohungsmodellierung,a
+6810a372-7e2c-41f8-8223-58db5e26b458,GatewayFunktion (Paketweiterleitung),Netzwerktechnik
+68cf6247-d14e-43fe-9a32-c6aca07acf21,Ausbildung gewissenhaft durchführen (§ 14 Abs. 1 BBiG),Wirtschafts und -Sozialkunde
+69293b9c-d5db-4377-91be-2fdf3c6efdb2,digitale Transformation,Apokryphen
+699ebdba-7538-4834-855f-86b8f03dfc42,Transaktionsbereiche,Apokryphen
+69b18196-b81b-40e7-a92d-877680313a49,Funktionserweiterung,a
+69fda248-ac7a-412d-b08e-78be42ee15c4,Social-Media-Marketing,Apokryphen
+6a464986-186a-4a73-8cee-048d46744d30,Private IP-Adressbereiche,Apokryphen
+6ae09982-60a3-4e21-8ff5-42745f629923,User-Helpdes,Apokryphen
+6b0dd900-615d-49f3-92d8-185d491c16c9,Datenschutzgrundsätze,a
+6b1d0a42-1a62-46f2-82f7-866ef41f3d8c,USV,Apokryphen
+6b2ab738-10b4-4854-930c-2dac7ed13c95,Dateiformat,Apokryphen
+6b515acb-ddc0-470c-8667-64dffb09d2bd,ASCII-Tabelle,Apokryphen
+6bbdd56a-5d71-485d-b41c-6d8a174daaac,Erweiterungsprogrammierung,Apokryphen
+6bdf78c5-aa3a-431a-bf99-470cf50561ab,ВРМ,Apokryphen
+6c04e77d-c9b6-4111-95d4-62731b259ccb,Abfall- & Recyclinggesetze,LF01
+6c4698ca-704f-434d-ade3-c685be2b15b1,spaltenorientierte Datenbank,Apokryphen
+6c787639-7a91-4e4a-8988-7d3836598d4d,Hoaxes,Apokryphen
+6cac33ea-82c6-44ba-979c-b4d699660e82,durchführen,PV2a
+6cad813d-d37e-49c7-9ba7-44c0016690d7,Leitungssysteme,Apokryphen
+6cd4a673-20e5-4e2c-96f4-6f89ade3a4aa,Algorithmus,Apokryphen
+6d992397-7818-4ab2-a0e4-c615c3d9520b,Netzwerktopologien,Apokryphen
+6e00e1f4-6f92-4925-b483-819cd4158b78,Arbeitsteilung,Apokryphen
+6e2c58de-9220-4e84-ac74-980481dae070,Meilenstein,Apokryphen
+6eaaf4f6-5d59-47bd-849a-da500281ed66,Passwort,Apokryphen
+6ead7ed1-9b04-4669-bf06-67ff0c3471ce,HTML,Apokryphen
+6eb7adbd-c9b2-4c04-8564-0b7fcdd2de1b,Virtuelle Netzwerke,a
+6ec97e2f-2415-41b0-8015-dc119b3d50ff,Antivirenprogramme,a
+6ef5a607-b4b8-475d-b8c9-1570d1c9c021,Schutz vor Diskriminierung (AGG),Wirtschafts und -Sozialkunde
+6f50e4d8-e9d1-492b-a635-12d8b7af2f19,Subsidiarität,Apokryphen
+6f67563c-824d-4ea4-bb31-7a3a567d068d,statische Code-Analyse,Apokryphen
+6fd29674-8deb-4f70-8d1a-96e4b6fb78d1,Organisationsmittel,Apokryphen
+6feed36c-024b-4156-b9fc-c51dd265af58,DSGVO Anforderungen,Wirtschafts und -Sozialkunde
+6ffab95f-f025-4d7a-9cb7-f28735986cfc,Traceroute,Apokryphen
+704e42e1-e4c4-40c6-9658-e2223768c828,Digitale Erpressung (Ransomware),PV2a
+70519fa3-9401-4bda-b5d4-2cba81d74072,"UniqueLocal (FC00::#7, private Netze)",Netzwerktechnik
+70c5cd73-e91c-46ee-bd41-db445a7a512e,Oligopol,Apokryphen
+70cb74c9-807d-4a4a-a3b1-efd1bbca892e,CRM,Prüfungsvorbereitung AP1
+70d0fb8b-3e59-4323-802c-3f84027949dd,Vorkalkulation,Prüfungsvorbereitung AP1
+70d87d90-4d54-4361-b3f1-b9dc23d2906b,Sensoren,PV2a
+710997e8-f1fc-4d85-8782-a80a0a968f15,CSV,LF08
+71612c5e-ed3a-48ad-95a6-636cb41ce0b5,GbR,Wirtschafts und -Sozialkunde
+71795f8d-dbff-4340-a208-5b3c7a19617f,Syntax,Apokryphen
+717c5858-949a-4dd0-b593-14048c1d69cf,Finden von Fehlern im Quellcode,Prüfungsvorbereitung AP1
+71870b1d-e54e-44af-84dc-bb79915457af,All-Flash- und Hybrid-Flash-Storage,Apokryphen
+720456d4-bd11-41cd-8f2b-a63e577da862,Cyberkriminalität,Apokryphen
+721985a4-bea9-41a3-aeb8-953e1e0958f6,UTF-32,Apokryphen
+722ca5b7-1fd5-4236-a266-8668d5537200,Farbtiefe,Apokryphen
+72340e52-c39a-43f8-a906-0b9fbdda2a84,Ausbildungsvertrag,LF01_
+72483b93-f0c6-40ed-a44b-97776e8ca888,Umweltschutz & Green IT,LF01
+7261fec1-61ed-4512-816d-23b3ed0ca1b9,Parallelisierung,Apokryphen
+727d9138-e9ae-45d6-a123-572584b56283,Farbmodell,Apokryphen
+732dd511-0521-41e1-827e-1f360fa50f2b,Marktbeobachtung,Apokryphen
+739edc78-0a8d-4e39-aca4-0030eda21703,Subnetzmasken,LF03
+73ac2a56-e548-4642-87b5-e40a4669dc2a,"Paketverlust (Ursachen, ICMPv6-Fehler)",Netzwerktechnik
+73ba35da-990f-4e80-ac2a-bf230a71ca84,Cloudlösungen SaaS,Prüfungsvorbereitung AP1
+73d84ffa-58d7-411e-8548-abdfed1e9dbb,Projektmanagement,Apokryphen
+73f5ea04-c570-4a68-90ef-daa655138ac9,Wertschöpfungsketten,Apokryphen
+740c60b9-d85e-4390-a06a-11c787b777bd,"Standardpräfixe (#64 für LAN, #48 für Organisationen)",Netzwerktechnik
+741c7296-5503-48ef-8501-5d82803221e5,SNMP,Apokryphen
+7431fef6-f13c-4f6f-8845-3af8f4ce74a6,"Werte (Kommunikation, Einfachheit, Feedback)",a
+7435a485-88d1-44d5-93f4-eaee3f1f6101,Projekte,LF05
+7444080a-170d-4c69-afbd-14eaa29fb082,Einnahmen-Überschuss-Rechnung,Wirtschafts und -Sozialkunde
+7462f439-4831-43a4-962c-deacb604019b,EU-Ebene DSGVO,PV2a
+747d8311-4739-446c-922b-2f470e507308,Telemediengesetz,Apokryphen
+7487dc10-450d-4411-9fbd-4fefe6e30344,Personenbezogene Daten,Wirtschafts und -Sozialkunde
+74ba2615-2d00-4223-a253-a0f472895826,Rekursion,Apokryphen
+74f791c3-1905-476b-8735-0526a9b08f89,Entwurfsprozess,LF05
+7522b3d6-c689-4b84-b73f-fdf064d8630c,Panel,Apokryphen
+7546b760-dff7-42c9-a5ef-a4eb4b63117d,Dokumenten-Datenbank,Apokryphen
+754e2c0e-2cce-40e5-b95a-fe10f3bf6372,TQM,Apokryphen
+7582b584-732a-411c-93e8-c45805e95bf0,DSGVO-Anforderungen,a
+75c63182-6a24-4504-848a-b98792fce2a0,Hotspot,Apokryphen
+75cd0f53-7bfd-47d2-b601-753912aca806,Transparenz,PV2a
+75db4e07-8484-468f-b511-a4ea4f96967d,Pflichtenheft,Apokryphen
+7626322b-1835-408c-86c5-602c68721cb0,relationale Operatoren,Apokryphen
+7669802a-aef9-4868-a740-f725bf51a467,Ausbildungsplan erstellen (§ 11 BBiG),Wirtschafts und -Sozialkunde
+768e37bc-7247-4cba-9241-12e3e01bf4f8,TMG,a
+76a6eb63-afec-4a27-a8cd-b7bdd3fc5e83,IPV6-Adresstypen,Apokryphen
+7788cbac-382b-4665-b09f-b14c662265a8,DCL,Apokryphen
+77c32793-03fc-4d3d-86d7-35a10c6834e1,ABC-Kunden,Apokryphen
+77e50726-1b49-473e-aa7d-9509a4566cc6,Divisionsmethode,Apokryphen
+77f35d94-9309-42fe-b9e2-f31970125307,Gemeinkostenverteilung,Wirtschafts und -Sozialkunde
+780168c5-75c6-4ade-9f89-b5dbb1698da2,"Feedback und Priorität, Visuelle Rückmeldung,Strukturierte Navigation",a
+7802ce37-668a-4605-86e1-784dae83d0f7,Event -Listener und -Handler,a
+780715a2-6f30-4f6a-bc29-7737b6b7cc67,Built-in-Funktion,Apokryphen
+784293e4-6187-46ed-a212-0454a9b91562,Attribut,Apokryphen
+785a920c-d9ce-4d37-b0d9-fbc0cf4b39a3,Workstation,Apokryphen
+78c9f411-3d92-46cd-8e6a-28b0d46510a9,Betriebssysteme,a
+78ca9f9c-e5e1-41e6-bebe-e030b4395ee8,Monopol,Apokryphen
+78dba1ff-63d5-4e39-b477-6435aeab3a3e,Vier-Seiten-Modell,LF06
+78f06626-994a-49cc-a5d5-b2989e61afda,"Präfixberechnung (Netzwerkanteil, Interface-ID)",Netzwerktechnik
+78ffc234-d9fa-4bc4-a0ae-9109282d601d,Akzeptanz Tests,LF08
+7904dac0-9e18-4b07-93c2-bc64ec81a40f,Permanent Link,Apokryphen
+791c3d01-2d0a-4f8f-a4f9-8f83e3d66958,Außerordentliche Kündigung (§ 22 Abs. 2 BBiG),Wirtschafts und -Sozialkunde
+79617172-4af1-41d3-bf75-f312cb2ac85f,Zwei-Faktor-Authentifizierung,a
+79a1b9ad-1742-4508-a4a1-b56b814f35b4,Anforderungen klären,a
+79bbeaee-9c1a-4fc1-95f9-7b3834e708cd,Compliance-Regelungen,PV2a
+79c9c3b5-ca06-4ed4-b070-5975efccdede,Anwenderprogramme,Apokryphen
+79cd6ad3-d41f-4d61-b9e0-80a9a912b98b,RedMonk,Apokryphen
+7a1e49b1-e4cc-4a07-9f91-c2de4d6d6092,Bildwiederholfrequenz,Apokryphen
+7a48232c-6c1e-449f-a139-7d078155ea8e,RGB,Apokryphen
+7a61b0ce-f606-4872-92f7-6689c2b52998,Textformat,Apokryphen
+7a6af824-a117-43c4-a010-febd47b256d4,Drive-by-Exploits,Apokryphen
+7a71f4a6-a46d-4b85-8ef9-0e01918f6361,Schutzbedarf,Apokryphen
+7a81e54d-94d6-4304-a47f-484fd215b311,ERD (Entity-Relationship-Diagramm),a
+7aa5e200-0935-419a-9d9a-72ed3075d264,Testabschluss,Apokryphen
+7aa8d285-3598-4714-a8a0-bc4230835170,boolesche Literale,Apokryphen
+7b200966-dfbe-49f7-b535-ed48bd51fc03,RFID,Apokryphen
+7b3c3dce-e119-4b7b-b9c4-78b9ba9b837d,Netzwerkmodell,a
+7b4769a5-bc5d-44aa-aca6-3361f0e2d13c,ISO 8601,Apokryphen
+7b493880-7f73-4b7d-8356-2642e2c5fd60,Mehrliniensystem,a
+7b538f7f-f30a-41a3-a1ee-eaecb4751e35,"Ablauf (Risiken identfizieren, prototyping, bewerten, nächsten Zyklus planen, fertig stellen)",a
+7b55712d-ca7e-4713-bfe1-8fcc372d4dde,TOM,Apokryphen
+7b877efb-953d-4715-bf90-dec42d3df519,Sequenz,Apokryphen
+7be55bff-bc02-44f7-bf44-c5495a68baf4,Ressourcen,LF06
+7c0b9261-0d3d-4890-a35d-89852f452a1a,Reviews durchführen,a
+7c7b574f-64f6-4766-9192-64b00305fed7,Personal- und Materialbedarf schätzen,a
+7c93ef6f-3317-4558-8ba7-dfd1508dee6b,TCL,Apokryphen
+7cac9b3b-30a5-4709-ac7f-91dd5ba7d265,WLAN-Router,Prüfungsvorbereitung AP1
+7caf7ea6-0a8b-4ef9-8820-3684dee75101,Stabliniensystem,Apokryphen
+7cf1c0ec-53b5-4065-8bca-be204e134dd0,"Ablauf (Anforderungen Festlegen, System entwerfen, Module entwickeln, testen jeder Ebene, System abnehmen",a
+7d28bee4-23b4-4275-92ef-3075a5138b7f,Unternehmensdaten,Apokryphen
+7d5a9ebd-831f-4ede-8b2b-fc654f22b867,Stakeholder,Apokryphen
+7d5e3919-059b-435c-96ce-f33aaf73fba5,PDCA,Apokryphen
+7d7a39a8-2a1d-4288-8c30-9f074bc72dcb,Identitätsdiebstahl,LF04
+7da57c70-7cc0-4376-b5aa-29c5a547d5e6,Gefährdungslage,Apokryphen
+7dd6d635-fbe6-415e-8620-c33cf14aa55e,Objektorientierung (Definieren von Methoden),Prüfungsvorbereitung AP1
+7de42232-e83c-4e34-aed8-5fb04895df42,Datenflussplan,Apokryphen
+7dee693c-8009-4acb-9d2f-bccea1e16d06,interne Daten,Apokryphen
+7e1387f5-d31c-41aa-a1f3-ec34c50bb001,externe Datenträger,Apokryphen
+7e596beb-c3e0-41ec-a453-1bffb2b19467,MAC-Adressen,Apokryphen
+7e5a2bb8-1299-4625-8578-02678fe2c90a,strukturierte Daten,Apokryphen
+7e644089-8df7-4c24-833d-79d53b8b5513,Datenherkunft,Apokryphen
+7e813bd7-193a-49e8-a1fe-911eade8dd77,"DHCPKonfiguration (Server, IP-Pool, Lease-Zeit)",Netzwerktechnik
+7ef739ff-d5cf-4b70-b482-e880b295cb6e,"LinkLocal (FE80::#10, lokale Kommunikation)",Netzwerktechnik
+7f98d428-d07f-4264-9c48-803578556fb1,Digital Workplace,Apokryphen
+7fb2e6c3-2a3d-461b-839a-3736e024b15b,Mockups (Detailgetreue Statische Designs),a
+7fdd4b76-45e0-43be-85eb-25e08a059b58,Design,Apokryphen
+8059aef2-781c-457b-948e-ab4131f98aba,Kardinalitat,Apokryphen
+8087d1fe-3f54-4088-abb7-f847808e2d21,Fat Clients,Apokryphen
+809eda21-625b-4170-9a60-3dce36b4627a,Anycast,Apokryphen
+80c209a5-5424-4169-bb53-f670c9e6b4b2,Datenbanksystem,Apokryphen
+8123228f-0173-4d9a-bb21-0081aae540b3,CIO,Apokryphen
+81cada8c-4472-41f9-a3a4-fa8a8bf7a25c,"DHCPv6Prozess (Solicit, Advertise, Request, Reply)",Netzwerktechnik
+81fead14-733e-41e1-8b1d-cdb4daaf3bb0,ISO,Apokryphen
+820364c3-81da-4fbd-9bff-ae8a9c9d57fb,Bus,Apokryphen
+822daf9c-c6c0-4593-b6f5-31e72670c689,Testplanung,Apokryphen
+82839048-1bcf-4751-9cc7-a25e8578474e,WhileSchleife,raw
+828728d0-378e-46a0-9fcc-3c6295f7d4c4,"Autokonfigurationsanalyse (SLAAC, NDP-Fehler)",Netzwerktechnik
+82907c3d-1102-4381-9bac-ec5e1bee8038,Qualitätszirkel,Apokryphen
+829dd2cc-3feb-4e81-bd74-3277c33e9554,Profitcenter,Apokryphen
+82b69651-aa92-47dd-83db-9bfebedb7ae2,Würmer,Apokryphen
+82e7ae29-c2cd-4aee-8912-a7d27d069940,Umrechnung (CIDR zu Dezimalmaske),Netzwerktechnik
+8319ab7d-b564-4b13-addd-c8dd1c8994a0,SOAP,LF08
+8333b4d7-90c8-4a94-824d-2ec3fa70456b,Netzplantechnik,Apokryphen
+836718b8-c855-4b5e-9996-c5b19f33bdce,Helpdesk,Apokryphen
+836aaf7a-13ab-4afb-aa8f-74ec71f69ba7,Unternehmen,Apokryphen
+838943ff-d2cd-43e9-95d6-2fe49e020d62,Port-Nummern,Apokryphen
+83a88c21-ccd6-4e74-9688-652e40970030,Performancetest,a
+83acd7f8-c12d-46cc-b8d3-df291f62bf31,Kündigungsregelungen,Wirtschafts und -Sozialkunde
+83f4e61c-eda8-489a-957d-48b0f3c95b68,Recht auf Berichtigung,PV2a
+8412f38b-9d0b-40f4-9158-9698c99a548a,Audioformat,Apokryphen
+8419934b-a800-40a1-af18-b7180c6144ec,Anforderungsspezifikation,Apokryphen
+8464fcf5-a430-4222-862c-9464556dfdb6,Fehler identifizieren,a
+84b0864b-523a-40f5-b17b-f8aa599fc66c,Mängelarten,Apokryphen
+85412d04-13c5-481c-9967-20e6ca7ff23a,Handlungskosten,Apokryphen
+85554eff-ae2a-40aa-98ae-20f1d271e0cd,Sozialversicherungsträger,Apokryphen
+857bed0d-3293-4c67-b146-bbd956204e6e,IT-Sicherheitskonzepte,a
+85a7dde4-b952-4778-94a0-c2c2f66700ad,Technisch organisatorische Maßnahmen,LF04
+85e41807-6f83-4f57-a5b7-25647a27ce96,Browser,Prüfungsvorbereitung AP1
+8636c6b0-c98b-4711-a1a8-6620ca53271c,Routing Table,Apokryphen
+86717331-841d-4fe7-99c5-df96851bf5c3,"Multicastadressen (FF00::/8, Gruppen)",Netzwerktechnik
+86767674-2064-4fb2-ad1a-3437d3546886,Datenflussdiagramm,a
+868ca03d-44ad-44dc-8740-e69132cc5571,Schutzmaßnahmen für mobile Datenträger,Apokryphen
+869e68b0-3fdb-40d9-9e70-c74257fe8f90,Wirtschaftskreislauf,Apokryphen
+86a4d78e-ae2b-4331-bdff-69971e1e14ec,Web-Browser,Apokryphen
+86b56d45-3349-4fe0-b988-26b6f29e38c1,Zeugnisarten,Apokryphen
+86cefbfa-6361-4eb0-adc0-8ac9ba24e287,DQL,PV2a
+86fcba3a-e8eb-4737-b0d9-f4bdc82ed55e,Schwachstellenanalyse,a
+8736d725-5bee-48bb-8232-ffd0d72c1535,Key-Value Datenbank,Apokryphen
+8744b17d-9856-4da9-b12f-5d3fa2d5fbde,GuV (Gewinn- Verlustrechnung),Wirtschafts und -Sozialkunde
+875f29b3-f029-419e-99df-e5392a13b730,Drucktechnologie,Apokryphen
+8772241d-a9a0-4d83-922a-cbea37a926d0,Präfixlänge,LF03
+877c2031-9494-498e-8d35-b5e5effe8420,Zielgruppen,Apokryphen
+879d8ac4-cfc5-4c08-acf0-cc167203480a,"DHCPv6vsSLAAC (Vergleich, Einsatzszenarien)",Netzwerktechnik
+87a42414-cec3-4686-98fb-334d7ec93f1a,Switchtypen,Apokryphen
+87ca9c66-47e8-4862-9947-1fa73a6e5399,Audit,Apokryphen
+87e9d11d-4afd-48be-b66d-9a72b886ade7,Konstanten,raw
+87f51612-107b-44ef-8ed6-a16cb67a7969,Softwarekomponenten dokumentieren,a
+88380d03-3fe7-4c0f-8956-9704b6b2f197,"DHCPAbfragen (Client-Anfragen, Serverantworten)",LF08
+884ee4fe-d952-4b34-aa34-36d49e3d2ffd,"Ipconfig (Windows, IPv6-Adressen)",LF08
+88717532-a259-40bb-b55a-18a37770a153,ISO IEC 10646,Apokryphen
+8885980e-2e07-4eb9-9ba3-1d2fb0463617,IfElse,raw
+88d147fc-0b83-4114-9a42-37451e5ae03c,"DHCPGrundlagen (Automatische Adresszuweisung, IPv4)",Netzwerktechnik
+88e9eaa3-634c-4f7b-a140-3874a9ea69ad,Switch,Prüfungsvorbereitung AP1
+89099404-7f84-48b9-848e-715a4557a9d8,Programmierwerkzeuge,Apokryphen
+8915545f-e2fd-4e54-8a7f-e712cbfc1ec6,Unternehmensleitbild,Apokryphen
+893e5c5c-0f94-4f49-8093-9866066742bd,Eisbergmodell,LF06
+8944ce87-4c62-41b0-ab15-11ee613e9d96,Embedded Systems,Apokryphen
+89454590-353c-4b84-affc-fc0a4cf63f8b,Tintenstrahldrucker (Inkjet)),LF01
+898e052d-420c-4111-9996-6021d8efbf67,Primärverkabelung,Apokryphen
+89a0c9ae-9f1c-4009-a5ea-e37a9aa91a2f,Jobrotation,Apokryphen
+89e0bc8d-35da-415f-8585-0ce8aab095e5,Datenbasis,Apokryphen
+89ff8e41-5422-4eb5-93a1-57ba579b266a,Bedarfsanalyse,Apokryphen
+8a020107-c7e3-4b0e-b273-24e972f1042e,"PräfixDefinition (z. B. /64, 64 Bits)",Netzwerktechnik
+8aef0cab-1353-4f58-aa03-3c4d69b0dc9a,ISMS,Apokryphen
+8b21ba2e-c77d-475b-9add-0e4bc4648edf,Multimomentaufnahme,Apokryphen
+8b4aeb89-68ea-4a56-a2b0-113d2dc6da61,Erstellen von Angeboten,Prüfungsvorbereitung AP1
+8b740dea-1883-4eb1-b0c5-f3eea915fa4c,Reflexionsstrategie,Apokryphen
+8bb5c2c1-ab76-46e2-9c3f-b926882cac58,Schutzmaßnahmen für Betriebssysteme,Apokryphen
+8bbb2af6-d72a-4e8c-936f-9b31c28a94f2,Container,a
+8bcf76e7-0770-4ab3-a493-6315e6abce9c,Betriebseigentum schonen (§ 13 BBiG),Wirtschafts und -Sozialkunde
+8c003bfd-ca71-4d25-a5e1-2a8677a1137d,GPGPU,Apokryphen
+8c1d0c88-e2b1-4bef-bb52-7ee37133714a,CRUD-Operationen,PV2a
+8c330be3-25b3-42f4-8658-ba14619e756d,Notebooks,Prüfungsvorbereitung AP1
+8c431dee-75cb-4535-8f63-d9b16be5b8e1,Aktiengesellschaft (AG),LF01_
+8c5de9c1-5c06-4563-a790-5653ae1f6c08,Channel Link,Apokryphen
+8c651660-3747-4597-92e1-96083923b416,Tarifvertrag,LF01_
+8c7527a3-8e53-45b2-8f5b-84561e444c01,Rolle der UI in Softwareprojekten,a
+8c824ac0-8ba6-4e20-8f75-abe5d4ee0ff7,qualifizierte Signatur,Apokryphen
+8cbe6451-f4cd-488f-920a-e5359bb20da1,Energieeinsparung,Wirtschafts und -Sozialkunde
+8ccc6e24-3948-4470-98cf-0cf0474c305c,"Dokumentation (Spezifikationen, Abnahmeprotokolle, Testpläne)",a
+8d0e0575-c484-44bd-bbd3-b19f159f3036,"Ergebnisse (Anforderungsspezifikation, Entwurfsdokumente, Testberichte)",a
+8d466727-55f3-49be-b639-c00ce2661f1b,"GlobalUnicast (2000::#3, weltweit eindeutig)",Netzwerktechnik
+8d473738-a80d-467f-926c-ab33bb5e1b65,öffentliche Daten,Apokryphen
+8d5e06fe-dd55-4679-a6fc-8d962d5c60d1,Effektivspannung,Apokryphen
+8da1537f-ce73-41a0-971a-540fa02c76d1,Aufbauorganisation,Apokryphen
+8e0ea4f1-6c02-4d56-a9be-9f3d887122f1,zweiseitige Verzweigung,Apokryphen
+8e3dcac2-3cfd-4acb-95e3-41bd7fac3fc3,"künftig (Darkmode, Mikrointeraktionen)",a
+8e8dc2d3-8b20-4b5a-ae65-a3fa962cac3b,Streik,Apokryphen
+8e93cb61-ba41-49e8-bdbc-3c5771380e2b,Social Responsibilit,Apokryphen
+8e943f55-89e6-4447-ba5f-50a4f08210e3,vorbereiten,PV2a
+8eae15da-bf5d-4be6-8223-cc38014aa8a8,Änderungsmanagement,a
+8ee7b408-f4be-4aa8-928e-c9bcd55de348,Swift,Apokryphen
+8ef35237-54ee-46c4-8118-5fe62f45f8a4,TCP/IP-Modell,Apokryphen
+8f0484a7-1420-4400-8736-2958cc577fd8,Konfliktmanagement,a
+8f72b692-6d3f-4088-84c5-206862a42706,Datendiebstahl,PV2a
+8ffe7664-db06-4579-ba9c-e4f5d109b3a5,UPS,Apokryphen
+9058dc59-0547-4557-ad00-81dd2d44a2cb,Ressourcennutzung verbessern,a
+9077dbbb-b443-4666-bd6d-c99a6bec023d,Sozialgesetzbuch (SGB),LF01_
+90906445-f03c-4048-84c3-252137d23d1a,Escape-Sequenz,Apokryphen
+9096385c-e7ce-4ea0-aebe-29a3ea50b747,Probezeitregelung,Wirtschafts und -Sozialkunde
+90a1119e-f1e1-4d3b-8733-14f03f657183,Webservice Service Oriented Architecture (SOA),PV2a
+90df834f-bc60-4a19-b5be-3a0c6acb1789,"Prinzipien (Verschwendung eliminieren, Wert maximieren, schnelle Lieferung)",a
+9151127b-313f-4ee1-9a57-94568f30bc2f,Personalakte,Apokryphen
+91603d18-a522-4223-8e0e-0004e2db136b,DML,PV2a
+91c333d1-6113-4af3-9927-800eaa46b9f7,Verzweigung,Apokryphen
+91c43907-bd0e-4603-bf68-83de84f1c55d,CIDR,LF03
+91c58310-7768-4a7b-87a7-27c41404c865,Patch,Apokryphen
+924281dc-1792-498b-bfc7-0759112d7de6,Marktsegmentierung,Apokryphen
+925419a7-d413-4ff6-b69e-89f0dbed0cdd,Firewall-Konfiguration,a
+92cc1eb3-f043-4a14-bd9e-af6c335b7b9c,"Subnetzplanung (IP-Bereiche, Zuweisung)",Netzwerktechnik
+92d89415-c70b-4dd7-a81c-181409f3df8d,Analyse bestehender Software,a
+92e0da0f-22ae-4144-b78a-729ce6ad7d98,Bundesbeauftragte,Apokryphen
+92e7a154-d1c0-487a-b821-86a72a159800,Blackbox- und Whitebox-Tests,a
+92f43665-e575-4b9b-bf94-ad978eb640dc,Einzelunternehmen,Wirtschafts und -Sozialkunde
+930875a0-983c-40e7-a79c-13f37ec5986d,"Ablauf (Planen, Entwickeln, Testen, Bereitstellen, Überwachen, Feedback integrieren)",a
+931a543a-056f-4e7f-85ac-35460146ce9d,Socket,Apokryphen
+9335c4cb-63e5-4824-ad15-d070350bd6ae,Watzlawicks 5 Axiome,LF06
+935fe6c2-1d60-407e-a61a-bdca2ffac29a,Multimode-Fasern,Apokryphen
+936517b7-8b99-4db3-aa8e-73380eae1b5f,Abstract Factory-Pattern,a
+93a6ffb4-7699-456c-bec9-5cefe7d1558e,Byte,Apokryphen
+93d182d2-8b93-49e2-b089-b5db6b24175b,Store-and-Forward-Switch,Apokryphen
+941c43f0-2f53-4c44-a98b-68422273608a,"Keep It Simple, Stupid (KISS - Halte es einfach, Dummkopf)",a
+942e82f1-f367-4720-a15f-17517794ce08,Bewerten der Kosten,Prüfungsvorbereitung AP1
+94343345-8633-4e48-b015-dd2836cd4839,Entgeltformen,Apokryphen
+944ab924-3326-4a8d-a751-6cd062755b00,Matrixdrucker (Nadel- o. Punktmatrixdrucker),LF01
+946327bf-9731-4e67-ac54-2479c7068524,Netzwerkadresse (Erste Adresse),Netzwerktechnik
+946b328d-709f-41ba-8e1b-7f633b0773ad,Client-Server-Datenbank,Apokryphen
+946bee69-cd97-4540-a9c8-75af791df0e2,Stellenwertsystem,Apokryphen
+947461c7-d14a-4341-97e4-135f2ad33747,Nassi-Shneiderman-Diagramm,a
+9495cb04-5c4b-40e9-a106-a6eac21bd497,AGB,Apokryphen
+94ddcfc8-1501-4f0e-8dbb-5bf3b734cd2f,Input-Stream,Apokryphen
+953d7e27-21d2-4c90-9c1d-a62b311f855f,DMZ,Apokryphen
+9554b8f8-971b-468c-a877-a878e1954749,Community Cloud,Apokryphen
+959bc3f5-05ee-4cba-b1af-e7a77e6e37e9,statische Testverfahren,Apokryphen
+95c62c92-87c9-421b-9302-93d81ae5c906,"Meaningful Names, Small Functions, Sparse Comments (Sinnvolle Namen, kleine Funktionen, sparsame Kommentare)",a
+969522cb-9d0a-4bcd-b7b4-5bb5dd87edbc,Externe Speichermedien,LF01
+96a92757-3348-4e5f-8107-57d5f2805aaf,Auswahl der Ausbildungsmaßnahmen (§ 14 Abs. 2 BBiG),Wirtschafts und -Sozialkunde
+96fb73b9-cf62-4f92-9411-a8eea9be286b,Scareware,Apokryphen
+96fe0c57-e915-437d-a952-05cd1718f74c,Man-in-the-Middle-Angriffe,Apokryphen
+972f7be9-46f8-4ca7-9f3d-9b80ba23f208,Europass,Apokryphen
+97379f2b-b43b-4ed5-a7bd-5def91edbf5c,Verbesserungsvorschläge erarbeiten,a
+97544885-fd06-4443-8e3a-be9fce33c093,Anordnung von Arbeitszeiten (§ 14 Abs. 2 BBiG),Wirtschafts und -Sozialkunde
+9788f459-4d20-4cb6-b643-fdb95bcd7019,FSB,Apokryphen
+978bd8c1-ca81-411e-a8f5-182823f676d6,Binärpräfixe,Apokryphen
+97d0061f-198b-4d1a-b01d-780bf729971a,Angebotseinholung,Apokryphen
+981fc043-f8bf-43df-a6a5-41bd2efe18b4,JAV,Apokryphen
+983f5960-57d9-4159-8798-044d5ae94aea,Weiterleitungstabelle,Apokryphen
+985493f5-0f6d-4345-8ae7-40253c3c3d08,Arbeitsplatzgestaltung,Wirtschafts und -Sozialkunde
+986da40c-f726-466f-986c-cd4ad8141f86,Rollout,Apokryphen
+98bf4d2c-603c-4234-8a67-e6d85f264e04,Analyse Tools,LF06
+98dafb65-e6c2-43f5-90b5-c34262e05f8d,Jobenlargement,Apokryphen
+98e6142c-0b81-4889-8672-be1668809437,Vorgehensmodell,Apokryphen
+9925669a-f561-4765-aec3-47c443b930f7,Benutzbarkeit,Apokryphen
+9934af4a-d269-4218-944d-04de3bcf6920,objektorientiertes Programmierparadigma,Apokryphen
+993919f0-9623-42ea-bf09-c6f9d7c8b26c,Sicherheitsprotokolle,a
+993e5021-4717-4f29-97ea-10a59d3cbb9d,Visual Studio Code,Apokryphen
+9999bc34-eb8d-41f7-956c-f8c9900a2995,Zweierkomplement,Apokryphen
+9a317fbc-66dd-47e0-a18c-9157bde17c00,Ausgangsadresse (z. B. 192.168.1.0/24),Netzwerktechnik
+9a629653-c98b-4472-83d4-d43318054895,"GUI (Desktop, Web, Mobile)",a
+9abc4f69-fe7e-4357-8562-443365aa2a62,Observer-Pattern,a
+9ae87827-4e22-43cf-b139-f0d59d50f277,Spam,Apokryphen
+9afb2bd7-664b-4670-921e-44a306cc036a,Managed-IT-Services,Apokryphen
+9b13b71d-f258-44fb-97e2-ebfad5a05add,Outsourcing,Apokryphen
+9b4b98db-f351-47c7-8315-af4bbbc5e6e5,Energieeffizienz,Wirtschafts und -Sozialkunde
+9b4cecbb-1f3c-4035-b52a-f8126270708e,Projektstrukturplan,Apokryphen
+9b62a0d3-a16b-4686-b602-e2e12f4a4981,BinäreBerechnung (AND-Operation),Netzwerktechnik
+9bd7ada0-f40d-4b5e-8ca5-a52c65a918f9,funktionale Anforderungen,Apokryphen
+9c21378e-5f37-48f3-9ab2-7d47dcaa94b9,Schutzbedarf Arbeitsplatzsoftware,LF04
+9c3d2b87-1175-4ec3-8085-1118d67743b0,Kaufvertrag,Apokryphen
+9c902ff1-c757-44d1-9984-df95d61468bf,Zuschlagssätze,Wirtschafts und -Sozialkunde
+9d064975-54dc-4f5e-8a10-f276e79e6408,Daten,Apokryphen
+9d50d3a4-47e6-4817-9075-ee95d92a9ab6,Command-Pattern,a
+9d5d73ad-e991-4f01-adc1-2d597c50eab2,Schutzbedarf Datenaustausch mobile Datenträger,LF04
+9d7e5abf-7f76-4bcf-956f-eab76d334a71,Werkvertrag,Apokryphen
+9dfe1a3e-f810-46f8-b563-4f45f447ff98,SAL,Apokryphen
+9e048155-1e8f-4f41-a8e7-2bf50890833c,Erwartungen dokumentieren,a
+9e28ebce-57d9-4a0a-9650-b81fb5420188,"Ergebnisse (Subnetzadressen, Anzahl)",Netzwerktechnik
+9e4965d7-05fc-46d5-9a60-60e9d40493e3,Lasten- und Pflichtenheft,LF05
+9e6fcc73-c842-40e7-aab0-ab5a9c571678,deklarative Programmierparadigma,Apokryphen
+9e7927d6-7c10-46fd-95ac-8835e3d54137,Sampling,Apokryphen
+9eaf1760-6155-4f0e-8a6f-f29e4ad8dce1,Sicherungsarten,Apokryphen
+9eda4f25-38f4-4521-af35-025974400435,Ist-Analyse (Arbeitsabläufe und Geschäftsprozesse analysieren und berschreiben),a
+9ef064ce-8e90-4be7-88c0-7b41617dffc2,Objektidiagramm,a
+9eff8bd0-ada0-4358-b2b2-3e366fae5fa9,Anwendersoftware,Apokryphen
+9f3a7230-a1d1-4bbc-b37f-930571ed77f7,Combosquatting,Apokryphen
+9f94eace-5191-421d-bb9d-92f0441b97ef,IT-SIG,Apokryphen
+a010a9fa-13ec-4de2-8660-7a7aa9b9f7b0,Kompatibilität mit neuen Systemen sicherstellen,a
+a01e62f7-0f12-40b1-9900-925fee99ba65,elektrische Anlagen,Apokryphen
+a026f54e-5b86-4c83-a4e0-e36c40fa512b,Rechte Pflichten Definition,Wirtschafts und -Sozialkunde
+a0276368-6596-42b8-8c27-b5278bab5ffc,Veränderungen von Einsatzfeldern,PV2a
+a04182f4-5b1f-47bb-a9a4-d58d667b21f7,ISO-8859-Norm,Apokryphen
+a044796c-3b12-4e90-9949-c64a59541f7c,nachbereiten,PV2a
+a06c44a8-e8fb-4192-91db-2a152e87f1a4,Bugfixing,LF08
+a0a34505-a9f9-493c-88d1-326d27d80ec4,"PingOptionen (ping6, -c, -s)",Netzwerktechnik
+a0d12a37-67f6-40cb-a11a-64fd2bcd31a1,Beziehungstyp,Apokryphen
+a0e2d1e2-6b6f-4742-8372-c034995af703,Recycling,Wirtschafts und -Sozialkunde
+a10b14e8-dafe-4d8c-a9af-4211cfe4cfe8,IT-Bereich Services,LF01
+a112cbd0-43ea-4130-aed0-cf67ad4617cc,Softwarelebenszyklus,Apokryphen
+a18aa542-0335-4ebe-9020-c66dba032ef0,Latenz,Apokryphen
+a1a3bff9-53b5-4109-b75b-9a4c25423726,Strukturdiagramme,Apokryphen
+a1e513a9-e48f-48b1-adb8-66d897c6b5e0,Darlehensarten,Apokryphen
+a21706d8-844d-4ede-b240-4491a0744a3b,Zweckbindung,PV2a
+a2246391-b344-4814-8e8c-7b76d80ba14e,Datenschutzbeauftragte,Apokryphen
+a229bf3a-ef5a-4cf9-8529-a65da96f030a,Entwickleraufgaben,LF05
+a2886b0b-44ec-46e4-82f7-5b59b9494e29,GmbH,Wirtschafts und -Sozialkunde
+a2aae75d-cce3-468f-9c18-b37810223659,Thermotransferdrucker,LF01
+a2b06f88-3da7-4d2c-ae37-bddc9f5a001e,UTF-8,Apokryphen
+a2ba048a-4fc9-48b0-bba5-70fbadc9a437,virtuelle Maschinen,Apokryphen
+a2dfade5-9dff-43b0-8374-bf1dddf38c77,wirtschaftliche Ziele,Apokryphen
+a309965a-b20d-4ece-997a-e8715d8c7446,Systemdokumentation,Apokryphen
+a334d488-942b-49b7-9d95-e87f68f11404,Gemeinkosten,Wirtschafts und -Sozialkunde
+a33ab762-0013-4388-a0cd-9385a988c298,IPv4-DHCP,LF03
+a34867c7-eb40-4da3-b39d-f682408064ee,Effizienz,Apokryphen
+a3489612-b074-45dd-825d-0168beff5182,OpenData sowie API-Schnittstellen,PV2a
+a3ce88c8-3c38-4f38-930c-ead6fc00bd2b,"Anycast (1-zu-Nächstem, gleiche Adresse)",Netzwerktechnik
+a3d05494-21f1-4077-aefe-51cc483020a3,IEEE,Apokryphen
+a40d0a76-07e1-4a92-b9f8-2b8e63558076,Wartbarkeit,Apokryphen
+a4357513-156f-4762-b319-a3286f1fe163,Broadcastadresse (Letzte Adresse),Netzwerktechnik
+a44bb164-c3e3-403f-ae4d-7d14ba0f2d99,Binär-Stream,Apokryphen
+a4c43df0-1616-4c1a-8ff6-fb09ecec7e54,After-Sales,Apokryphen
+a4d636d8-0a66-4e1b-9333-409dfed53c3a,Open Closed Principle (Offen Geschlossen-Prinzip),a
+a507e3ef-a429-4f33-b244-40a36b596c72,Datenlöschung,LF05
+a50cfe2c-6a3e-4e6e-b176-6bda4576c8df,Unternehmensrichtlinien,Wirtschafts und -Sozialkunde
+a567af9e-3e6f-41a4-81fd-5271c61275f0,Risikoanalyse Arbeitsplatz,LF01
+a58f4a32-aca9-45ce-ba8f-3fb9c4ad44ea,Detachable,Apokryphen
+a5aa88c2-ea20-40b3-a14c-850f4b42a888,End-to-Site-VPN,Apokryphen
+a5bcccd8-9bcb-4055-85af-8e98af771d3c,"Multicast (1-zu-Gruppe, z. B. FF02::1)",Netzwerktechnik
+a606a50c-4e27-4680-8e57-928dffd62c07,Paketdiagramm,a
+a60cc9d1-fbe7-4248-887b-11e2149ebbdb,DMS,Apokryphen
+a6213ce5-ede6-419c-8089-0f49351c5aff,Duales Studium,Apokryphen
+a62fd1c5-a2b9-4e74-89e9-5f6c5ae2f44a,"Nutzen geeigneter Informationsquellen, z.B. Fachmessen, Fachforen im Internet, um neue Trends sowie Einsatzgebiete wahrzunehmen",PV2a
+a6f2d636-cf2c-48f6-ac5a-c7e093d5e998,Hub,Apokryphen
+a6f5b8d5-47a8-4be5-bd77-348c5cf39c40,Prokura,Apokryphen
+a7347f70-087e-4b50-81dd-8953e87865c1,Management,LF06
+a7c2718b-d9b8-4fc7-a86d-5b66291d5455,Lessons Learned sammeln,a
+a7c2a5e7-0016-40bd-af93-d6a7f2ef2c73,Anweisungen des Arbeitgebers befolgen (§ 13 BBiG),Wirtschafts und -Sozialkunde
+a7ee2e54-6d54-4e2c-9fba-a1e3e4197115,SAN,Apokryphen
+a832b903-7697-4455-b1df-4f8be2937398,Phablet,Apokryphen
+a83748b6-5ab4-4237-867e-41c08262ccdc,Inspektion,Apokryphen
+a8c75944-0f88-4f80-bbea-d844d5719f3d,USB,Apokryphen
+a92a8728-3f86-4a8b-92b2-0d910baff2b0,Informationsbeschaffung,Apokryphen
+a92de952-adb9-4088-9ea7-ed2f2abfb5be,"Anforderungskatalog (Funktionale und nicht funktionale Anforderungen, Barierefreiheit)",a
+a9436de6-996f-49b2-ab06-d9ef1cbf5fc3,digitale Plattformen,Apokryphen
+a9fc5cd1-2f6e-460c-b055-d13f5a2bdb39,Verkabelung,LF03
+aa153fa0-30d3-4076-bfd9-f0e98725b425,"Einsatzgebiete (Unternehmen, Multicast)",Netzwerktechnik
+aa738823-1bc0-4e51-8e37-79ee39ae7721,Integritat,Apokryphen
+aaa1349a-fef0-47f2-8455-bc94e31dfab2,Kostenstellenrechnung,Wirtschafts und -Sozialkunde
+aab16f4d-0bb2-4306-ab74-5f503f8c29c3,Kriterien,LF05
+aac6f390-4f19-4de0-99f0-8a9364d9e6fd,MulticastPing (Ping an FF02::1%Interface),LF08
+aae028fe-2333-4d3a-90ab-e42846c7fded,Lichtwellenleiter,Apokryphen
+aae908a4-cc46-430e-8d61-56643276fd80,"Adressaufbau (Netzwerkanteil, Hostanteil)",Netzwerktechnik
+abadc43d-08a7-4642-8ed2-33069722df4d,Internet-Protocol,Apokryphen
+abde572d-4fb6-4c7e-b419-a93a3e16a8af,"Werkzeuge (Kanban-Board, WIP-Limits (Work in Progress))",a
+ac4361b4-6cea-435e-8034-50d656edbf63,Schulungsplanung und -durchführung,a
+ac7da810-bc04-4e7d-9db3-6429d6f20a2a,Rechtmäßigkeit,PV2a
+ac7f707b-474b-4b27-b4c8-2920f0c5309d,Mainboard,Apokryphen
+ac9bf6e1-c64c-415c-9698-ae26a298d83d,Aktoren,Apokryphen
+ac9c0f15-6468-45db-b087-5b2b03475d45,OLED,Apokryphen
+acbff17f-dbfb-44a2-bcae-357531590358,Entwicklungsgeschichte & Trends Computertechnik,LF01
+acc3c813-d07f-4633-92cc-baea2c1bda26,Leistungsangebot,Apokryphen
+acfca800-6e4e-4475-95c4-6b38e32a0b30,Fehlerprotokollierung,LF08
+ad273c25-a619-4f46-9538-dbff064e89d3,Code-Kommentare,a
+ad7feb00-55d5-41b3-b88c-426122db08c7,Grundlagen,a
+ad88430a-bbdc-4535-8981-b30649d774fe,Monitoring,LF06
+ada13450-fb83-41c7-8f92-501ca154c0f1,"DHCPv6Grundlagen (Automatische Adresszuweisung, IPv6)",Netzwerktechnik
+ada561b7-7953-4972-bd57-1193ecb92269,Arbeitsraumgestaltung,Apokryphen
+adc7b571-67fe-4bda-bacb-21a7c3b6c8c3,Datenschutz-Folgenabschätzung,a
+adc98f14-d352-4443-b846-ea55c57d8830,Intrusion Detection System (IDS),Prüfungsvorbereitung AP1
+adef70ad-b70d-4ed9-9a50-8d0f1841a31e,Aggregation,PV2a
+ae7e0472-257a-4e71-8352-dc1718b1f976,Recht auf Unterweisung durch Ausbilder (§ 14 Abs. 1 BBiG),Wirtschafts und -Sozialkunde
+ae8e353c-b522-4a3d-82f4-70ab002ac637,Phasen des Softwareentwicklungsprozesses,Apokryphen
+aec598b1-4d6f-44ac-b939-2955a3c21413,Hostanzahl (2^(32-m) - 2),Netzwerktechnik
+af20281a-ea83-4379-8458-49041c7db180,"Sicherheitskonzept
+
+",Apokryphen
+af23ecf3-5db1-4bc8-9285-8afb56835845,Qualitätsmanagement,Apokryphen
+af4f9528-6cb4-4ca2-b3af-7649c83c388f,"Bäume, Hash-Tabellen",a
+af76e390-92ed-4459-9643-69b31226d1bb,HierarchischesModell,a
+af90b01c-6292-4c37-9461-2276464ae3b6,Jobenrichment,Apokryphen
+afa25b6b-125d-4dbe-8b72-6881d1a7ffd4,Colocation,Apokryphen
+afb01c93-1003-4c70-9662-1c4a7fff5441,Projektdurchführung,Apokryphen
+afe8085d-2d1d-49bf-a2c5-5dfbf545f33b,Daas,Apokryphen
+b01db28a-7814-4538-acfd-4cc7ec76db4f,Broadcast,Apokryphen
+b04874d4-04b3-4a56-863b-5719000bf650,KMU,Apokryphen
+b0547dc3-7dce-4721-ae93-dd3c994d54ed,BIOS,Prüfungsvorbereitung AP1
+b0b21491-791c-4d56-80b9-68a67b6fd721,Netzwerkknoten,Apokryphen
+b0bb674f-1f90-4620-b969-30ea3269e946,Entwicklung evaluieren,LF05
+b0d8b0b7-2a0d-4cab-8802-1eaa6fdd778d,Einwandbehandlung,Apokryphen
+b108bd4b-cbb7-4765-a271-ec2d83ef34ed,"Phasen der Teamentwicklung (Forming, Storming, Norming, Performing)",a
+b11b2966-dfcb-4849-ba07-4b056d25ee37,Ethik,PV2a
+b11d5136-8d17-4c6b-ac46-81df337d49f4,Vektorgrafik,Apokryphen
+b16d9502-f861-4e11-9c10-26d1df10a5c7,Domain Name Systems,Apokryphen
+b1913079-167f-472a-bf3d-587bb09305e8,Block-Storage,Apokryphen
+b1b0bffe-7c1e-4f7d-b94c-d87877b2451f,Modellierungssprachen,LF05
+b1b2c3a9-f07e-400f-8802-8bfe907aaa1f,Verschwiegenheit über Betriebsgeheimnisse (§ 13 BBiG),Wirtschafts und -Sozialkunde
+b210c7ad-ce98-4ed5-b257-c8eec85a9009,Saas,Apokryphen
+b21c822d-2a4b-4a4f-a0b5-20c72ab58169,Prüfungsanforderungen,Wirtschafts und -Sozialkunde
+b2393eb6-176c-45c9-8fdc-52c0fe074c31,Smart Devices,Apokryphen
+b28f0a89-0a9a-4483-bd20-f6bff6820610,Mitwirkung bei der Ausbildungsplanung (§ 13 BBiG),Wirtschafts und -Sozialkunde
+b29c4d37-258a-4623-aab9-dfdf17447c5c,"Bereitstellungsstrategien (Cloud, Container, Server)",a
+b2aa3deb-3677-4512-99cb-bf9b33dae2a3,Carrier,Apokryphen
+b2be8ac8-2915-48bd-ae71-14def9fdcdf8,Kartellgesetz,Apokryphen
+b2d769e6-fbb3-4520-9704-3765fb319937,IsolationLevels,a
+b2fb46b5-d466-495b-9afb-4cfc0a6b473f,Inhalte,Wirtschafts und -Sozialkunde
+b31f98ea-bb41-4838-92b1-57abd91eac03,deklaratives Programmierparadigma,Apokryphen
+b32210f4-8133-416f-8023-76f0d8f118b1,EVA-Prinzip,Apokryphen
+b37cb132-0951-4807-9745-26ee6be312f6,Gesetz gegen unlauteren Wettbewerb,PV2a
+b3df1143-db89-4815-b98b-75bd83080cac,Situationsgerechte Kommunikation,Prüfungsvorbereitung AP1
+b4070aee-52ed-427f-9d47-ae9db18553e4,"Ifconfig (Linux, Scope-ID, Schnittstellen)",LF08
+b409164a-fb00-4699-9e28-d7e859a54359,Daten vs. Informationen,LF05
+b40f8d89-38dd-4d76-9525-16c93302e8fe,Deklaration,raw
+b441a971-9a72-46ca-86e0-92c9e50631c1,Teststufen,Apokryphen
+b44d3f88-bca2-4f87-bb86-3cceef47dfc9,Leistungsabrechnung,Wirtschafts und -Sozialkunde
+b4574ec1-a8fb-48d8-9430-b77f9a5b6c7f,OHG,Wirtschafts und -Sozialkunde
+b47a6524-3bae-417c-9f8d-3b7b76551695,XML,LF08
+b4a02d5f-ea3d-4a0b-a25b-2692e477ca13,Errorhandling,LF08
+b4a67eef-e4a0-4974-aed0-06a4180e3d71,Arbeitsplatztypen,Apokryphen
+b53c719f-4486-403a-afda-0e7df74fb073,Abnahmeerklärung,Apokryphen
+b5527e27-d7da-4bf4-a8fc-d25e5adaff89,Berücksichtigung bestehender Systeme sowie Altsysteme,PV2a
+b5e3f52d-8231-4bdd-9213-e4a5b46e8d16,Ablauforganisation,Apokryphen
+b60b059b-dd38-41ac-8fbb-02e1d3fc40ff,Integrationstest,Apokryphen
+b653ba46-7cf3-443e-95b7-e3eb17b3b247,Abfallmanagement,Wirtschafts und -Sozialkunde
+b69530cd-a332-48c1-9fc4-65c2c9155250,Betroffenenrechte,a
+b6e70b0a-eb4d-413e-97de-bef3ee951a23,Curved Screen,Apokryphen
+b720b089-2fa2-47ef-a2c8-460933f0b538,Bitmap,Apokryphen
+b7acd508-17b1-4787-8c81-db964544ef8f,Agile Organisation,a
+b7ad41b2-8808-44b1-a22a-cc29b201939a,DQL Joins,a
+b7af33b1-e467-47b5-8b1f-52be49ff6e2c,Änderungen und Testprotokolle festhalten,a
+b7cbf3e8-02c9-4c43-876f-d69647151e28,Schadenszenarien,Apokryphen
+b8160882-cac5-49f1-9b0a-7e99c5d0378a,Aufbau,LF05
+b825ca76-09b7-44d6-a8ec-cb27dd58cf27,PC-Vergleich,Apokryphen
+b8319466-08d0-4f9c-8599-8c6ff5c04c07,Sicherheitsberichte,LF04
+b85d478f-001c-4b3e-b424-3f639fb51165,Multicast,Apokryphen
+b85f14e1-7389-4d07-a650-e092c65a68de,Speichermedien,a
+b8f6d7e0-b027-4bca-9439-394b2cd0db90,Gefährdungsbeurteilung,Wirtschafts und -Sozialkunde
+b909148a-b760-4879-b9e5-a670b13e4e94,aushangpflichtige Gesetze,Apokryphen
+b9734d65-5ea3-4d19-b806-9783a038bd49,Bedienungsanleitungen erstellen,a
+b976de9e-e884-441c-941f-bf03b0fc0989,einseitige Verzweigung,Apokryphen
+b9a8dae7-aaa9-4a51-9bf7-cc95a192ae64,Backup,LF05
+b9f6b677-1315-421a-9d70-218adf0fdfbe,IP,Prüfungsvorbereitung AP1
+ba28f681-ad9b-4c40-b8b6-fa1c3cad67bd,Testmethoden,a
+ba3efb86-fe99-4e0f-affd-11681a6c81a4,DVI,Apokryphen
+ba779adb-67d6-4f33-a0e4-02cb1cfb3ea7,Single Responsibility Principle (Ein-Verantwortungs-Prinzip),a
+bb313d79-9123-4abf-b82f-b50ae39ad7c1,Autorisierung,PV2a
+bb7b9035-4ab6-46c0-8689-731b55cd753f,Sekundärverkabelung,Apokryphen
+bbebe25e-3b2e-4efc-93f2-f292ef9e6ed9,Zeugnis ausstellen (§ 16 BBiG),Wirtschafts und -Sozialkunde
+bc2072f0-8854-487d-af22-363ee0349acd,Benutzer anmelden,LF03
+bc2aeb08-aac5-4af8-b016-ca65aae94550,Visual Basic,Apokryphen
+bc3a858e-188d-4f27-94c0-359b7d7ad78d,Testspezifikation,Apokryphen
+bc437346-7901-4316-9901-6cfc37614466,Ausbildungsordnung,Apokryphen
+bc994a0d-bc33-4dac-b78e-e8a1947d81ed,Recht auf Löschung,PV2a
+bcd79a43-f9e9-487f-b3de-06fca7b2b85d,Projektstruktur im Unternehmen präsentieren,a
+bcda7cc3-9cda-471f-b789-5bc52deec6d0,ACID,a
+bd599092-53fd-4b7b-9ebd-ad62ecf07d83,Energy Star,Apokryphen
+bd986b06-d68f-4ee1-9085-dc30078f585c,Mainboard Hauptplatine,LF01
+bdace232-2e44-44d5-9fd6-693c70c96e95,Medienzugriffsverfahren,Apokryphen
+bdb77d2c-3762-4e5c-99f2-8514245b29d3,Impactdrucker (Schlagdrucker),LF01
+bdb994eb-ec2f-4d67-bfb0-926aac39a8b0,Sicherheitstest,a
+bdd962c1-0757-4939-b997-29c4516025c8,Betriebsverfassungsgesetz (BetrVG),LF01_
+bddd1bf4-e418-4279-8e33-10be22a3d55d,Desktop,Apokryphen
+bde42366-e552-49e2-a144-3519d5d6b2e0,Kosten-Nutzen-Analyse,a
+bdf15bcb-0e10-4906-8809-e840e93e934d,"Konsistenz und Einfachheit, Einheitliches Layout, Reduktion auf Wesentliches",a
+be477267-83b0-4b41-a44e-bc77bd73ad2d,Zugriffskontrollen,Prüfungsvorbereitung AP1
+be7f1f36-e91e-4046-b776-77ea1804dd05,DDL,PV2a
+bec89a52-62d2-4e15-8843-560dce83a5f4,Datensatz,Apokryphen
+bed862cf-f6b9-4fe9-bd12-1ca0ad80e80c,Funktionstest,a
+beee4d30-ce4d-4f79-b02e-390366c5ea36,Refurbishing,Apokryphen
+bf29e304-d8ec-4837-b7bc-5f24ca730709,Parametrisierung,Apokryphen
+bf67d674-fcba-4a80-9db8-4c42f9449c34,Formfaktor,Apokryphen
+bf701bf3-e196-4b95-8fc5-2dcb3b83a6f8,Variable Kosten,Wirtschafts und -Sozialkunde
+bf761558-d356-4aec-8c35-bb21cfeb0c36,Convertible,Apokryphen
+bf77ec34-6e41-4c49-835a-5515100ebbed,"Netzwerksegmentierung (Effizienz, Sicherheit)",Netzwerktechnik
+bf7be417-cb5b-4c9f-896e-b98f1c3d79b5,Beschaffungsplanung,Apokryphen
+bfbfb8b0-543c-45c0-9004-d1c7e4d6c23f,Software anpassen,LF05
+bfd78692-71b6-485e-9ca3-faaf0b08d959,Marktsituation,Apokryphen
+bfeb7a80-d8e3-42f6-81ea-c6974909fc96,Netzteil,Apokryphen
+bff41c85-0453-4347-b754-e9cea5eef864,Query-Operatoren,PV2a
+c04f22af-0483-47e9-ae2e-af527abacfe0,Zuweisung,raw
+c0cd94ac-e03e-47c6-a051-6c47af94c3ca,UI mit Backend verbinden,a
+c127f96e-055a-4406-9ac2-97f8b5342ee0,Registrierte Ports,Apokryphen
+c12dac38-56aa-4005-813e-8ea58efd785d,Netzwerkkategorien,Apokryphen
+c15017a7-d712-4c8f-b183-031d1c194777,Sicherheitskennzeichen,Apokryphen
+c162e19c-d227-4072-8c4d-c54befdab964,"Python-Datenstrukturen (Listen, Dictionaries)",a
+c1b601e2-5a77-4bf5-b2b8-be4499688a43,ökonomische Prinzipien,Apokryphen
+c1d268cf-02e6-45d4-81e9-57d2c944a27b,Globalisierung,Apokryphen
+c20685ea-8cc0-4ceb-91e8-d3b73970eab4,Entitätsbeziehungsmodell,a
+c217e4bd-376b-4b98-9802-528f451f5de9,Systemintegration,LF01_
+c231101e-f7ff-4bb5-af16-b5220ae60966,Installation,LF06
+c251bcf9-5304-4c71-9e16-a2b204f1155f,Kundenbeziehungen nach betrieblicheen Grundsätzen,PV2a
+c2afbd9c-e0ca-4be4-9e84-fec22023a794,Whitebox-Test,Apokryphen
+c2e1c794-dbae-4064-b691-2edffac733d6,IPv6-DHCP,LF03
+c39d7078-0591-441b-ba4b-b816094fdc5c,Stellenbildung,Apokryphen
+c3bc6854-af42-4793-a4d2-bc66639cc2da,Webhosting,Apokryphen
+c3c60c28-876c-4e8e-802a-8406d9cbe858,V-Modell,Apokryphen
+c3dd26db-df31-4695-a6a5-559514a283e4,DDL Constraints,a
+c424345b-01c6-44db-b7c0-c4ab84ee1a74,Edge,Apokryphen
+c43a9aa5-cba3-4d81-8ae8-57617f343c07,Prüfungen,LF01_
+c49e6120-7417-4a4d-a79a-0bd9ab8bc668,Compliance,Apokryphen
+c5cdd1ef-ad67-4d44-8f60-dd9d54971f28,Datei,Apokryphen
+c5db9e2f-b390-4b0c-814b-a98ca6c95ede,Projektinstanzen,Apokryphen
+c5ed359e-498e-4220-8c41-48693d952e46,DHCP,Apokryphen
+c6078799-0c73-48d2-a16e-b8c903a11472,Kollaboration,Apokryphen
+c60f003d-ba86-41ba-a83d-5be5e9ecc3fa,(2) Sicherungsschicht,Prüfungsvorbereitung AP1
+c613add6-d196-4ec6-a039-e97e616ba6d5,Testarten,Apokryphen
+c631d363-fb1c-4234-b129-9a6d84b2c496,Virenschutz,Prüfungsvorbereitung AP1
+c67b6c16-74ac-46fc-a55b-c582e0b418d8,Netzabdeckung,Apokryphen
+c6961fdb-9586-4dac-9774-b97f7830e6c5,Intrusion-Detection-Systeme,a
+c6a4d69c-6f1e-4ea9-bdff-0c24dc3ac81b,Adressmanagement (IP-Sparsamkeit),Netzwerktechnik
+c6a984a4-7834-4680-ad38-50fc5ab48773,Repeater,Apokryphen
+c6dc1ef3-8cec-4ce3-9e6b-82ff4b679bcd,Product Backlog,Apokryphen
+c6ec88f7-4467-4fb7-8d66-f66144bbcc20,Offene Handelsgesellschaft (OHG),LF01_
+c70b89b3-07cf-42ad-b333-5f5ac0af110d,Visual Studio,Apokryphen
+c7c429bd-9e86-4799-8999-c50b1295bfd0,Teamarbeit,LF06
+c7f7466d-3a73-4341-b63e-3798bbb5638b,(4) Transportschicht,Prüfungsvorbereitung AP1
+c7faf046-7b60-4e0e-9328-f2544bf3223c,Adressformat,LF03
+c80fc9ae-02e2-4a66-91a4-1c6b6f6ef8f3,Dokumentenmodellierung,PV2a
+c834e5ae-db8b-49ce-ad15-2388b5b78c40,Identifikation von Trends unter Berücksichtigung von Such- sowie Innovationsfeldern,PV2a
+c8370c33-cc68-4864-9baf-382fc9788cbe,Digitalisierungseffekte,Wirtschafts und -Sozialkunde
+c8cb5189-ad2f-49ce-a355-91a7bf9e0c30,"Praktiken (Pair-Programming, Test-Driven Development (TDD), Häufige releases)",a
+c8d7b38f-7526-4674-b98a-e1f932abe7be,Adressbereiche (z. B. 2001:db8:1::#64),Netzwerktechnik
+c92a2b3b-5248-463f-8701-9c83c617ab44,ISO IEC 9126,Apokryphen
+c96fd063-325d-4c8e-8242-6cb9008d4d9b,Rechenschaftspflicht,PV2a
+c979cdb1-bbcc-4a71-a0de-c5c6be13558c,Relationales Modell,LF05
+c98f5606-fb2c-4462-aafe-7338ca3603b9,Model View Presenter (MVP),PV2a
+c99ab89d-30d0-4c8e-892d-8bb090931067,Konfliktlösung,LF06
+c9b6e332-eb25-4778-949c-80c2812eb5d5,Anforderungen,LF05
+c9c06fc4-b4a0-483e-a176-fd4ff1df5165,"Testebenen (Unit-Tests, Integrationstests, Systemtests)",a
+c9eb2fea-a62f-42bc-806c-55dde268227b,Rückwärtskalkulation,Apokryphen
+ca10dc1b-baea-403e-b556-8c9eda6e14e5,Arbeitsschutz,Apokryphen
+ca764762-d662-4d7d-affc-57f54d0b09b6,Interface Segregation Principle (Schnittstellentrennungs-Prinzip),a
+caf85db9-b36f-4e0d-a0f6-feed9678b072,Vertraulichkeit,Prüfungsvorbereitung AP1
+cb1271f5-f622-4df0-89e2-406a091fb21b,Stick-PC,Apokryphen
+cb180360-9e11-40d2-b58e-25c55b40773d,Double Word,Apokryphen
+cb3573ed-d202-4746-966a-4a58c8914f32,Anforderungsanalyse,Apokryphen
+cb42b295-d49e-4322-bf98-06bb4f195ffd,Verpackungsgesetz,Apokryphen
+cbd944ec-2a5b-41cc-8032-cd6b2dfc13a3,BYOD,Apokryphen
+cc2aea7b-9c95-4600-b2dd-75ac545163b8,"Unit-, Integrations- und Systemtests",a
+cc61cded-c409-4c4b-8549-6f628853b478,"Ablauf (Backlog erstellen, Sprint planen, Daily Scrum, Sprint Review, Retrospective",a
+cc6eb18c-b707-435a-a3ea-230abda00f62,Auszubildende,LF01_
+cc86ec41-cccb-4c42-8bce-d848fa713005,UTF-16,Apokryphen
+cc8ff007-3c5e-45be-a5cd-fcbd2bdd1d76,RDS,Apokryphen
+cca197ce-b5a7-4596-b4d7-5151b696f83c,Ausfallsicherung,Apokryphen
+ccb37adc-369a-4022-a26c-1c4cb5b5196b,Rechtsformen,Apokryphen
+cd1877b4-763a-4f4a-baef-b85c370f5c01,Marketing & Verkaufsförderung,LF01
+cd20709c-4cc1-42cc-869a-7497856388dd,Fehlerbehebung,a
+cd3262f3-19f9-4a2d-8e38-d646bf9f4c8f,"Artefakte (das Increment, der Product- und Sprintbacklog)",a
+cd34299d-1e96-4fec-9852-40bbd6968445,Konfiguration,LF06
+cd35f724-4fb5-47dc-9f3e-5a74091edba7,wirtschaftliche Verflechtungen,Apokryphen
+cd432593-f259-4e15-88e2-a90c5db492b8,Adressverwaltung (großer Adressraum),Netzwerktechnik
+cd95d7e3-564d-40c6-9f24-68485b93a5d7,Use-Case-Diagramm,a
+cddf7806-10a3-45a8-ae38-9d31a797c873,Auftragsbearbeitung & Projektmanagement,LF01
+ce7e5d69-c821-4d71-a069-446be584ef9c,"GatewayKonfiguration (IPv6-Adresse, DHCPv6)",Netzwerktechnik
+ce8911a1-b241-4ede-aecb-293db82a8150,boolesche Operatoren,Apokryphen
+cf029a91-5cb1-4d81-bfbf-d18b014cbf8b,DCL Data Control Language,a
+cf6194e9-7887-4866-ae40-2763cd494089,Singleton-Pattern,a
+cf9070de-99cd-44eb-a9d8-052cd83dc74a,Datenredundanz,Apokryphen
+cfb95113-4d37-4612-a01e-107e514eba3c,Ausbildender,Apokryphen
+cfbcbee8-1d6d-48ed-a556-b684d15531a4,Netzwerk-Medien,Apokryphen
+cfeefd6c-ad37-4f27-9462-c3df361b51d2,Projektablaufplan,Apokryphen
+cfef8ecd-1795-4f96-8344-4e467789e1e8,Hypervisors,a
+cff60aff-fb39-440e-99db-a4dfd3e461c7,Anwendungen,a
+d0045ae3-63f5-4ed3-8026-3f2a824b9e24,Rekursive Algorithmen,a
+d009f7ac-394b-4db3-b985-7d670f8e8d4a,"Netzwerkplanung (LAN, WAN, ISP)",Netzwerktechnik
+d0231b0c-be53-4909-9da3-05cd8126a639,Divisionsorganisation,a
+d032b7e7-0b8c-4622-9a07-05c853613091,Feedback (Nutzer einbindenm Rückmeldungen sammeln),a
+d03ff46c-9f48-4b2f-ba53-0cc6719506f4,(5) Sitzungsschicht,Prüfungsvorbereitung AP1
+d0555b85-27cc-4ea0-8ba9-03f944cd2e3f,Recht auf Einschränkung der Bearbeitung,PV2a
+d0ef85ac-a17c-41ac-aa56-6c5cf745dc0a,Vertragsabschluss,Apokryphen
+d10a845b-2e6e-43e5-96e9-c44b75fe3306,Virtual Desktop Infrastructure,Apokryphen
+d123a8e3-6c72-4a3d-b057-c3e6dc250843,Recht auf Auskunft,PV2a
+d14eef24-88d7-420c-857d-b3c4cd128996,Laptops,Apokryphen
+d15ca823-d130-485d-9eb6-ecdefb2c04a0,Kundenkommunikation generell,Prüfungsvorbereitung AP1
+d1b328e6-94a1-4f8d-a16a-2197cb9ebc52,Netzwerkdatenbank,Apokryphen
+d216765b-aa75-400f-9d64-bebb44bd66d3,Rollen,a
+d26ab35a-2804-43a9-96b7-809c41902fe0,Transaction Control Language,Apokryphen
+d27f1b65-b66c-48b5-99c7-f772e14d0a1e,Regelkonformität,PV2a

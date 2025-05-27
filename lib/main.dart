@@ -12,6 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import '_globals/widgets/theme_toggler.dart';
 import 'firebase_options.dart';
+import 'foldermanagement/folder_management.dart';
+import 'level_screen/new_Try1/LevelScreen_v1.dart';
 import 'level_screen/new_levelScreen.dart';
 import 'level_screen/level_screen.dart';
 
@@ -68,9 +70,11 @@ class MyApp extends StatelessWidget {
             // QuizScreen(selected_level_pk: "188de553-db8e-499e-8bf5-049884b88a05"),
             // const LevelScreen()
             // const NewLevelScreen(unlocked: ["c08583af-357b-44e5-9173-4a1e1d3f9d7d"],)
-            // const StartScreen()
+            const StartScreen()
+            // FolderScreen()
+            // const LevelScreen_v1(levelPks: ["c08583af-357b-44e5-9173-4a1e1d3f9d7d"],)
             // const PayScreen()
-            SubscriptionPage()
+            // SubscriptionPage()
           );
         },
       ),

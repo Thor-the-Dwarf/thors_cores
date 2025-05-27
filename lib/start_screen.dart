@@ -4,6 +4,7 @@ import 'package:neon_thors_cores/_globals/widgets/my_background.dart';
 import 'package:neon_thors_cores/_globals/widgets/theme_controller.dart';
 import 'package:neon_thors_cores/level_screen/level_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -82,25 +83,62 @@ class StartScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     if (_keyController.text == keyData) {
+                        //       Navigator.push(
+                        //         context,
+                        //         MaterialPageRoute(
+                        //           builder:
+                        //               (context) =>
+                        //               LevelScreen(),
+                        //         ),
+                        //       );
+                        //     } else {
+                        //       ScaffoldMessenger.of(context).showSnackBar(
+                        //         const SnackBar(
+                        //             content: Text("Falscher Schlüssel!")),
+                        //       );
+                        //     }
+                        //   },
+                        //   child: const Text("Betreten"),
+                        // ),
+
                         ElevatedButton(
-                          onPressed: () {
-                            if (_keyController.text == keyData) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder:
-                                      (context) =>
-                                      LevelScreen(),
-                                ),
-                              );
-                            } else {
+                          onPressed: () async {
+                            final subscriptionId = _keyController.text.trim();
+                            if (subscriptionId.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text("Falscher Schlüssel!")),
+                                const SnackBar(content: Text('Bitte geben Sie eine Subscription ID ein!')),
+                              );
+                              return;
+                            }
+
+                            try {
+                              final supabase = Supabase.instance.client; // Supabase-Client initialisieren
+                              final response = await supabase
+                                  .from('access_keys')
+                                  .select()
+                                  .eq('paypal_subscription_id', subscriptionId)
+                                  .maybeSingle();
+
+                              if (response != null && DateTime.parse(response['valid_until']).isAfter(DateTime.now())) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LevelScreen()),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Ungültige oder abgelaufene Subscription ID!')),
+                                );
+                              }
+                            } catch (error) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Fehler bei der Überprüfung!')),
                               );
                             }
                           },
-                          child: const Text("Betreten"),
+                          child: const Text('Betreten'),
                         ),
                       ],
                     ),

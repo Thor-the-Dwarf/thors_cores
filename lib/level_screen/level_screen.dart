@@ -360,7 +360,8 @@ class _LevelScreenState extends State<LevelScreen>
                       }
                     },
                     child: Icon(
-                      node.hasCores ? Icons.quiz_outlined : Icons.folder,
+                      node.hasCores ? Icons.blur_circular
+                          : Icons.folder,
                       color: node.hasCores ? Colors.yellow : Colors.lightBlue,
                     ),
                   ),

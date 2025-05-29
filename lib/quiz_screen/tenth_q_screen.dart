@@ -95,9 +95,8 @@ class _ArchivemendScreenState extends State<ArchivemendScreen> {
                 const Spacer(),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => QuizScreen(selected_level_pk: widget.selected_level_pk,)),
-                    );
+                    // Zurück zum QuizScreen, anstatt ein neues Quiz zu starten
+                    Navigator.pop(context);
                   },
                   child: Text(btn_text),
                 ),

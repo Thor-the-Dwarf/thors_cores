@@ -1,0 +1,95 @@
+@startuml
+entity "user" {
+  * user_id : uuid pk
+  --
+  email : text
+  username : text
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity "payments" {
+  * payer_id : uuid pk
+  --
+  * paypal_payment_id : uuid
+  --
+  payer_email : text
+  payer_status : text
+  profile_status : text
+  product_id : text
+  custom : text // Enthält user_id aus IPN
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity "room" {
+  * product_id : text pk
+  --
+  unlocked_levels : json String Array
+  visible_levels : json String Array
+}
+
+entity "acceskey" {
+  * key_id : uuid autoincrement
+  --
+  paypal_payment_id : uuid FK References payments.paypal_payment_id
+  product_id : text FK References room.product_id
+}
+
+entity "player" {
+  * id : uuid FK References acceskey.key_id
+  --
+  essences : jsonb
+  /'
+  {
+    "richtige_essenzen": [
+      {
+        "essence_fk": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+        "richtige_fragen": [
+          "a1b2c3d4-e5f6-47g8-h9i0-j1k2l3m4n5o6",
+          "123e4567-e89b-12d3-a456-426614174000"
+        ],
+        "falsche_fragen": [
+          "550e8400-e29b-41d4-a716-446655440000",
+          "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+        ]
+      }
+    ],
+    "falsche_essenzen": [
+      {
+        "essence_fk": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+        "richtige_fragen": [
+          "a1b2c3d4-e5f6-47g8-h9i0-j1k2l3m4n5o6",
+          "123e4567-e89b-12d3-a456-426614174000"
+        ],
+        "falsche_fragen": [
+          "550e8400-e29b-41d4-a716-446655440000",
+          "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+        ]
+      }
+    ]
+  }
+  '/
+}
+
+' Fremdschlüssel-Beziehungen
+acceskey ||--o{ payments : paypal_payment_id
+player ||--o{ acceskey : key_id
+
+' product_id-Beziehungen
+payments ||--o{ room : product_id
+payments ||--o{ acceskey : product_id
+room ||--o{ acceskey : product_id
+
+' Logische Beziehung (kein direkter FK)
+user -[norank].. payments : [1] Setze user_id in custom
+'payments -[norank].. user : [2] Abgleich custom mit user_id
+user -[norank].. acceskey : [3] Indirekte Verknüpfung über payments
+
+note right of payments
+  Das custom-Feld aus PayPal IPN enthält die user_id,
+  die mit user.user_id abgeglichen wird, um Zahlungen
+  einem Benutzer zuzuordnen.
+end note
+
+@enduml

@@ -23,7 +23,10 @@ class StartScreen extends StatelessWidget {
                 themeController.themeMode == ThemeMode.dark
                     ? Icons.dark_mode
                     : Icons.light_mode,
-                color: Theme.of(context).iconTheme.color,
+                color: Theme
+                    .of(context)
+                    .iconTheme
+                    .color,
               ),
               onPressed: () {
                 themeController.toggleTheme();
@@ -42,8 +45,10 @@ class StartScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16),
                     ),
-                    Text("Bald kann man die Web-App nur noch mit diesem oder ähnlichen Schlüsseln betreten."),
-                    Text("Dieser Alpha-Schlüssel wird vstl. bis Juni Zutritt verschaffen."),
+                    Text(
+                        "Bald kann man die Web-App nur noch mit diesem oder ähnlichen Schlüsseln betreten."),
+                    Text(
+                        "Dieser Alpha-Schlüssel wird vstl. bis Juni Zutritt verschaffen."),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -109,32 +114,40 @@ class StartScreen extends StatelessWidget {
                             final subscriptionId = _keyController.text.trim();
                             if (subscriptionId.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Bitte geben Sie eine Subscription ID ein!')),
+                                const SnackBar(content: Text(
+                                    'Bitte geben Sie eine Subscription ID ein!')),
                               );
                               return;
                             }
 
                             try {
-                              final supabase = Supabase.instance.client; // Supabase-Client initialisieren
+                              final supabase = Supabase.instance
+                                  .client; // Supabase-Client initialisieren
                               final response = await supabase
                                   .from('access_keys')
                                   .select()
                                   .eq('paypal_subscription_id', subscriptionId)
                                   .maybeSingle();
 
-                              if (response != null && DateTime.parse(response['valid_until']).isAfter(DateTime.now())) {
+                              if (response != null && DateTime.parse(
+                                  response['valid_until']).isAfter(
+                                  DateTime.now())) {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => LevelScreen()),
+                                  MaterialPageRoute(
+                                      builder: (context) => LevelScreen()),
                                 );
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Ungültige oder abgelaufene Subscription ID!')),
+                                  const SnackBar(content: Text(
+                                      'Ungültige oder abgelaufene Subscription ID!')),
                                 );
                               }
                             } catch (error) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Fehler bei der Überprüfung!')),
+                                const SnackBar(
+                                    content: Text(
+                                        'Fehler bei der Überprüfung!')),
                               );
                             }
                           },
@@ -142,11 +155,21 @@ class StartScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    ElevatedButton(
+                        onPressed: () =>
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>
+                                  LevelScreen()),
+                            ),
+                        child: Text("ausprobieren"))
                   ],
                 ),
               ),
-            ],
-          ),
+            ]
+            ,
+          )
+          ,
         );
       },
     );

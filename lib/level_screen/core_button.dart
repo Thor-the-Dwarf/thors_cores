@@ -3,15 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
 
-class HaloSphere extends StatelessWidget {
-  String text;
-  Color color;
+import 'package:flutter/material.dart';
+import '../_globals/getColorForPercentage.dart'; // Annahme: Diese Funktion existiert
 
-  HaloSphere(
-      {super.key,
-        required this.text,
-        required this.color
+import 'package:flutter/material.dart';
+import '../_globals/getColorForPercentage.dart'; // Annahme: Diese Funktion existiert
+
+class HaloSphere extends StatefulWidget {
+  final String text;
+  double percentage; // Fortschritt in Prozent
+
+  HaloSphere({
+    super.key,
+    required this.text,
+    required this.percentage,
+  });
+
+  @override
+  _HaloSphereState createState() => _HaloSphereState();
+}
+
+class _HaloSphereState extends State<HaloSphere> {
+  late double _percentage;
+
+  @override
+  void initState() {
+    super.initState();
+    _percentage = widget.percentage; // Initialer Wert
+  }
+
+  @override
+  void didUpdateWidget(HaloSphere oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.percentage != widget.percentage) {
+      setState(() {
+        _percentage = widget.percentage; // Aktualisiere den Fortschritt
       });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +49,13 @@ class HaloSphere extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            // padding: EdgeInsets.all(80),
-            margin: EdgeInsets.all(50),
+            margin: const EdgeInsets.all(50),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Theme.of(context).cardColor.withOpacity(0.93),
               boxShadow: [
                 BoxShadow(
-                  color: color,
+                  color: getColorForPercentage(_percentage), // Farbe basierend auf Fortschritt
                   blurRadius: 125,
                   spreadRadius: 5,
                 ),
@@ -36,7 +64,7 @@ class HaloSphere extends StatelessWidget {
           ),
           Center(
             child: Text(
-              text,
+              widget.text,
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -76,9 +104,10 @@ class MyHomePage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(child: HaloSphere(text: 'ist', color: Colors.red,)),
-              Expanded(child: HaloSphere(text: 'ist', color: Colors.red,)),
-              Expanded(child: HaloSphere(text: 'ist', color: Colors.red,)),
+              Expanded(child: HaloSphere(text: 'ist', percentage: 10)),
+              Expanded(child: HaloSphere(text: 'ist', percentage: 20)),
+              Expanded(child: HaloSphere(text: 'ist', percentage: 30)),
+              Expanded(child: HaloSphere(text: 'ist', percentage: 40)),
             ],
           ),
         ),

@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
-
 import '../_globals/getColorForPercentage.dart';
 
-
-
-
-
-import 'package:flutter/material.dart';
-import '../_globals/getColorForPercentage.dart'; // Annahme: Diese Funktion existiert
-
-class ClusterButton extends StatefulWidget {
+class CoreClusterIcon extends StatefulWidget {
   double percentage; // Fortschritt in Prozent
 
-  ClusterButton({
+  CoreClusterIcon({
     super.key,
     required this.percentage,
   });
 
   @override
-  _ClusterButtonState createState() => _ClusterButtonState();
+  _CoreClusterIconState createState() => _CoreClusterIconState();
 }
 
-class _ClusterButtonState extends State<ClusterButton> {
+class _CoreClusterIconState extends State<CoreClusterIcon> {
   late double _percentage;
 
   @override
@@ -31,7 +23,7 @@ class _ClusterButtonState extends State<ClusterButton> {
   }
 
   @override
-  void didUpdateWidget(ClusterButton oldWidget) {
+  void didUpdateWidget(CoreClusterIcon oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.percentage != widget.percentage) {
       setState(() {
@@ -105,7 +97,7 @@ class MyHomePage extends StatelessWidget {
                 final percentage = index * 5.0;
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
-                  child: ClusterButton(percentage: percentage),
+                  child: CoreClusterIcon(percentage: percentage),
                 );
               },
             ),

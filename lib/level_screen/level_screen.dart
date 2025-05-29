@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:neon_thors_cores/level_screen/core_button.dart';
+import 'package:neon_thors_cores/level_screen/core_icon.dart';
 import 'package:neon_thors_cores/level_screen/tree_node.dart';
 import 'package:neon_thors_cores/pay_screen.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../_globals/widgets/my_background.dart';
 import '../_globals/widgets/theme_controller.dart';
 import '../quiz_screen/quiz__screen.dart';
-import 'cluster_button.dart';
+import 'core_cluster_icon.dart';
 
 class LevelScreen extends StatefulWidget {
   const LevelScreen({super.key});
@@ -220,6 +220,22 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
     });
   }
 
+  String _getLevelName(String levelId, List<TreeNode> tree) {
+    TreeNode? findNode(String id, List<TreeNode> nodes) {
+      for (var node in nodes) {
+        if (node.id == id) return node;
+        if (node.children.isNotEmpty) {
+          final found = findNode(id, node.children);
+          if (found != null) return found;
+        }
+      }
+      return null;
+    }
+
+    final node = findNode(levelId, tree);
+    return node?.name ?? 'Unbekanntes Level';
+  }
+
   List<Map<String, dynamic>> _collectAllCores(String levelId, List<TreeNode> tree) {
     List<Map<String, dynamic>> allCores = [];
 
@@ -323,7 +339,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                     onTap: () {
                       _toggleCores(node.id, tree);
                     },
-                    child: ClusterButton(
+                    child: CoreClusterIcon(
                       percentage: nodeProgressMap[node.id] ?? 0.0,
                     ),
                   ),
@@ -447,14 +463,11 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                           children: [
                             Icon(
                               Icons.play_arrow,
-                              color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.5),
-                              size: 24.0,
                             ),
                             const SizedBox(width: 8.0),
                             Text(
                               'Quiz starten',
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.5),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

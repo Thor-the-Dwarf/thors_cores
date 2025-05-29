@@ -60,16 +60,11 @@ class MyApp extends StatelessWidget {
             darkTheme: ThemeData.dark(), // Dark Mode Theme
             themeMode: themeController.themeMode, // Dynamisch vom Controller
             home:
-
+            // const LevelScreen()
+            const StartScreen()
             // const ArchivemendScreen(),
             // QuizScreen(selected_level_pk: "188de553-db8e-499e-8bf5-049884b88a05"),
-            const LevelScreen()
-            // const NewLevelScreen(unlocked: ["c08583af-357b-44e5-9173-4a1e1d3f9d7d"],)
-            // const StartScreen()
-            // FolderScreen()
-            // const LevelScreen_v1(levelPks: ["c08583af-357b-44e5-9173-4a1e1d3f9d7d"],)
-            // const PayScreen()
-            // SubscriptionPage()
+
           );
         },
       ),

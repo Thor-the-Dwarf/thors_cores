@@ -18,6 +18,7 @@ class LevelScreen extends StatefulWidget {
 }
 
 class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin {
+
   bool isLoading = true;
   List<TreeNode> tree = [];
   late final SupabaseClient supabase;
@@ -340,7 +341,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                       _toggleCores(node.id, tree);
                     },
                     child: CoreClusterIcon(
-                      percentage: nodeProgressMap[node.id] ?? 0.0,
+                      progress: nodeProgressMap[node.id] ?? 0.0,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -429,7 +430,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                             child: Center(
                               child: HaloSphere(
                                 text: core['name'] as String,
-                                percentage: Random().nextDouble() * 100,
+                                progress: Random().nextDouble() * 100,
                               ),
                             ),
                           ),

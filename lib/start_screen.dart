@@ -6,7 +6,9 @@ import 'package:neon_thors_cores/level_screen/level_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:math'; // Für zufällige Benutzer-ID
+import 'dart:math';
+
+import 'level_screen/player/local_storage_player.dart'; // Für zufällige Benutzer-ID
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -177,11 +179,8 @@ class StartScreen extends StatelessWidget {
                       ElevatedButton(
                         onPressed: saveProgress
                             ? () async {
-                          // Speichere den Fortschritt
-                          final prefs = await SharedPreferences.getInstance();
-                          await prefs.setBool('save_progress', true);
-                          await prefs.setString('user_id', userId);
-                          Navigator.of(context).pop(); // Schließe das PopUp
+                          await LocalStoragePlayer().load(key: keyData); // Erstellt die Singleton-Instanz
+                          Navigator.of(context).pop();
                           Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
-
-
-import 'package:flutter/material.dart';
 import '../_globals/getColorForPercentage.dart'; // Annahme: Diese Funktion existiert
 
-import 'package:flutter/material.dart';
-import '../_globals/getColorForPercentage.dart'; // Annahme: Diese Funktion existiert
 
 class HaloSphere extends StatefulWidget {
   final String text;
-  double percentage; // Fortschritt in Prozent
+  double progress; // Fortschritt in Prozent
 
   HaloSphere({
     super.key,
     required this.text,
-    required this.percentage,
+    required this.progress,
   });
 
   @override
@@ -29,15 +22,15 @@ class _HaloSphereState extends State<HaloSphere> {
   @override
   void initState() {
     super.initState();
-    _percentage = widget.percentage; // Initialer Wert
+    _percentage = widget.progress; // Initialer Wert
   }
 
   @override
   void didUpdateWidget(HaloSphere oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.percentage != widget.percentage) {
+    if (oldWidget.progress != widget.progress) {
       setState(() {
-        _percentage = widget.percentage; // Aktualisiere den Fortschritt
+        _percentage = widget.progress; // Aktualisiere den Fortschritt
       });
     }
   }
@@ -104,10 +97,10 @@ class MyHomePage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(child: HaloSphere(text: 'ist', percentage: 10)),
-              Expanded(child: HaloSphere(text: 'ist', percentage: 20)),
-              Expanded(child: HaloSphere(text: 'ist', percentage: 30)),
-              Expanded(child: HaloSphere(text: 'ist', percentage: 40)),
+              Expanded(child: HaloSphere(text: 'ist', progress: 10)),
+              Expanded(child: HaloSphere(text: 'ist', progress: 20)),
+              Expanded(child: HaloSphere(text: 'ist', progress: 30)),
+              Expanded(child: HaloSphere(text: 'ist', progress: 40)),
             ],
           ),
         ),

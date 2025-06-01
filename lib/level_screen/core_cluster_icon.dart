@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../_globals/getColorForPercentage.dart';
 
 class CoreClusterIcon extends StatefulWidget {
-  double percentage; // Fortschritt in Prozent
+  double progress; // Fortschritt in Prozent
 
   CoreClusterIcon({
     super.key,
-    required this.percentage,
+    required this.progress,
   });
 
   @override
@@ -19,15 +19,15 @@ class _CoreClusterIconState extends State<CoreClusterIcon> {
   @override
   void initState() {
     super.initState();
-    _percentage = widget.percentage; // Initialer Wert
+    _percentage = widget.progress; // Initialer Wert
   }
 
   @override
   void didUpdateWidget(CoreClusterIcon oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.percentage != widget.percentage) {
+    if (oldWidget.progress != widget.progress) {
       setState(() {
-        _percentage = widget.percentage; // Aktualisiere den Fortschritt
+        _percentage = widget.progress; // Aktualisiere den Fortschritt
       });
     }
   }
@@ -97,7 +97,7 @@ class MyHomePage extends StatelessWidget {
                 final percentage = index * 5.0;
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
-                  child: CoreClusterIcon(percentage: percentage),
+                  child: CoreClusterIcon(progress: percentage),
                 );
               },
             ),

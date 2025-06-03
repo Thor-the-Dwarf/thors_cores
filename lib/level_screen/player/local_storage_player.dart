@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:html' show window;
-import 'dart:math';
 import 'abstract_player_and_progress.dart';
 
 class LocalStoragePlayer extends Player {

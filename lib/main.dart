@@ -10,7 +10,9 @@ import '_globals/debug_prints.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'firebase_options.dart';
+import 'level_screen/level_manager.dart';
 import 'level_screen/level_screen.dart';
+import 'level_screen/player/local_storage_player.dart';
 
 void debug(String text) {
   if (false || DEBUG_EVERYTHING) printRed("[main] $text");
@@ -51,8 +53,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: ThemeController(), // Singleton-Instanz
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SupabaseManager()),
+        ChangeNotifierProvider(create: (_) => ThemeController()),
+      ],
       child: Consumer<ThemeController>(
         builder: (context, themeController, child) {
           return MaterialApp(

@@ -16,37 +16,27 @@ class LocalStoragePlayer extends Player {
   }
 
 
-    // Generiert einen UUID-ähnlichen Schlüssel
-  static String _generateCustomUuid() {
-    const String chars = '0123456789abcdef';
-    final Random random = Random();
-    String generateSegment(int length) {
-      return String.fromCharCodes(
-        Iterable.generate(
-          length,
-              (_) => chars.codeUnitAt(random.nextInt(chars.length)),
-        ),
-      );
-    }
-    return '${generateSegment(8)}-${generateSegment(4)}-${generateSegment(4)}-${generateSegment(4)}-${generateSegment(12)}';
-  }
-
   @override
   Future<void> save() async {
+    if (key == null || key.isEmpty) return; // wenn der user "nicht speichern" gewählt hat
     final jsonData = cores.map((core) => core.toJson()).toList();
     window.localStorage[key] = jsonEncode(jsonData);
   }
 
   @override
-  Future<void> load({required key}) async {
+  Future<void> load({required String? key}) async {
+    if (key == null || key.isEmpty) return; // wenn der user "nicht speichern" gewählt hat
+
     this.key = key;
     final jsonString = window.localStorage[key];
-    if (jsonString == null || jsonString.isEmpty) {
-      this.cores = [];
-    }
-    else{
+
+    try {
+      if (jsonString == null) throw Exception('Kein Eintrag im localStorage');
       final jsonData = jsonDecode(jsonString) as List;
-      this.cores =  jsonData.map((item) => Core.fromJson(item as Map<String, dynamic>)).toList();
+      this.cores = jsonData.map((item) => Core.fromJson(item as Map<String, dynamic>)).toList();
+    } catch (e) {
+      this.cores = [];
+      window.localStorage[key] = jsonEncode([]); // Leeren JSON-Array speichern
     }
   }
 }

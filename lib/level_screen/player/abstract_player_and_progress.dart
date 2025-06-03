@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+
+import '../level_manager.dart';
+import '../tree_node.dart';
 
 abstract class Player extends ChangeNotifier {
   bool _isLoaded = false;
-  String key = "thors_cores";
+  String key = "";
   List<Core> cores = [];
+  Map<String, double> experience = {};
 
   bool get isLoaded => _isLoaded;
 
@@ -17,17 +22,96 @@ abstract class Player extends ChangeNotifier {
 
   // Lädt eine Liste von Core-Objekten
   Future<void> load({required String key});
+
+  Future<void> loadExpirience({required TreeNode treeNode}) async {
+    final coreData = SupabaseManager().coreData;
+
+    // Erstelle eine Map von Core-ID zu Player.Core für schnellen Zugriff
+    final coreMap = Map<String, Core>.fromEntries(
+      cores.map((core) => MapEntry(core.id, core)),
+    );
+
+    // Rekursive Funktion zur Berechnung des Level-Fortschritts
+    Future<double> calculateLevelProgress(TreeNode node) async {
+      List<double> progresses = [];
+
+      // 1. Core-Fortschritt berechnen, wenn der Node Cores hat
+      if (node.hasCores) {
+        final coresForLevel = coreData[node.id] as List<dynamic>? ?? [];
+        for (var treeCore in coresForLevel) {
+          final coreId = treeCore['id'] as String; // Core-ID aus coreData
+          final playerCore =
+              coreMap[coreId] ??
+              Core(
+                id: coreId,
+                richtigeEssenzen: [],
+                falscheEssenzen: [],
+              ); // Fallback
+
+          // Hole essences_count aus coreData
+          final essencesCount = treeCore['essences_count'] as int? ?? 0;
+          final richtigeEssenzenCount =
+              playerCore.richtigeEssenzen?.length ?? 0;
+
+          // Berechne Fortschritt gemäß der Formel
+          final progress =
+              essencesCount == 0
+                  ? 0.0
+                  : (essencesCount / 100.0) * richtigeEssenzenCount;
+
+          playerCore.progress = progress;
+          progresses.add(progress);
+
+          // Aktualisiere coreMap, falls ein neues Core erstellt wurde
+          coreMap[coreId] = playerCore;
+        }
+      }
+
+      // 2. Sublevel-Fortschritt berechnen
+      for (var child in node.children) {
+        final childProgress = await calculateLevelProgress(child);
+        progresses.add(childProgress);
+      }
+
+      // 3. Aggregiere Fortschritte (Durchschnitt)
+      final levelProgress =
+          progresses.isNotEmpty
+              ? progresses.reduce((a, b) => a + b) / progresses.length
+              : 0.0;
+
+      // Speichere Level-Fortschritt
+      experience[node.id] = levelProgress;
+      return levelProgress;
+    }
+
+    // Berechne Fortschritt für den gegebenen TreeNode
+    await calculateLevelProgress(treeNode);
+
+    // Aktualisiere cores-Liste
+    cores = coreMap.values.toList();
+
+    // Speichere aktualisierte Cores
+    await save();
+    notifyListeners(); // Benachrichtige UI über Änderungen
+  }
 }
 
 class Core {
+  late String id; // Hinzugefügt
+  late double progress;
   List<Essence>? richtigeEssenzen;
   List<Essence>? falscheEssenzen;
 
-  Core({this.richtigeEssenzen, this.falscheEssenzen});
+  Core({
+    required this.id,
+    this.progress = 0.0,
+    this.richtigeEssenzen,
+    this.falscheEssenzen,
+  });
 
-  // Interne Methode zum Parsen des JSON für ein Core-Objekt
   static Core fromJson(Map<String, dynamic> json) {
     return Core(
+      id: json['id'], // Hinzugefügt
       richtigeEssenzen:
           (json['richtige_essenzen'] as List?)
               ?.map((e) => Essence.fromJson(e))
@@ -41,6 +125,7 @@ class Core {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id, // Hinzugefügt
       'richtige_essenzen': richtigeEssenzen?.map((e) => e.toJson()).toList(),
       'falsche_essenzen': falscheEssenzen?.map((e) => e.toJson()).toList(),
     };

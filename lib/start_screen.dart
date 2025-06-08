@@ -5,7 +5,6 @@ import 'package:neon_thors_cores/_globals/widgets/theme_controller.dart';
 import 'package:neon_thors_cores/level_screen/level_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math';
 import 'level_screen/player/local_storage_player.dart';
 
@@ -24,16 +23,16 @@ class StartScreen extends StatelessWidget {
         return String.fromCharCodes(
           Iterable.generate(
             length,
-                (_) => chars.codeUnitAt(random.nextInt(chars.length)),
+            (_) => chars.codeUnitAt(random.nextInt(chars.length)),
           ),
         );
       }
+
       return '${generateSegment(8)}-${generateSegment(4)}-${generateSegment(4)}-${generateSegment(4)}-${generateSegment(12)}';
     }
 
     Future<void> _showKeyPopup(BuildContext context) async {
       String lokalStorageKey = generateCustomUuid();
-
 
       showDialog(
         context: context,
@@ -71,12 +70,21 @@ class StartScreen extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                         IconButton(
-                          icon: const Icon(Icons.copy, size: 20, color: Colors.white70),
+                          icon: const Icon(
+                            Icons.copy,
+                            size: 20,
+                            color: Colors.white70,
+                          ),
                           onPressed: () {
-                            Clipboard.setData(ClipboardData(text: lokalStorageKey));
+                            Clipboard.setData(
+                              ClipboardData(text: lokalStorageKey),
+                            );
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text("Schlüssel kopiert!", style: TextStyle(color: Colors.white)),
+                                content: Text(
+                                  "Schlüssel kopiert!",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 backgroundColor: Colors.grey,
                               ),
                             );
@@ -106,7 +114,10 @@ class StartScreen extends StatelessWidget {
                         const Flexible(
                           child: Text(
                             'Fortschritte lokal speichern? (Wenn du das Häkchen setzt, wird dein Fortschritt mit deinem Schlüssel auf deinem Gerät gesichert.)',
-                            style: TextStyle(fontSize: 14, color: Colors.white70),
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white70,
+                            ),
                           ),
                         ),
                       ],
@@ -118,32 +129,47 @@ class StartScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                        onPressed: !saveProgress
-                            ? () {
-                          Navigator.of(context).pop();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => LevelScreen()),
-                          );
-                        }
-                            : null,
+                        onPressed:
+                            !saveProgress
+                                ? () {
+                                  Navigator.of(context).pop();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (context) => ChangeNotifierProvider<
+                                            LocalStoragePlayer
+                                          >(
+                                            create: (_) => LocalStoragePlayer(),
+                                            child: LevelScreen(),
+                                          ),
+                                    ),
+                                  );
+                                }
+                                : null,
                         child: const Text('Ohne Speichern fortfahren'),
                       ),
                       ElevatedButton(
-                        onPressed: saveProgress
-                            ? () async {
-                          Navigator.of(context).pop();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Provider<LocalStoragePlayer>(
-                                create: (_) => LocalStoragePlayer()..load(key: keyData),
-                                child: LevelScreen(),
-                              ),
-                            ),
-                          );
-                        }
-                            : null,
+                        onPressed:
+                            saveProgress
+                                ? () async {
+                                  Navigator.of(context).pop();
+                                  final player = LocalStoragePlayer();
+                                  await player.load(key: lokalStorageKey);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (context) => ChangeNotifierProvider<
+                                            LocalStoragePlayer
+                                          >(
+                                            create: (_) => player,
+                                            child: LevelScreen(),
+                                          ),
+                                    ),
+                                  );
+                                }
+                                : null,
                         child: const Text('Speichern ermöglichen'),
                       ),
                     ],
@@ -162,7 +188,9 @@ class StartScreen extends StatelessWidget {
           appBar: AppBar(
             leading: IconButton(
               icon: Icon(
-                themeController.themeMode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode,
+                themeController.themeMode == ThemeMode.dark
+                    ? Icons.dark_mode
+                    : Icons.light_mode,
                 color: Theme.of(context).iconTheme.color,
               ),
               onPressed: () {
@@ -182,21 +210,32 @@ class StartScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16),
                     ),
-                    const Text("Bald kann man die Web-App nur noch mit diesem oder ähnlichen Schlüsseln betreten."),
-                    const Text("Dieser Alpha-Schlüssel wird vstl. bis Juni Zutritt verschaffen."),
+                    const Text(
+                      "Bald kann man die Web-App nur noch mit diesem oder ähnlichen Schlüsseln betreten.",
+                    ),
+                    const Text(
+                      "Dieser Alpha-Schlüssel wird vstl. bis Juni Zutritt verschaffen.",
+                    ),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text("Alpha-Schlüssel:  "),
-                        const SelectableText(keyData, style: TextStyle(fontSize: 30)),
+                        const SelectableText(
+                          keyData,
+                          style: TextStyle(fontSize: 30),
+                        ),
                         const SizedBox(width: 8),
                         IconButton(
                           icon: const Icon(Icons.copy, size: 20),
                           onPressed: () {
-                            Clipboard.setData(const ClipboardData(text: keyData));
+                            Clipboard.setData(
+                              const ClipboardData(text: keyData),
+                            );
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("Schlüssel kopiert!")),
+                              const SnackBar(
+                                content: Text("Schlüssel kopiert!"),
+                              ),
                             );
                           },
                           tooltip: "Schlüssel kopieren",
@@ -223,32 +262,51 @@ class StartScreen extends StatelessWidget {
                             final subscriptionId = _keyController.text.trim();
                             if (subscriptionId.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Bitte geben Sie eine Subscription ID ein!')),
+                                const SnackBar(
+                                  content: Text(
+                                    'Bitte geben Sie eine Subscription ID ein!',
+                                  ),
+                                ),
                               );
                               return;
                             }
 
                             try {
                               final supabase = Supabase.instance.client;
-                              final response = await supabase
-                                  .from('access_keys')
-                                  .select()
-                                  .eq('paypal_subscription_id', subscriptionId)
-                                  .maybeSingle();
+                              final response =
+                                  await supabase
+                                      .from('access_keys')
+                                      .select()
+                                      .eq(
+                                        'paypal_subscription_id',
+                                        subscriptionId,
+                                      )
+                                      .maybeSingle();
 
-                              if (response != null && DateTime.parse(response['valid_until']).isAfter(DateTime.now())) {
+                              if (response != null &&
+                                  DateTime.parse(
+                                    response['valid_until'],
+                                  ).isAfter(DateTime.now())) {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => LevelScreen()),
+                                  MaterialPageRoute(
+                                    builder: (context) => LevelScreen(),
+                                  ),
                                 );
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Ungültige oder abgelaufene Subscription ID!')),
+                                  const SnackBar(
+                                    content: Text(
+                                      'Ungültige oder abgelaufene Subscription ID!',
+                                    ),
+                                  ),
                                 );
                               }
                             } catch (error) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Fehler bei der Überprüfung!')),
+                                const SnackBar(
+                                  content: Text('Fehler bei der Überprüfung!'),
+                                ),
                               );
                             }
                           },

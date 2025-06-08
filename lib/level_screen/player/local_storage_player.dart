@@ -24,7 +24,13 @@ class LocalStoragePlayer extends Player {
 
   @override
   Future<void> load({required String? key}) async {
-    if (key == null || key.isEmpty) return; // wenn der user "nicht speichern" gewählt hat
+    // wenn der user "nicht speichern" gewählt hat
+    if (key == null || key.isEmpty) {
+      cores = [];
+      isLoaded = true;
+      notifyListeners();
+      return;
+    }
 
     this.key = key;
     final jsonString = window.localStorage[key];
@@ -36,6 +42,10 @@ class LocalStoragePlayer extends Player {
     } catch (e) {
       this.cores = [];
       window.localStorage[key] = jsonEncode([]); // Leeren JSON-Array speichern
+
+
+      isLoaded = true;
+      notifyListeners();
     }
   }
 }

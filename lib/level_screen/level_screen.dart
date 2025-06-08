@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:neon_thors_cores/level_screen/core_icon.dart';
 import 'package:neon_thors_cores/level_screen/player/abstract_player_and_progress.dart';
@@ -15,7 +14,7 @@ import 'player/local_storage_player.dart';
 class LevelScreen extends StatefulWidget {
 
   LevelScreen({super.key, String? accesKey}){
-    if(accesKey != null) LocalStoragePlayer()..load(key: accesKey);
+    // if(accesKey != null) LocalStoragePlayer()..load(key: accesKey);
   }
 
   @override
@@ -196,9 +195,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                 child: Container(
                   padding: EdgeInsets.fromLTRB(16.0 + depth * 16.0, 8.0, 16.0, 8.0),
                   color: isSelected
-                      ? (isDarkMode
-                      ? Colors.white.withOpacity(0.2)
-                      : Colors.black.withOpacity(0.2))
+                      ? (isDarkMode ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2))
                       : Colors.transparent,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -209,9 +206,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                             ? GestureDetector(
                           onTap: () => _toggleNode(node),
                           child: Icon(
-                            node.isExpanded
-                                ? Icons.expand_more
-                                : Icons.chevron_right,
+                            node.isExpanded ? Icons.expand_more : Icons.chevron_right,
                             color: isDarkMode ? Colors.white : Colors.black,
                           ),
                         )
@@ -220,8 +215,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                       const SizedBox(width: 8),
                       GestureDetector(
                         onTap: () {
-                          _toggleCores(
-                              node.id, Provider.of<SupabaseManager>(context, listen: false).tree);
+                          _toggleCores(node.id, Provider.of<SupabaseManager>(context, listen: false).tree);
                         },
                         child: CoreClusterIcon(
                           progress: player.experience[node.id] ?? 0.0,
@@ -231,8 +225,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            _toggleCores(
-                                node.id, Provider.of<SupabaseManager>(context, listen: false).tree);
+                            _toggleCores(node.id, Provider.of<SupabaseManager>(context, listen: false).tree);
                           },
                           child: Text(
                             node.name,
@@ -258,6 +251,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
       },
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -302,7 +296,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                                 final core = _collectAllCores(_selectedLevelId!, supabaseManager.tree)[index];
                                 final coreProgress = player.cores.firstWhere(
                                       (c) => c.id == core['id'],
-                                  orElse: () => Core(id: core['id']), // error: The named parameter 'progress' isn't defined. (undefined_named_parameter at [neon_thors_cores] lib/level_screen/level_screen.dart:318)
+                                  orElse: () => Core(id: core['id']),
                                 ).progress;
                                 return GestureDetector(
                                   onTap: () {
@@ -390,9 +384,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                               ? const Center(child: Text('Keine Daten verfügbar'))
                               : Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Provider<LocalStoragePlayer>.value(
-                                value: LocalStoragePlayer(),
-                                child: _buildNodeList(visibleNodes)),
+                            child: _buildNodeList(visibleNodes), // Direkt aufrufen
                           ),
                         ),
                       ),

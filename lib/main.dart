@@ -25,7 +25,6 @@ Future<void> main() async {
     persistenceEnabled: true,
     cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
   );
-  WidgetsFlutterBinding.ensureInitialized();
 
   setUrlStrategy(PathUrlStrategy());
 

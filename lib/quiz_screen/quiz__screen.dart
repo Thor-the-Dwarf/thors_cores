@@ -209,7 +209,7 @@ class _QuizScreenState extends State<QuizScreen> {
     List<Map<String, dynamic>> availableQuestions = [];
     final questionResponse = await widget.supabase
         .from('question')
-        .select('question_pk, text, points, options')
+        .select('question_pk, text, points, options, essence_fk') // essence_fk hinzugefügt
         .inFilter('essence_fk', essencePks);
 
     debug('Question Response: $questionResponse');
@@ -260,6 +260,7 @@ class _QuizScreenState extends State<QuizScreen> {
       isLoading = false;
     });
   }
+
 
   // Neue Methode: Lade die nächsten 10 Fragen, während der ArchivemendScreen angezeigt wird
   Future<void> _loadNext10Questions(String levelPk) async {

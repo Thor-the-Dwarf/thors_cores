@@ -7,6 +7,7 @@ import '../_globals/widgets/my_background.dart';
 import '../_globals/widgets/theme_controller.dart';
 import '../pay_screen.dart';
 import '../quiz_screen/db_question.dart';
+import '../quiz_screen/quiz__screen.dart';
 import 'core_cluster_icon.dart';
 import 'level_manager.dart';
 import 'player/local_storage_player.dart';

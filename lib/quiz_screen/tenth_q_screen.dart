@@ -1,110 +1,44 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:neon_thors_cores/_globals/widgets/my_background.dart';
-import 'package:neon_thors_cores/_globals/widgets/theme_toggler.dart';
-import 'package:neon_thors_cores/quiz_screen/quiz__screen.dart';
 
 List<String> btn_sprueche = [
   "🔥 Du bist auf dem richtigen Weg!",
   "🎯 Fokus! Du packst das!",
-  // ... (rest of the list unchanged)
 ];
 
 String zufaelliger_btn_spruch() {
   return btn_sprueche[Random().nextInt(btn_sprueche.length)];
 }
 
-class ArchivemendScreen extends StatefulWidget {
-  final String selected_level_pk;
-  const ArchivemendScreen({super.key, required this.selected_level_pk});
-
-  @override
-  State<ArchivemendScreen> createState() => _ArchivemendScreenState();
-}
-
-class _ArchivemendScreenState extends State<ArchivemendScreen> {
-  final String btn_text = zufaelliger_btn_spruch();
-  double _progress = 0.0;
-  bool _showLoadingBar = true;
-  bool _hasStarted = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _startLoading();
-  }
-
-  void _startLoading() {
-    if (_hasStarted) return;
-    _hasStarted = true;
-    Future.delayed(Duration.zero, () async {
-      for (int i = 0; i <= 100; i++) {
-        await Future.delayed(const Duration(milliseconds: 10));
-        if (!mounted) return;
-        setState(() {
-          _progress = i / 100;
-        });
-      }
-      if (!mounted) return;
-      setState(() {
-        _showLoadingBar = false;
-      });
-    });
-  }
+class AchievementPopup extends StatelessWidget {
+  const AchievementPopup({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: ThemeToggler(),
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        foregroundColor: Theme.of(context).colorScheme.onSurface,
-      ),
-      body: Stack(
-        children: [
-          MyBackGround(key: BG_KEY),
-          Center(
-            child: Column(
-              children: [
-                const Spacer(),
-                _showLoadingBar
-                    ? Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    SizedBox(
-                      width: 200,
-                      height: 20,
-                      child: LinearProgressIndicator(
-                        value: _progress,
-                        backgroundColor: Theme.of(context).colorScheme.surface.withOpacity(0.5),
-                        valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
-                      ),
-                    ),
-                    Text(
-                      _progress < 1 ? "Speichere Fortschritte" : "",
-                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-                    ),
-                  ],
-                )
-                    : const SizedBox.shrink(),
-                const Spacer(),
-                Text(
-                  "Wiederholung ist die Mutter des Lernens",
-                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-                ),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    // Zurück zum QuizScreen, anstatt ein neues Quiz zu starten
-                    Navigator.pop(context);
-                  },
-                  child: Text(btn_text),
-                ),
-                const Spacer(),
-              ],
+    return Material(
+      color: Theme.of(context).colorScheme.surface.withOpacity(0.5),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Runde abgeschlossen!",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 20),
+            Text(
+              zufaelliger_btn_spruch(),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface,
+                fontSize: 18,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

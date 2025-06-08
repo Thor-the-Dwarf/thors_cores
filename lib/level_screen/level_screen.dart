@@ -3,14 +3,18 @@ import 'package:neon_thors_cores/level_screen/core_icon.dart';
 import 'package:neon_thors_cores/level_screen/player/abstract_player_and_progress.dart';
 import 'package:neon_thors_cores/level_screen/tree_node.dart';
 import 'package:provider/provider.dart';
+import '../_globals/debug_prints.dart';
 import '../_globals/widgets/my_background.dart';
 import '../_globals/widgets/theme_controller.dart';
 import '../pay_screen.dart';
-import '../quiz_screen/db_question.dart';
 import '../quiz_screen/quiz__screen.dart';
 import 'core_cluster_icon.dart';
 import 'level_manager.dart';
 import 'player/local_storage_player.dart';
+
+void DEBUG(String text) {
+  if (true || DEBUG_EVERYTHING) printYellow("[LevelScreen] $text");
+}
 
 class LevelScreen extends StatefulWidget {
 
@@ -299,6 +303,8 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                                       (c) => c.id == core['id'],
                                   orElse: () => Core(id: core['id']),
                                 ).progress;
+                                DEBUG('Core ID: ${core['id']}, Progress: $coreProgress');
+
                                 return GestureDetector(
                                   onTap: () {
                                     print('Core geklickt: ${core['name']} (ID: ${core['id']})');

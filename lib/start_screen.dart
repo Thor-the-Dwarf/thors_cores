@@ -155,7 +155,7 @@ class StartScreen extends StatelessWidget {
                                 ? () async {
                                   Navigator.of(context).pop();
                                   final player = LocalStoragePlayer();
-                                  await player.load(key: lokalStorageKey);
+                                  await player.loadOrCreate(key: lokalStorageKey);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -259,56 +259,8 @@ class StartScreen extends StatelessWidget {
                         const SizedBox(width: 8),
                         ElevatedButton(
                           onPressed: () async {
-                            final subscriptionId = _keyController.text.trim();
-                            if (subscriptionId.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Bitte geben Sie eine Subscription ID ein!',
-                                  ),
-                                ),
-                              );
-                              return;
-                            }
-
-                            try {
-                              final supabase = Supabase.instance.client;
-                              final response =
-                                  await supabase
-                                      .from('access_keys')
-                                      .select()
-                                      .eq(
-                                        'paypal_subscription_id',
-                                        subscriptionId,
-                                      )
-                                      .maybeSingle();
-
-                              if (response != null &&
-                                  DateTime.parse(
-                                    response['valid_until'],
-                                  ).isAfter(DateTime.now())) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => LevelScreen(),
-                                  ),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'Ungültige oder abgelaufene Subscription ID!',
-                                    ),
-                                  ),
-                                );
-                              }
-                            } catch (error) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Fehler bei der Überprüfung!'),
-                                ),
-                              );
-                            }
+                            final inputtetKey = _keyController.text.trim();
+                            await _betreten(inputtetKey, context);
                           },
                           child: const Text('Betreten'),
                         ),
@@ -326,5 +278,71 @@ class StartScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> _betreten(String inputtetKey, BuildContext context) async {
+    // Entferne führende und nachfolgende Leerzeichen
+    final trimmedKey = inputtetKey.trim();
+
+    // Prüfe, ob der Schlüssel leer ist
+    if (trimmedKey.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Bitte gib einen gültigen Schlüssel ein!')),
+      );
+      return;
+    }
+
+    // Prüfe zunächst den lokalen Speicher
+    final localStoragePlayer = LocalStoragePlayer();
+    final localStorageValid = await localStoragePlayer.enterLocalStorage(key: trimmedKey);
+
+    if (localStorageValid) {
+      // Schlüssel im lokalen Speicher gültig, navigiere zu LevelScreen mit geladenem Player
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChangeNotifierProvider<LocalStoragePlayer>(
+            create: (_) => localStoragePlayer,
+            child: LevelScreen(),
+          ),
+        ),
+      );
+      return;
+    }
+
+    // Wenn kein lokaler Speicher, prüfe Supabase
+    try {
+      final supabase = Supabase.instance.client;
+      final response = await supabase
+          .from('access_keys')
+          .select()
+          .eq('paypal_subscription_id', trimmedKey)
+          .maybeSingle();
+
+      if (response != null &&
+          DateTime.parse(response['valid_until']).isAfter(DateTime.now())) {
+        // Supabase-Schlüssel gültig, navigiere zu LevelScreen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChangeNotifierProvider<LocalStoragePlayer>(
+              create: (_) => LocalStoragePlayer()
+                ..enterLocalStorage(key: trimmedKey), // Initialisiere neuen Player
+              child: LevelScreen(),
+            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Ungültige oder abgelaufene Subscription ID!'),
+          ),
+        );
+      }
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Fehler bei der Schlüsselüberprüfung!')),
+      );
+    }
   }
 }

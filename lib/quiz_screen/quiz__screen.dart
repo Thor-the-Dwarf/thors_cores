@@ -1,6 +1,6 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:neon_thors_cores/level_screen/player/local_storage_player.dart';
 import 'package:neon_thors_cores/quiz_screen/question_vm.dart';
 import 'package:neon_thors_cores/quiz_screen/question_widget.dart';
 import 'package:neon_thors_cores/quiz_screen/tenth_q_screen.dart';
@@ -12,8 +12,9 @@ import '../_globals/widgets/my_background.dart';
 import '../_globals/widgets/theme_toggler.dart';
 import '../level_screen/tree_node.dart';
 import 'db_question.dart';
+import 'dart:math';
 
-void debug(String text) {
+void DEBUG(String text) {
   if (false || DEBUG_EVERYTHING) printYellow("[QuizScreen] $text");
 }
 
@@ -41,21 +42,54 @@ class _QuizScreenState extends State<QuizScreen> {
   final PageController _pageController = PageController();
   int currentIndex = 0;
   bool isLoading = true;
-  bool _hasCompletedQuiz = false; // Boolean, um erneuten Aufruf des ArchivemendScreen zu verhindern
+  OverlayEntry? _overlayEntry;
+  bool _isPopupActive = false;
 
   @override
   void initState() {
     super.initState();
     widget.supabase = Supabase.instance.client;
-    _load10Questions(widget.selected_level_pk);
+    _loadQuestions(widget.selected_level_pk, isInitialLoad: true);
     Future.delayed(Duration.zero, () => _focusNode.requestFocus());
   }
 
   @override
   void dispose() {
+    _overlayEntry?.remove();
     _focusNode.dispose();
     _pageController.dispose();
     super.dispose();
+  }
+
+  void _showAchievementPopup() {
+    _overlayEntry?.remove();
+    _overlayEntry = OverlayEntry(
+      builder: (context) => const AchievementPopup(),
+    );
+    setState(() {
+      _isPopupActive = true;
+    });
+    Overlay.of(context).insert(_overlayEntry!);
+    Future.delayed(const Duration(seconds: 3), () {
+      if (!mounted) return;
+      _overlayEntry?.remove();
+      _overlayEntry = null;
+      setState(() {
+        _isPopupActive = false;
+        if (widget.questions.isNotEmpty) {
+          widget.history.add(widget.questions.removeAt(0));
+          currentIndex = widget.history.length - 1;
+          _pageController.animateToPage(
+            currentIndex,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+          );
+        } else {
+          DEBUG('Keine Fragen geladen, versuche erneut...');
+          _loadQuestions(widget.selected_level_pk);
+        }
+      });
+    });
   }
 
   void _handleKey(RawKeyEvent event) {
@@ -88,39 +122,23 @@ class _QuizScreenState extends State<QuizScreen> {
           _pageController.animateToPage(
             currentIndex,
             duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
+            curve: Curves.easeOut,
           );
         });
-      } else if (widget.history.length < 10 && widget.questions.isNotEmpty) {
+      } else if (widget.questions.isNotEmpty) {
         setState(() {
           widget.history.add(widget.questions.removeAt(0));
           currentIndex++;
           _pageController.animateToPage(
             currentIndex,
             duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
+            curve: Curves.easeOut,
           );
         });
-      } else if (currentIndex == 9 && !_hasCompletedQuiz) {
-        setState(() {
-          _hasCompletedQuiz = true;
-        });
-        // Lade die nächsten 10 Fragen im Hintergrund
-        _loadNext10Questions(widget.selected_level_pk);
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => ArchivemendScreen(selected_level_pk: widget.selected_level_pk)),
-        );
-      } else if (_hasCompletedQuiz && widget.questions.isNotEmpty) {
-        // Füge die neuen Fragen zur history hinzu und setze den Index zurück
-        setState(() {
-          widget.history.add(widget.questions.removeAt(0));
-          currentIndex++;
-          _pageController.animateToPage(
-            currentIndex,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-          );
-        });
+      } else if (widget.history.length % 10 == 0 && widget.history.length > 0) {
+        LocalStoragePlayer().save();
+        _showAchievementPopup(); // Popup sofort anzeigen
+        _loadQuestions(widget.selected_level_pk); // Fragen im Hintergrund laden
       }
     }
   }
@@ -132,7 +150,7 @@ class _QuizScreenState extends State<QuizScreen> {
         _pageController.animateToPage(
           currentIndex,
           duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
+          curve: Curves.easeOut,
         );
       });
     }
@@ -172,16 +190,24 @@ class _QuizScreenState extends State<QuizScreen> {
     return allCores;
   }
 
-  Future<void> _load10Questions(String levelPk) async {
-    List<QuestionWidget> list = [];
+  Future<void> _loadQuestions(String levelPk, {bool isInitialLoad = false}) async {
+    DEBUG('Lade Fragen für Level: $levelPk (Initial: $isInitialLoad)');
+    if (isInitialLoad) {
+      setState(() {
+        isLoading = true;
+      });
+    }
 
+    List<QuestionWidget> list = [];
     final allCores = _collectAllCores(levelPk, widget.tree);
 
     if (allCores.isEmpty) {
-      debug('Keine Cores in diesem Level oder seinen Sub-Levels gefunden.');
-      setState(() {
-        isLoading = false;
-      });
+      DEBUG('Keine Cores in diesem Level oder seinen Sub-Levels gefunden.');
+      if (isInitialLoad) {
+        setState(() {
+          isLoading = false;
+        });
+      }
       return;
     }
 
@@ -199,30 +225,34 @@ class _QuizScreenState extends State<QuizScreen> {
     }
 
     if (essencePks.isEmpty) {
-      debug('Keine Essences für die Cores gefunden.');
-      setState(() {
-        isLoading = false;
-      });
+      DEBUG('Keine Essences für die Cores gefunden.');
+      if (isInitialLoad) {
+        setState(() {
+          isLoading = false;
+        });
+      }
       return;
     }
 
     List<Map<String, dynamic>> availableQuestions = [];
     final questionResponse = await widget.supabase
         .from('question')
-        .select('question_pk, text, points, options, essence_fk') // essence_fk hinzugefügt
+        .select('question_pk, text, points, options, essence_fk')
         .inFilter('essence_fk', essencePks);
 
-    debug('Question Response: $questionResponse');
+    DEBUG('Question Response: ${questionResponse?.length ?? 0} Fragen gefunden');
 
     if (questionResponse != null && questionResponse.isNotEmpty) {
       availableQuestions = questionResponse.cast<Map<String, dynamic>>();
     }
 
     if (availableQuestions.isEmpty) {
-      debug('Keine Fragen für die Essences gefunden.');
-      setState(() {
-        isLoading = false;
-      });
+      DEBUG('Keine Fragen für die Essences gefunden.');
+      if (isInitialLoad) {
+        setState(() {
+          isLoading = false;
+        });
+      }
       return;
     }
 
@@ -233,11 +263,13 @@ class _QuizScreenState extends State<QuizScreen> {
         .where((q) => !excludedPks.contains(q['question_pk'] as String))
         .toList();
 
+    DEBUG('Verfügbare Fragen nach Ausschluss: ${availableQuestions.length}');
+
     final random = Random();
-    while (list.length < 10 && availableQuestions.isNotEmpty) {
+    while (availableQuestions.isNotEmpty && list.length < 10) {
       final questionIndex = random.nextInt(availableQuestions.length);
       final questionData = availableQuestions[questionIndex];
-      debug('Verarbeitete Frage: $questionData');
+      DEBUG('Verarbeitete Frage: $questionData');
       list.add(
         QuestionWidget(
           questionVM: QuestionVM(question: Question.fromSupaBase(questionData)),
@@ -246,94 +278,18 @@ class _QuizScreenState extends State<QuizScreen> {
       availableQuestions.removeAt(questionIndex);
     }
 
-    if (list.length < 10) {
-      debug('Nicht genug Fragen gefunden. Gefundene Fragen: ${list.length}');
-    }
+    DEBUG('Geladene Fragen: ${list.length}');
 
     setState(() {
       widget.questions = list;
-      if (widget.questions.isNotEmpty) {
+      if (isInitialLoad && widget.questions.isNotEmpty) {
         widget.history.add(
           widget.questions.removeAt(random.nextInt(widget.questions.length)),
         );
       }
-      isLoading = false;
-    });
-  }
-
-
-  // Neue Methode: Lade die nächsten 10 Fragen, während der ArchivemendScreen angezeigt wird
-  Future<void> _loadNext10Questions(String levelPk) async {
-    List<QuestionWidget> list = [];
-
-    final allCores = _collectAllCores(levelPk, widget.tree);
-
-    if (allCores.isEmpty) {
-      debug('Keine Cores in diesem Level oder seinen Sub-Levels gefunden (Next 10).');
-      return;
-    }
-
-    List<String> essencePks = [];
-    for (var core in allCores) {
-      final coreId = core['id'] as String;
-      final essenceResponse = await widget.supabase
-          .from('essence')
-          .select('essence_pk')
-          .eq('core_fk', coreId);
-
-      if (essenceResponse != null && essenceResponse.isNotEmpty) {
-        essencePks.addAll(essenceResponse.map((e) => e['essence_pk'] as String));
+      if (isInitialLoad) {
+        isLoading = false;
       }
-    }
-
-    if (essencePks.isEmpty) {
-      debug('Keine Essences für die Cores gefunden (Next 10).');
-      return;
-    }
-
-    List<Map<String, dynamic>> availableQuestions = [];
-    final questionResponse = await widget.supabase
-        .from('question')
-        .select('question_pk, text, points, options')
-        .inFilter('essence_fk', essencePks);
-
-    debug('Question Response (Next 10): $questionResponse');
-
-    if (questionResponse != null && questionResponse.isNotEmpty) {
-      availableQuestions = questionResponse.cast<Map<String, dynamic>>();
-    }
-
-    if (availableQuestions.isEmpty) {
-      debug('Keine Fragen für die Essences gefunden (Next 10).');
-      return;
-    }
-
-    List<String> excludedPks = widget.history
-        .map((qw) => qw.questionVM.question.question_pk)
-        .toList();
-    availableQuestions = availableQuestions
-        .where((q) => !excludedPks.contains(q['question_pk'] as String))
-        .toList();
-
-    final random = Random();
-    while (list.length < 10 && availableQuestions.isNotEmpty) {
-      final questionIndex = random.nextInt(availableQuestions.length);
-      final questionData = availableQuestions[questionIndex];
-      debug('Verarbeitete Frage (Next 10): $questionData');
-      list.add(
-        QuestionWidget(
-          questionVM: QuestionVM(question: Question.fromSupaBase(questionData)),
-        ),
-      );
-      availableQuestions.removeAt(questionIndex);
-    }
-
-    if (list.length < 10) {
-      debug('Nicht genug Fragen gefunden (Next 10). Gefundene Fragen: ${list.length}');
-    }
-
-    setState(() {
-      widget.questions = list;
     });
   }
 
@@ -343,114 +299,115 @@ class _QuizScreenState extends State<QuizScreen> {
       appBar: AppBar(leading: const ThemeToggler()),
       body: Stack(
         children: [
-          MyBackGround(
-            key: BG_KEY,
-          ),
+          MyBackGround(),
           isLoading
               ? const Center(child: CircularProgressIndicator())
               : widget.history.isEmpty
               ? const Center(child: Text('Keine Fragen verfügbar'))
-              : RawKeyboardListener(
-            onKey: _handleKey,
-            focusNode: _focusNode..requestFocus(),
-            autofocus: true,
-            child: GestureDetector(
-              onVerticalDragEnd: (details) {
-                if (details.primaryVelocity! > 0) {
-                  _scrollDown();
-                } else if (details.primaryVelocity! < 0 &&
-                    widget.history[currentIndex].questionVM.isLocked) {
-                  _scrollUp();
-                }
-              },
-              child: PageView.builder(
-                controller: _pageController,
-                scrollDirection: Axis.vertical,
-                itemCount: widget.history.length,
-                physics: const PageScrollPhysics(),
-                onPageChanged: (index) {
-                  setState(() {
-                    currentIndex = index;
-                  });
+              : AbsorbPointer(
+            absorbing: _isPopupActive,
+            child: RawKeyboardListener(
+              onKey: _handleKey,
+              focusNode: _focusNode..requestFocus(),
+              autofocus: true,
+              child: GestureDetector(
+                onVerticalDragEnd: (details) {
+                  if (details.primaryVelocity! > 0) {
+                    _scrollDown();
+                  } else if (details.primaryVelocity! < 0 &&
+                      widget.history[currentIndex].questionVM.isLocked) {
+                    _scrollUp();
+                  }
                 },
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Flexible(
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minHeight: 0,
-                            maxHeight: MediaQuery.of(context).size.height * 0.7,
-                          ),
-                          child: Scrollbar(
-                            child: SingleChildScrollView(
-                              child: widget.history[index],
+                child: PageView.builder(
+                  controller: _pageController,
+                  scrollDirection: Axis.vertical,
+                  itemCount: widget.history.length,
+                  physics: const PageScrollPhysics(),
+                  onPageChanged: (index) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Flexible(
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: 0,
+                              maxHeight: MediaQuery.of(context).size.height * 0.7,
+                            ),
+                            child: Scrollbar(
+                              child: SingleChildScrollView(
+                                child: widget.history[index],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 60,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: _scrollDown,
-                                  hoverColor: Colors.grey.withOpacity(0.1),
-                                  highlightColor: Colors.grey.withOpacity(0.1),
-                                  splashColor: Colors.grey.withOpacity(0.1),
-                                  child: const Center(
-                                    child: Icon(Icons.arrow_drop_down),
+                        SizedBox(
+                          height: 60,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: _scrollDown,
+                                    hoverColor: Colors.grey.withOpacity(0.1),
+                                    highlightColor: Colors.grey.withOpacity(0.1),
+                                    splashColor: Colors.grey.withOpacity(0.1),
+                                    child: const Center(
+                                      child: Icon(Icons.arrow_drop_down),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            ChangeNotifierProvider.value(
-                              value: widget.history[index].questionVM,
-                              child: Consumer<QuestionVM>(
-                                builder: (context, vm, child) {
-                                  return Visibility(
-                                    visible: !vm.isLocked,
-                                    child: Expanded(
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        child: InkWell(
-                                          onTap: _lockEvent,
-                                          hoverColor: Colors.grey.withOpacity(0.1),
-                                          highlightColor: Colors.grey.withOpacity(0.1),
-                                          splashColor: Colors.grey.withOpacity(0.1),
-                                          child: const Center(
-                                            child: Icon(Icons.lock),
+                              ChangeNotifierProvider.value(
+                                value: widget.history[index].questionVM,
+                                child: Consumer<QuestionVM>(
+                                  builder: (context, vm, child) {
+                                    return Visibility(
+                                      visible: !vm.isLocked,
+                                      child: Expanded(
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            onTap: _lockEvent,
+                                            hoverColor: Colors.grey.withOpacity(0.1),
+                                            highlightColor: Colors.grey.withOpacity(0.1),
+                                            splashColor: Colors.grey.withOpacity(0.1),
+                                            child: const Center(
+                                              child: Icon(Icons.lock),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: _scrollUp,
-                                  hoverColor: Colors.grey.withOpacity(0.1),
-                                  highlightColor: Colors.grey.withOpacity(0.1),
-                                  splashColor: Colors.grey.withOpacity(0.1),
-                                  child: const Center(
-                                    child: Icon(Icons.arrow_drop_up),
+                              Expanded(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: _scrollUp,
+                                    hoverColor: Colors.grey.withOpacity(0.1),
+                                    highlightColor: Colors.grey.withOpacity(0.1),
+                                    splashColor: Colors.grey.withOpacity(0.1),
+                                    child: const Center(
+                                      child: Icon(Icons.arrow_drop_up),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                },
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ),

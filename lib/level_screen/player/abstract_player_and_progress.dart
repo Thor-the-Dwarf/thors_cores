@@ -64,78 +64,59 @@ abstract class Player extends ChangeNotifier {
   Future<void> loadOrCreate({required String key});
 
   Future<void> loadExpirience({required TreeNode treeNode}) async {
-    final coreData = SupabaseManager().coreData;
+    // Vermeide mehrfache Verarbeitung desselben Cores
+    final coreMap = <String, Core>{};
+    for (var core in this.cores) {
+      if (!coreMap.containsKey(core.id)) {
+        coreMap[core.id] = core;
+        final essencesCount = (core.richtigeEssenzen?.length ?? 0) + (core.falscheEssenzen?.length ?? 0);
+        final richtigeEssenzenCount = core.richtigeEssenzen?.where((e) => e.richtigeFragen?.isNotEmpty ?? false).length ?? 0;
+        core.progress = essencesCount > 0 ? (richtigeEssenzenCount / essencesCount) * 100.0 : 0.0;
+        DEBUG('Core ${core.id}: essencesCount=$essencesCount, richtigeEssenzenCount=$richtigeEssenzenCount, progress=${core.progress}');
+      }
+    }
 
-    // Erstelle eine Map von Core-ID zu Player.Core für schnellen Zugriff
-    final coreMap = Map<String, Core>.fromEntries(
-      cores.map((core) => MapEntry(core.id, core)),
-    );
-
-    // Rekursive Funktion zur Berechnung des Level-Fortschritts
     Future<double> calculateLevelProgress(TreeNode node) async {
       List<double> progresses = [];
-
-      // 1. Core-Fortschritt berechnen, wenn der Node Cores hat
       if (node.hasCores) {
-        final coresForLevel = coreData[node.id] as List<dynamic>? ?? [];
-        for (var treeCore in coresForLevel) {
-          final coreId = treeCore['id'] as String; // Core-ID aus coreData
-          final playerCore =
-              coreMap[coreId] ??
-              Core(
-                id: coreId,
-                richtigeEssenzen: [],
-                falscheEssenzen: [],
-              ); // Fallback
-
-          // Hole essences_count aus coreData
-          final essencesCount = treeCore['essences_count'] as int? ?? 0;
-          final richtigeEssenzenCount =
-              playerCore.richtigeEssenzen?.length ?? 0;
-
-          // Berechne Fortschritt gemäß der Formel
-          final progress =
-              essencesCount == 0
-                  ? 0.0
-                  : (essencesCount / 100.0) * richtigeEssenzenCount;
-
-          DEBUG('Core $coreId: essencesCount=$essencesCount, richtigeEssenzenCount=$richtigeEssenzenCount, progress=$progress');
-
-          playerCore.progress = progress;
-          progresses.add(progress);
-
-          // Aktualisiere coreMap, falls ein neues Core erstellt wurde
-          coreMap[coreId] = playerCore;
+        // Filtere Cores basierend auf node.id (anpassen nach Bedarf)
+        final coresForLevel = this.cores.where((c) => c.id == node.id || c.id.startsWith(node.id)).toList();
+        for (var core in coresForLevel) {
+          progresses.add(core.progress);
+          DEBUG('Processed Core ${core.id} for node ${node.id} with progress ${core.progress}');
+        }
+        // Optional: Füge Cores aus coreData hinzu, falls nicht in player.cores
+        final coreData = SupabaseManager().coreData[node.id] as List<dynamic>? ?? [];
+        for (var treeCore in coreData) {
+          final coreId = treeCore['id'] as String;
+          if (!coreMap.containsKey(coreId)) {
+            final playerCore = Core(
+              id: coreId,
+              richtigeEssenzen: [],
+              falscheEssenzen: [],
+            );
+            coreMap[coreId] = playerCore;
+            final essencesCount = treeCore['essences_count'] as int? ?? 0;
+            final richtigeEssenzenCount = 0; // Keine Daten in player.cores
+            playerCore.progress = essencesCount > 0 ? 0.0 : 0.0; // Fortschritt 0, da keine richtigeEssenzen
+            progresses.add(playerCore.progress);
+            DEBUG('Added Core from coreData ${coreId}: essencesCount=$essencesCount, progress=${playerCore.progress}');
+          }
         }
       }
-
-      // 2. Sublevel-Fortschritt berechnen
       for (var child in node.children) {
         final childProgress = await calculateLevelProgress(child);
         progresses.add(childProgress);
       }
-
-      // 3. Aggregiere Fortschritte (Durchschnitt)
-      final levelProgress =
-          progresses.isNotEmpty
-              ? progresses.reduce((a, b) => a + b) / progresses.length
-              : 0.0;
-
-      // Speichere Level-Fortschritt
+      final levelProgress = progresses.isNotEmpty ? progresses.reduce((a, b) => a + b) / progresses.length : 0.0;
       experience[node.id] = levelProgress;
       return levelProgress;
     }
 
-    // Berechne Fortschritt für den gegebenen TreeNode
     await calculateLevelProgress(treeNode);
-
-    // Aktualisiere cores-Liste
     cores = coreMap.values.toList();
-
-    // Speichere aktualisierte Cores
     await save();
-    notifyListeners(); // Benachrichtige UI über Änderungen
-
+    notifyListeners();
   }
 
   void answered({required bool correct, required String essence_id, required String question_id, }) {

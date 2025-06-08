@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import '../../_globals/debug_prints.dart';
-import '../level_manager.dart';
+import '../supabase_manager.dart';
 import '../tree_node.dart';
-
-
 
 /**  Beispiel:
     {
@@ -79,29 +78,10 @@ abstract class Player extends ChangeNotifier {
     Future<double> calculateLevelProgress(TreeNode node) async {
       List<double> progresses = [];
       if (node.hasCores) {
-        // Filtere Cores basierend auf node.id (anpassen nach Bedarf)
-        final coresForLevel = this.cores.where((c) => c.id == node.id || c.id.startsWith(node.id)).toList();
+        final coresForLevel = this.cores.where((c) => c.levelId == node.id).toList(); // Zuordnung über levelId
         for (var core in coresForLevel) {
           progresses.add(core.progress);
-          DEBUG('Processed Core ${core.id} for node ${node.id} with progress ${core.progress}');
-        }
-        // Optional: Füge Cores aus coreData hinzu, falls nicht in player.cores
-        final coreData = SupabaseManager().coreData[node.id] as List<dynamic>? ?? [];
-        for (var treeCore in coreData) {
-          final coreId = treeCore['id'] as String;
-          if (!coreMap.containsKey(coreId)) {
-            final playerCore = Core(
-              id: coreId,
-              richtigeEssenzen: [],
-              falscheEssenzen: [],
-            );
-            coreMap[coreId] = playerCore;
-            final essencesCount = treeCore['essences_count'] as int? ?? 0;
-            final richtigeEssenzenCount = 0; // Keine Daten in player.cores
-            playerCore.progress = essencesCount > 0 ? 0.0 : 0.0; // Fortschritt 0, da keine richtigeEssenzen
-            progresses.add(playerCore.progress);
-            DEBUG('Added Core from coreData ${coreId}: essencesCount=$essencesCount, progress=${playerCore.progress}');
-          }
+          DEBUG('Core ${core.id} for level ${node.id} progress: ${core.progress}');
         }
       }
       for (var child in node.children) {
@@ -110,6 +90,7 @@ abstract class Player extends ChangeNotifier {
       }
       final levelProgress = progresses.isNotEmpty ? progresses.reduce((a, b) => a + b) / progresses.length : 0.0;
       experience[node.id] = levelProgress;
+      DEBUG('Level ${node.id} progress: $levelProgress');
       return levelProgress;
     }
 
@@ -119,13 +100,31 @@ abstract class Player extends ChangeNotifier {
     notifyListeners();
   }
 
-  void answered({required bool correct, required String essence_id, required String question_id, }) {
+  void answered({required bool correct, required String essence_id, required String question_id, required context}) {
     // Finde oder erstelle das relevante Core_-Objekt
     Core? core = cores.firstWhere(
-      (core) => core.id == essence_id,
+          (core) => core.id == essence_id,
       orElse: () {
+        // Finde den zugehörigen Level-Knoten, um levelId zu bestimmen
+        TreeNode? findNodeWithEssence(String essenceId, List<TreeNode> nodes) {
+          for (var node in nodes) {
+            if (node.hasCores) {
+              final cores = Provider.of<SupabaseManager>(context, listen: false).coreData[node.id] ?? [];
+              if (cores.any((c) => c['id'] == essenceId)) {
+                return node;
+              }
+            }
+            if (node.children.isNotEmpty) {
+              final found = findNodeWithEssence(essenceId, node.children);
+              if (found != null) return found;
+            }
+          }
+          return null;
+        }
+        final node = findNodeWithEssence(essence_id, Provider.of<SupabaseManager>(context, listen: false).tree);
         final newCore = Core(
           id: essence_id,
+          levelId: node?.id ?? '', // Fallback auf leeren String, falls kein Knoten gefunden
           richtigeEssenzen: [],
           falscheEssenzen: [],
         );
@@ -135,32 +134,17 @@ abstract class Player extends ChangeNotifier {
     );
 
     // Finde oder erstelle das Essence_-Objekt
-    Essence? essence =
-        core.richtigeEssenzen?.firstWhere(
+    Essence? essence = core.richtigeEssenzen?.firstWhere(
           (e) => e.essenceFk == essence_id,
-          orElse:
-              () => Essence(
-                essenceFk: essence_id,
-                richtigeFragen: [],
-                falscheFragen: [],
-              ),
-        ) ??
+      orElse: () => Essence(essenceFk: essence_id, richtigeFragen: [], falscheFragen: []),
+    ) ??
         core.falscheEssenzen?.firstWhere(
-          (e) => e.essenceFk == essence_id,
-          orElse:
-              () => Essence(
-                essenceFk: essence_id,
-                richtigeFragen: [],
-                falscheFragen: [],
-              ),
+              (e) => e.essenceFk == essence_id,
+          orElse: () => Essence(essenceFk: essence_id, richtigeFragen: [], falscheFragen: []),
         );
 
     if (essence == null) {
-      essence = Essence(
-        essenceFk: essence_id,
-        richtigeFragen: [],
-        falscheFragen: [],
-      );
+      essence = Essence(essenceFk: essence_id, richtigeFragen: [], falscheFragen: []);
       if (correct) {
         core.richtigeEssenzen ??= [];
         core.richtigeEssenzen!.add(essence);
@@ -201,12 +185,14 @@ abstract class Player extends ChangeNotifier {
 
 class Core {
   late String id;
+  late String levelId; // Neue Eigenschaft
   late double progress;
   List<Essence>? richtigeEssenzen;
   List<Essence>? falscheEssenzen;
 
   Core({
     required this.id,
+    required this.levelId,
     this.progress = 0.0,
     this.richtigeEssenzen,
     this.falscheEssenzen,
@@ -215,20 +201,16 @@ class Core {
   static Core fromJson(Map<String, dynamic> json) {
     return Core(
       id: json['id'],
-      richtigeEssenzen:
-          (json['richtige_essenzen'] as List?)
-              ?.map((e) => Essence.fromJson(e))
-              .toList(),
-      falscheEssenzen:
-          (json['falsche_essenzen'] as List?)
-              ?.map((e) => Essence.fromJson(e))
-              .toList(),
+      levelId: json['level_id'] ?? '', // Muss in deinen Daten vorhanden sein
+      richtigeEssenzen: (json['richtige_essenzen'] as List?)?.map((e) => Essence.fromJson(e)).toList(),
+      falscheEssenzen: (json['falsche_essenzen'] as List?)?.map((e) => Essence.fromJson(e)).toList(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
+      'level_id': levelId,
       'richtige_essenzen': richtigeEssenzen?.map((e) => e.toJson()).toList(),
       'falsche_essenzen': falscheEssenzen?.map((e) => e.toJson()).toList(),
     };

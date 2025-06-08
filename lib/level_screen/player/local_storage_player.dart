@@ -64,6 +64,7 @@ class LocalStoragePlayer extends Player {
     } catch (e) {
       DEBUG('Error parsing JSON, initializing with test data: $e');
       final testData = {
+        "level_id": "032e4fac-bbe1-481e-89be-4946bce69d62", // Zuordnung zum Level
         "id": "012b4753-c19c-42ab-99e6-dfa962456f2c",
         "richtige_essenzen": [
           {

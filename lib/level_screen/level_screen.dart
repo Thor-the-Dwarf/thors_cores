@@ -9,7 +9,7 @@ import '../_globals/widgets/theme_controller.dart';
 import '../pay_screen.dart';
 import '../quiz_screen/quiz__screen.dart';
 import 'core_cluster_icon.dart';
-import 'level_manager.dart';
+import 'supabase_manager.dart';
 import 'player/local_storage_player.dart';
 
 void DEBUG(String text) {
@@ -17,9 +17,10 @@ void DEBUG(String text) {
 }
 
 class LevelScreen extends StatefulWidget {
-
-  LevelScreen({super.key, String? accesKey}){
-    // if(accesKey != null) LocalStoragePlayer()..load(key: accesKey);
+  LevelScreen({super.key, String? accesKey}) {
+    if (accesKey != null) {
+      LocalStoragePlayer()..loadOrCreate(key: accesKey);
+    }
   }
 
   @override
@@ -49,26 +50,23 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
     _slideAnimation = Tween<Offset>(
       begin: const Offset(-1.0, 0.0),
       end: const Offset(0.0, 0.0),
-    ).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
+    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
     _paySlideAnimation = Tween<Offset>(
       begin: const Offset(1.0, 0.0),
       end: const Offset(0.0, 0.0),
-    ).animate(
-      CurvedAnimation(parent: _payAnimationController, curve: Curves.easeInOut),
-    );
+    ).animate(CurvedAnimation(parent: _payAnimationController, curve: Curves.easeInOut));
 
-    // Lade Tree-Daten und berechne Fortschritt
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final supabaseManager = Provider.of<SupabaseManager>(context, listen: false);
+      final manager = Provider.of<SupabaseManager>(context, listen: false); // Korrigierter Name
       final player = Provider.of<LocalStoragePlayer>(context, listen: false);
-
-      supabaseManager.loadTreeData().then((_) {
-        // Berechne Fortschritt für den gesamten Baum
-        for (var root in supabaseManager.tree) {
-          player.loadExpirience(treeNode: root);
+      manager.loadTreeData().then((_) {
+        for (var root in manager.tree) {
+          player.loadExpirience(treeNode: root).catchError((error) {
+            DEBUG('Fehler beim Laden der Erfahrung: $error');
+          });
         }
+      }).catchError((error) {
+        DEBUG('Fehler beim Laden der Tree-Daten: $error');
       });
     });
   }
@@ -108,47 +106,47 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
 
   void _toggleCores(String levelId, List<TreeNode> tree) {
     setState(() {
-      if (_selectedLevelId == levelId) {
-        _selectedLevelId = null;
-      } else {
-        _selectedLevelId = levelId;
-        if (_isMenuOpen) {
-          _isMenuOpen = false;
-          _animationController.reverse();
-        }
+      _selectedLevelId = _selectedLevelId == levelId ? null : levelId;
+      if (_isMenuOpen && _selectedLevelId != null) {
+        _isMenuOpen = false;
+        _animationController.reverse();
       }
     });
   }
 
   List<Map<String, dynamic>> _collectAllCores(String levelId, List<TreeNode> tree) {
+    final manager = Provider.of<SupabaseManager>(context, listen: false);
     List<Map<String, dynamic>> allCores = [];
-    final coreData = Provider.of<SupabaseManager>(context, listen: false).coreData;
 
-    TreeNode? findNode(String id, List<TreeNode> nodes) {
-      for (var node in nodes) {
-        if (node.id == id) return node;
-        if (node.children.isNotEmpty) {
-          final found = findNode(id, node.children);
-          if (found != null) return found;
-        }
+    // Hilfsfunktion, um rekursiv Cores zu sammeln
+    void collectCores(String nodeId) {
+      // Füge Cores des aktuellen Levels hinzu
+      if (manager.coreData[nodeId] != null) {
+        allCores.addAll(manager.coreData[nodeId]!);
       }
-      return null;
-    }
 
-    final node = findNode(levelId, tree);
-    if (node == null) return allCores;
+      // Finde den aktuellen Knoten
+      TreeNode? node = tree.firstWhere(
+            (n) => n.id == nodeId,
+        orElse: () => TreeNode(id: '', name: '', children: []), // Fallback, um Fehler zu vermeiden
+      );
 
-    void collectCores(TreeNode node) {
-      if (node.hasCores && coreData[node.id] != null) {
-        allCores.addAll(coreData[node.id]!);
-      }
+      // Rekursiver Aufruf für alle Kinder
       for (var child in node.children) {
-        collectCores(child);
+        collectCores(child.id);
       }
     }
 
-    collectCores(node);
+    DEBUG('Suche Cores für levelId: $levelId und Sub-Level');
+    collectCores(levelId);
+    DEBUG('Gesamtzahl Cores gefunden: ${allCores.length}');
     return allCores;
+  }
+
+
+  void _collectCoresRec(TreeNode node, List<Map<String, dynamic>> allCores, SupabaseManager manager) {
+    if (node.hasCores && manager.coreData[node.id] != null) allCores.addAll(manager.coreData[node.id]!);
+    for (var child in node.children) _collectCoresRec(child, allCores, manager);
   }
 
   List<Map<String, dynamic>> _buildVisibleNodes(List<TreeNode> nodes, int depth) {
@@ -166,6 +164,16 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
     setState(() {
       node.isExpanded = !node.isExpanded;
     });
+  }
+
+  TreeNode? _findNodeWithCore(String coreId, TreeNode node) {
+    final manager = Provider.of<SupabaseManager>(context, listen: false);
+    if (node.hasCores && manager.coreData[node.id]?.any((c) => c['id'] == coreId) == true) return node;
+    for (var child in node.children) {
+      final found = _findNodeWithCore(coreId, child);
+      if (found != null) return found;
+    }
+    return null;
   }
 
   Widget _buildNodeList(List<Map<String, dynamic>> visibleNodes) {
@@ -187,16 +195,12 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
           child: ListView.builder(
             itemCount: visibleNodes.length,
             itemBuilder: (context, index) {
-              final node = visibleNodes[index]['node'] as TreeNode;
-              final depth = visibleNodes[index]['depth'] as int;
+              final nodeData = visibleNodes[index];
+              final node = nodeData['node'] as TreeNode;
+              final depth = nodeData['depth'] as int;
               final isSelected = node.id == _selectedLevelId;
-
               return InkWell(
-                onTap: () {
-                  if (node.children.isNotEmpty) {
-                    _toggleNode(node);
-                  }
-                },
+                onTap: node.children.isNotEmpty ? () => _toggleNode(node) : null,
                 child: Container(
                   padding: EdgeInsets.fromLTRB(16.0 + depth * 16.0, 8.0, 16.0, 8.0),
                   color: isSelected
@@ -219,9 +223,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                       ),
                       const SizedBox(width: 8),
                       GestureDetector(
-                        onTap: () {
-                          _toggleCores(node.id, Provider.of<SupabaseManager>(context, listen: false).tree);
-                        },
+                        onTap: () => _toggleCores(node.id, Provider.of<SupabaseManager>(context, listen: false).tree),
                         child: CoreClusterIcon(
                           progress: player.experience[node.id] ?? 0.0,
                         ),
@@ -229,9 +231,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                       const SizedBox(width: 8),
                       Expanded(
                         child: GestureDetector(
-                          onTap: () {
-                            _toggleCores(node.id, Provider.of<SupabaseManager>(context, listen: false).tree);
-                          },
+                          onTap: () => _toggleCores(node.id, Provider.of<SupabaseManager>(context, listen: false).tree),
                           child: Text(
                             node.name,
                             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -257,12 +257,11 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Consumer<SupabaseManager>(
-      builder: (context, supabaseManager, child) {
-        final visibleNodes = _buildVisibleNodes(supabaseManager.tree, 0);
+      builder: (context, manager, child) {
+        final visibleNodes = _buildVisibleNodes(manager.tree, 0);
         return Scaffold(
           appBar: AppBar(
             title: const Text('Wiederholung ist die Mutter des Lernens'),
@@ -271,12 +270,8 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
           ),
           body: GestureDetector(
             onTap: () {
-              if (_isMenuOpen) {
-                _toggleMenu();
-              }
-              if (_isPayScreenOpen) {
-                _togglePayScreen();
-              }
+              if (_isMenuOpen) _toggleMenu();
+              if (_isPayScreenOpen) _togglePayScreen();
             },
             child: Stack(
               children: [
@@ -296,19 +291,26 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                                 mainAxisSpacing: 16.0,
                                 childAspectRatio: 3 / 2,
                               ),
-                              itemCount: _collectAllCores(_selectedLevelId!, supabaseManager.tree).length,
+                              itemCount: _selectedLevelId != null
+                                  ? _collectAllCores(_selectedLevelId!, manager.tree).length
+                                  : 0,
                               itemBuilder: (context, index) {
-                                final core = _collectAllCores(_selectedLevelId!, supabaseManager.tree)[index];
+                                final core = _collectAllCores(_selectedLevelId!, manager.tree)[index];
                                 final coreProgress = player.cores.firstWhere(
                                       (c) => c.id == core['id'],
-                                  orElse: () => Core(id: core['id']),
+                                  orElse: () {
+                                    TreeNode? node = _findNodeWithCore(core['id'], manager.tree.first);
+                                    return Core(
+                                      id: core['id'],
+                                      levelId: node?.id ?? _selectedLevelId ?? '',
+                                      richtigeEssenzen: [],
+                                      falscheEssenzen: [],
+                                    );
+                                  },
                                 ).progress;
                                 DEBUG('Core ID: ${core['id']}, Progress: $coreProgress');
-
                                 return GestureDetector(
-                                  onTap: () {
-                                    print('Core geklickt: ${core['name']} (ID: ${core['id']})');
-                                  },
+                                  onTap: () => print('Core geklickt: ${core['name']} (ID: ${core['id']})'),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: Colors.transparent,
@@ -344,8 +346,8 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                                   MaterialPageRoute(
                                     builder: (context) => QuizScreen(
                                       selected_level_pk: _selectedLevelId!,
-                                      tree: supabaseManager.tree,
-                                      coreData: supabaseManager.coreData,
+                                      tree: manager.tree,
+                                      coreData: manager.coreData,
                                     ),
                                   ),
                                 );
@@ -385,13 +387,13 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                         onTap: () {},
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.8,
-                          child: supabaseManager.isLoading
+                          child: manager.isLoading
                               ? const Center(child: CircularProgressIndicator())
                               : visibleNodes.isEmpty
                               ? const Center(child: Text('Keine Daten verfügbar'))
                               : Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: _buildNodeList(visibleNodes), // Direkt aufrufen
+                            child: _buildNodeList(visibleNodes),
                           ),
                         ),
                       ),
@@ -400,15 +402,14 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
                 ),
                 SlideTransition(
                   position: _paySlideAnimation,
-                  child: Container(
+                  child: _isPayScreenOpen
+                      ? Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     color: Colors.transparent,
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: const PayScreen(),
-                    ),
-                  ),
+                    child: const PayScreen(),
+                  )
+                      : const SizedBox.shrink(),
                 ),
                 Positioned(
                   bottom: 24.0,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:neon_thors_cores/level_screen/player/local_storage_player.dart';
 import '../_globals/debug_prints.dart';
 import 'db_question.dart';
 
 class QuestionVM with ChangeNotifier {
-  void debug(String text) {
+  void DEBUG(String text) {
     if (false || DEBUG_EVERYTHING)
       printCyan("[QuestionViewModel] ${question.text} $text");
   }
@@ -17,25 +18,25 @@ class QuestionVM with ChangeNotifier {
   bool get isLocked => _isLocked;
 
   QuestionVM({required this.question}) {
-    debug("QuizQuestion(){");
+    DEBUG("QuizQuestion(){");
     _questionSelections = List.generate(
       question.options.length,
       (index) => false,
     );
-    debug("\tInitialisierte Selections: $_questionSelections");
-    debug("}");
+    DEBUG("\tInitialisierte Selections: $_questionSelections");
+    DEBUG("}");
   }
 
   void selectQuestion(int index) {
-    debug("selectQuestion($index){");
+    DEBUG("selectQuestion($index){");
 
     if (_isLocked || index > questionSelections.length - 1) {
-      debug("\tFrage ist gesperrt, keine Änderung möglich");
+      DEBUG("\tFrage ist gesperrt, keine Änderung möglich");
       return;
     }
 
     final newSelections = List<bool>.from(questionSelections);
-    debug("\tnewSelections = $newSelections");
+    DEBUG("\tnewSelections = $newSelections");
 
     // Prüfen, ob es eine SingleChoice- oder MultipleChoice-Frage ist
     bool isSingleChoice =
@@ -45,33 +46,34 @@ class QuestionVM with ChangeNotifier {
       // RadioButton-Verhalten: Nur eine Option kann ausgewählt sein
       newSelections.fillRange(0, newSelections.length, false); // Alle abwählen
       newSelections[index] = true; // Nur die geklickte Option auswählen
-      debug("\tSingleChoice erkannt: Nur Option $index ausgewählt");
+      DEBUG("\tSingleChoice erkannt: Nur Option $index ausgewählt");
     } else {
       // Checkbox-Verhalten: Mehrere Optionen können ausgewählt bleiben
       newSelections[index] = !newSelections[index]; // Wert toggeln
-      debug("\tMultipleChoice erkannt: Option $index getoggelt");
+      DEBUG("\tMultipleChoice erkannt: Option $index getoggelt");
     }
 
     _questionSelections = newSelections;
-    debug("\t_questionSelections = ${_questionSelections}");
+    DEBUG("\t_questionSelections = ${_questionSelections}");
     notifyListeners();
-    debug("\t_notifyListeners aufgerufen");
-    debug("}");
+    DEBUG("\t_notifyListeners aufgerufen");
+    DEBUG("}");
   }
 
   void lock() {
     if (!questionSelections.contains(true)) return;
+    LocalStoragePlayer().s
     _isLocked = true;
     notifyListeners();
-    debug("lock(){");
+    DEBUG("lock(){");
   }
 
   QuestionVM clone() {
-    debug("clone(){");
+    DEBUG("clone(){");
     final clone = QuestionVM(question: this.question)
       .._questionSelections = List.from(this._questionSelections);
-    debug("\tErstellter Clone: $clone");
-    debug("}");
+    DEBUG("\tErstellter Clone: $clone");
+    DEBUG("}");
     return clone;
   }
 }

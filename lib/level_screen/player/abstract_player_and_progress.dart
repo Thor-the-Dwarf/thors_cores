@@ -101,11 +101,9 @@ abstract class Player extends ChangeNotifier {
   }
 
   void answered({required bool correct, required String essence_id, required String question_id, required context}) {
-    // Finde oder erstelle das relevante Core_-Objekt
     Core? core = cores.firstWhere(
           (core) => core.id == essence_id,
       orElse: () {
-        // Finde den zugehörigen Level-Knoten, um levelId zu bestimmen
         TreeNode? findNodeWithEssence(String essenceId, List<TreeNode> nodes) {
           for (var node in nodes) {
             if (node.hasCores) {
@@ -124,7 +122,7 @@ abstract class Player extends ChangeNotifier {
         final node = findNodeWithEssence(essence_id, Provider.of<SupabaseManager>(context, listen: false).tree);
         final newCore = Core(
           id: essence_id,
-          levelId: node?.id ?? '', // Fallback auf leeren String, falls kein Knoten gefunden
+          levelId: node?.id ?? '',
           richtigeEssenzen: [],
           falscheEssenzen: [],
         );
@@ -133,7 +131,6 @@ abstract class Player extends ChangeNotifier {
       },
     );
 
-    // Finde oder erstelle das Essence_-Objekt
     Essence? essence = core.richtigeEssenzen?.firstWhere(
           (e) => e.essenceFk == essence_id,
       orElse: () => Essence(essenceFk: essence_id, richtigeFragen: [], falscheFragen: []),
@@ -154,14 +151,12 @@ abstract class Player extends ChangeNotifier {
       }
     }
 
-    // Bewege die Frage zwischen richtigeFragen und falscheFragen
     if (correct) {
       essence.falscheFragen?.remove(question_id);
       essence.richtigeFragen ??= [];
       if (!essence.richtigeFragen!.contains(question_id)) {
         essence.richtigeFragen!.add(question_id);
       }
-      // Bewege Essence zu richtigeEssenzen, falls es in falscheEssenzen ist
       if (core.falscheEssenzen?.contains(essence) ?? false) {
         core.falscheEssenzen!.remove(essence);
         core.richtigeEssenzen ??= [];
@@ -173,14 +168,49 @@ abstract class Player extends ChangeNotifier {
       if (!essence.falscheFragen!.contains(question_id)) {
         essence.falscheFragen!.add(question_id);
       }
-      // Bewege Essence zu falscheEssenzen, falls es in richtigeEssenzen ist
       if (core.richtigeEssenzen?.contains(essence) ?? false) {
         core.richtigeEssenzen!.remove(essence);
         core.falscheEssenzen ??= [];
         core.falscheEssenzen!.add(essence);
       }
     }
+
+    // Aktualisiere Core-Progress
+    final essencesCount = (core.richtigeEssenzen?.length ?? 0) + (core.falscheEssenzen?.length ?? 0);
+    final richtigeEssenzenCount = core.richtigeEssenzen?.where((e) => e.richtigeFragen?.isNotEmpty ?? false).length ?? 0;
+    core.progress = essencesCount > 0 ? (richtigeEssenzenCount / essencesCount) * 100.0 : 0.0;
+
+    // Aktualisiere experience für den Level
+    final levelId = core.levelId;
+    if (levelId.isNotEmpty) {
+      final levelCores = cores.where((c) => c.levelId == levelId).toList();
+      final levelProgress = levelCores.isNotEmpty
+          ? levelCores.map((c) => c.progress).reduce((a, b) => a + b) / levelCores.length
+          : 0.0;
+      experience[levelId] = levelProgress;
+      // Aktualisiere auch die Eltern-Level
+      final supabaseManager = Provider.of<SupabaseManager>(context, listen: false);
+      var currentNode = supabaseManager.tree.firstWhere(
+            (node) => node.id == levelId,
+        orElse: () => TreeNode(id: '', name: '', children: []),
+      );
+      while (currentNode.id.isNotEmpty) {
+        final parentLevelCores = cores.where((c) => c.levelId == currentNode.id).toList();
+        final parentProgress = parentLevelCores.isNotEmpty
+            ? parentLevelCores.map((c) => c.progress).reduce((a, b) => a + b) / parentLevelCores.length
+            : 0.0;
+        experience[currentNode.id] = parentProgress;
+        currentNode = supabaseManager.tree.firstWhere(
+              (node) => node.children.any((child) => child.id == currentNode.id),
+          orElse: () => TreeNode(id: '', name: '', children: []),
+        );
+      }
+    }
+
+    save();
+    notifyListeners();
   }
+
 }
 
 class Core {

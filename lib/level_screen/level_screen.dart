@@ -17,6 +17,9 @@ void DEBUG(String text) {
 }
 
 class LevelScreen extends StatefulWidget {
+  String? accesKey;
+
+
   LevelScreen({super.key, String? accesKey}) {
     if (accesKey != null) {
       LocalStoragePlayer()..loadOrCreate(key: accesKey);
@@ -57,8 +60,14 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
     ).animate(CurvedAnimation(parent: _payAnimationController, curve: Curves.easeInOut));
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final manager = Provider.of<SupabaseManager>(context, listen: false); // Korrigierter Name
+      final manager = Provider.of<SupabaseManager>(context, listen: false);
       final player = Provider.of<LocalStoragePlayer>(context, listen: false);
+      // Initialisiere LocalStoragePlayer mit accesKey, falls vorhanden
+      if (widget.accesKey != null) {
+        player.loadOrCreate(key: widget.accesKey!).catchError((error) {
+          DEBUG('Fehler beim Laden des Players: $error');
+        });
+      }
       manager.loadTreeData().then((_) {
         for (var root in manager.tree) {
           player.loadExpirience(treeNode: root).catchError((error) {

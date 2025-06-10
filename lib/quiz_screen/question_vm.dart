@@ -62,7 +62,6 @@ class QuestionVM with ChangeNotifier {
 
   void lock() {
     if (!questionSelections.contains(true)) return;
-    LocalStoragePlayer().s
     _isLocked = true;
     notifyListeners();
     DEBUG("lock(){");

@@ -13,7 +13,6 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String keyData = r"Alpha_B8$kFm2@rW^bXe!4pZ*u&oR6%1HjLq#G7Nv?Td";
     final TextEditingController _keyController = TextEditingController();
 
     String generateCustomUuid() {
@@ -206,43 +205,11 @@ class StartScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Sichere dir diesen Schlüssel solange er hier eingeblendet ist!",
+                      "Hier warten über 20.000 Prüfungsfragen für werdende Fachinformatiker auf dich.",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16),
                     ),
-                    const Text(
-                      "Bald kann man die Web-App nur noch mit diesem oder ähnlichen Schlüsseln betreten.",
-                    ),
-                    const Text(
-                      "Dieser Alpha-Schlüssel wird vstl. bis Juni Zutritt verschaffen.",
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Alpha-Schlüssel:  "),
-                        const SelectableText(
-                          keyData,
-                          style: TextStyle(fontSize: 30),
-                        ),
-                        const SizedBox(width: 8),
-                        IconButton(
-                          icon: const Icon(Icons.copy, size: 20),
-                          onPressed: () {
-                            Clipboard.setData(
-                              const ClipboardData(text: keyData),
-                            );
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Schlüssel kopiert!"),
-                              ),
-                            );
-                          },
-                          tooltip: "Schlüssel kopieren",
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -266,6 +233,7 @@ class StartScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: 16,),
                     ElevatedButton(
                       onPressed: () => _showKeyPopup(context),
                       child: const Text("ausprobieren"),

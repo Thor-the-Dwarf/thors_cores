@@ -17,14 +17,9 @@ void DEBUG(String text) {
 }
 
 class LevelScreen extends StatefulWidget {
-  String? accesKey;
+  const LevelScreen({super.key, this.accesKey});
 
-
-  LevelScreen({super.key, String? accesKey}) {
-    if (accesKey != null) {
-      LocalStoragePlayer()..loadOrCreate(key: accesKey);
-    }
-  }
+  final String? accesKey;
 
   @override
   _LevelScreenState createState() => _LevelScreenState();
@@ -62,18 +57,13 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final manager = Provider.of<SupabaseManager>(context, listen: false);
       final player = Provider.of<LocalStoragePlayer>(context, listen: false);
-      // Initialisiere LocalStoragePlayer mit accesKey, falls vorhanden
       if (widget.accesKey != null) {
         player.loadOrCreate(key: widget.accesKey!).catchError((error) {
           DEBUG('Fehler beim Laden des Players: $error');
         });
       }
       manager.loadTreeData().then((_) {
-        for (var root in manager.tree) {
-          player.loadExpirience(treeNode: root).catchError((error) {
-            DEBUG('Fehler beim Laden der Erfahrung: $error');
-          });
-        }
+        _updatePlayerExperience(player, manager.tree);
       }).catchError((error) {
         DEBUG('Fehler beim Laden der Tree-Daten: $error');
       });
@@ -123,24 +113,26 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
     });
   }
 
+  void _updatePlayerExperience(LocalStoragePlayer player, List<TreeNode> tree) {
+    for (var root in tree) {
+      player.loadExpirience(treeNode: root).catchError((error) {
+        DEBUG('Fehler beim Laden der Erfahrung: $error');
+      });
+    }
+  }
+
   List<Map<String, dynamic>> _collectAllCores(String levelId, List<TreeNode> tree) {
     final manager = Provider.of<SupabaseManager>(context, listen: false);
     List<Map<String, dynamic>> allCores = [];
 
-    // Hilfsfunktion, um rekursiv Cores zu sammeln
     void collectCores(String nodeId) {
-      // Füge Cores des aktuellen Levels hinzu
       if (manager.coreData[nodeId] != null) {
         allCores.addAll(manager.coreData[nodeId]!);
       }
-
-      // Finde den aktuellen Knoten
       TreeNode? node = tree.firstWhere(
             (n) => n.id == nodeId,
-        orElse: () => TreeNode(id: '', name: '', children: []), // Fallback, um Fehler zu vermeiden
+        orElse: () => TreeNode(id: '', name: '', children: []),
       );
-
-      // Rekursiver Aufruf für alle Kinder
       for (var child in node.children) {
         collectCores(child.id);
       }
@@ -151,7 +143,6 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
     DEBUG('Gesamtzahl Cores gefunden: ${allCores.length}');
     return allCores;
   }
-
 
   void _collectCoresRec(TreeNode node, List<Map<String, dynamic>> allCores, SupabaseManager manager) {
     if (node.hasCores && manager.coreData[node.id] != null) allCores.addAll(manager.coreData[node.id]!);
@@ -268,215 +259,225 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SupabaseManager>(
-      builder: (context, manager, child) {
-        final visibleNodes = _buildVisibleNodes(manager.tree, 0);
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Wiederholung ist die Mutter des Lernens'),
-            elevation: 0,
-            automaticallyImplyLeading: false,
-          ),
-          body: GestureDetector(
-            onTap: () {
-              if (_isMenuOpen) _toggleMenu();
-              if (_isPayScreenOpen) _togglePayScreen();
-            },
-            child: Stack(
-              children: [
-                MyBackGround(),
-                if (_selectedLevelId != null)
-                  Consumer<LocalStoragePlayer>(
-                    builder: (context, player, child) {
-                      return Stack(
-                        children: [
-                          Container(
-                            color: Colors.transparent,
-                            child: GridView.builder(
-                              padding: const EdgeInsets.all(16.0),
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4,
-                                crossAxisSpacing: 16.0,
-                                mainAxisSpacing: 16.0,
-                                childAspectRatio: 3 / 2,
-                              ),
-                              itemCount: _selectedLevelId != null
-                                  ? _collectAllCores(_selectedLevelId!, manager.tree).length
-                                  : 0,
-                              itemBuilder: (context, index) {
-                                final core = _collectAllCores(_selectedLevelId!, manager.tree)[index];
-                                final coreProgress = player.cores.firstWhere(
-                                      (c) => c.id == core['id'],
-                                  orElse: () {
-                                    TreeNode? node = _findNodeWithCore(core['id'], manager.tree.first);
-                                    return Core(
-                                      id: core['id'],
-                                      levelId: node?.id ?? _selectedLevelId ?? '',
-                                      richtigeEssenzen: [],
-                                      falscheEssenzen: [],
-                                    );
-                                  },
-                                ).progress;
-                                DEBUG('Core ID: ${core['id']}, Progress: $coreProgress');
-                                return GestureDetector(
-                                  onTap: () => print('Core geklickt: ${core['name']} (ID: ${core['id']})'),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.transparent,
-                                          blurRadius: 4.0,
-                                          offset: const Offset(0, 2),
+    return WillPopScope(
+      onWillPop: () async {
+        final manager = Provider.of<SupabaseManager>(context, listen: false);
+        final player = Provider.of<LocalStoragePlayer>(context, listen: false);
+        _updatePlayerExperience(player, manager.tree);
+        return true;
+      },
+      child: Consumer<SupabaseManager>(
+        builder: (context, manager, child) {
+          final visibleNodes = _buildVisibleNodes(manager.tree, 0);
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Wiederholung ist die Mutter des Lernens'),
+              elevation: 0,
+              automaticallyImplyLeading: false,
+            ),
+            body: GestureDetector(
+              onTap: () {
+                if (_isMenuOpen) _toggleMenu();
+                if (_isPayScreenOpen) _togglePayScreen();
+              },
+              child: Stack(
+                children: [
+                  MyBackGround(),
+                  if (_selectedLevelId != null)
+                    Consumer<LocalStoragePlayer>(
+                      builder: (context, player, child) {
+                        return Stack(
+                          children: [
+                            Container(
+                              color: Colors.transparent,
+                              child: GridView.builder(
+                                padding: const EdgeInsets.all(16.0),
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 4,
+                                  crossAxisSpacing: 16.0,
+                                  mainAxisSpacing: 16.0,
+                                  childAspectRatio: 3 / 2,
+                                ),
+                                itemCount: _selectedLevelId != null
+                                    ? _collectAllCores(_selectedLevelId!, manager.tree).length
+                                    : 0,
+                                itemBuilder: (context, index) {
+                                  final core = _collectAllCores(_selectedLevelId!, manager.tree)[index];
+                                  final coreProgress = player.cores.firstWhere(
+                                        (c) => c.id == core['id'],
+                                    orElse: () {
+                                      TreeNode? node = _findNodeWithCore(core['id'], manager.tree.first);
+                                      return Core(
+                                        id: core['id'],
+                                        levelId: node?.id ?? _selectedLevelId ?? '',
+                                        richtigeEssenzen: [],
+                                        falscheEssenzen: [],
+                                      );
+                                    },
+                                  ).progress;
+                                  DEBUG('Core ID: ${core['id']}, Progress: $coreProgress');
+                                  return GestureDetector(
+                                    onTap: () => print('Core geklickt: ${core['name']} (ID: ${core['id']})'),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                        borderRadius: BorderRadius.circular(8.0),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.transparent,
+                                            blurRadius: 4.0,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: HaloSphere(
+                                          text: core['name'] as String,
+                                          progress: coreProgress,
                                         ),
-                                      ],
-                                    ),
-                                    child: Center(
-                                      child: HaloSphere(
-                                        text: core['name'] as String,
-                                        progress: coreProgress,
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            child: GestureDetector(
-                              onTap: () {
-                                print('Quiz gestartet für Level ID: $_selectedLevelId');
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => QuizScreen(
-                                      selected_level_pk: _selectedLevelId!,
-                                      tree: manager.tree,
-                                      coreData: manager.coreData,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: 56.0,
-                                color: Theme.of(context).primaryColor,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.play_arrow),
-                                    const SizedBox(width: 8.0),
-                                    Text(
-                                      'Quiz starten',
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                        fontWeight: FontWeight.bold,
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: GestureDetector(
+                                onTap: () {
+                                  print('Quiz gestartet für Level ID: $_selectedLevelId');
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => QuizScreen(
+                                        selected_level_pk: _selectedLevelId!,
+                                        tree: manager.tree,
+                                        coreData: manager.coreData,
                                       ),
                                     ),
-                                  ],
+                                  ).then((_) {
+                                    // Aktualisiere Fortschritte nach Rückkehr von QuizScreen
+                                    final player = Provider.of<LocalStoragePlayer>(context, listen: false);
+                                    _updatePlayerExperience(player, manager.tree);
+                                  });
+                                },
+                                child: Container(
+                                  height: 56.0,
+                                  color: Theme.of(context).primaryColor,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.play_arrow),
+                                      const SizedBox(width: 8.0),
+                                      Text(
+                                        'Quiz starten',
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                SlideTransition(
-                  position: _slideAnimation,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    color: Colors.transparent,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: manager.isLoading
-                              ? const Center(child: CircularProgressIndicator())
-                              : visibleNodes.isEmpty
-                              ? const Center(child: Text('Keine Daten verfügbar'))
-                              : Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: _buildNodeList(visibleNodes),
+                          ],
+                        );
+                      },
+                    ),
+                  SlideTransition(
+                    position: _slideAnimation,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      color: Colors.transparent,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            child: manager.isLoading
+                                ? const Center(child: CircularProgressIndicator())
+                                : visibleNodes.isEmpty
+                                ? const Center(child: Text('Keine Daten verfügbar'))
+                                : Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: _buildNodeList(visibleNodes),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SlideTransition(
-                  position: _paySlideAnimation,
-                  child: _isPayScreenOpen
-                      ? Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    color: Colors.transparent,
-                    child: const PayScreen(),
-                  )
-                      : const SizedBox.shrink(),
-                ),
-                Positioned(
-                  bottom: 24.0,
-                  right: MediaQuery.of(context).size.width * 0.025,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(height: 40.0),
-                      FloatingActionButton(
-                        heroTag: 'theme_toggler',
-                        onPressed: () {
-                          Provider.of<ThemeController>(context, listen: false).toggleTheme();
-                        },
-                        mini: true,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                        child: Consumer<ThemeController>(
-                          builder: (context, controller, _) => Icon(
-                            controller.themeMode == ThemeMode.dark
-                                ? Icons.dark_mode
-                                : Icons.light_mode,
+                  SlideTransition(
+                    position: _paySlideAnimation,
+                    child: _isPayScreenOpen
+                        ? Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      color: Colors.transparent,
+                      child: const PayScreen(),
+                    )
+                        : const SizedBox.shrink(),
+                  ),
+                  Positioned(
+                    bottom: 24.0,
+                    right: MediaQuery.of(context).size.width * 0.025,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: 40.0),
+                        FloatingActionButton(
+                          heroTag: 'theme_toggler',
+                          onPressed: () {
+                            Provider.of<ThemeController>(context, listen: false).toggleTheme();
+                          },
+                          mini: true,
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          child: Consumer<ThemeController>(
+                            builder: (context, controller, _) => Icon(
+                              controller.themeMode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode,
+                              color: Theme.of(context).iconTheme.color,
+                              size: 48.0,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 40.0),
+                        FloatingActionButton(
+                          heroTag: 'menu_toggle',
+                          onPressed: _toggleMenu,
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          child: Icon(
+                            _isMenuOpen ? Icons.close : Icons.menu,
                             color: Theme.of(context).iconTheme.color,
                             size: 48.0,
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 40.0),
-                      FloatingActionButton(
-                        heroTag: 'menu_toggle',
-                        onPressed: _toggleMenu,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                        child: Icon(
-                          _isMenuOpen ? Icons.close : Icons.menu,
-                          color: Theme.of(context).iconTheme.color,
-                          size: 48.0,
+                        const SizedBox(height: 40.0),
+                        FloatingActionButton(
+                          heroTag: 'support_me',
+                          onPressed: _togglePayScreen,
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          child: Icon(
+                            _isPayScreenOpen ? Icons.close : Icons.handshake,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 48.0,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 40.0),
-                      FloatingActionButton(
-                        heroTag: 'support_me',
-                        onPressed: _togglePayScreen,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                        child: Icon(
-                          _isPayScreenOpen ? Icons.close : Icons.handshake,
-                          color: Theme.of(context).iconTheme.color,
-                          size: 48.0,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

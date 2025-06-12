@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:neon_thors_cores/level_screen/core_icon.dart';
 import 'package:neon_thors_cores/level_screen/player/abstract_player_and_progress.dart';
@@ -64,6 +66,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
       }
       manager.loadTreeData().then((_) {
         _updatePlayerExperience(player, manager.tree);
+        printTreeAsJson();
       }).catchError((error) {
         DEBUG('Fehler beim Laden der Tree-Daten: $error');
       });
@@ -479,5 +482,41 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
         },
       ),
     );
+  }
+
+
+
+  void printTreeAsJson() {
+    final manager = Provider.of<SupabaseManager>(context, listen: false);
+
+    // Rekursive Funktion zum Konvertieren von TreeNode zu JSON
+    List<Map<String, dynamic>> convertTreeToJson(List<TreeNode> nodes) {
+      return nodes.map((node) {
+        // Nur Core-IDs aus coreData holen
+        List<Map<String, dynamic>> cores = [];
+        if (node.hasCores && manager.coreData[node.id] != null) {
+          cores = manager.coreData[node.id]!.map((coreData) {
+            return {
+              'corePk': coreData['id'] as String,
+            };
+          }).toList();
+        }
+
+        // Sublevels rekursiv konvertieren
+        final sublevels = convertTreeToJson(node.children);
+
+        // Minimales JSON-Objekt für Level
+        return {
+          'levelPk': node.id,
+          'sublevel': sublevels,
+          'cores': cores,
+        };
+      }).toList();
+    }
+
+    // Konvertiere Tree und gib JSON formatiert aus
+    final jsonData = convertTreeToJson(manager.tree);
+    final prettyJson = JsonEncoder.withIndent('  ').convert(jsonData);
+    print('[LevelScreen] Tree as JSON:\n$prettyJson');
   }
 }

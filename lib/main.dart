@@ -10,6 +10,8 @@ import '_globals/debug_prints.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'firebase_options.dart';
+import 'level_screen/level_widget.dart';
+import 'level_screen/structure/test_room.dart';
 import 'level_screen/supabase_manager.dart';
 import 'level_screen/level_screen.dart';
 import 'level_screen/player/local_storage_player.dart';
@@ -65,9 +67,10 @@ class MyApp extends StatelessWidget {
             themeMode: themeController.themeMode, // Dynamisch vom Controller
             home:
             // const LevelScreen()
-            const StartScreen()
+            // const StartScreen()
             // const ArchivemendScreen(),
             // QuizScreen(selected_level_pk: "188de553-db8e-499e-8bf5-049884b88a05"),
+            LevelListTestGui(levelPks: topLevelIds)
 
           );
         },

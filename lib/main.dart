@@ -66,11 +66,11 @@ class MyApp extends StatelessWidget {
             darkTheme: ThemeData.dark(), // Dark Mode Theme
             themeMode: themeController.themeMode, // Dynamisch vom Controller
             home:
-            // const LevelScreen()
+            LevelScreen(levelIds: topLevelIds,)
             // const StartScreen()
             // const ArchivemendScreen(),
             // QuizScreen(selected_level_pk: "188de553-db8e-499e-8bf5-049884b88a05"),
-            LevelListTestGui(levelPks: topLevelIds)
+            // LevelListTestGui(levelPks: topLevelIds)
 
           );
         },

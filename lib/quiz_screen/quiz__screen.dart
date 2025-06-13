@@ -20,7 +20,7 @@ void DEBUG(String text) {
 
 class QuizScreen extends StatefulWidget {
   final String selected_level_pk;
-  final List<TreeNode> tree;
+  // final List<TreeNode> tree;
   final Map<String, List<Map<String, dynamic>>> coreData;
   late final SupabaseClient supabase;
   List<QuestionWidget> history = [];
@@ -29,7 +29,7 @@ class QuizScreen extends StatefulWidget {
   QuizScreen({
     super.key,
     required this.selected_level_pk,
-    required this.tree,
+    // required this.tree,
     required this.coreData,
   });
 
@@ -199,98 +199,98 @@ class _QuizScreenState extends State<QuizScreen> {
     }
 
     List<QuestionWidget> list = [];
-    final allCores = _collectAllCores(levelPk, widget.tree);
+    // final allCores = _collectAllCores(levelPk, widget.tree);
 
-    if (allCores.isEmpty) {
-      DEBUG('Keine Cores in diesem Level oder seinen Sub-Levels gefunden.');
-      if (isInitialLoad) {
-        setState(() {
-          isLoading = false;
-        });
-      }
-      return;
-    }
+    // if (allCores.isEmpty) {
+    //   DEBUG('Keine Cores in diesem Level oder seinen Sub-Levels gefunden.');
+    //   if (isInitialLoad) {
+    //     setState(() {
+    //       isLoading = false;
+    //     });
+    //   }
+    //   return;
+    // }
 
-    List<String> essencePks = [];
-    for (var core in allCores) {
-      final coreId = core['id'] as String;
-      final essenceResponse = await widget.supabase
-          .from('essence')
-          .select('essence_pk')
-          .eq('core_fk', coreId);
+    // List<String> essencePks = [];
+    // for (var core in allCores) {
+    //   final coreId = core['id'] as String;
+    //   final essenceResponse = await widget.supabase
+    //       .from('essence')
+    //       .select('essence_pk')
+    //       .eq('core_fk', coreId);
+    //
+    //   if (essenceResponse != null && essenceResponse.isNotEmpty) {
+    //     essencePks.addAll(essenceResponse.map((e) => e['essence_pk'] as String));
+    //   }
+    // }
+    //
+    // if (essencePks.isEmpty) {
+    //   DEBUG('Keine Essences für die Cores gefunden.');
+    //   if (isInitialLoad) {
+    //     setState(() {
+    //       isLoading = false;
+    //     });
+    //   }
+    //   return;
+    // }
 
-      if (essenceResponse != null && essenceResponse.isNotEmpty) {
-        essencePks.addAll(essenceResponse.map((e) => e['essence_pk'] as String));
-      }
-    }
-
-    if (essencePks.isEmpty) {
-      DEBUG('Keine Essences für die Cores gefunden.');
-      if (isInitialLoad) {
-        setState(() {
-          isLoading = false;
-        });
-      }
-      return;
-    }
-
-    List<Map<String, dynamic>> availableQuestions = [];
-    final questionResponse = await widget.supabase
-        .from('question')
-        .select('question_pk, text, points, options, essence_fk')
-        .inFilter('essence_fk', essencePks);
-
-    DEBUG('Question Response: ${questionResponse?.length ?? 0} Fragen gefunden');
-
-    if (questionResponse != null && questionResponse.isNotEmpty) {
-      availableQuestions = questionResponse.cast<Map<String, dynamic>>();
-    }
-
-    if (availableQuestions.isEmpty) {
-      DEBUG('Keine Fragen für die Essences gefunden.');
-      if (isInitialLoad) {
-        setState(() {
-          isLoading = false;
-        });
-      }
-      return;
-    }
-
-    List<String> excludedPks = widget.history
-        .map((qw) => qw.questionVM.question.question_pk)
-        .toList();
-    availableQuestions = availableQuestions
-        .where((q) => !excludedPks.contains(q['question_pk'] as String))
-        .toList();
-
-    DEBUG('Verfügbare Fragen nach Ausschluss: ${availableQuestions.length}');
-
-    final random = Random();
-    while (availableQuestions.isNotEmpty && list.length < 10) {
-      final questionIndex = random.nextInt(availableQuestions.length);
-      final questionData = availableQuestions[questionIndex];
-      DEBUG('Verarbeitete Frage: $questionData');
-      list.add(
-        QuestionWidget(
-          questionVM: QuestionVM(question: Question.fromSupaBase(questionData)),
-        ),
-      );
-      availableQuestions.removeAt(questionIndex);
-    }
-
-    DEBUG('Geladene Fragen: ${list.length}');
-
-    setState(() {
-      widget.questions = list;
-      if (isInitialLoad && widget.questions.isNotEmpty) {
-        widget.history.add(
-          widget.questions.removeAt(random.nextInt(widget.questions.length)),
-        );
-      }
-      if (isInitialLoad) {
-        isLoading = false;
-      }
-    });
+  //   List<Map<String, dynamic>> availableQuestions = [];
+  //   final questionResponse = await widget.supabase
+  //       .from('question')
+  //       .select('question_pk, text, points, options, essence_fk')
+  //       .inFilter('essence_fk', essencePks);
+  //
+  //   DEBUG('Question Response: ${questionResponse?.length ?? 0} Fragen gefunden');
+  //
+  //   if (questionResponse != null && questionResponse.isNotEmpty) {
+  //     availableQuestions = questionResponse.cast<Map<String, dynamic>>();
+  //   }
+  //
+  //   if (availableQuestions.isEmpty) {
+  //     DEBUG('Keine Fragen für die Essences gefunden.');
+  //     if (isInitialLoad) {
+  //       setState(() {
+  //         isLoading = false;
+  //       });
+  //     }
+  //     return;
+  //   }
+  //
+  //   List<String> excludedPks = widget.history
+  //       .map((qw) => qw.questionVM.question.question_pk)
+  //       .toList();
+  //   availableQuestions = availableQuestions
+  //       .where((q) => !excludedPks.contains(q['question_pk'] as String))
+  //       .toList();
+  //
+  //   DEBUG('Verfügbare Fragen nach Ausschluss: ${availableQuestions.length}');
+  //
+  //   final random = Random();
+  //   while (availableQuestions.isNotEmpty && list.length < 10) {
+  //     final questionIndex = random.nextInt(availableQuestions.length);
+  //     final questionData = availableQuestions[questionIndex];
+  //     DEBUG('Verarbeitete Frage: $questionData');
+  //     list.add(
+  //       QuestionWidget(
+  //         questionVM: QuestionVM(question: Question.fromSupaBase(questionData)),
+  //       ),
+  //     );
+  //     availableQuestions.removeAt(questionIndex);
+  //   }
+  //
+  //   DEBUG('Geladene Fragen: ${list.length}');
+  //
+  //   setState(() {
+  //     widget.questions = list;
+  //     if (isInitialLoad && widget.questions.isNotEmpty) {
+  //       widget.history.add(
+  //         widget.questions.removeAt(random.nextInt(widget.questions.length)),
+  //       );
+  //     }
+  //     if (isInitialLoad) {
+  //       isLoading = false;
+  //     }
+  //   });
   }
 
   @override

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'dart:math';
 import 'level_screen/player/local_storage_player.dart';
+import 'level_screen/structure/test_room.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -140,7 +141,7 @@ class StartScreen extends StatelessWidget {
                                             LocalStoragePlayer
                                           >(
                                             create: (_) => LocalStoragePlayer(),
-                                            child: LevelScreen(),
+                                            child: LevelScreen(levelIds: topLevelIds),
                                           ),
                                     ),
                                   );
@@ -163,7 +164,7 @@ class StartScreen extends StatelessWidget {
                                             LocalStoragePlayer
                                           >(
                                             create: (_) => player,
-                                            child: LevelScreen(),
+                                            child: LevelScreen(levelIds: topLevelIds,),
                                           ),
                                     ),
                                   );
@@ -271,7 +272,7 @@ class StartScreen extends StatelessWidget {
         MaterialPageRoute(
           builder: (context) => ChangeNotifierProvider<LocalStoragePlayer>(
             create: (_) => localStoragePlayer,
-            child: LevelScreen(),
+            child: LevelScreen(levelIds: topLevelIds,),
           ),
         ),
       );
@@ -296,7 +297,7 @@ class StartScreen extends StatelessWidget {
             builder: (context) => ChangeNotifierProvider<LocalStoragePlayer>(
               create: (_) => LocalStoragePlayer()
                 ..enterLocalStorage(key: trimmedKey), // Initialisiere neuen Player
-              child: LevelScreen(),
+              child: LevelScreen(levelIds: topLevelIds,),
             ),
           ),
         );

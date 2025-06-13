@@ -94,15 +94,22 @@ class _LevelWidgetState extends State<LevelWidget> {
     );
   }
 
+
   Future<void> _load() async {
-    print('NNNNNNNNNNNNNNAÖSNDÖANSFÖKNSADÖKNASÖDNÖKN ${widget.level_pk}');
     try {
       final supabase = Supabase.instance.client;
+
       final levelData = await supabase
           .from('levels')
           .select('name, details')
           .eq('level_pk', widget.level_pk)
+          .limit(1)
           .maybeSingle();
+
+      if (levelData == null) {
+        print('⚠️ Kein Level gefunden mit ID: ${widget.level_pk}');
+        return;
+      }
 
       final sublevelData = await supabase
           .from('sub_levels')
@@ -117,37 +124,24 @@ class _LevelWidgetState extends State<LevelWidget> {
       final newWidget = LevelWidget(
         key: widget.key,
         level_pk: widget.level_pk,
-        name: levelData?['name'] as String? ?? 'Kein Name',
-        details: levelData?['details'] as String? ?? '',
-        sublevel: sublevelData
+        name: levelData['name'] ?? 'Kein Name',
+        details: levelData['details'] ?? '',
+        sublevel: (sublevelData as List<dynamic>)
             .map((sub) => LevelWidget(
           key: ValueKey(sub['child_level_fk']),
           level_pk: sub['child_level_fk'] as String,
         ))
             .toList(),
-        cores: coreData.map((core) => core['core_fk'] as String).toList(),
+        cores: (coreData as List<dynamic>)
+            .map((core) => core['core_fk'] as String)
+            .toList(),
       );
 
-      if (mounted) {
-        setState(() {
-          _cache[widget.level_pk] = newWidget;
-        });
-      }
-    } catch (e) {
-      print('Fehler beim Laden von Level ${widget.level_pk}: $e');
-      final errorWidget = LevelWidget(
-        key: widget.key,
-        level_pk: widget.level_pk,
-        name: 'Fehler',
-        details: '',
-        sublevel: [],
-        cores: [],
-      );
-      if (mounted) {
-        setState(() {
-          _cache[widget.level_pk] = errorWidget;
-        });
-      }
+      setState(() {
+        _cache[widget.level_pk] = newWidget;
+      });
+    } catch (e, stack) {
+      print('❌ Fehler in _load(): $e\n$stack');
     }
   }
 

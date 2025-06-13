@@ -1,17 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:neon_thors_cores/level_screen/core_icon.dart';
 import 'package:neon_thors_cores/level_screen/player/abstract_player_and_progress.dart';
-import 'package:neon_thors_cores/level_screen/tree_node.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../_globals/debug_prints.dart';
 import '../_globals/widgets/my_background.dart';
 import '../_globals/widgets/theme_controller.dart';
 import '../pay_screen.dart';
 import '../quiz_screen/quiz__screen.dart';
 import 'core_cluster_icon.dart';
-import 'supabase_manager.dart';
+import 'level_widget.dart';
 import 'player/local_storage_player.dart';
 
 void DEBUG(String text) {
@@ -19,9 +18,10 @@ void DEBUG(String text) {
 }
 
 class LevelScreen extends StatefulWidget {
-  const LevelScreen({super.key, this.accesKey});
+  const LevelScreen({super.key, required this.levelIds, this.accessKey});
 
-  final String? accesKey;
+  final List<String> levelIds;
+  final String? accessKey;
 
   @override
   _LevelScreenState createState() => _LevelScreenState();
@@ -56,21 +56,6 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
       end: const Offset(0.0, 0.0),
     ).animate(CurvedAnimation(parent: _payAnimationController, curve: Curves.easeInOut));
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final manager = Provider.of<SupabaseManager>(context, listen: false);
-      final player = Provider.of<LocalStoragePlayer>(context, listen: false);
-      if (widget.accesKey != null) {
-        player.loadOrCreate(key: widget.accesKey!).catchError((error) {
-          DEBUG('Fehler beim Laden des Players: $error');
-        });
-      }
-      manager.loadTreeData().then((_) {
-        _updatePlayerExperience(player, manager.tree);
-        printTreeAsJson();
-      }).catchError((error) {
-        DEBUG('Fehler beim Laden der Tree-Daten: $error');
-      });
-    });
   }
 
   @override
@@ -106,7 +91,7 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
     });
   }
 
-  void _toggleCores(String levelId, List<TreeNode> tree) {
+  void _toggleCores(String levelId) {
     setState(() {
       _selectedLevelId = _selectedLevelId == levelId ? null : levelId;
       if (_isMenuOpen && _selectedLevelId != null) {
@@ -116,147 +101,33 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
     });
   }
 
-  void _updatePlayerExperience(LocalStoragePlayer player, List<TreeNode> tree) {
-    for (var root in tree) {
-      player.loadExpirience(treeNode: root).catchError((error) {
-        DEBUG('Fehler beim Laden der Erfahrung: $error');
-      });
+
+  Future<List<Map<String, dynamic>>> _collectAllCores(String levelId) async {
+    try {
+      final supabase = Supabase.instance.client;
+      final coreData = await supabase
+          .from('level_cores')
+          .select('core_fk, name')
+          .eq('parent_level_fk', levelId);
+      final cores = coreData.map((core) => {
+        'id': core['core_fk'],
+        'name': core['name'] ?? 'Core',
+      }).toList();
+      DEBUG('Cores für Level $levelId: ${cores.length} gefunden');
+      return cores;
+    } catch (e) {
+      DEBUG('Fehler beim Laden der Cores für Level $levelId: $e');
+      return [];
     }
   }
 
-  List<Map<String, dynamic>> _collectAllCores(String levelId, List<TreeNode> tree) {
-    final manager = Provider.of<SupabaseManager>(context, listen: false);
-    List<Map<String, dynamic>> allCores = [];
-
-    void collectCores(String nodeId) {
-      if (manager.coreData[nodeId] != null) {
-        allCores.addAll(manager.coreData[nodeId]!);
-      }
-      TreeNode? node = tree.firstWhere(
-            (n) => n.id == nodeId,
-        orElse: () => TreeNode(id: '', name: '', children: []),
-      );
-      for (var child in node.children) {
-        collectCores(child.id);
-      }
-    }
-
-    DEBUG('Suche Cores für levelId: $levelId und Sub-Level');
-    collectCores(levelId);
-    DEBUG('Gesamtzahl Cores gefunden: ${allCores.length}');
-    return allCores;
-  }
-
-  void _collectCoresRec(TreeNode node, List<Map<String, dynamic>> allCores, SupabaseManager manager) {
-    if (node.hasCores && manager.coreData[node.id] != null) allCores.addAll(manager.coreData[node.id]!);
-    for (var child in node.children) _collectCoresRec(child, allCores, manager);
-  }
-
-  List<Map<String, dynamic>> _buildVisibleNodes(List<TreeNode> nodes, int depth) {
-    List<Map<String, dynamic>> visibleNodes = [];
-    for (var node in nodes) {
-      visibleNodes.add({'node': node, 'depth': depth});
-      if (node.isExpanded && node.children.isNotEmpty) {
-        visibleNodes.addAll(_buildVisibleNodes(node.children, depth + 1));
-      }
-    }
-    return visibleNodes;
-  }
-
-  void _toggleNode(TreeNode node) {
-    setState(() {
-      node.isExpanded = !node.isExpanded;
-    });
-  }
-
-  TreeNode? _findNodeWithCore(String coreId, TreeNode node) {
-    final manager = Provider.of<SupabaseManager>(context, listen: false);
-    if (node.hasCores && manager.coreData[node.id]?.any((c) => c['id'] == coreId) == true) return node;
-    for (var child in node.children) {
-      final found = _findNodeWithCore(coreId, child);
-      if (found != null) return found;
-    }
-    return null;
-  }
-
-  Widget _buildNodeList(List<Map<String, dynamic>> visibleNodes) {
-    return Consumer<LocalStoragePlayer>(
-      builder: (context, player, child) {
-        final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(8.0),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).shadowColor.withOpacity(0.3),
-                blurRadius: 4.0,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: ListView.builder(
-            itemCount: visibleNodes.length,
-            itemBuilder: (context, index) {
-              final nodeData = visibleNodes[index];
-              final node = nodeData['node'] as TreeNode;
-              final depth = nodeData['depth'] as int;
-              final isSelected = node.id == _selectedLevelId;
-              return InkWell(
-                onTap: node.children.isNotEmpty ? () => _toggleNode(node) : null,
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(16.0 + depth * 16.0, 8.0, 16.0, 8.0),
-                  color: isSelected
-                      ? (isDarkMode ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2))
-                      : Colors.transparent,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 24,
-                        child: node.children.isNotEmpty
-                            ? GestureDetector(
-                          onTap: () => _toggleNode(node),
-                          child: Icon(
-                            node.isExpanded ? Icons.expand_more : Icons.chevron_right,
-                            color: isDarkMode ? Colors.white : Colors.black,
-                          ),
-                        )
-                            : null,
-                      ),
-                      const SizedBox(width: 8),
-                      GestureDetector(
-                        onTap: () => _toggleCores(node.id, Provider.of<SupabaseManager>(context, listen: false).tree),
-                        child: CoreClusterIcon(
-                          progress: player.experience[node.id] ?? 0.0,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () => _toggleCores(node.id, Provider.of<SupabaseManager>(context, listen: false).tree),
-                          child: Text(
-                            node.name,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                              color: isSelected
-                                  ? (isDarkMode ? Colors.white : Colors.black)
-                                  : Theme.of(context).textTheme.bodyMedium!.color,
-                            ),
-                            softWrap: true,
-                            overflow: TextOverflow.visible,
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
+  Widget _buildNodeList() {
+    return ListView(
+      children: widget.levelIds.map((levelId) {
+        return LevelWidget(
+          level_pk: levelId,
         );
-      },
+      }).toList(),
     );
   }
 
@@ -264,259 +135,199 @@ class _LevelScreenState extends State<LevelScreen> with TickerProviderStateMixin
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        final manager = Provider.of<SupabaseManager>(context, listen: false);
-        final player = Provider.of<LocalStoragePlayer>(context, listen: false);
-        _updatePlayerExperience(player, manager.tree);
         return true;
       },
-      child: Consumer<SupabaseManager>(
-        builder: (context, manager, child) {
-          final visibleNodes = _buildVisibleNodes(manager.tree, 0);
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Wiederholung ist die Mutter des Lernens'),
-              elevation: 0,
-              automaticallyImplyLeading: false,
-            ),
-            body: GestureDetector(
-              onTap: () {
-                if (_isMenuOpen) _toggleMenu();
-                if (_isPayScreenOpen) _togglePayScreen();
-              },
-              child: Stack(
-                children: [
-                  MyBackGround(),
-                  if (_selectedLevelId != null)
-                    Consumer<LocalStoragePlayer>(
-                      builder: (context, player, child) {
-                        return Stack(
-                          children: [
-                            Container(
-                              color: Colors.transparent,
-                              child: GridView.builder(
-                                padding: const EdgeInsets.all(16.0),
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4,
-                                  crossAxisSpacing: 16.0,
-                                  mainAxisSpacing: 16.0,
-                                  childAspectRatio: 3 / 2,
-                                ),
-                                itemCount: _selectedLevelId != null
-                                    ? _collectAllCores(_selectedLevelId!, manager.tree).length
-                                    : 0,
-                                itemBuilder: (context, index) {
-                                  final core = _collectAllCores(_selectedLevelId!, manager.tree)[index];
-                                  final coreProgress = player.cores.firstWhere(
-                                        (c) => c.id == core['id'],
-                                    orElse: () {
-                                      TreeNode? node = _findNodeWithCore(core['id'], manager.tree.first);
-                                      return Core(
-                                        id: core['id'],
-                                        levelId: node?.id ?? _selectedLevelId ?? '',
-                                        richtigeEssenzen: [],
-                                        falscheEssenzen: [],
-                                      );
-                                    },
-                                  ).progress;
-                                  DEBUG('Core ID: ${core['id']}, Progress: $coreProgress');
-                                  return GestureDetector(
-                                    onTap: () => print('Core geklickt: ${core['name']} (ID: ${core['id']})'),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.transparent,
-                                        borderRadius: BorderRadius.circular(8.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.transparent,
-                                            blurRadius: 4.0,
-                                            offset: const Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Center(
-                                        child: HaloSphere(
-                                          text: core['name'] as String,
-                                          progress: coreProgress,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Wiederholung ist die Mutter des Lernens'),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+        ),
+        body: GestureDetector(
+          onTap: () {
+            if (_isMenuOpen) _toggleMenu();
+            if (_isPayScreenOpen) _togglePayScreen();
+          },
+          child: Stack(
+            children: [
+              MyBackGround(),
+              if (_selectedLevelId != null)
+                FutureBuilder<List<Map<String, dynamic>>>(
+                  future: _collectAllCores(_selectedLevelId!),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    final cores = snapshot.data!;
+                    return Stack(
+                      children: [
+                        Container(
+                          color: Colors.transparent,
+                          child: GridView.builder(
+                            padding: const EdgeInsets.all(16.0),
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 16.0,
+                              mainAxisSpacing: 16.0,
+                              childAspectRatio: 3 / 2,
                             ),
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: GestureDetector(
-                                onTap: () {
-                                  print('Quiz gestartet für Level ID: $_selectedLevelId');
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => QuizScreen(
-                                        selected_level_pk: _selectedLevelId!,
-                                        tree: manager.tree,
-                                        coreData: manager.coreData,
-                                      ),
-                                    ),
-                                  ).then((_) {
-                                    // Aktualisiere Fortschritte nach Rückkehr von QuizScreen
-                                    final player = Provider.of<LocalStoragePlayer>(context, listen: false);
-                                    _updatePlayerExperience(player, manager.tree);
-                                  });
-                                },
+                            itemCount: cores.length,
+                            itemBuilder: (context, index) {
+                              final core = cores[index];
+                              return GestureDetector(
+                                onTap: () => print('Core geklickt: ${core['name']} (ID: ${core['id']})'),
                                 child: Container(
-                                  height: 56.0,
-                                  color: Theme.of(context).primaryColor,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(Icons.play_arrow),
-                                      const SizedBox(width: 8.0),
-                                      Text(
-                                        'Quiz starten',
-                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.transparent,
+                                        blurRadius: 4.0,
+                                        offset: const Offset(0, 2),
                                       ),
                                     ],
                                   ),
+                                  child: Center(
+                                    child: HaloSphere(
+                                      text: core['name'] as String,
+                                      progress: 0.0,
+                                    ),
+                                  ),
                                 ),
+                              );
+                            },
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: () async {
+                              final coreData = await _collectAllCores(_selectedLevelId!);
+                              print('Quiz gestartet für Level ID: $_selectedLevelId');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => QuizScreen(
+                                    selected_level_pk: _selectedLevelId!,
+                                    coreData: {_selectedLevelId!: coreData},
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 56.0,
+                              color: Theme.of(context).primaryColor,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.play_arrow),
+                                  const SizedBox(width: 8.0),
+                                  Text(
+                                    'Quiz starten',
+                                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        );
-                      },
-                    ),
-                  SlideTransition(
-                    position: _slideAnimation,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      color: Colors.transparent,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            child: manager.isLoading
-                                ? const Center(child: CircularProgressIndicator())
-                                : visibleNodes.isEmpty
-                                ? const Center(child: Text('Keine Daten verfügbar'))
-                                : Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: _buildNodeList(visibleNodes),
-                            ),
                           ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              SlideTransition(
+                position: _slideAnimation,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  color: Colors.transparent,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: widget.levelIds.isEmpty
+                            ? const Center(child: Text('Keine Daten verfügbar'))
+                            : Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: _buildNodeList(),
                         ),
                       ),
                     ),
                   ),
-                  SlideTransition(
-                    position: _paySlideAnimation,
-                    child: _isPayScreenOpen
-                        ? Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      color: Colors.transparent,
-                      child: const PayScreen(),
-                    )
-                        : const SizedBox.shrink(),
-                  ),
-                  Positioned(
-                    bottom: 24.0,
-                    right: MediaQuery.of(context).size.width * 0.025,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(height: 40.0),
-                        FloatingActionButton(
-                          heroTag: 'theme_toggler',
-                          onPressed: () {
-                            Provider.of<ThemeController>(context, listen: false).toggleTheme();
-                          },
-                          mini: true,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          child: Consumer<ThemeController>(
-                            builder: (context, controller, _) => Icon(
-                              controller.themeMode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode,
-                              color: Theme.of(context).iconTheme.color,
-                              size: 48.0,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 40.0),
-                        FloatingActionButton(
-                          heroTag: 'menu_toggle',
-                          onPressed: _toggleMenu,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          child: Icon(
-                            _isMenuOpen ? Icons.close : Icons.menu,
-                            color: Theme.of(context).iconTheme.color,
-                            size: 48.0,
-                          ),
-                        ),
-                        const SizedBox(height: 40.0),
-                        FloatingActionButton(
-                          heroTag: 'support_me',
-                          onPressed: _togglePayScreen,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          child: Icon(
-                            _isPayScreenOpen ? Icons.close : Icons.handshake,
-                            color: Theme.of(context).iconTheme.color,
-                            size: 48.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          );
-        },
+              SlideTransition(
+                position: _paySlideAnimation,
+                child: _isPayScreenOpen
+                    ? Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  color: Colors.transparent,
+                  child: const PayScreen(),
+                )
+                    : const SizedBox.shrink(),
+              ),
+              Positioned(
+                bottom: 24.0,
+                right: MediaQuery.of(context).size.width * 0.025,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(height: 40.0),
+                    FloatingActionButton(
+                      heroTag: 'theme_toggler',
+                      onPressed: () {
+                        Provider.of<ThemeController>(context, listen: false).toggleTheme();
+                      },
+                      mini: true,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      child: Consumer<ThemeController>(
+                        builder: (context, controller, _) => Icon(
+                          controller.themeMode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode,
+                          color: Theme.of(context).iconTheme.color,
+                          size: 48.0,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 40.0),
+                    FloatingActionButton(
+                      heroTag: 'menu_toggle',
+                      onPressed: _toggleMenu,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      child: Icon(
+                        _isMenuOpen ? Icons.close : Icons.menu,
+                        color: Theme.of(context).iconTheme.color,
+                        size: 48.0,
+                      ),
+                    ),
+                    const SizedBox(height: 40.0),
+                    FloatingActionButton(
+                      heroTag: 'support_me',
+                      onPressed: _togglePayScreen,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      child: Icon(
+                        _isPayScreenOpen ? Icons.close : Icons.handshake,
+                        color: Theme.of(context).iconTheme.color,
+                        size: 48.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
-  }
-
-
-
-  void printTreeAsJson() {
-    final manager = Provider.of<SupabaseManager>(context, listen: false);
-
-    // Rekursive Funktion zum Konvertieren von TreeNode zu JSON
-    List<Map<String, dynamic>> convertTreeToJson(List<TreeNode> nodes) {
-      return nodes.map((node) {
-        // Nur Core-IDs aus coreData holen
-        List<Map<String, dynamic>> cores = [];
-        if (node.hasCores && manager.coreData[node.id] != null) {
-          cores = manager.coreData[node.id]!.map((coreData) {
-            return {
-              'corePk': coreData['id'] as String,
-            };
-          }).toList();
-        }
-
-        // Sublevels rekursiv konvertieren
-        final sublevels = convertTreeToJson(node.children);
-
-        // Minimales JSON-Objekt für Level
-        return {
-          'levelPk': node.id,
-          'sublevel': sublevels,
-          'cores': cores,
-        };
-      }).toList();
-    }
-
-    // Konvertiere Tree und gib JSON formatiert aus
-    final jsonData = convertTreeToJson(manager.tree);
-    final prettyJson = JsonEncoder.withIndent('  ').convert(jsonData);
-    print('[LevelScreen] Tree as JSON:\n$prettyJson');
   }
 }

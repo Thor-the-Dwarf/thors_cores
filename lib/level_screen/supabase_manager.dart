@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:neon_thors_cores/level_screen/tree_node.dart';
-import 'dart:math';
 
 // Definiere DEBUG, da es nicht global verfügbar ist
 void DEBUG(String text) {
@@ -22,7 +21,7 @@ class SupabaseManager extends ChangeNotifier {
   List<TreeNode> get tree => _tree;
   Map<String, List<Map<String, dynamic>>> get coreData => _coreData;
 
-  Future<void> loadTreeData() async {
+  Future<void> loadTreeData({required List<String> topLevelIds}) async {
     try {
       _isLoading = true;
       notifyListeners();
@@ -107,7 +106,7 @@ class SupabaseManager extends ChangeNotifier {
         subLevel['name'] = levelData['name'] as String? ?? 'Unnamed Level';
       }
 
-      _tree = _buildTree(rawData, _coreData);
+      _tree = _buildTree(rawData, _coreData, topLevelIds);
       _isLoading = false;
       DEBUG('coreData geladen: $_coreData');
       notifyListeners();
@@ -121,6 +120,7 @@ class SupabaseManager extends ChangeNotifier {
   List<TreeNode> _buildTree(
       List<Map<String, dynamic>> rawData,
       Map<String, List<Map<String, dynamic>>> coreData,
+      List<String> topLevelIds,
       ) {
     final Map<String, TreeNode> nodes = {};
     final Map<String, List<String>> childMap = {};
@@ -130,9 +130,7 @@ class SupabaseManager extends ChangeNotifier {
       nodes[row['id']] = TreeNode(
         id: row['id'] as String? ?? '',
         name: row['name'] as String? ?? '',
-        isCore: row['is_core'] as bool? ?? false,
         hasCores: coreData.containsKey(row['id']),
-        color: coreData.containsKey(row['id']) ? _getRandomColor() : null,
       );
       if (row['parent_id'] != null) {
         childMap.putIfAbsent(row['parent_id'] as String? ?? '', () => []).add(row['id'] as String? ?? '');
@@ -147,19 +145,13 @@ class SupabaseManager extends ChangeNotifier {
         }
       }
       if (!rawData.any((row) => row['id'] == id && row['parent_id'] != null)) {
-        roots.add(node);
+        if (topLevelIds.contains(id)) {
+          roots.add(node);
+        }
       }
     });
 
     return roots;
   }
 
-  Color _getRandomColor() {
-    final List<Color> solidColors = [
-      Colors.red, Colors.green, Colors.blue, Colors.yellow,
-      Colors.purple, Colors.orange, Colors.cyan,
-    ];
-    final random = Random();
-    return solidColors[random.nextInt(solidColors.length)];
-  }
 }

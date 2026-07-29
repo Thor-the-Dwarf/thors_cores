@@ -1217,13 +1217,52 @@
         return summary;
       }
 
+      const BAUM_EXPANSION_SCHLÜSSEL = "therealdeal.folder-tree.expansion.v1";
+
+      function baumExpansionLaden() {
+        try {
+          const gespeichert = JSON.parse(localStorage.getItem(BAUM_EXPANSION_SCHLÜSSEL));
+          if (!gespeichert || typeof gespeichert !== "object" || Array.isArray(gespeichert)) {
+            return null;
+          }
+          return gespeichert;
+        } catch {
+          return null;
+        }
+      }
+
+      function baumDetailsInitialisieren(details, pfad, standardOffen, gespeichert) {
+        details.dataset.baumPfad = pfad;
+        details.open = typeof gespeichert?.[pfad] === "boolean"
+          ? gespeichert[pfad]
+          : standardOffen;
+      }
+
+      function baumExpansionSpeichern(baum) {
+        const zustand = Object.fromEntries(
+          [...baum.querySelectorAll("details[data-baum-pfad]")]
+            .map(details => [details.dataset.baumPfad, details.open])
+        );
+        try {
+          localStorage.setItem(BAUM_EXPANSION_SCHLÜSSEL, JSON.stringify(zustand));
+        } catch {
+          // Der Folder Tree bleibt auch ohne verfügbaren Browserspeicher bedienbar.
+        }
+      }
+
       function baumRendern(datensatz) {
         const baum = document.querySelector("#ordnerbaum");
+        const gespeicherteExpansion = baumExpansionLaden();
         const lernfeldEintrag = document.createElement("li");
         const lernfeldDetails = document.createElement("details");
         const kompetenzListe = document.createElement("ul");
         lernfeldEintrag.className = "lernfeld";
-        lernfeldDetails.open = true;
+        baumDetailsInitialisieren(
+          lernfeldDetails,
+          `lernfeld:${datensatz.lernfeld.id ?? datensatz.lernfeld.number}`,
+          true,
+          gespeicherteExpansion
+        );
         kompetenzListe.className = "ebene kompetenzen";
         lernfeldDetails.append(
           baumZusammenfassung(`Lernfeld ${datensatz.lernfeld.number}`, datensatz.lernfeld),
@@ -1238,7 +1277,12 @@
           const clusterListe = document.createElement("ul");
           const kompetenzZusammenfassung = baumZusammenfassung(kompetenz.title, kompetenz);
           kompetenzEintrag.className = "kompetenz";
-          kompetenzDetails.open = kompetenzIndex === 0;
+          baumDetailsInitialisieren(
+            kompetenzDetails,
+            `kompetenz:${kompetenz.id}`,
+            kompetenzIndex === 0,
+            gespeicherteExpansion
+          );
           clusterListe.className = "ebene clusterliste";
           kompetenzZusammenfassung.dataset.fokusId = `kompetenz:${kompetenz.id}`;
           kompetenzZusammenfassung.dataset.themaIds = kompetenz.themencluster
@@ -1257,7 +1301,12 @@
             const themenListe = document.createElement("ul");
             const clusterZusammenfassung = baumZusammenfassung(cluster.title, cluster);
             clusterEintrag.className = "cluster";
-            clusterDetails.open = kompetenzIndex === 0 && clusterIndex === 0;
+            baumDetailsInitialisieren(
+              clusterDetails,
+              `cluster:${cluster.id}`,
+              kompetenzIndex === 0 && clusterIndex === 0,
+              gespeicherteExpansion
+            );
             themenListe.className = "ebene themenliste";
             clusterZusammenfassung.dataset.fokusId = `cluster:${cluster.id}`;
             clusterZusammenfassung.dataset.themaIds = cluster.themen
@@ -1286,6 +1335,11 @@
             });
           });
         });
+
+        baum.addEventListener("toggle", ereignis => {
+          if (!(ereignis.target instanceof HTMLDetailsElement)) return;
+          baumExpansionSpeichern(baum);
+        }, true);
       }
 
       function baumInteraktionenEinrichten() {

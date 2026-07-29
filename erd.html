@@ -111,8 +111,8 @@
       grid-template-columns: repeat(4, minmax(220px, 1fr));
       grid-template-rows: repeat(3, auto);
       gap: 74px 58px;
-      width: max(1400px, 100%);
-      min-height: 1040px;
+      width: max(1240px, 100%);
+      min-height: 900px;
       padding: 48px;
       isolation: isolate;
       transform-origin: 0 0;
@@ -497,7 +497,56 @@
         return { x: von.x + dx * faktor, y: von.y + dy * faktor };
       }
 
-      function labelPositionFinden(start, ziel, text, karten, verwendeteLabels) {
+      function segmenteKreuzen(a, b, c, d) {
+        const orientierung = (p, q, r) =>
+          (q.x - p.x) * (r.y - p.y) - (q.y - p.y) * (r.x - p.x);
+        return orientierung(a, b, c) * orientierung(a, b, d) < -0.001
+          && orientierung(c, d, a) * orientierung(c, d, b) < -0.001;
+      }
+
+      function kurveAlsPunkte(start, kontrolle, ziel, schritte = 24) {
+        return Array.from({ length: schritte + 1 }, (_, index) => {
+          const t = index / schritte;
+          const rest = 1 - t;
+          return {
+            x: rest * rest * start.x
+              + 2 * rest * t * kontrolle.x
+              + t * t * ziel.x,
+            y: rest * rest * start.y
+              + 2 * rest * t * kontrolle.y
+              + t * t * ziel.y
+          };
+        });
+      }
+
+      function kurvenKreuzen(erste, zweite) {
+        const erstePunkte =
+          kurveAlsPunkte(erste.start, erste.kontrolle, erste.ziel);
+        const zweitePunkte =
+          kurveAlsPunkte(zweite.start, zweite.kontrolle, zweite.ziel);
+        for (let i = 0; i < erstePunkte.length - 1; i += 1) {
+          for (let j = 0; j < zweitePunkte.length - 1; j += 1) {
+            if (segmenteKreuzen(
+              erstePunkte[i],
+              erstePunkte[i + 1],
+              zweitePunkte[j],
+              zweitePunkte[j + 1]
+            )) return true;
+          }
+        }
+        return false;
+      }
+
+      function labelPositionFinden(
+        start,
+        ziel,
+        text,
+        karten,
+        verwendeteLabels,
+        vorherigePfade,
+        beziehung,
+        kreuzungenVermeiden
+      ) {
         const dx = ziel.x - start.x;
         const dy = ziel.y - start.y;
         const länge = Math.max(1, Math.hypot(dx, dy));
@@ -507,44 +556,77 @@
         const höhe = 24;
         const kandidaten = [];
 
-        [0.5, 0.4, 0.6, 0.3, 0.7].forEach(t => {
-          [0, 26, -26, 48, -48, 72, -72].forEach(abstand => {
-            const x = start.x + dx * t + normalX * abstand;
-            const y = start.y + dy * t + normalY * abstand;
-            const rechteck = {
-              links: x - breite / 2,
-              rechts: x + breite / 2,
-              oben: y - höhe / 2,
-              unten: y + höhe / 2
-            };
-            const kartenKollision = karten.reduce(
-              (summe, karte) => summe + rechteckÜberschneidung(rechteck, karte, 10),
-              0
-            );
-            const labelKollision = verwendeteLabels.reduce(
-              (summe, label) => summe + rechteckÜberschneidung(rechteck, label, 8),
-              0
-            );
-            kandidaten.push({
-              x,
-              y,
-              breite,
-              höhe,
-              rechteck,
-              wert: kartenKollision * 20
-                + labelKollision * 14
-                + Math.abs(t - 0.5) * 180
-                + Math.abs(abstand) * 0.35
+        [0.5, 0.4, 0.6, 0.3, 0.7, 0.2, 0.8, 0.1, 0.9, 0.05, 0.95]
+          .forEach(t => {
+            [
+              0, 26, -26, 48, -48, 72, -72, 96, -96,
+              122, -122, 150, -150, 180, -180, 210, -210, 240, -240,
+              270, -270, 300, -300, 330, -330, 360, -360
+            ]
+            .forEach(abstand => {
+              const x = start.x + dx * t + normalX * abstand;
+              const y = start.y + dy * t + normalY * abstand;
+              const rechteck = {
+                links: x - breite / 2,
+                rechts: x + breite / 2,
+                oben: y - höhe / 2,
+                unten: y + höhe / 2
+              };
+              const kartenKollision = karten.reduce(
+                (summe, karte) => summe + rechteckÜberschneidung(rechteck, karte, 10),
+                0
+              );
+              const kartenTreffer = karten.filter(
+                karte => rechteckÜberschneidung(rechteck, karte, 10) > 0
+              ).length;
+              const labelKollision = verwendeteLabels.reduce(
+                (summe, label) => summe + rechteckÜberschneidung(rechteck, label, 8),
+                0
+              );
+              const labelTreffer = verwendeteLabels.filter(
+                label => rechteckÜberschneidung(rechteck, label, 8) > 0
+              ).length;
+              const außen =
+                Math.max(0, 12 - rechteck.links) +
+                Math.max(0, rechteck.rechts - diagramm.clientWidth + 12) +
+                Math.max(0, 12 - rechteck.oben) +
+                Math.max(0, rechteck.unten - diagramm.clientHeight + 12);
+              const kreuzungen = kreuzungenVermeiden
+                ? vorherigePfade.filter(pfad => {
+                    const gemeinsamerKnoten =
+                      [beziehung.von, beziehung.zu]
+                        .some(id => pfad.knoten.includes(id));
+                    return !gemeinsamerKnoten && kurvenKreuzen(
+                      { start, kontrolle: { x, y }, ziel },
+                      pfad
+                    );
+                  }).length
+                : 0;
+              kandidaten.push({
+                x,
+                y,
+                breite,
+                höhe,
+                rechteck,
+                wert: kartenTreffer * 200_000_000
+                  + labelTreffer * 150_000_000
+                  + kreuzungen * 50_000_000
+                  + kartenKollision * 20
+                  + labelKollision * 14
+                  + außen * 10000
+                  + Math.abs(t - 0.5) * 180
+                  + Math.abs(abstand) * 0.35
+              });
             });
-          });
         });
         return kandidaten.sort((a, b) => a.wert - b.wert)[0];
       }
 
-      function verbindungenZeichnen(beziehungen) {
+      function verbindungenZeichnen(beziehungen, kreuzungenVermeiden = false) {
         verbindungen.querySelectorAll("[data-beziehung]").forEach(element => element.remove());
         const karten = kartenRechtecke();
         const verwendeteLabels = [];
+        const vorherigePfade = [];
 
         beziehungen.forEach(beziehung => {
           const startElement = diagramm.querySelector(`[data-entität="${beziehung.von}"]`);
@@ -572,8 +654,23 @@
             zielElement.offsetHeight
           );
           const text = `${beziehung.feld} (${beziehung.anzahl})`;
-          const label = labelPositionFinden(start, ziel, text, karten, verwendeteLabels);
+          const label = labelPositionFinden(
+            start,
+            ziel,
+            text,
+            karten,
+            verwendeteLabels,
+            vorherigePfade,
+            beziehung,
+            kreuzungenVermeiden
+          );
           verwendeteLabels.push(label.rechteck);
+          vorherigePfade.push({
+            start,
+            kontrolle: { x: label.x, y: label.y },
+            ziel,
+            knoten: [beziehung.von, beziehung.zu]
+          });
 
           const pfad = document.createElementNS(SVG_NS, "path");
           const gruppe = document.createElementNS(SVG_NS, "g");
@@ -602,14 +699,17 @@
       function forceLayoutStarten(beziehungen) {
         const elemente = [...diagramm.querySelectorAll(".entität")];
         const knoten = elemente.map(element => {
-          const rechteck = element.getBoundingClientRect();
+          const breite = element.offsetWidth;
+          const höhe = element.offsetHeight;
           return {
             id: element.dataset.entität,
             element,
-            breite: rechteck.width,
-            höhe: rechteck.height,
-            x: element.offsetLeft + rechteck.width / 2,
-            y: element.offsetTop + rechteck.height / 2,
+            breite,
+            höhe,
+            x: element.offsetLeft + breite / 2,
+            y: element.offsetTop + höhe / 2,
+            ankerX: element.offsetLeft + breite / 2,
+            ankerY: element.offsetTop + höhe / 2,
             vx: 0,
             vy: 0
           };
@@ -621,25 +721,111 @@
             b: nachId.get(beziehung.zu)
           }))
           .filter(kante => kante.a && kante.b);
-        const breite = Math.max(1400, diagramm.clientWidth);
-        const höhe = 1040;
+        const breite = diagramm.clientWidth;
+        const höhe = matchMedia("(max-width: 600px)").matches ? 980 : 900;
         diagramm.style.height = `${höhe}px`;
 
         elemente.forEach((element, index) => {
           const knotenpunkt = knoten[index];
           element.style.position = "absolute";
+          element.style.gridColumn = "auto";
+          element.style.gridRow = "auto";
           element.style.width = `${knotenpunkt.breite}px`;
           element.style.left = `${knotenpunkt.x - knotenpunkt.breite / 2}px`;
           element.style.top = `${knotenpunkt.y - knotenpunkt.höhe / 2}px`;
         });
         canvasEinpassen();
 
+        function kantenKreuzen(erste, zweite) {
+          if (erste.a === zweite.a || erste.a === zweite.b ||
+              erste.b === zweite.a || erste.b === zweite.b) return false;
+          const orientierung = (a, b, c) =>
+            (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+          const o1 = orientierung(erste.a, erste.b, zweite.a);
+          const o2 = orientierung(erste.a, erste.b, zweite.b);
+          const o3 = orientierung(zweite.a, zweite.b, erste.a);
+          const o4 = orientierung(zweite.a, zweite.b, erste.b);
+          return o1 * o2 < -0.001 && o3 * o4 < -0.001;
+        }
+
+        function kreuzendeKantenpaare() {
+          const paare = [];
+          for (let i = 0; i < kanten.length; i += 1) {
+            for (let j = i + 1; j < kanten.length; j += 1) {
+              if (kantenKreuzen(kanten[i], kanten[j])) {
+                paare.push([kanten[i], kanten[j]]);
+              }
+            }
+          }
+          return paare;
+        }
+
+        function kartenÜberlappungenZählen(rand = 16) {
+          let anzahl = 0;
+          for (let i = 0; i < knoten.length; i += 1) {
+            for (let j = i + 1; j < knoten.length; j += 1) {
+              const a = knoten[i];
+              const b = knoten[j];
+              const überX =
+                (a.breite + b.breite) / 2 + rand - Math.abs(b.x - a.x);
+              const überY =
+                (a.höhe + b.höhe) / 2 + rand - Math.abs(b.y - a.y);
+              if (überX > 0 && überY > 0) anzahl += 1;
+            }
+          }
+          return anzahl;
+        }
+
+        function layoutBewerten() {
+          const kreuzungen = kreuzendeKantenpaare().length;
+          const überlappungen = kartenÜberlappungenZählen();
+          const kantenlänge = kanten.reduce(
+            (summe, { a, b }) => summe + Math.hypot(b.x - a.x, b.y - a.y),
+            0
+          );
+          const links = Math.min(...knoten.map(knotenpunkt =>
+            knotenpunkt.x - knotenpunkt.breite / 2));
+          const rechts = Math.max(...knoten.map(knotenpunkt =>
+            knotenpunkt.x + knotenpunkt.breite / 2));
+          const oben = Math.min(...knoten.map(knotenpunkt =>
+            knotenpunkt.y - knotenpunkt.höhe / 2));
+          const unten = Math.max(...knoten.map(knotenpunkt =>
+            knotenpunkt.y + knotenpunkt.höhe / 2));
+          const fläche = (rechts - links) * (unten - oben);
+          return {
+            kreuzungen,
+            überlappungen,
+            wert:
+              kreuzungen * 1_000_000_000 +
+              überlappungen * 100_000_000 +
+              kantenlänge +
+              fläche * 0.0005
+          };
+        }
+
         let schritt = 0;
         let ruhigeSchritte = 0;
+        let besterWert = Infinity;
+        let bestePositionen = null;
+
+        function bestenZustandMerken() {
+          const bewertung = layoutBewerten();
+          if (bewertung.wert >= besterWert) return;
+          besterWert = bewertung.wert;
+          bestePositionen = knoten.map(knotenpunkt => ({
+            x: knotenpunkt.x,
+            y: knotenpunkt.y
+          }));
+        }
+
+        bestenZustandMerken();
+
         function simulieren() {
           knoten.forEach(knotenpunkt => {
-            knotenpunkt.vx += (breite / 2 - knotenpunkt.x) * 0.0007;
-            knotenpunkt.vy += (höhe / 2 - knotenpunkt.y) * 0.0007;
+            knotenpunkt.vx += (breite / 2 - knotenpunkt.x) * 0.0008;
+            knotenpunkt.vy += (höhe / 2 - knotenpunkt.y) * 0.0008;
+            knotenpunkt.vx += (knotenpunkt.ankerX - knotenpunkt.x) * 0.0012;
+            knotenpunkt.vy += (knotenpunkt.ankerY - knotenpunkt.y) * 0.0012;
           });
 
           for (let i = 0; i < knoten.length; i += 1) {
@@ -649,7 +835,7 @@
               let dx = b.x - a.x;
               let dy = b.y - a.y;
               const distanz = Math.max(1, Math.hypot(dx, dy));
-              const kraft = Math.min(2.8, 18000 / (distanz * distanz));
+              const kraft = Math.min(2.4, 12000 / (distanz * distanz));
               dx /= distanz;
               dy /= distanz;
               a.vx -= dx * kraft;
@@ -657,17 +843,17 @@
               b.vx += dx * kraft;
               b.vy += dy * kraft;
 
-              const überX = (a.breite + b.breite) / 2 + 42 - Math.abs(b.x - a.x);
-              const überY = (a.höhe + b.höhe) / 2 + 42 - Math.abs(b.y - a.y);
+              const überX = (a.breite + b.breite) / 2 + 24 - Math.abs(b.x - a.x);
+              const überY = (a.höhe + b.höhe) / 2 + 24 - Math.abs(b.y - a.y);
               if (überX > 0 && überY > 0) {
                 if (überX < überY) {
                   const richtung = Math.sign(b.x - a.x) || 1;
-                  a.vx -= richtung * überX * 0.045;
-                  b.vx += richtung * überX * 0.045;
+                  a.vx -= richtung * überX * 0.06;
+                  b.vx += richtung * überX * 0.06;
                 } else {
                   const richtung = Math.sign(b.y - a.y) || 1;
-                  a.vy -= richtung * überY * 0.045;
-                  b.vy += richtung * überY * 0.045;
+                  a.vy -= richtung * überY * 0.06;
+                  b.vy += richtung * überY * 0.06;
                 }
               }
             }
@@ -677,13 +863,42 @@
             const dx = b.x - a.x;
             const dy = b.y - a.y;
             const distanz = Math.max(1, Math.hypot(dx, dy));
-            const kraft = (distanz - 330) * 0.0038;
+            const kraft = (distanz - 265) * 0.0046;
             const kx = dx / distanz * kraft;
             const ky = dy / distanz * kraft;
             a.vx += kx;
             a.vy += ky;
             b.vx -= kx;
             b.vy -= ky;
+          });
+
+          kreuzendeKantenpaare().forEach(([erste, zweite], index) => {
+            const ersteMitte = {
+              x: (erste.a.x + erste.b.x) / 2,
+              y: (erste.a.y + erste.b.y) / 2
+            };
+            const zweiteMitte = {
+              x: (zweite.a.x + zweite.b.x) / 2,
+              y: (zweite.a.y + zweite.b.y) / 2
+            };
+            let dx = zweiteMitte.x - ersteMitte.x;
+            let dy = zweiteMitte.y - ersteMitte.y;
+            const distanz = Math.max(1, Math.hypot(dx, dy));
+            if (distanz === 1) {
+              dx = index % 2 ? 1 : -1;
+              dy = index % 2 ? -1 : 1;
+            } else {
+              dx /= distanz;
+              dy /= distanz;
+            }
+            [erste.a, erste.b].forEach(knotenpunkt => {
+              knotenpunkt.vx -= dx * 1.4;
+              knotenpunkt.vy -= dy * 1.4;
+            });
+            [zweite.a, zweite.b].forEach(knotenpunkt => {
+              knotenpunkt.vx += dx * 1.4;
+              knotenpunkt.vy += dy * 1.4;
+            });
           });
 
           let bewegung = 0;
@@ -705,12 +920,28 @@
             bewegung += Math.abs(knotenpunkt.vx) + Math.abs(knotenpunkt.vy);
           });
 
+          bestenZustandMerken();
           verbindungenZeichnen(beziehungen);
           schritt += 1;
           ruhigeSchritte = bewegung < 0.28 ? ruhigeSchritte + 1 : 0;
           if (schritt < 220 && ruhigeSchritte < 12) {
             requestAnimationFrame(simulieren);
           } else {
+            if (bestePositionen) {
+              knoten.forEach((knotenpunkt, index) => {
+                knotenpunkt.x = bestePositionen[index].x;
+                knotenpunkt.y = bestePositionen[index].y;
+                knotenpunkt.element.style.left =
+                  `${knotenpunkt.x - knotenpunkt.breite / 2}px`;
+                knotenpunkt.element.style.top =
+                  `${knotenpunkt.y - knotenpunkt.höhe / 2}px`;
+              });
+            }
+            const finaleBewertung = layoutBewerten();
+            verbindungenZeichnen(beziehungen, true);
+            diagramm.dataset.kreuzungen = String(finaleBewertung.kreuzungen);
+            diagramm.dataset.kartenÜberlappungen =
+              String(finaleBewertung.überlappungen);
             diagramm.dataset.layout = "bereit";
           }
         }

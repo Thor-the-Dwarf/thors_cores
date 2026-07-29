@@ -17,6 +17,7 @@
       --linie: #526079;
       --bezug: #82a6ff;
       --fehler: #f87171;
+      --app-bar-höhe: 60px;
     }
 
     * { box-sizing: border-box; }
@@ -34,19 +35,25 @@
       background: var(--hintergrund);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       touch-action: auto;
+      padding-bottom: calc(var(--app-bar-höhe) + env(safe-area-inset-bottom, 0px));
     }
 
-    header {
-      position: sticky;
-      z-index: 20;
-      top: 0;
+    body > header {
+      position: fixed;
+      z-index: 30;
+      right: 0;
+      bottom: 0;
+      left: 0;
       display: grid;
       grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
       gap: 12px;
-      min-height: 60px;
-      padding: 8px 12px;
-      border-bottom: 1px solid rgba(183, 195, 220, 0.18);
+      width: 100%;
+      min-height: calc(var(--app-bar-höhe) + env(safe-area-inset-bottom, 0px));
+      padding: 8px max(12px, env(safe-area-inset-right, 0px))
+        calc(8px + env(safe-area-inset-bottom, 0px))
+        max(12px, env(safe-area-inset-left, 0px));
+      border-top: 1px solid rgba(183, 195, 220, 0.18);
       background: rgba(10, 14, 23, 0.96);
       backdrop-filter: blur(14px);
     }
@@ -57,8 +64,8 @@
       text-align: center;
     }
 
-    header a,
-    header button {
+    body > header a,
+    body > header button {
       min-height: 40px;
       display: inline-flex;
       align-items: center;
@@ -75,35 +82,19 @@
       cursor: pointer;
     }
 
-    header a:hover,
-    header a:focus-visible,
-    header button:hover,
-    header button:focus-visible {
+    body > header a:hover,
+    body > header a:focus-visible,
+    body > header button:hover,
+    body > header button:focus-visible {
       border-color: rgba(130, 166, 255, 0.52);
       background: rgba(130, 166, 255, 0.12);
       outline: none;
     }
 
-    .status {
-      margin: 0;
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(183, 195, 220, 0.12);
-      color: var(--gedimmt);
-      background: rgba(13, 18, 29, 0.82);
-      font-size: 0.75rem;
-      font-weight: 700;
-      line-height: 1.45;
-      text-align: center;
-    }
-
-    .status[data-zustand="fehler"] {
-      color: #fecaca;
-      background: rgba(127, 29, 29, 0.28);
-    }
-
     .diagramm-scroll {
       width: 100%;
-      height: max(440px, calc(100vh - 116px));
+      height: calc(100vh - var(--app-bar-höhe) - env(safe-area-inset-bottom, 0px));
+      height: calc(100dvh - var(--app-bar-höhe) - env(safe-area-inset-bottom, 0px));
       overflow: hidden;
       cursor: grab;
       overscroll-behavior: contain;
@@ -256,18 +247,29 @@
       color: #fecaca;
     }
 
+    .ladefehler {
+      max-width: 680px;
+      margin: 80px auto;
+      padding: 18px;
+      border: 1px solid rgba(248, 113, 113, 0.48);
+      border-radius: 12px;
+      color: #fecaca;
+      background: rgba(127, 29, 29, 0.28);
+      line-height: 1.5;
+    }
+
     @media (max-width: 600px) {
-      header {
+      :root {
+        --app-bar-höhe: 104px;
+      }
+
+      body > header {
         grid-template-columns: auto minmax(0, 1fr);
       }
 
-      header button {
+      body > header button {
         grid-column: 1 / -1;
         min-height: 34px;
-      }
-
-      .status {
-        text-align: left;
       }
 
       .diagramm {
@@ -285,7 +287,6 @@
     <h1>Dynamisches ERD des Lern-Vaults</h1>
     <button id="neu-laden" type="button">JSON neu laden</button>
   </header>
-  <p id="schema-status" class="status" role="status">Aktuelle JSON-Dateien werden ausgewertet …</p>
   <main>
     <div id="diagramm-viewport" class="diagramm-scroll">
       <section id="diagramm" class="diagramm" aria-label="Entity-Relationship-Diagramm">
@@ -309,7 +310,6 @@
     (async () => {
       "use strict";
 
-      const status = document.querySelector("#schema-status");
       const diagrammViewport = document.querySelector("#diagramm-viewport");
       const diagramm = document.querySelector("#diagramm");
       const verbindungen = document.querySelector("#verbindungen");
@@ -827,18 +827,18 @@
         beziehungenRendern(beziehungen);
         const schemaVersionen = [...new Set(dateien.map(datei => daten[datei].schema_version))];
         const ungültig = beziehungen.reduce((summe, beziehung) => summe + beziehung.ungültig, 0);
-        status.textContent =
-          `Schema ${schemaVersionen.join(" / ")} · ` +
-          `${lernfelder.length} Lernfeld · ${kompetenzen.length} Kompetenzen · ` +
-          `${themencluster.length} Themencluster · ${themen.length} Themen · ` +
-          `${cores.length} Cores · ${ausprägungen.length} Core-Ausprägungen · ` +
-          `${quellen.length} Quellen · ${ungültig} nicht auflösbare Referenzen`;
-        status.dataset.zustand = ungültig ? "fehler" : "bereit";
+        diagramm.dataset.schemaVersionen = schemaVersionen.join(" / ");
+        diagramm.dataset.ungültigeReferenzen = String(ungültig);
 
         forceLayoutStarten(beziehungen);
       } catch (fehler) {
-        status.dataset.zustand = "fehler";
-        status.textContent = `ERD konnte nicht aus den aktuellen JSON-Dateien erzeugt werden: ${fehler.message}`;
+        diagramm.dataset.zustand = "fehler";
+        const hinweis = document.createElement("p");
+        hinweis.className = "ladefehler";
+        hinweis.setAttribute("role", "alert");
+        hinweis.textContent =
+          `ERD konnte nicht aus den aktuellen JSON-Dateien erzeugt werden: ${fehler.message}`;
+        diagramm.append(hinweis);
       }
     })();
   </script>

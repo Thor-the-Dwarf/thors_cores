@@ -950,16 +950,19 @@
       }
 
       .navigation {
-        width: 100%;
+        position: fixed;
+        z-index: 18;
+        inset: 0 auto var(--app-bar-höhe) 0;
+        width: min(440px, 100vw);
         height: auto;
-        max-height: 64vh;
-        border-right: 0;
-        border-bottom: 1px solid var(--linie);
+        max-height: none;
+        border-right: 1px solid var(--linie);
+        border-bottom: 0;
         box-shadow: 0 18px 54px rgba(0, 0, 0, 0.22);
       }
 
       .ordnerbaum {
-        max-height: calc(64vh - 64px);
+        max-height: none;
       }
 
       .arbeitsfläche {

@@ -599,6 +599,20 @@
       pointer-events: none;
     }
 
+    .core-symbol {
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--aktive-core-farbe);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
     .core-raster.fortschritt-prototyp .core-fortschrittsring {
       opacity: var(--core-fortschrittsring-sichtbar, 1);
     }
@@ -1825,6 +1839,7 @@
       const beispielKategorien = cores.map(
         (core, index) => prototypKategorien[index % prototypKategorien.length]
       );
+      const coreSymbole = ["◆", "✦", "▲", "■", "●", "✚", "◇"];
 
       const positionen = cores.map((core, index) => {
         const winkel = index * 2.3999632297;
@@ -1879,6 +1894,7 @@
       cores.forEach(([titelText, farbe, zuordnungen = []], index) => {
         const punkt = document.createElement("button");
         const fortschrittsring = document.createElement("span");
+        const symbol = document.createElement("span");
         const titel = document.createElement("h2");
         punkt.className = "core-karte";
         punkt.type = "button";
@@ -1905,8 +1921,11 @@
         punkt.setAttribute("aria-label", coreBeschriftung(index));
         fortschrittsring.className = "core-fortschrittsring";
         fortschrittsring.setAttribute("aria-hidden", "true");
+        symbol.className = "core-symbol";
+        symbol.textContent = coreSymbole[index % coreSymbole.length];
+        symbol.setAttribute("aria-hidden", "true");
         titel.textContent = titelText;
-        punkt.append(fortschrittsring, titel);
+        punkt.append(fortschrittsring, symbol, titel);
         raster.append(punkt);
         knotenElemente.push(punkt);
       });

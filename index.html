@@ -2352,6 +2352,7 @@
       }
 
       viewport.addEventListener("wheel", ereignis => {
+        if (ereignis.ctrlKey || ereignis.metaKey) return;
         ereignis.preventDefault();
         const rechteck = viewport.getBoundingClientRect();
         zoomSetzen(

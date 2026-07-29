@@ -103,9 +103,15 @@
 
     .diagramm-scroll {
       width: 100%;
-      overflow: auto;
-      overscroll-behavior: auto;
+      height: max(440px, calc(100vh - 116px));
+      overflow: hidden;
+      cursor: grab;
+      overscroll-behavior: contain;
       touch-action: auto;
+    }
+
+    .diagramm-scroll.zieht {
+      cursor: grabbing;
     }
 
     .diagramm {
@@ -114,15 +120,17 @@
       grid-template-columns: repeat(4, minmax(220px, 1fr));
       grid-template-rows: repeat(3, auto);
       gap: 74px 58px;
-      width: max(1180px, 100%);
-      min-height: 900px;
+      width: max(1400px, 100%);
+      min-height: 1040px;
       padding: 48px;
       isolation: isolate;
+      transform-origin: 0 0;
+      will-change: transform;
     }
 
     .verbindungen {
       position: absolute;
-      z-index: -1;
+      z-index: 0;
       inset: 0;
       width: 100%;
       height: 100%;
@@ -147,7 +155,16 @@
       text-anchor: middle;
     }
 
+    .verbindungen .beziehungslabel rect {
+      fill: rgba(7, 10, 17, 0.94);
+      stroke: rgba(130, 166, 255, 0.32);
+      stroke-width: 1px;
+      rx: 5px;
+    }
+
     .entität {
+      position: relative;
+      z-index: 1;
       align-self: start;
       min-width: 0;
       border: 1px solid var(--linie);
@@ -270,7 +287,7 @@
   </header>
   <p id="schema-status" class="status" role="status">Aktuelle JSON-Dateien werden ausgewertet …</p>
   <main>
-    <div class="diagramm-scroll">
+    <div id="diagramm-viewport" class="diagramm-scroll">
       <section id="diagramm" class="diagramm" aria-label="Entity-Relationship-Diagramm">
         <svg id="verbindungen" class="verbindungen" aria-hidden="true">
           <defs>
@@ -293,10 +310,82 @@
       "use strict";
 
       const status = document.querySelector("#schema-status");
+      const diagrammViewport = document.querySelector("#diagramm-viewport");
       const diagramm = document.querySelector("#diagramm");
       const verbindungen = document.querySelector("#verbindungen");
       const beziehungsliste = document.querySelector("#beziehungsliste");
       const SVG_NS = "http://www.w3.org/2000/svg";
+      let canvasZoom = 1;
+      let canvasX = 0;
+      let canvasY = 0;
+      let canvasZug = null;
+
+      function canvasTransformationAnwenden() {
+        diagramm.style.transform =
+          `translate(${canvasX}px, ${canvasY}px) scale(${canvasZoom})`;
+        diagramm.dataset.zoom = canvasZoom.toFixed(3);
+        diagramm.dataset.verschiebungX = canvasX.toFixed(1);
+        diagramm.dataset.verschiebungY = canvasY.toFixed(1);
+      }
+
+      function canvasEinpassen() {
+        const rand = 28;
+        canvasZoom = Math.max(0.22, Math.min(
+          1,
+          (diagrammViewport.clientWidth - rand * 2) / Math.max(1, diagramm.offsetWidth),
+          (diagrammViewport.clientHeight - rand * 2) / Math.max(1, diagramm.offsetHeight)
+        ));
+        canvasX = (diagrammViewport.clientWidth - diagramm.offsetWidth * canvasZoom) / 2;
+        canvasY = (diagrammViewport.clientHeight - diagramm.offsetHeight * canvasZoom) / 2;
+        canvasTransformationAnwenden();
+      }
+
+      diagrammViewport.addEventListener("wheel", ereignis => {
+        if (ereignis.ctrlKey || ereignis.metaKey) return;
+        ereignis.preventDefault();
+        const rechteck = diagrammViewport.getBoundingClientRect();
+        const fokusX = ereignis.clientX - rechteck.left;
+        const fokusY = ereignis.clientY - rechteck.top;
+        const weltX = (fokusX - canvasX) / canvasZoom;
+        const weltY = (fokusY - canvasY) / canvasZoom;
+        canvasZoom = Math.max(
+          0.18,
+          Math.min(2.4, canvasZoom * Math.exp(-ereignis.deltaY * 0.0014))
+        );
+        canvasX = fokusX - weltX * canvasZoom;
+        canvasY = fokusY - weltY * canvasZoom;
+        canvasTransformationAnwenden();
+      }, { passive: false });
+
+      diagrammViewport.addEventListener("pointerdown", ereignis => {
+        if (ereignis.button !== 0 || ereignis.pointerType === "touch") return;
+        ereignis.preventDefault();
+        canvasZug = {
+          pointerId: ereignis.pointerId,
+          startX: ereignis.clientX,
+          startY: ereignis.clientY,
+          ursprungX: canvasX,
+          ursprungY: canvasY
+        };
+        diagrammViewport.classList.add("zieht");
+        diagrammViewport.setPointerCapture(ereignis.pointerId);
+      });
+
+      diagrammViewport.addEventListener("pointermove", ereignis => {
+        if (!canvasZug || ereignis.pointerId !== canvasZug.pointerId) return;
+        canvasX = canvasZug.ursprungX + ereignis.clientX - canvasZug.startX;
+        canvasY = canvasZug.ursprungY + ereignis.clientY - canvasZug.startY;
+        canvasTransformationAnwenden();
+      });
+
+      function canvasZugBeenden(ereignis) {
+        if (!canvasZug || ereignis.pointerId !== canvasZug.pointerId) return;
+        canvasZug = null;
+        diagrammViewport.classList.remove("zieht");
+      }
+
+      diagrammViewport.addEventListener("pointerup", canvasZugBeenden);
+      diagrammViewport.addEventListener("pointercancel", canvasZugBeenden);
 
       document.querySelector("#neu-laden").addEventListener("click", () => location.reload());
 
@@ -374,59 +463,258 @@
         });
       }
 
-      function verbindungenZeichnen(beziehungen) {
-        verbindungen.querySelectorAll("path[data-beziehung], text").forEach(element => element.remove());
-        const diagrammRechteck = diagramm.getBoundingClientRect();
+      function rechteckÜberschneidung(a, b, rand = 0) {
+        const breite = Math.max(
+          0,
+          Math.min(a.rechts + rand, b.rechts + rand)
+            - Math.max(a.links - rand, b.links - rand)
+        );
+        const höhe = Math.max(
+          0,
+          Math.min(a.unten + rand, b.unten + rand)
+            - Math.max(a.oben - rand, b.oben - rand)
+        );
+        return breite * höhe;
+      }
 
-        beziehungen.forEach((beziehung, index) => {
+      function kartenRechtecke() {
+        return [...diagramm.querySelectorAll(".entität")].map(element => ({
+          links: element.offsetLeft,
+          oben: element.offsetTop,
+          rechts: element.offsetLeft + element.offsetWidth,
+          unten: element.offsetTop + element.offsetHeight
+        }));
+      }
+
+      function kanteAmRechteck(von, zu, breite, höhe) {
+        const dx = zu.x - von.x;
+        const dy = zu.y - von.y;
+        const faktor = 1 / Math.max(
+          Math.abs(dx) / Math.max(1, breite / 2),
+          Math.abs(dy) / Math.max(1, höhe / 2),
+          1
+        );
+        return { x: von.x + dx * faktor, y: von.y + dy * faktor };
+      }
+
+      function labelPositionFinden(start, ziel, text, karten, verwendeteLabels) {
+        const dx = ziel.x - start.x;
+        const dy = ziel.y - start.y;
+        const länge = Math.max(1, Math.hypot(dx, dy));
+        const normalX = -dy / länge;
+        const normalY = dx / länge;
+        const breite = Math.min(230, Math.max(96, text.length * 6.4 + 18));
+        const höhe = 24;
+        const kandidaten = [];
+
+        [0.5, 0.4, 0.6, 0.3, 0.7].forEach(t => {
+          [0, 26, -26, 48, -48, 72, -72].forEach(abstand => {
+            const x = start.x + dx * t + normalX * abstand;
+            const y = start.y + dy * t + normalY * abstand;
+            const rechteck = {
+              links: x - breite / 2,
+              rechts: x + breite / 2,
+              oben: y - höhe / 2,
+              unten: y + höhe / 2
+            };
+            const kartenKollision = karten.reduce(
+              (summe, karte) => summe + rechteckÜberschneidung(rechteck, karte, 10),
+              0
+            );
+            const labelKollision = verwendeteLabels.reduce(
+              (summe, label) => summe + rechteckÜberschneidung(rechteck, label, 8),
+              0
+            );
+            kandidaten.push({
+              x,
+              y,
+              breite,
+              höhe,
+              rechteck,
+              wert: kartenKollision * 20
+                + labelKollision * 14
+                + Math.abs(t - 0.5) * 180
+                + Math.abs(abstand) * 0.35
+            });
+          });
+        });
+        return kandidaten.sort((a, b) => a.wert - b.wert)[0];
+      }
+
+      function verbindungenZeichnen(beziehungen) {
+        verbindungen.querySelectorAll("[data-beziehung]").forEach(element => element.remove());
+        const karten = kartenRechtecke();
+        const verwendeteLabels = [];
+
+        beziehungen.forEach(beziehung => {
           const startElement = diagramm.querySelector(`[data-entität="${beziehung.von}"]`);
           const zielElement = diagramm.querySelector(`[data-entität="${beziehung.zu}"]`);
           if (!startElement || !zielElement) return;
 
-          const start = startElement.getBoundingClientRect();
-          const ziel = zielElement.getBoundingClientRect();
           const startMitte = {
-            x: start.left - diagrammRechteck.left + start.width / 2,
-            y: start.top - diagrammRechteck.top + start.height / 2
+            x: startElement.offsetLeft + startElement.offsetWidth / 2,
+            y: startElement.offsetTop + startElement.offsetHeight / 2
           };
           const zielMitte = {
-            x: ziel.left - diagrammRechteck.left + ziel.width / 2,
-            y: ziel.top - diagrammRechteck.top + ziel.height / 2
+            x: zielElement.offsetLeft + zielElement.offsetWidth / 2,
+            y: zielElement.offsetTop + zielElement.offsetHeight / 2
           };
-          const horizontal = Math.abs(zielMitte.x - startMitte.x)
-            >= Math.abs(zielMitte.y - startMitte.y);
-          const richtung = horizontal
-            ? Math.sign(zielMitte.x - startMitte.x) || 1
-            : Math.sign(zielMitte.y - startMitte.y) || 1;
-          const x1 = horizontal
-            ? startMitte.x + richtung * start.width / 2
-            : startMitte.x;
-          const y1 = horizontal
-            ? startMitte.y
-            : startMitte.y + richtung * start.height / 2;
-          const x2 = horizontal
-            ? zielMitte.x - richtung * ziel.width / 2
-            : zielMitte.x;
-          const y2 = horizontal
-            ? zielMitte.y
-            : zielMitte.y - richtung * ziel.height / 2;
-          const abstand = 18 + (index % 4) * 8;
-          const pfad = document.createElementNS(SVG_NS, "path");
-          const beschriftung = document.createElementNS(SVG_NS, "text");
+          const start = kanteAmRechteck(
+            startMitte,
+            zielMitte,
+            startElement.offsetWidth,
+            startElement.offsetHeight
+          );
+          const ziel = kanteAmRechteck(
+            zielMitte,
+            startMitte,
+            zielElement.offsetWidth,
+            zielElement.offsetHeight
+          );
+          const text = `${beziehung.feld} (${beziehung.anzahl})`;
+          const label = labelPositionFinden(start, ziel, text, karten, verwendeteLabels);
+          verwendeteLabels.push(label.rechteck);
 
+          const pfad = document.createElementNS(SVG_NS, "path");
+          const gruppe = document.createElementNS(SVG_NS, "g");
+          const hintergrund = document.createElementNS(SVG_NS, "rect");
+          const beschriftung = document.createElementNS(SVG_NS, "text");
           pfad.dataset.beziehung = beziehung.feld;
           pfad.setAttribute("marker-end", "url(#pfeil)");
           pfad.setAttribute(
             "d",
-            horizontal
-              ? `M ${x1} ${y1} C ${(x1 + x2) / 2} ${y1 + abstand}, ${(x1 + x2) / 2} ${y2 - abstand}, ${x2} ${y2}`
-              : `M ${x1} ${y1} C ${x1 + abstand} ${(y1 + y2) / 2}, ${x2 - abstand} ${(y1 + y2) / 2}, ${x2} ${y2}`
+            `M ${start.x} ${start.y} Q ${label.x} ${label.y} ${ziel.x} ${ziel.y}`
           );
-          beschriftung.setAttribute("x", String((x1 + x2) / 2));
-          beschriftung.setAttribute("y", String((y1 + y2) / 2 - 5));
-          beschriftung.textContent = `${beziehung.feld} (${beziehung.anzahl})`;
-          verbindungen.append(pfad, beschriftung);
+          gruppe.dataset.beziehung = beziehung.feld;
+          gruppe.classList.add("beziehungslabel");
+          hintergrund.setAttribute("x", String(label.x - label.breite / 2));
+          hintergrund.setAttribute("y", String(label.y - label.höhe / 2));
+          hintergrund.setAttribute("width", String(label.breite));
+          hintergrund.setAttribute("height", String(label.höhe));
+          beschriftung.setAttribute("x", String(label.x));
+          beschriftung.setAttribute("y", String(label.y + 4));
+          beschriftung.textContent = text;
+          gruppe.append(hintergrund, beschriftung);
+          verbindungen.append(pfad, gruppe);
         });
+      }
+
+      function forceLayoutStarten(beziehungen) {
+        const elemente = [...diagramm.querySelectorAll(".entität")];
+        const knoten = elemente.map(element => {
+          const rechteck = element.getBoundingClientRect();
+          return {
+            id: element.dataset.entität,
+            element,
+            breite: rechteck.width,
+            höhe: rechteck.height,
+            x: element.offsetLeft + rechteck.width / 2,
+            y: element.offsetTop + rechteck.height / 2,
+            vx: 0,
+            vy: 0
+          };
+        });
+        const nachId = new Map(knoten.map(knotenpunkt => [knotenpunkt.id, knotenpunkt]));
+        const kanten = beziehungen
+          .map(beziehung => ({
+            a: nachId.get(beziehung.von),
+            b: nachId.get(beziehung.zu)
+          }))
+          .filter(kante => kante.a && kante.b);
+        const breite = Math.max(1400, diagramm.clientWidth);
+        const höhe = 1040;
+        diagramm.style.height = `${höhe}px`;
+
+        elemente.forEach((element, index) => {
+          const knotenpunkt = knoten[index];
+          element.style.position = "absolute";
+          element.style.width = `${knotenpunkt.breite}px`;
+          element.style.left = `${knotenpunkt.x - knotenpunkt.breite / 2}px`;
+          element.style.top = `${knotenpunkt.y - knotenpunkt.höhe / 2}px`;
+        });
+        canvasEinpassen();
+
+        let schritt = 0;
+        let ruhigeSchritte = 0;
+        function simulieren() {
+          knoten.forEach(knotenpunkt => {
+            knotenpunkt.vx += (breite / 2 - knotenpunkt.x) * 0.0007;
+            knotenpunkt.vy += (höhe / 2 - knotenpunkt.y) * 0.0007;
+          });
+
+          for (let i = 0; i < knoten.length; i += 1) {
+            for (let j = i + 1; j < knoten.length; j += 1) {
+              const a = knoten[i];
+              const b = knoten[j];
+              let dx = b.x - a.x;
+              let dy = b.y - a.y;
+              const distanz = Math.max(1, Math.hypot(dx, dy));
+              const kraft = Math.min(2.8, 18000 / (distanz * distanz));
+              dx /= distanz;
+              dy /= distanz;
+              a.vx -= dx * kraft;
+              a.vy -= dy * kraft;
+              b.vx += dx * kraft;
+              b.vy += dy * kraft;
+
+              const überX = (a.breite + b.breite) / 2 + 42 - Math.abs(b.x - a.x);
+              const überY = (a.höhe + b.höhe) / 2 + 42 - Math.abs(b.y - a.y);
+              if (überX > 0 && überY > 0) {
+                if (überX < überY) {
+                  const richtung = Math.sign(b.x - a.x) || 1;
+                  a.vx -= richtung * überX * 0.045;
+                  b.vx += richtung * überX * 0.045;
+                } else {
+                  const richtung = Math.sign(b.y - a.y) || 1;
+                  a.vy -= richtung * überY * 0.045;
+                  b.vy += richtung * überY * 0.045;
+                }
+              }
+            }
+          }
+
+          kanten.forEach(({ a, b }) => {
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const distanz = Math.max(1, Math.hypot(dx, dy));
+            const kraft = (distanz - 330) * 0.0038;
+            const kx = dx / distanz * kraft;
+            const ky = dy / distanz * kraft;
+            a.vx += kx;
+            a.vy += ky;
+            b.vx -= kx;
+            b.vy -= ky;
+          });
+
+          let bewegung = 0;
+          knoten.forEach(knotenpunkt => {
+            knotenpunkt.vx = Math.max(-14, Math.min(14, knotenpunkt.vx * 0.78));
+            knotenpunkt.vy = Math.max(-14, Math.min(14, knotenpunkt.vy * 0.78));
+            knotenpunkt.x = Math.max(
+              36 + knotenpunkt.breite / 2,
+              Math.min(breite - 36 - knotenpunkt.breite / 2, knotenpunkt.x + knotenpunkt.vx)
+            );
+            knotenpunkt.y = Math.max(
+              36 + knotenpunkt.höhe / 2,
+              Math.min(höhe - 36 - knotenpunkt.höhe / 2, knotenpunkt.y + knotenpunkt.vy)
+            );
+            knotenpunkt.element.style.left =
+              `${knotenpunkt.x - knotenpunkt.breite / 2}px`;
+            knotenpunkt.element.style.top =
+              `${knotenpunkt.y - knotenpunkt.höhe / 2}px`;
+            bewegung += Math.abs(knotenpunkt.vx) + Math.abs(knotenpunkt.vy);
+          });
+
+          verbindungenZeichnen(beziehungen);
+          schritt += 1;
+          ruhigeSchritte = bewegung < 0.28 ? ruhigeSchritte + 1 : 0;
+          if (schritt < 220 && ruhigeSchritte < 12) {
+            requestAnimationFrame(simulieren);
+          } else {
+            diagramm.dataset.layout = "bereit";
+          }
+        }
+        requestAnimationFrame(simulieren);
       }
 
       function referenzenPrüfen(vonMenge, items, feld) {
@@ -547,8 +835,7 @@
           `${quellen.length} Quellen · ${ungültig} nicht auflösbare Referenzen`;
         status.dataset.zustand = ungültig ? "fehler" : "bereit";
 
-        requestAnimationFrame(() => verbindungenZeichnen(beziehungen));
-        new ResizeObserver(() => verbindungenZeichnen(beziehungen)).observe(diagramm);
+        forceLayoutStarten(beziehungen);
       } catch (fehler) {
         status.dataset.zustand = "fehler";
         status.textContent = `ERD konnte nicht aus den aktuellen JSON-Dateien erzeugt werden: ${fehler.message}`;

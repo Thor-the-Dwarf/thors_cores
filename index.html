@@ -1452,7 +1452,7 @@
         const deltaX = von.left - zu.left;
         const deltaY = von.top - zu.top;
         const zielTransform = getComputedStyle(navigation).transform;
-        navigationÜbergang = navigation.animate([
+        const animation = navigation.animate([
           {
             transform: `translate(${deltaX}px, ${deltaY}px) ${zielTransform}`,
             width: `${von.width}px`,
@@ -1466,18 +1466,31 @@
             opacity: String(zu.opacity)
           }
         ], {
-          duration: 320,
-          easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+          duration: 650,
+          easing: "cubic-bezier(0.4, 0, 0.2, 1)"
         });
-        navigationÜbergang.finished.finally(() => {
+        navigationÜbergang = animation;
+        const animationAbschließen = () => {
+          if (navigationÜbergang !== animation) return;
           navigation.classList.remove("quiz-übergang-aktiv");
           navigationÜbergang = null;
           beimEnde?.();
-        });
+        };
+        animation.finished.then(animationAbschließen, animationAbschließen);
+      }
+
+      function navigationRechteck() {
+        const rechteck = navigation.getBoundingClientRect();
+        return {
+          left: rechteck.left,
+          top: rechteck.top,
+          width: rechteck.width,
+          height: rechteck.height
+        };
       }
 
       function quizAuswahlmodusBeenden() {
-        const start = navigation.getBoundingClientRect();
+        const start = navigationRechteck();
         quizAuswahlAktiv = false;
         app.classList.remove("quiz-auswahlmodus");
         quizAuswahlhinweis.hidden = true;
@@ -1489,7 +1502,7 @@
           checkbox.disabled = true;
         });
         quizAuswahlAktualisieren();
-        const ziel = navigation.getBoundingClientRect();
+        const ziel = navigationRechteck();
         navigationÜbergangAnimieren(
           { ...start, opacity: 1 },
           { ...ziel, opacity: navigationWarSichtbarVorQuiz ? 1 : 0 },
@@ -1502,7 +1515,7 @@
         settingsDrawerSichtbarSetzen(false);
         navigationWarSichtbarVorQuiz = !app.classList.contains("navigation-geschlossen");
         folderTreeSichtbarSetzen(true);
-        const start = navigation.getBoundingClientRect();
+        const start = navigationRechteck();
         quizAuswahlAktiv = true;
         quizAußenPointerId = null;
         quizAußenKlickUnterdrücken = false;
@@ -1517,7 +1530,7 @@
           checkbox.disabled = nachgeordneteThemenCheckboxen(checkbox).length === 0;
         });
         quizAuswahlAktualisieren();
-        const ziel = navigation.getBoundingClientRect();
+        const ziel = navigationRechteck();
         navigationÜbergangAnimieren(
           { ...start, opacity: navigationWarSichtbarVorQuiz ? 1 : 0 },
           { ...ziel, opacity: 1 }

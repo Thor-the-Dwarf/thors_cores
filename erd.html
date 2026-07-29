@@ -17,6 +17,7 @@
       --linie: #526079;
       --bezug: #82a6ff;
       --fehler: #f87171;
+      --top-app-bar-höhe: calc(52px + env(safe-area-inset-top, 0px));
       --app-bar-höhe: 60px;
     }
 
@@ -36,6 +37,34 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       touch-action: auto;
       padding-bottom: calc(var(--app-bar-höhe) + env(safe-area-inset-bottom, 0px));
+    }
+
+    .top-app-bar {
+      position: fixed;
+      z-index: 100;
+      inset: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 100vw;
+      min-height: var(--top-app-bar-höhe);
+      padding: calc(8px + env(safe-area-inset-top, 0px))
+        max(12px, env(safe-area-inset-right, 0px))
+        8px
+        max(12px, env(safe-area-inset-left, 0px));
+      border-bottom: 1px solid rgba(183, 195, 220, 0.2);
+      color: #eef2f9;
+      background: rgba(10, 14, 23, 0.96);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(14px);
+      touch-action: pan-x pan-y pinch-zoom;
+    }
+
+    .top-app-bar__text {
+      margin: 0;
+      font-size: clamp(0.78rem, 2.4vw, 0.92rem);
+      font-weight: 850;
+      line-height: 1.25;
+      text-align: center;
     }
 
     body > header {
@@ -93,8 +122,9 @@
 
     .diagramm-scroll {
       width: 100%;
-      height: calc(100vh - var(--app-bar-höhe) - env(safe-area-inset-bottom, 0px));
-      height: calc(100dvh - var(--app-bar-höhe) - env(safe-area-inset-bottom, 0px));
+      height: calc(100vh - var(--top-app-bar-höhe) - var(--app-bar-höhe) - env(safe-area-inset-bottom, 0px));
+      height: calc(100dvh - var(--top-app-bar-höhe) - var(--app-bar-höhe) - env(safe-area-inset-bottom, 0px));
+      margin-top: var(--top-app-bar-höhe);
       overflow: hidden;
       cursor: grab;
       overscroll-behavior: contain;
@@ -282,6 +312,9 @@
   </style>
 </head>
 <body>
+  <div class="top-app-bar" role="banner">
+    <p class="top-app-bar__text">Wiederholung ist die Mutter des Lernens</p>
+  </div>
   <header>
     <a href="index.html">← Vault</a>
     <h1>Dynamisches ERD des Lern-Vaults</h1>

@@ -1,0 +1,154 @@
+{
+  "schema_version": "2.0.0-preview",
+  "status": "fachliche_strukturvorschau_nicht_vollständig",
+  "purpose": "Kleines Muster zur Kontrolle der neuen Core-Definition vor einer vollständigen Überarbeitung von Lernfeld_1_Cores.json.",
+  "information_architecture": [
+    "Lernfeld",
+    "Kompetenz",
+    "Themencluster",
+    "Thema",
+    "Core"
+  ],
+  "core_contract": {
+    "shortTitle": "Sehr kurze, knotentaugliche Bezeichnung als Stichwort oder knappe Nominalphrase.",
+    "title": "Kurzer, verständlicher Titel; kein vollständiger Lern- oder Quellensatz.",
+    "content": "Eigenständiger, verständlicher Lernbaustein, der den fachlichen Inhalt des Cores erklärt.",
+    "topic": "Eindeutige Zuordnung zum übergeordneten Thema.",
+    "category_weights": "Gewichtete Zuordnung zu IT, BWL inklusive Projektmanagement und WiSo; Summe ist 1.",
+    "sources": "Nachvollziehbarer Bezug zur fachlichen Primärquelle."
+  },
+  "categories": [
+    {
+      "id": "it",
+      "label": "IT",
+      "color": {
+        "name": "Blau",
+        "hex": "#2563EB"
+      }
+    },
+    {
+      "id": "bwl",
+      "label": "BWL inklusive Projektmanagement",
+      "color": {
+        "name": "Gelb",
+        "hex": "#FACC15"
+      }
+    },
+    {
+      "id": "wiso",
+      "label": "WiSo",
+      "color": {
+        "name": "Rot",
+        "hex": "#DC2626"
+      }
+    }
+  ],
+  "source_catalog": [
+    {
+      "id": "KMK-RLP-IT-2020",
+      "publisher": "Kultusministerkonferenz",
+      "title": "Rahmenlehrplan für die Ausbildungsberufe Fachinformatiker/Fachinformatikerin und IT-System-Elektroniker/IT-System-Elektronikerin",
+      "relevance": "Offizielle Zielformulierung von Lernfeld 1."
+    }
+  ],
+  "lernfeld": {
+    "id": "LF1",
+    "number": 1,
+    "title": "Das Unternehmen und die eigene Rolle im Betrieb beschreiben",
+    "structure_note": "Kompetenzen, Themencluster und Themen sind didaktisch aus der offiziellen Zielformulierung abgeleitet und keine wörtlichen KMK-Untertitel.",
+    "kompetenzen": [
+      {
+        "id": "LF1-K01",
+        "title": "Unternehmen im Umfeld einordnen",
+        "themencluster": [
+          {
+            "id": "LF1-K01-TC01",
+            "title": "Zielsystem des Unternehmens",
+            "themen": [
+              {
+                "id": "LF1-K01-TC01-T01",
+                "title": "Unternehmensziele",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC01-T01-C01",
+                    "shortTitle": "Ökonomische Ziele",
+                    "title": "Ökonomische Unternehmensziele",
+                    "content": "Ökonomische Unternehmensziele richten den Blick auf den wirtschaftlichen Erfolg und die dauerhafte Handlungsfähigkeit eines Unternehmens.",
+                    "topic": {
+                      "id": "LF1-K01-TC01-T01",
+                      "title": "Unternehmensziele"
+                    },
+                    "category_weights": [
+                      {
+                        "category_id": "bwl",
+                        "weight": 1.0
+                      }
+                    ],
+                    "sources": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1, Zielformulierung: ökonomische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T01-C02",
+                    "shortTitle": "Ökologische Ziele",
+                    "title": "Ökologische Unternehmensziele",
+                    "content": "Ökologische Unternehmensziele beziehen Umweltwirkungen und einen verantwortungsvollen Umgang mit natürlichen Ressourcen in unternehmerische Entscheidungen ein.",
+                    "topic": {
+                      "id": "LF1-K01-TC01-T01",
+                      "title": "Unternehmensziele"
+                    },
+                    "category_weights": [
+                      {
+                        "category_id": "bwl",
+                        "weight": 0.55
+                      },
+                      {
+                        "category_id": "wiso",
+                        "weight": 0.45
+                      }
+                    ],
+                    "sources": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1, Zielformulierung: ökologische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T01-C03",
+                    "shortTitle": "Soziale Ziele",
+                    "title": "Soziale Unternehmensziele",
+                    "content": "Soziale Unternehmensziele berücksichtigen die Interessen und das Wohlergehen der Menschen, die mit dem Unternehmen verbunden sind.",
+                    "topic": {
+                      "id": "LF1-K01-TC01-T01",
+                      "title": "Unternehmensziele"
+                    },
+                    "category_weights": [
+                      {
+                        "category_id": "bwl",
+                        "weight": 0.35
+                      },
+                      {
+                        "category_id": "wiso",
+                        "weight": 0.65
+                      }
+                    ],
+                    "sources": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1, Zielformulierung: soziale Zielsetzungen"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

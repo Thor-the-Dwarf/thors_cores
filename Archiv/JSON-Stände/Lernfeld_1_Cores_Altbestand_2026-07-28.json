@@ -1,0 +1,2664 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_id": "de-fachinformatiker-lf1-cores",
+  "metadata": {
+    "title": "Cores für Lernfeld 1 der Fachinformatiker-Ausbildung",
+    "description": "Atomisierte Kompetenz- und Wissenseinheiten aus offiziellen Ordnungsmitteln sowie ihre belastbare IHK-Einordnung.",
+    "language": "de",
+    "created_at": "2026-07-28",
+    "status": "initiale_offizielle_quellenbasis",
+    "core_definition": "Ein Core ist hier die kleinste aus einer Quelle belegbare Kompetenz- oder Informationseinheit mit genau einer zentralen Aussage beziehungsweise Handlung. Die Bezeichnung und Atomisierung als Core ist eine redaktionelle Projektstruktur und keine amtliche Terminologie.",
+    "scope": {
+      "ausbildungsberuf": "Fachinformatiker und Fachinformatikerin",
+      "ausbildungsordnung": "Fachinformatikerausbildungsverordnung vom 28. Februar 2020",
+      "fachrichtungen": [
+        "Anwendungsentwicklung",
+        "Systemintegration",
+        "Daten- und Prozessanalyse",
+        "Digitale Vernetzung"
+      ],
+      "lernfeld": {
+        "nummer": 1,
+        "titel": "Das Unternehmen und die eigene Rolle im Betrieb beschreiben",
+        "ausbildungsjahr": 1,
+        "zeitrichtwert_stunden": 40
+      }
+    },
+    "abgrenzung": [
+      "Der Begriff Lernfeld gehört zum KMK-Rahmenlehrplan für den Lernort Berufsschule.",
+      "Der Ausbildungsrahmenplan ist Bestandteil der Ausbildungsordnung und gilt für den Lernort Betrieb; er verwendet keine Lernfeldgliederung.",
+      "Die BIBB/KMK-Entsprechungsliste verbindet beide Ordnungsmittel. Deshalb werden direktes LF1, ausdrücklich LF1 zugeordnete Ausbildungsrahmenplan-Inhalte und lernfeldübergreifende Inhalte getrennt ausgewiesen.",
+      "Nicht-offizielle Unterrichtsmaterialien wurden nicht als fachliche Quelle verwendet."
+    ],
+    "projektkontext": {
+      "zielordner_war_zu_beginn_leer": true,
+      "benachbarte_json_struktur_geprüft": "../Thors_Cores2/example.json",
+      "benachbarte_json_als_inhaltsquelle_verwendet": false,
+      "hinweis": "Die benachbarte Beispieldatei war syntaktisch ungültig und bezeichnete als Lernfeld 1 eine Ausbildungsrahmenplan-Position zum Projektmanagement. Diese Struktur wurde daher nicht übernommen."
+    },
+    "unsicherheiten": [
+      {
+        "id": "U-001",
+        "thema": "Amtlicher Status der Cores",
+        "hinweis": "Die amtlichen Quellen formulieren Kompetenzen und Ausbildungsinhalte, aber keine Cores. Die Zerlegung in atomare Einheiten ist eine nachvollziehbare redaktionelle Ableitung.",
+        "auswirkung": "Vor einer produktiven Lernplattform-Nutzung sollte die gewünschte Granularität didaktisch bestätigt werden."
+      },
+      {
+        "id": "U-002",
+        "thema": "Lernfeldübergreifende Inhalte",
+        "hinweis": "Als alle Lernfelder gekennzeichnete Ausbildungsrahmenplan-Inhalte gelten auch in Lernfeld 1, sind aber nicht ausschließlich Lernfeld 1 zugeordnet.",
+        "auswirkung": "Diese Cores stehen in einer eigenen Gruppe und dürfen nicht als exklusiver LF1-Stoff interpretiert werden."
+      },
+      {
+        "id": "U-003",
+        "thema": "Länder- und schulinterne Konkretisierung",
+        "hinweis": "Landeslehrpläne und schulinterne Curricula können das bundesweit abgestimmte Lernfeld konkretisieren.",
+        "auswirkung": "Solche Konkretisierungen sind in dieser ersten bundesweiten Quellenbasis noch nicht enthalten."
+      }
+    ]
+  },
+  "source_catalog": [
+    {
+      "id": "KMK-RLP-IT-2020",
+      "publisher": "Kultusministerkonferenz",
+      "title": "Rahmenlehrplan für die Ausbildungsberufe Fachinformatiker/Fachinformatikerin und IT-System-Elektroniker/IT-System-Elektronikerin",
+      "date": "2019-12-13",
+      "url": "https://www.kmk.org/service/servicebereich-berufliche-schulen/downloadbereich-rahmenlehrplaene?tx_fedownloads_single%5Baction%5D=forceDownload&tx_fedownloads_single%5Bcontroller%5D=Downloads&tx_fedownloads_single%5Bdownload%5D=45009&type=150",
+      "authority": "offizielle Primärquelle",
+      "relevance": "Definiert Lernfeld 1, dessen Titel, Zeitrichtwert und vollständige Kompetenzbeschreibung; enthält außerdem die BIBB/KMK-Entsprechungslisten."
+    },
+    {
+      "id": "FIAusbV-HTML",
+      "publisher": "Bundesministerium der Justiz und Bundesamt für Justiz",
+      "title": "Fachinformatikerausbildungsverordnung",
+      "date": "2020-02-28",
+      "url": "https://www.gesetze-im-internet.de/fiausbv/BJNR025000020.html",
+      "authority": "amtliches Bundesrecht",
+      "relevance": "Rechtsverbindliche Ausbildungsordnung einschließlich Ausbildungsrahmenplan in der Anlage."
+    },
+    {
+      "id": "FIAusbV-PDF",
+      "publisher": "Bundesministerium der Justiz und Bundesamt für Justiz",
+      "title": "Fachinformatikerausbildungsverordnung als PDF",
+      "date": "2020-02-28",
+      "url": "https://www.gesetze-im-internet.de/fiausbv/FIAusbV.pdf",
+      "authority": "amtliches Bundesrecht",
+      "relevance": "Stabile Gesamtfassung der Verordnung mit Anlage und Seitenbezug."
+    },
+    {
+      "id": "BIBB-BERUFEPROFIL",
+      "publisher": "Bundesinstitut für Berufsbildung",
+      "title": "Berufesuche: Fachinformatiker/Fachinformatikerin",
+      "url": "https://www.bibb.de/dienst/berufesuche/de/index_berufesuche.php/profile/apprenticeship/olkiu98",
+      "authority": "offizielle Bundesfachinstitution",
+      "relevance": "Bestätigt Ausbildungsdauer, vier Fachrichtungen, Rechtsgrundlage und den geltenden Rahmenlehrplan."
+    },
+    {
+      "id": "BIBB-UMSETZUNGSHILFE",
+      "publisher": "Bundesinstitut für Berufsbildung",
+      "title": "Fachinformatiker/Fachinformatikerin – Umsetzungshilfe für die Ausbildungspraxis",
+      "date": "2020",
+      "url": "https://www.bibb.de/dienst/publikationen/de/16661",
+      "authority": "offizielle Umsetzungshilfe",
+      "relevance": "Erläutert die modernisierte Ausbildungsordnung und ihre Ausbildungsberufsbildpositionen; dient als Kontextquelle, nicht als Grundlage zusätzlicher erfundener Cores."
+    },
+    {
+      "id": "IHK-DUESSELDORF-BERUF",
+      "publisher": "IHK Düsseldorf",
+      "title": "Fachinformatiker/-in",
+      "url": "https://www.ihk.de/duesseldorf/ausbildung/ausbildungsberufe/fachinformatiker-4676986",
+      "authority": "offizielle IHK-Quelle",
+      "relevance": "Trennt Ausbildungsordnung und Ausbildungsrahmenplan vom schulischen Rahmenlehrplan und bestätigt die vier Fachrichtungen sowie die Prüfungsstruktur."
+    },
+    {
+      "id": "IHK-REGENSBURG-UEBERSICHT",
+      "publisher": "IHK Regensburg für Oberpfalz / Kelheim",
+      "title": "Ausbildungsrahmenpläne – Sachliche und zeitliche Gliederung",
+      "url": "https://www.ihk.de/regensburg/aus-und-weiterbildung/ausbildung/ausbilder-und-personalverantwortliche/rahmenplaene",
+      "authority": "offizielle IHK-Quelle",
+      "relevance": "Stellt für alle vier Fachrichtungen aktuelle Vorlagen zur sachlichen und zeitlichen Gliederung bereit."
+    },
+    {
+      "id": "IHK-ARP-AE",
+      "publisher": "IHK Regensburg für Oberpfalz / Kelheim",
+      "title": "Ausbildungsrahmenplan Fachinformatiker – Fachrichtung Anwendungsentwicklung",
+      "url": "https://www.ihk.de/regensburg/blueprint/servlet/resource/blob/4809326/22d5605fcfefcb14d3a383bffe75621b/rahmenplan-fachinformatiker-anwendungsentwicklung-data.pdf",
+      "authority": "offizielle IHK-Quelle",
+      "relevance": "IHK-Ausbildungsplanvorlage; die für LF1 relevanten fachrichtungsübergreifenden und integrativen Positionen entsprechen der FIAusbV."
+    },
+    {
+      "id": "IHK-ARP-DPA",
+      "publisher": "IHK Regensburg für Oberpfalz / Kelheim",
+      "title": "Ausbildungsrahmenplan Fachinformatiker – Fachrichtung Daten- und Prozessanalyse",
+      "url": "https://www.ihk.de/regensburg/blueprint/servlet/resource/blob/5025518/c102a6fd6d3ec0738acae277e2786599/rahmenplan-fachinformatiker-daten-und-prozessanalyse-data.pdf",
+      "authority": "offizielle IHK-Quelle",
+      "relevance": "IHK-Ausbildungsplanvorlage; bestätigt die fachrichtungsübergreifenden und integrativen Positionen."
+    },
+    {
+      "id": "IHK-ARP-DV",
+      "publisher": "IHK Regensburg für Oberpfalz / Kelheim",
+      "title": "Ausbildungsrahmenplan Fachinformatiker – Fachrichtung Digitale Vernetzung",
+      "url": "https://www.ihk.de/regensburg/blueprint/servlet/resource/blob/5025524/c4db486af1c4a9c3b0fa29a3345426bd/rahmenplan-fachinformatiker-digitale-vernetzung-data.pdf",
+      "authority": "offizielle IHK-Quelle",
+      "relevance": "IHK-Ausbildungsplanvorlage; bestätigt die fachrichtungsübergreifenden und integrativen Positionen."
+    },
+    {
+      "id": "IHK-ARP-SI",
+      "publisher": "IHK Regensburg für Oberpfalz / Kelheim",
+      "title": "Ausbildungsrahmenplan Fachinformatiker – Fachrichtung Systemintegration",
+      "url": "https://www.ihk.de/regensburg/blueprint/servlet/resource/blob/5025526/b7174eaa6d203c13be051f01194aec95/rahmenplan-fachinformatiker-systemintegration-data.pdf",
+      "authority": "offizielle IHK-Quelle",
+      "relevance": "IHK-Ausbildungsplanvorlage; bestätigt die fachrichtungsübergreifenden und integrativen Positionen."
+    }
+  ],
+  "categories": [
+    {
+      "id": "it",
+      "label": "IT",
+      "rank": 1,
+      "color": {
+        "name": "Blau",
+        "token": "core-category-it",
+        "hex": "#2563EB"
+      },
+      "definition": "Informationstechnik, digitale Systeme, Daten, technische Fachsprache, digitale Werkzeuge und fachbezogene Informationsverarbeitung.",
+      "equal_rank": true
+    },
+    {
+      "id": "bwl",
+      "label": "BWL inklusive Projektmanagement",
+      "rank": 1,
+      "color": {
+        "name": "Gelb",
+        "token": "core-category-bwl",
+        "hex": "#FACC15"
+      },
+      "definition": "Betriebswirtschaft, Unternehmen, Markt, Kunden, Wertschöpfung, Organisation, Geschäftsprozesse, Qualität sowie Projektmanagement.",
+      "equal_rank": true
+    },
+    {
+      "id": "wiso",
+      "label": "WiSo",
+      "long_label": "Wirtschafts- und Sozialkunde",
+      "rank": 1,
+      "color": {
+        "name": "Rot",
+        "token": "core-category-wiso",
+        "hex": "#DC2626"
+      },
+      "definition": "Recht, Arbeitswelt, eigene Rolle, Gesellschaft, Zusammenarbeit, Sicherheit, Gesundheit, Umweltschutz, Datenschutz, Persönlichkeitsrechte, Ethik und Verantwortung.",
+      "equal_rank": true
+    }
+  ],
+  "visual_encoding": {
+    "category_membership": "Jeder Core speichert eine Liste gewichteter Kategorien. Die Gewichte summieren sich auf 1.",
+    "mixed_color": {
+      "method": "weighted_srgb",
+      "description": "Für Misch-Cores werden die RGB-Werte der drei Grundfarben anhand der category_weights linear gewichtet.",
+      "fallback": "Die Kategorie mit dem höchsten Gewicht liefert die Fallback-Farbe; bei Gleichstand entscheidet die Reihenfolge in category_weights nicht über eine fachliche Rangfolge."
+    },
+    "node_title_field": "title",
+    "node_description_field": "short_description",
+    "node_edge_reference_field": "connections"
+  },
+  "core_groups": [
+    {
+      "id": "LF1-DIREKT",
+      "title": "Direkt aus der Kompetenzbeschreibung von Lernfeld 1",
+      "scope_note": "Diese Cores sind atomisierte Paraphrasen der vollständigen LF1-Beschreibung im KMK-Rahmenlehrplan.",
+      "cores": [
+        {
+          "id": "LF1-001",
+          "statement": "Ein Unternehmen verfolgt ökonomische Zielsetzungen.",
+          "type": "Kenntnis",
+          "tags": [
+            "Unternehmensziele",
+            "Ökonomie"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 2"
+            }
+          ],
+          "title": "Ein Unternehmen verfolgt ökonomische Zielsetzungen",
+          "short_description": "Ein Unternehmen verfolgt ökonomische Zielsetzungen.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E001",
+            "E002",
+            "E003"
+          ]
+        },
+        {
+          "id": "LF1-002",
+          "statement": "Ein Unternehmen verfolgt ökologische Zielsetzungen.",
+          "type": "Kenntnis",
+          "tags": [
+            "Unternehmensziele",
+            "Ökologie"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 2"
+            }
+          ],
+          "title": "Ein Unternehmen verfolgt ökologische Zielsetzungen",
+          "short_description": "Ein Unternehmen verfolgt ökologische Zielsetzungen.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.4
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.6
+            }
+          ],
+          "connections": [
+            "E001"
+          ]
+        },
+        {
+          "id": "LF1-003",
+          "statement": "Ein Unternehmen verfolgt soziale Zielsetzungen.",
+          "type": "Kenntnis",
+          "tags": [
+            "Unternehmensziele",
+            "Soziales"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 2"
+            }
+          ],
+          "title": "Ein Unternehmen verfolgt soziale Zielsetzungen",
+          "short_description": "Ein Unternehmen verfolgt soziale Zielsetzungen.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E002"
+          ]
+        },
+        {
+          "id": "LF1-004",
+          "statement": "Das Unternehmensleitbild ist eine Quelle zur Ermittlung von Unternehmenszielen.",
+          "type": "Kenntnis",
+          "tags": [
+            "Unternehmensleitbild",
+            "Unternehmensziele"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 2"
+            }
+          ],
+          "title": "Das Unternehmensleitbild ist eine Quelle zur Ermittlung von Unternehmenszielen",
+          "short_description": "Das Unternehmensleitbild ist eine Quelle zur Ermittlung von Unternehmenszielen.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.7
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.3
+            }
+          ],
+          "connections": [
+            "E003"
+          ]
+        },
+        {
+          "id": "LF1-005",
+          "statement": "Die Marktstruktur der eigenen Branche kann analysiert werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Marktstruktur",
+            "Branche"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 3"
+            }
+          ],
+          "title": "Die Marktstruktur der eigenen Branche kann analysiert werden",
+          "short_description": "Die Marktstruktur der eigenen Branche kann analysiert werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E004",
+            "E019"
+          ]
+        },
+        {
+          "id": "LF1-006",
+          "statement": "Ein Unternehmen steht in Marktbeziehungen.",
+          "type": "Kenntnis",
+          "tags": [
+            "Marktbeziehungen",
+            "Unternehmen"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 3"
+            }
+          ],
+          "title": "Ein Unternehmen steht in Marktbeziehungen",
+          "short_description": "Ein Unternehmen steht in Marktbeziehungen.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E004",
+            "E005",
+            "E006"
+          ]
+        },
+        {
+          "id": "LF1-007",
+          "statement": "Ein Unternehmen steht in Kundenbeziehungen.",
+          "type": "Kenntnis",
+          "tags": [
+            "Kundenbeziehungen",
+            "Unternehmen"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 3"
+            }
+          ],
+          "title": "Ein Unternehmen steht in Kundenbeziehungen",
+          "short_description": "Ein Unternehmen steht in Kundenbeziehungen.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.8
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.2
+            }
+          ],
+          "connections": [
+            "E005",
+            "E021"
+          ]
+        },
+        {
+          "id": "LF1-008",
+          "statement": "Ein Unternehmen kann als komplexes System eingeordnet werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Systemdenken",
+            "Unternehmen"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 3"
+            }
+          ],
+          "title": "Ein Unternehmen kann als komplexes System eingeordnet werden",
+          "short_description": "Ein Unternehmen kann als komplexes System eingeordnet werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E006"
+          ]
+        },
+        {
+          "id": "LF1-009",
+          "statement": "Die Wertschöpfungskette des eigenen Unternehmens kann beschrieben werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Wertschöpfungskette"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absätze 1 und 3"
+            }
+          ],
+          "title": "Die Wertschöpfungskette des eigenen Unternehmens kann beschrieben werden",
+          "short_description": "Die Wertschöpfungskette des eigenen Unternehmens kann beschrieben werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E007"
+          ]
+        },
+        {
+          "id": "LF1-010",
+          "statement": "Die eigene Rolle innerhalb des Betriebs kann beschrieben werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Eigene Rolle",
+            "Betrieb"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absätze 1 und 3"
+            }
+          ],
+          "title": "Die eigene Rolle innerhalb des Betriebs kann beschrieben werden",
+          "short_description": "Die eigene Rolle innerhalb des Betriebs kann beschrieben werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E007"
+          ]
+        },
+        {
+          "id": "LF1-011",
+          "statement": "Die Leistungsschwerpunkte des eigenen Unternehmens können erkundet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Leistungsschwerpunkte",
+            "Unternehmen"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 4"
+            }
+          ],
+          "title": "Die Leistungsschwerpunkte des eigenen Unternehmens können erkundet werden",
+          "short_description": "Die Leistungsschwerpunkte des eigenen Unternehmens können erkundet werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E008"
+          ]
+        },
+        {
+          "id": "LF1-012",
+          "statement": "Besonderheiten des eigenen Unternehmens können erkundet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Unternehmensmerkmale"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 4"
+            }
+          ],
+          "title": "Besonderheiten des eigenen Unternehmens können erkundet werden",
+          "short_description": "Besonderheiten des eigenen Unternehmens können erkundet werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E008"
+          ]
+        },
+        {
+          "id": "LF1-013",
+          "statement": "Die Rechtsform des eigenen Unternehmens kann erläutert werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Rechtsform"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 4"
+            },
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 2a"
+            },
+            {
+              "source_id": "IHK-ARP-AE",
+              "locator": "Integrativ zu vermittelnde Fertigkeiten, Position 2a"
+            }
+          ],
+          "title": "Die Rechtsform des eigenen Unternehmens kann erläutert werden",
+          "short_description": "Die Rechtsform des eigenen Unternehmens kann erläutert werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E009"
+          ]
+        },
+        {
+          "id": "LF1-014",
+          "statement": "Der organisatorische Aufbau des eigenen Unternehmens kann erläutert werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Aufbauorganisation"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 4; Entsprechungsliste Fachinformatiker, Abschnitt F, Position 2a"
+            },
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 2a"
+            },
+            {
+              "source_id": "IHK-ARP-SI",
+              "locator": "Integrativ zu vermittelnde Fertigkeiten, Position 2a"
+            }
+          ],
+          "title": "Der organisatorische Aufbau des eigenen Unternehmens kann erläutert werden",
+          "short_description": "Der organisatorische Aufbau des eigenen Unternehmens kann erläutert werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E009",
+            "E029"
+          ]
+        },
+        {
+          "id": "LF1-015",
+          "statement": "Der eigene Handlungs- und Entscheidungsspielraum im Unternehmen kann ermittelt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Handlungsspielraum",
+            "Entscheidungsspielraum"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 4"
+            }
+          ],
+          "title": "Der eigene Handlungs- und Entscheidungsspielraum im Unternehmen kann ermittelt werden",
+          "short_description": "Der eigene Handlungs- und Entscheidungsspielraum im Unternehmen kann ermittelt werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.4
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.6
+            }
+          ],
+          "connections": [
+            "E010"
+          ]
+        },
+        {
+          "id": "LF1-016",
+          "statement": "Vollmachten bestimmen den Handlungs- und Entscheidungsspielraum im Unternehmen mit.",
+          "type": "Kenntnis",
+          "tags": [
+            "Vollmachten",
+            "Entscheidungsspielraum"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 4"
+            }
+          ],
+          "title": "Vollmachten bestimmen den Handlungs- und Entscheidungsspielraum im Unternehmen mit",
+          "short_description": "Vollmachten bestimmen den Handlungs- und Entscheidungsspielraum im Unternehmen mit.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.3
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.7
+            }
+          ],
+          "connections": [
+            "E010"
+          ]
+        },
+        {
+          "id": "LF1-017",
+          "statement": "Betriebliche Fortbildungsmaßnahmen können ermittelt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Fortbildung"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 4"
+            }
+          ],
+          "title": "Betriebliche Fortbildungsmaßnahmen können ermittelt werden",
+          "short_description": "Betriebliche Fortbildungsmaßnahmen können ermittelt werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E011"
+          ]
+        },
+        {
+          "id": "LF1-018",
+          "statement": "Betriebliche Weiterbildungsmaßnahmen können ermittelt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Weiterbildung"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 4"
+            }
+          ],
+          "title": "Betriebliche Weiterbildungsmaßnahmen können ermittelt werden",
+          "short_description": "Betriebliche Weiterbildungsmaßnahmen können ermittelt werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E011"
+          ]
+        },
+        {
+          "id": "LF1-019",
+          "statement": "Eine Darstellung des eigenen Unternehmens kann adressatengerecht geplant werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Präsentationsplanung",
+            "Adressatenbezug"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 5"
+            }
+          ],
+          "title": "Eine Darstellung des eigenen Unternehmens kann adressatengerecht geplant werden",
+          "short_description": "Eine Darstellung des eigenen Unternehmens kann adressatengerecht geplant werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.6
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.4
+            }
+          ],
+          "connections": [
+            "E012",
+            "E013"
+          ]
+        },
+        {
+          "id": "LF1-020",
+          "statement": "Eine Darstellung des eigenen Unternehmens kann multimedial erstellt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Multimedia",
+            "Präsentation"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 5"
+            }
+          ],
+          "title": "Eine Darstellung des eigenen Unternehmens kann multimedial erstellt werden",
+          "short_description": "Eine Darstellung des eigenen Unternehmens kann multimedial erstellt werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E012",
+            "E047"
+          ]
+        },
+        {
+          "id": "LF1-021",
+          "statement": "Eine Darstellung des eigenen Unternehmens kann im Team erstellt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Teamarbeit",
+            "Präsentation"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 5"
+            }
+          ],
+          "title": "Eine Darstellung des eigenen Unternehmens kann im Team erstellt werden",
+          "short_description": "Eine Darstellung des eigenen Unternehmens kann im Team erstellt werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.3
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.7
+            }
+          ],
+          "connections": [
+            "E013"
+          ]
+        },
+        {
+          "id": "LF1-022",
+          "statement": "Ergebnisse zum eigenen Unternehmen können präsentiert werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Präsentation",
+            "Ergebnisse"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 6"
+            }
+          ],
+          "title": "Ergebnisse zum eigenen Unternehmen können präsentiert werden",
+          "short_description": "Ergebnisse zum eigenen Unternehmen können präsentiert werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.5
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.5
+            }
+          ],
+          "connections": [
+            "E014"
+          ]
+        },
+        {
+          "id": "LF1-023",
+          "statement": "Die Qualität eines Handlungsproduktes kann anhand von Kriterien überprüft werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Qualität",
+            "Kriterien",
+            "Handlungsprodukt"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 7"
+            }
+          ],
+          "title": "Die Qualität eines Handlungsproduktes kann anhand von Kriterien überprüft werden",
+          "short_description": "Die Qualität eines Handlungsproduktes kann anhand von Kriterien überprüft werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E014",
+            "E015",
+            "E048"
+          ]
+        },
+        {
+          "id": "LF1-024",
+          "statement": "Verbesserungsmöglichkeiten für ein Handlungsprodukt können gemeinsam entwickelt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Verbesserung",
+            "Teamarbeit"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 7"
+            },
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 1i; laut Entsprechungsliste LF1 bis LF11 zugeordnet"
+            }
+          ],
+          "title": "Verbesserungsmöglichkeiten für ein Handlungsprodukt können gemeinsam entwickelt werden",
+          "short_description": "Verbesserungsmöglichkeiten für ein Handlungsprodukt können gemeinsam entwickelt werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.6
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.4
+            }
+          ],
+          "connections": [
+            "E015"
+          ]
+        },
+        {
+          "id": "LF1-025",
+          "statement": "Die eigene Rolle im Betrieb kann reflektiert werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Reflexion",
+            "Eigene Rolle"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 8"
+            }
+          ],
+          "title": "Die eigene Rolle im Betrieb kann reflektiert werden",
+          "short_description": "Die eigene Rolle im Betrieb kann reflektiert werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E016"
+          ]
+        },
+        {
+          "id": "LF1-026",
+          "statement": "Das eigene Handeln im Betrieb kann reflektiert werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Reflexion",
+            "Eigenes Handeln"
+          ],
+          "sources": [
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Lernfeld 1, S. 13, Absatz 8"
+            },
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 1i; laut Entsprechungsliste LF1 bis LF11 zugeordnet"
+            }
+          ],
+          "title": "Das eigene Handeln im Betrieb kann reflektiert werden",
+          "short_description": "Das eigene Handeln im Betrieb kann reflektiert werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E016",
+            "E030"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LF1-ARP-ZUGEORDNET",
+      "title": "Ausbildungsrahmenplan-Inhalte mit ausdrücklicher LF1-Zuordnung",
+      "scope_note": "Diese zusätzlichen Atome stammen aus Positionen, denen die offizielle BIBB/KMK-Entsprechungsliste ausdrücklich Lernfeld 1 zuordnet. Überschneidungen mit den direkten LF1-Cores wurden nicht dupliziert.",
+      "cores": [
+        {
+          "id": "LF1-027",
+          "statement": "Preise von Wettbewerbern können im Rahmen der Marktbeobachtung verglichen werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Marktbeobachtung",
+            "Wettbewerber",
+            "Preise"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2a: LF1 und LF2"
+            },
+            {
+              "source_id": "IHK-ARP-DPA",
+              "locator": "Fachrichtungsübergreifende Position 2a"
+            }
+          ],
+          "title": "Preise von Wettbewerbern können im Rahmen der Marktbeobachtung verglichen werden",
+          "short_description": "Preise von Wettbewerbern können im Rahmen der Marktbeobachtung verglichen werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E017",
+            "E019"
+          ]
+        },
+        {
+          "id": "LF1-028",
+          "statement": "Leistungen von Wettbewerbern können im Rahmen der Marktbeobachtung verglichen werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Marktbeobachtung",
+            "Wettbewerber",
+            "Leistungen"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2a: LF1 und LF2"
+            }
+          ],
+          "title": "Leistungen von Wettbewerbern können im Rahmen der Marktbeobachtung verglichen werden",
+          "short_description": "Leistungen von Wettbewerbern können im Rahmen der Marktbeobachtung verglichen werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E017",
+            "E018"
+          ]
+        },
+        {
+          "id": "LF1-029",
+          "statement": "Konditionen von Wettbewerbern können im Rahmen der Marktbeobachtung verglichen werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Marktbeobachtung",
+            "Wettbewerber",
+            "Konditionen"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2a: LF1 und LF2"
+            }
+          ],
+          "title": "Konditionen von Wettbewerbern können im Rahmen der Marktbeobachtung verglichen werden",
+          "short_description": "Konditionen von Wettbewerbern können im Rahmen der Marktbeobachtung verglichen werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E018"
+          ]
+        },
+        {
+          "id": "LF1-030",
+          "statement": "Bedarfe von Kunden und Kundinnen können festgestellt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Kundenbedarf"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2b"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2b: LF1 und LF2"
+            },
+            {
+              "source_id": "IHK-ARP-DV",
+              "locator": "Fachrichtungsübergreifende Position 2b"
+            }
+          ],
+          "title": "Bedarfe von Kunden und Kundinnen können festgestellt werden",
+          "short_description": "Bedarfe von Kunden und Kundinnen können festgestellt werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E020",
+            "E021"
+          ]
+        },
+        {
+          "id": "LF1-031",
+          "statement": "Zielgruppen können unterschieden werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Zielgruppen"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2b"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2b: LF1 und LF2"
+            }
+          ],
+          "title": "Zielgruppen können unterschieden werden",
+          "short_description": "Zielgruppen können unterschieden werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E020"
+          ]
+        },
+        {
+          "id": "LF1-032",
+          "statement": "Kunden und Kundinnen können unter Beachtung von Kommunikationsregeln informiert werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Kundeninformation",
+            "Kommunikationsregeln"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2c"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2c: LF1 und LF2"
+            }
+          ],
+          "title": "Kunden und Kundinnen können unter Beachtung von Kommunikationsregeln informiert werden",
+          "short_description": "Kunden und Kundinnen können unter Beachtung von Kommunikationsregeln informiert werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.4
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.6
+            }
+          ],
+          "connections": [
+            "E022"
+          ]
+        },
+        {
+          "id": "LF1-033",
+          "statement": "Sachverhalte können präsentiert werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Präsentation"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2c"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2c: LF1 und LF2"
+            }
+          ],
+          "title": "Sachverhalte können präsentiert werden",
+          "short_description": "Sachverhalte können präsentiert werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.6
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.4
+            }
+          ],
+          "connections": [
+            "E022",
+            "E023",
+            "E024"
+          ]
+        },
+        {
+          "id": "LF1-034",
+          "statement": "Deutsche Fachbegriffe können bei einer Präsentation angewendet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Fachsprache",
+            "Deutsch",
+            "Präsentation"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2c"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2c: LF1 und LF2"
+            }
+          ],
+          "title": "Deutsche Fachbegriffe können bei einer Präsentation angewendet werden",
+          "short_description": "Deutsche Fachbegriffe können bei einer Präsentation angewendet werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E023"
+          ]
+        },
+        {
+          "id": "LF1-035",
+          "statement": "Englische Fachbegriffe können bei einer Präsentation angewendet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Fachsprache",
+            "Englisch",
+            "Präsentation"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2c"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2c: LF1 und LF2"
+            }
+          ],
+          "title": "Englische Fachbegriffe können bei einer Präsentation angewendet werden",
+          "short_description": "Englische Fachbegriffe können bei einer Präsentation angewendet werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E024"
+          ]
+        },
+        {
+          "id": "LF1-036",
+          "statement": "Informationsquellen können aufgabenbezogen ausgewertet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Informationsquellen",
+            "Auswertung"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2e"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2e: LF1 und LF2"
+            }
+          ],
+          "title": "Informationsquellen können aufgabenbezogen ausgewertet werden",
+          "short_description": "Informationsquellen können aufgabenbezogen ausgewertet werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E025",
+            "E026"
+          ]
+        },
+        {
+          "id": "LF1-037",
+          "statement": "Englischsprachige Informationsquellen können aufgabenbezogen ausgewertet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Informationsquellen",
+            "Englisch",
+            "Auswertung"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2e"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2e: LF1 und LF2"
+            }
+          ],
+          "title": "Englischsprachige Informationsquellen können aufgabenbezogen ausgewertet werden",
+          "short_description": "Englischsprachige Informationsquellen können aufgabenbezogen ausgewertet werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E025"
+          ]
+        },
+        {
+          "id": "LF1-038",
+          "statement": "Ausgewertete Informationsquellen können für die Kundeninformation genutzt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Informationsquellen",
+            "Kundeninformation"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 2e"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 2e: LF1 und LF2"
+            }
+          ],
+          "title": "Ausgewertete Informationsquellen können für die Kundeninformation genutzt werden",
+          "short_description": "Ausgewertete Informationsquellen können für die Kundeninformation genutzt werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 0.5
+            },
+            {
+              "category_id": "bwl",
+              "weight": 0.5
+            }
+          ],
+          "connections": [
+            "E026"
+          ]
+        },
+        {
+          "id": "LF1-039",
+          "statement": "Die Aufgaben des Ausbildungsbetriebes können erläutert werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Ausbildungsbetrieb",
+            "Aufgaben"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 2a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 2a: LF1 sowie Wirtschafts- und Sozialkunde"
+            },
+            {
+              "source_id": "IHK-ARP-AE",
+              "locator": "Integrativ zu vermittelnde Fertigkeiten, Position 2a"
+            }
+          ],
+          "title": "Die Aufgaben des Ausbildungsbetriebes können erläutert werden",
+          "short_description": "Die Aufgaben des Ausbildungsbetriebes können erläutert werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E027",
+            "E029"
+          ]
+        },
+        {
+          "id": "LF1-040",
+          "statement": "Die Zuständigkeiten im Ausbildungsbetrieb können erläutert werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Ausbildungsbetrieb",
+            "Zuständigkeiten"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 2a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 2a: LF1 sowie Wirtschafts- und Sozialkunde"
+            }
+          ],
+          "title": "Die Zuständigkeiten im Ausbildungsbetrieb können erläutert werden",
+          "short_description": "Die Zuständigkeiten im Ausbildungsbetrieb können erläutert werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E027",
+            "E028"
+          ]
+        },
+        {
+          "id": "LF1-041",
+          "statement": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes können erläutert werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Geschäftsprozesse",
+            "Zusammenhänge"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 2a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 2a: LF1 sowie Wirtschafts- und Sozialkunde"
+            }
+          ],
+          "title": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes können erläutert werden",
+          "short_description": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes können erläutert werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E028"
+          ]
+        },
+        {
+          "id": "LF1-042",
+          "statement": "Die Aufgabendurchführung im Team kann reflektiert werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Teamarbeit",
+            "Reflexion"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt A, Berufsbildposition 1i"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt A, Position 1i: LF1 bis LF11"
+            }
+          ],
+          "title": "Die Aufgabendurchführung im Team kann reflektiert werden",
+          "short_description": "Die Aufgabendurchführung im Team kann reflektiert werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E030",
+            "E048"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LF1-INTEGRATIV",
+      "title": "Lernfeldübergreifende Ausbildungsrahmenplan-Inhalte, die auch für LF1 gelten",
+      "scope_note": "Die Entsprechungsliste kennzeichnet diese Positionen als für alle Lernfelder geltend. Sie gehören deshalb zur LF1-Gesamtbasis, sind aber nicht exklusiv LF1 zugeordnet.",
+      "cores": [
+        {
+          "id": "LF1-043",
+          "statement": "Gefährdungen von Sicherheit am Arbeitsplatz können festgestellt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Arbeitssicherheit",
+            "Gefährdung"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 3a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 3a: alle Lernfelder"
+            }
+          ],
+          "title": "Gefährdungen von Sicherheit am Arbeitsplatz können festgestellt werden",
+          "short_description": "Gefährdungen von Sicherheit am Arbeitsplatz können festgestellt werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E031",
+            "E032"
+          ]
+        },
+        {
+          "id": "LF1-044",
+          "statement": "Gefährdungen der Gesundheit am Arbeitsplatz können festgestellt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Gesundheitsschutz",
+            "Gefährdung"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 3a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 3a: alle Lernfelder"
+            }
+          ],
+          "title": "Gefährdungen der Gesundheit am Arbeitsplatz können festgestellt werden",
+          "short_description": "Gefährdungen der Gesundheit am Arbeitsplatz können festgestellt werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E031",
+            "E033"
+          ]
+        },
+        {
+          "id": "LF1-045",
+          "statement": "Maßnahmen zur Vermeidung einer festgestellten Arbeitsplatzgefährdung können ergriffen werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Arbeitssicherheit",
+            "Prävention"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 3a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 3a: alle Lernfelder"
+            }
+          ],
+          "title": "Maßnahmen zur Vermeidung einer festgestellten Arbeitsplatzgefährdung können ergriffen werden",
+          "short_description": "Maßnahmen zur Vermeidung einer festgestellten Arbeitsplatzgefährdung können ergriffen werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E032",
+            "E033"
+          ]
+        },
+        {
+          "id": "LF1-046",
+          "statement": "Berufsbezogene Arbeitsschutzvorschriften können angewendet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Arbeitsschutz",
+            "Vorschriften"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 3b"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 3b: alle Lernfelder"
+            }
+          ],
+          "title": "Berufsbezogene Arbeitsschutzvorschriften können angewendet werden",
+          "short_description": "Berufsbezogene Arbeitsschutzvorschriften können angewendet werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E034"
+          ]
+        },
+        {
+          "id": "LF1-047",
+          "statement": "Berufsbezogene Unfallverhütungsvorschriften können angewendet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Unfallverhütung",
+            "Vorschriften"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 3b"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 3b: alle Lernfelder"
+            }
+          ],
+          "title": "Berufsbezogene Unfallverhütungsvorschriften können angewendet werden",
+          "short_description": "Berufsbezogene Unfallverhütungsvorschriften können angewendet werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E034"
+          ]
+        },
+        {
+          "id": "LF1-048",
+          "statement": "Mögliche Umweltbelastungen durch den Ausbildungsbetrieb können an Beispielen erklärt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Umweltschutz",
+            "Umweltbelastung"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 4a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 4: alle Lernfelder"
+            }
+          ],
+          "title": "Mögliche Umweltbelastungen durch den Ausbildungsbetrieb können an Beispielen erklärt werden",
+          "short_description": "Mögliche Umweltbelastungen durch den Ausbildungsbetrieb können an Beispielen erklärt werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E035"
+          ]
+        },
+        {
+          "id": "LF1-049",
+          "statement": "Der Beitrag des Ausbildungsbetriebes zum Umweltschutz kann an Beispielen erklärt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Umweltschutz",
+            "Ausbildungsbetrieb"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 4a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 4: alle Lernfelder"
+            }
+          ],
+          "title": "Der Beitrag des Ausbildungsbetriebes zum Umweltschutz kann an Beispielen erklärt werden",
+          "short_description": "Der Beitrag des Ausbildungsbetriebes zum Umweltschutz kann an Beispielen erklärt werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E035",
+            "E036"
+          ]
+        },
+        {
+          "id": "LF1-050",
+          "statement": "Für den Ausbildungsbetrieb geltende Umweltschutzregelungen können angewendet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Umweltschutz",
+            "Regelungen"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 4b"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 4: alle Lernfelder"
+            }
+          ],
+          "title": "Für den Ausbildungsbetrieb geltende Umweltschutzregelungen können angewendet werden",
+          "short_description": "Für den Ausbildungsbetrieb geltende Umweltschutzregelungen können angewendet werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E036"
+          ]
+        },
+        {
+          "id": "LF1-051",
+          "statement": "Energie kann wirtschaftlich verwendet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Energie",
+            "Wirtschaftlichkeit"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 4c"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 4: alle Lernfelder"
+            }
+          ],
+          "title": "Energie kann wirtschaftlich verwendet werden",
+          "short_description": "Energie kann wirtschaftlich verwendet werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.4
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.6
+            }
+          ],
+          "connections": [
+            "E037"
+          ]
+        },
+        {
+          "id": "LF1-052",
+          "statement": "Energie kann umweltschonend verwendet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Energie",
+            "Umweltschutz"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 4c"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 4: alle Lernfelder"
+            }
+          ],
+          "title": "Energie kann umweltschonend verwendet werden",
+          "short_description": "Energie kann umweltschonend verwendet werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.4
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.6
+            }
+          ],
+          "connections": [
+            "E037"
+          ]
+        },
+        {
+          "id": "LF1-053",
+          "statement": "Material kann wirtschaftlich verwendet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Material",
+            "Wirtschaftlichkeit"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 4c"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 4: alle Lernfelder"
+            }
+          ],
+          "title": "Material kann wirtschaftlich verwendet werden",
+          "short_description": "Material kann wirtschaftlich verwendet werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.4
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.6
+            }
+          ],
+          "connections": [
+            "E038"
+          ]
+        },
+        {
+          "id": "LF1-054",
+          "statement": "Material kann umweltschonend verwendet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Material",
+            "Umweltschutz"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 4c"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 4: alle Lernfelder"
+            }
+          ],
+          "title": "Material kann umweltschonend verwendet werden",
+          "short_description": "Material kann umweltschonend verwendet werden.",
+          "category_weights": [
+            {
+              "category_id": "bwl",
+              "weight": 0.4
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.6
+            }
+          ],
+          "connections": [
+            "E038"
+          ]
+        },
+        {
+          "id": "LF1-055",
+          "statement": "Abfälle können vermieden werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Abfallvermeidung",
+            "Umweltschutz"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 4d"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 4: alle Lernfelder"
+            }
+          ],
+          "title": "Abfälle können vermieden werden",
+          "short_description": "Abfälle können vermieden werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E039",
+            "E040"
+          ]
+        },
+        {
+          "id": "LF1-056",
+          "statement": "Stoffe können einer umweltschonenden Entsorgung zugeführt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Entsorgung",
+            "Umweltschutz"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 4d"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 4: alle Lernfelder"
+            }
+          ],
+          "title": "Stoffe können einer umweltschonenden Entsorgung zugeführt werden",
+          "short_description": "Stoffe können einer umweltschonenden Entsorgung zugeführt werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E039"
+          ]
+        },
+        {
+          "id": "LF1-057",
+          "statement": "Materialien können einer umweltschonenden Entsorgung zugeführt werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Entsorgung",
+            "Umweltschutz"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 4d"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 4: alle Lernfelder"
+            }
+          ],
+          "title": "Materialien können einer umweltschonenden Entsorgung zugeführt werden",
+          "short_description": "Materialien können einer umweltschonenden Entsorgung zugeführt werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E040"
+          ]
+        },
+        {
+          "id": "LF1-058",
+          "statement": "Gegenseitige Wertschätzung kann in betrieblichen Abläufen praktiziert werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Wertschätzung",
+            "Zusammenarbeit"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 5a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 5: alle Lernfelder"
+            }
+          ],
+          "title": "Gegenseitige Wertschätzung kann in betrieblichen Abläufen praktiziert werden",
+          "short_description": "Gegenseitige Wertschätzung kann in betrieblichen Abläufen praktiziert werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E041"
+          ]
+        },
+        {
+          "id": "LF1-059",
+          "statement": "Gesellschaftliche Vielfalt kann in betrieblichen Abläufen berücksichtigt werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Vielfalt",
+            "Zusammenarbeit"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 5a"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 5: alle Lernfelder"
+            }
+          ],
+          "title": "Gesellschaftliche Vielfalt kann in betrieblichen Abläufen berücksichtigt werden",
+          "short_description": "Gesellschaftliche Vielfalt kann in betrieblichen Abläufen berücksichtigt werden.",
+          "category_weights": [
+            {
+              "category_id": "wiso",
+              "weight": 1.0
+            }
+          ],
+          "connections": [
+            "E041"
+          ]
+        },
+        {
+          "id": "LF1-060",
+          "statement": "Strategien zum verantwortungsvollen Umgang mit digitalen Medien können angewendet werden.",
+          "type": "Fertigkeit",
+          "tags": [
+            "Digitale Medien",
+            "Verantwortung"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 5b"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 5: alle Lernfelder"
+            }
+          ],
+          "title": "Strategien zum verantwortungsvollen Umgang mit digitalen Medien können angewendet werden",
+          "short_description": "Strategien zum verantwortungsvollen Umgang mit digitalen Medien können angewendet werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 0.5
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.5
+            }
+          ],
+          "connections": [
+            "E042",
+            "E047"
+          ]
+        },
+        {
+          "id": "LF1-061",
+          "statement": "Bei der Zusammenarbeit im virtuellen Raum sind die Persönlichkeitsrechte Dritter zu wahren.",
+          "type": "Kenntnis",
+          "tags": [
+            "Persönlichkeitsrechte",
+            "Virtuelle Zusammenarbeit"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 5b"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 5: alle Lernfelder"
+            }
+          ],
+          "title": "Bei der Zusammenarbeit im virtuellen Raum sind die Persönlichkeitsrechte Dritter zu wahren",
+          "short_description": "Bei der Zusammenarbeit im virtuellen Raum sind die Persönlichkeitsrechte Dritter zu wahren.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 0.3
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.7
+            }
+          ],
+          "connections": [
+            "E042"
+          ]
+        },
+        {
+          "id": "LF1-062",
+          "statement": "Auswirkungen des eigenen Kommunikationsverhaltens bei digitalen Inhalten können berücksichtigt werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Kommunikationsverhalten",
+            "Digitale Inhalte"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 5c"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 5: alle Lernfelder"
+            }
+          ],
+          "title": "Auswirkungen des eigenen Kommunikationsverhaltens bei digitalen Inhalten können berücksichtigt werden",
+          "short_description": "Auswirkungen des eigenen Kommunikationsverhaltens bei digitalen Inhalten können berücksichtigt werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 0.6
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.4
+            }
+          ],
+          "connections": [
+            "E043"
+          ]
+        },
+        {
+          "id": "LF1-063",
+          "statement": "Auswirkungen des eigenen Informationsverhaltens bei digitalen Inhalten können berücksichtigt werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Informationsverhalten",
+            "Digitale Inhalte"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 5c"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 5: alle Lernfelder"
+            }
+          ],
+          "title": "Auswirkungen des eigenen Informationsverhaltens bei digitalen Inhalten können berücksichtigt werden",
+          "short_description": "Auswirkungen des eigenen Informationsverhaltens bei digitalen Inhalten können berücksichtigt werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 0.6
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.4
+            }
+          ],
+          "connections": [
+            "E043"
+          ]
+        },
+        {
+          "id": "LF1-064",
+          "statement": "Ethische Aspekte können bei der Beurteilung von IT-Lösungen reflektiert werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Ethik",
+            "IT-Lösungen",
+            "Beurteilung"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 5d"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 5: alle Lernfelder"
+            }
+          ],
+          "title": "Ethische Aspekte können bei der Beurteilung von IT-Lösungen reflektiert werden",
+          "short_description": "Ethische Aspekte können bei der Beurteilung von IT-Lösungen reflektiert werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 0.6
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.4
+            }
+          ],
+          "connections": [
+            "E044"
+          ]
+        },
+        {
+          "id": "LF1-065",
+          "statement": "Ethische Aspekte können bei der Entwicklung von IT-Lösungen reflektiert werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Ethik",
+            "IT-Lösungen",
+            "Entwicklung"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 5d"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 5: alle Lernfelder"
+            }
+          ],
+          "title": "Ethische Aspekte können bei der Entwicklung von IT-Lösungen reflektiert werden",
+          "short_description": "Ethische Aspekte können bei der Entwicklung von IT-Lösungen reflektiert werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 0.6
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.4
+            }
+          ],
+          "connections": [
+            "E044",
+            "E045"
+          ]
+        },
+        {
+          "id": "LF1-066",
+          "statement": "Ethische Aspekte können bei der Umsetzung von IT-Lösungen reflektiert werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Ethik",
+            "IT-Lösungen",
+            "Umsetzung"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 5d"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 5: alle Lernfelder"
+            }
+          ],
+          "title": "Ethische Aspekte können bei der Umsetzung von IT-Lösungen reflektiert werden",
+          "short_description": "Ethische Aspekte können bei der Umsetzung von IT-Lösungen reflektiert werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 0.6
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.4
+            }
+          ],
+          "connections": [
+            "E045",
+            "E046"
+          ]
+        },
+        {
+          "id": "LF1-067",
+          "statement": "Ethische Aspekte können bei der Betreuung von IT-Lösungen reflektiert werden.",
+          "type": "Fähigkeit",
+          "tags": [
+            "Ethik",
+            "IT-Lösungen",
+            "Betreuung"
+          ],
+          "sources": [
+            {
+              "source_id": "FIAusbV-PDF",
+              "locator": "Anlage, Abschnitt F, Berufsbildposition 5d"
+            },
+            {
+              "source_id": "KMK-RLP-IT-2020",
+              "locator": "Entsprechungsliste Fachinformatiker, Abschnitt F, Position 5: alle Lernfelder"
+            }
+          ],
+          "title": "Ethische Aspekte können bei der Betreuung von IT-Lösungen reflektiert werden",
+          "short_description": "Ethische Aspekte können bei der Betreuung von IT-Lösungen reflektiert werden.",
+          "category_weights": [
+            {
+              "category_id": "it",
+              "weight": 0.6
+            },
+            {
+              "category_id": "wiso",
+              "weight": 0.4
+            }
+          ],
+          "connections": [
+            "E046"
+          ]
+        }
+      ]
+    }
+  ],
+  "graph_edges": [
+    {
+      "id": "E001",
+      "source": "LF1-001",
+      "target": "LF1-002",
+      "relation": "parallel_dimension",
+      "description": "Ökonomische und ökologische Zielsetzungen sind parallele Dimensionen der Unternehmensziele."
+    },
+    {
+      "id": "E002",
+      "source": "LF1-001",
+      "target": "LF1-003",
+      "relation": "parallel_dimension",
+      "description": "Ökonomische und soziale Zielsetzungen sind parallele Dimensionen der Unternehmensziele."
+    },
+    {
+      "id": "E003",
+      "source": "LF1-004",
+      "target": "LF1-001",
+      "relation": "evidence_source_for",
+      "description": "Das Unternehmensleitbild dient als Quelle für Unternehmensziele."
+    },
+    {
+      "id": "E004",
+      "source": "LF1-005",
+      "target": "LF1-006",
+      "relation": "contextualizes",
+      "description": "Die Marktstruktur kontextualisiert die Marktbeziehungen eines Unternehmens."
+    },
+    {
+      "id": "E005",
+      "source": "LF1-006",
+      "target": "LF1-007",
+      "relation": "related_context",
+      "description": "Markt- und Kundenbeziehungen beschreiben gemeinsam die externe Einordnung des Unternehmens."
+    },
+    {
+      "id": "E006",
+      "source": "LF1-008",
+      "target": "LF1-006",
+      "relation": "system_contains",
+      "description": "Die Marktbeziehungen sind Teil der Einordnung des Unternehmens als komplexes System."
+    },
+    {
+      "id": "E007",
+      "source": "LF1-009",
+      "target": "LF1-010",
+      "relation": "locates_role",
+      "description": "Die eigene Rolle wird im Kontext der betrieblichen Wertschöpfung beschrieben."
+    },
+    {
+      "id": "E008",
+      "source": "LF1-011",
+      "target": "LF1-012",
+      "relation": "parallel_dimension",
+      "description": "Leistungsschwerpunkte und Besonderheiten charakterisieren gemeinsam das eigene Unternehmen."
+    },
+    {
+      "id": "E009",
+      "source": "LF1-013",
+      "target": "LF1-014",
+      "relation": "organizational_context",
+      "description": "Rechtsform und Aufbauorganisation sind zwei offizielle Betrachtungsdimensionen des Unternehmens."
+    },
+    {
+      "id": "E010",
+      "source": "LF1-015",
+      "target": "LF1-016",
+      "relation": "influenced_by",
+      "description": "Vollmachten beeinflussen den eigenen Handlungs- und Entscheidungsspielraum."
+    },
+    {
+      "id": "E011",
+      "source": "LF1-017",
+      "target": "LF1-018",
+      "relation": "parallel_dimension",
+      "description": "Fort- und Weiterbildung sind gemeinsam genannte Entwicklungsmaßnahmen."
+    },
+    {
+      "id": "E012",
+      "source": "LF1-019",
+      "target": "LF1-020",
+      "relation": "implemented_as",
+      "description": "Die adressatengerechte Planung wird als multimediale Darstellung umgesetzt."
+    },
+    {
+      "id": "E013",
+      "source": "LF1-019",
+      "target": "LF1-021",
+      "relation": "can_be_performed_as",
+      "description": "Die Darstellung kann im Team geplant und erstellt werden."
+    },
+    {
+      "id": "E014",
+      "source": "LF1-022",
+      "target": "LF1-023",
+      "relation": "followed_by",
+      "description": "Auf die Ergebnispräsentation folgt die kriteriengeleitete Qualitätsprüfung."
+    },
+    {
+      "id": "E015",
+      "source": "LF1-023",
+      "target": "LF1-024",
+      "relation": "leads_to",
+      "description": "Die Qualitätsprüfung bildet die Grundlage für Verbesserungsmöglichkeiten."
+    },
+    {
+      "id": "E016",
+      "source": "LF1-025",
+      "target": "LF1-026",
+      "relation": "parallel_reflection",
+      "description": "Die Reflexion umfasst sowohl die eigene Rolle als auch das eigene Handeln."
+    },
+    {
+      "id": "E017",
+      "source": "LF1-027",
+      "target": "LF1-028",
+      "relation": "comparison_dimension",
+      "description": "Preise und Leistungen sind parallele Dimensionen des Wettbewerbervergleichs."
+    },
+    {
+      "id": "E018",
+      "source": "LF1-028",
+      "target": "LF1-029",
+      "relation": "comparison_dimension",
+      "description": "Leistungen und Konditionen sind parallele Dimensionen des Wettbewerbervergleichs."
+    },
+    {
+      "id": "E019",
+      "source": "LF1-005",
+      "target": "LF1-027",
+      "relation": "operationalized_by",
+      "description": "Der Wettbewerbervergleich konkretisiert die Analyse der Marktstruktur."
+    },
+    {
+      "id": "E020",
+      "source": "LF1-030",
+      "target": "LF1-031",
+      "relation": "segmented_by",
+      "description": "Kundenbedarfe werden im Zusammenhang mit unterscheidbaren Zielgruppen betrachtet."
+    },
+    {
+      "id": "E021",
+      "source": "LF1-007",
+      "target": "LF1-030",
+      "relation": "operationalized_by",
+      "description": "Das Feststellen von Kundenbedarfen konkretisiert Kundenbeziehungen."
+    },
+    {
+      "id": "E022",
+      "source": "LF1-032",
+      "target": "LF1-033",
+      "relation": "communication_form",
+      "description": "Präsentieren ist eine Form der regelgerechten Kundeninformation."
+    },
+    {
+      "id": "E023",
+      "source": "LF1-033",
+      "target": "LF1-034",
+      "relation": "uses_language",
+      "description": "Sachverhaltspräsentationen verwenden deutsche Fachbegriffe."
+    },
+    {
+      "id": "E024",
+      "source": "LF1-033",
+      "target": "LF1-035",
+      "relation": "uses_language",
+      "description": "Sachverhaltspräsentationen verwenden englische Fachbegriffe."
+    },
+    {
+      "id": "E025",
+      "source": "LF1-036",
+      "target": "LF1-037",
+      "relation": "language_specialization",
+      "description": "Englischsprachige Quellen sind eine ausdrücklich genannte Teilmenge der auszuwertenden Informationsquellen."
+    },
+    {
+      "id": "E026",
+      "source": "LF1-036",
+      "target": "LF1-038",
+      "relation": "used_for",
+      "description": "Ausgewertete Informationsquellen werden für Kundeninformationen genutzt."
+    },
+    {
+      "id": "E027",
+      "source": "LF1-039",
+      "target": "LF1-040",
+      "relation": "organizational_pair",
+      "description": "Aufgaben und Zuständigkeiten beschreiben gemeinsam den Ausbildungsbetrieb."
+    },
+    {
+      "id": "E028",
+      "source": "LF1-040",
+      "target": "LF1-041",
+      "relation": "embedded_in",
+      "description": "Zuständigkeiten sind in den Zusammenhängen betrieblicher Geschäftsprozesse eingebettet."
+    },
+    {
+      "id": "E029",
+      "source": "LF1-014",
+      "target": "LF1-039",
+      "relation": "structure_contains",
+      "description": "Die Aufbauorganisation umfasst Aufgaben des Ausbildungsbetriebes."
+    },
+    {
+      "id": "E030",
+      "source": "LF1-042",
+      "target": "LF1-026",
+      "relation": "specializes",
+      "description": "Die Reflexion der Teamdurchführung ist eine spezielle Form der Reflexion eigenen Handelns."
+    },
+    {
+      "id": "E031",
+      "source": "LF1-043",
+      "target": "LF1-044",
+      "relation": "parallel_dimension",
+      "description": "Sicherheits- und Gesundheitsgefährdungen sind parallele Schutzdimensionen."
+    },
+    {
+      "id": "E032",
+      "source": "LF1-043",
+      "target": "LF1-045",
+      "relation": "mitigated_by",
+      "description": "Festgestellte Sicherheitsgefährdungen erfordern Vermeidungsmaßnahmen."
+    },
+    {
+      "id": "E033",
+      "source": "LF1-044",
+      "target": "LF1-045",
+      "relation": "mitigated_by",
+      "description": "Festgestellte Gesundheitsgefährdungen erfordern Vermeidungsmaßnahmen."
+    },
+    {
+      "id": "E034",
+      "source": "LF1-046",
+      "target": "LF1-047",
+      "relation": "parallel_rule_set",
+      "description": "Arbeits- und Unfallverhütungsvorschriften sind gemeinsam anzuwenden."
+    },
+    {
+      "id": "E035",
+      "source": "LF1-048",
+      "target": "LF1-049",
+      "relation": "balanced_by",
+      "description": "Umweltbelastungen und Umweltschutzbeiträge des Betriebes werden gemeinsam betrachtet."
+    },
+    {
+      "id": "E036",
+      "source": "LF1-049",
+      "target": "LF1-050",
+      "relation": "implemented_by",
+      "description": "Betrieblicher Umweltschutz wird durch geltende Regelungen konkretisiert."
+    },
+    {
+      "id": "E037",
+      "source": "LF1-051",
+      "target": "LF1-052",
+      "relation": "parallel_dimension",
+      "description": "Energieverwendung wird wirtschaftlich und umweltschonend betrachtet."
+    },
+    {
+      "id": "E038",
+      "source": "LF1-053",
+      "target": "LF1-054",
+      "relation": "parallel_dimension",
+      "description": "Materialverwendung wird wirtschaftlich und umweltschonend betrachtet."
+    },
+    {
+      "id": "E039",
+      "source": "LF1-055",
+      "target": "LF1-056",
+      "relation": "precedes",
+      "description": "Abfallvermeidung steht vor der umweltschonenden Entsorgung von Stoffen."
+    },
+    {
+      "id": "E040",
+      "source": "LF1-055",
+      "target": "LF1-057",
+      "relation": "precedes",
+      "description": "Abfallvermeidung steht vor der umweltschonenden Entsorgung von Materialien."
+    },
+    {
+      "id": "E041",
+      "source": "LF1-058",
+      "target": "LF1-059",
+      "relation": "requires_consideration_of",
+      "description": "Gegenseitige Wertschätzung berücksichtigt gesellschaftliche Vielfalt."
+    },
+    {
+      "id": "E042",
+      "source": "LF1-060",
+      "target": "LF1-061",
+      "relation": "constrained_by",
+      "description": "Verantwortungsvoller Medienumgang wahrt Persönlichkeitsrechte Dritter."
+    },
+    {
+      "id": "E043",
+      "source": "LF1-062",
+      "target": "LF1-063",
+      "relation": "parallel_dimension",
+      "description": "Kommunikations- und Informationsverhalten sind parallele Aspekte digitaler Verantwortung."
+    },
+    {
+      "id": "E044",
+      "source": "LF1-064",
+      "target": "LF1-065",
+      "relation": "lifecycle_sequence",
+      "description": "Ethische Reflexion begleitet Beurteilung und Entwicklung von IT-Lösungen."
+    },
+    {
+      "id": "E045",
+      "source": "LF1-065",
+      "target": "LF1-066",
+      "relation": "lifecycle_sequence",
+      "description": "Ethische Reflexion begleitet Entwicklung und Umsetzung von IT-Lösungen."
+    },
+    {
+      "id": "E046",
+      "source": "LF1-066",
+      "target": "LF1-067",
+      "relation": "lifecycle_sequence",
+      "description": "Ethische Reflexion begleitet Umsetzung und Betreuung von IT-Lösungen."
+    },
+    {
+      "id": "E047",
+      "source": "LF1-020",
+      "target": "LF1-060",
+      "relation": "uses_responsibly",
+      "description": "Multimediale Darstellungen setzen einen verantwortungsvollen Umgang mit digitalen Medien voraus."
+    },
+    {
+      "id": "E048",
+      "source": "LF1-023",
+      "target": "LF1-042",
+      "relation": "supports_reflection",
+      "description": "Qualitätsprüfung unterstützt die Reflexion der Aufgabendurchführung im Team."
+    }
+  ],
+  "statistics": {
+    "core_count_total": 67,
+    "core_count_lf1_direct": 26,
+    "core_count_arp_explicitly_mapped_to_lf1": 16,
+    "core_count_integrative_all_lernfelder": 25,
+    "source_count": 11,
+    "category_count": 3,
+    "category_membership_counts": {
+      "it": 14,
+      "bwl": 35,
+      "wiso": 42
+    },
+    "mixed_category_core_count": 24,
+    "graph_edge_count": 48,
+    "unconnected_core_count": 0
+  },
+  "validation": {
+    "checked_at": "2026-07-28",
+    "json_syntax": "passed",
+    "source_references_resolved": "passed",
+    "category_references_resolved": "passed",
+    "category_weights_sum_to_one": "passed",
+    "exactly_three_base_categories": "passed",
+    "unique_core_ids": "passed",
+    "unique_edge_ids": "passed",
+    "edge_references_resolved": "passed",
+    "every_core_has_at_least_one_connection": "passed",
+    "official_source_urls_http_200": "passed_11_of_11",
+    "validator": "python3 -m json.tool und jq-Invariantenprüfung"
+  }
+}

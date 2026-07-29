@@ -1,0 +1,188 @@
+{
+  "schema_version": "3.0.0",
+  "dataset_id": "de-fachinformatiker-lern-vault",
+  "updated_at": "2026-07-29",
+  "language": "de",
+  "data_role": "Normalisierter Quellenkatalog",
+  "reference_contract": "source_refs in Core-Ausprägungen müssen über source_id auf genau eine Quelle verweisen.",
+  "quellen": [
+    {
+      "id": "KMK-RLP-IT-2020",
+      "publisher": "Kultusministerkonferenz",
+      "title": "Rahmenlehrplan für die Ausbildungsberufe Fachinformatiker/Fachinformatikerin und IT-System-Elektroniker/IT-System-Elektronikerin",
+      "date": "2020-02-28",
+      "url": "https://www.kmk.org/service/servicebereich-berufliche-schulen/downloadbereich-rahmenlehrplaene?tx_fedownloads_single%5Baction%5D=forceDownload&tx_fedownloads_single%5Bcontroller%5D=Downloads&tx_fedownloads_single%5Bdownload%5D=45009&type=150",
+      "authority": "offiziell",
+      "relevance": "Verbindliche Zielformulierung und Inhalte von Lernfeld 1."
+    },
+    {
+      "id": "FIAusbV-HTML",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Fachinformatikerausbildungsverordnung",
+      "date": "2020-02-28",
+      "url": "https://www.gesetze-im-internet.de/fiausbv/BJNR025000020.html",
+      "authority": "offiziell",
+      "relevance": "Ausbildungsprofil und gemeinsame berufsprofilgebende Fertigkeiten, Kenntnisse und Fähigkeiten."
+    },
+    {
+      "id": "BIBB-UMSETZUNGSHILFE",
+      "publisher": "Bundesinstitut für Berufsbildung",
+      "title": "Fachinformatiker/Fachinformatikerin – Umsetzungshilfe für die Ausbildungspraxis",
+      "url": "https://www.bibb.de/dienst/publikationen/de/16661",
+      "authority": "fachlich",
+      "relevance": "Didaktische Einordnung und Erläuterung der Ausbildungsordnung."
+    },
+    {
+      "id": "BGB-705",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Bürgerliches Gesetzbuch – § 705 Rechtsnatur der Gesellschaft",
+      "url": "https://www.gesetze-im-internet.de/bgb/__705.html",
+      "authority": "offiziell",
+      "relevance": "Gesetzliche Grundlage der Gesellschaft bürgerlichen Rechts."
+    },
+    {
+      "id": "HGB-UNTERNEHMENSFORMEN",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Handelsgesetzbuch",
+      "url": "https://www.gesetze-im-internet.de/hgb/",
+      "authority": "offiziell",
+      "relevance": "Gesetzliche Grundlagen für Kaufleute, OHG und KG."
+    },
+    {
+      "id": "GMBHG-13",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "GmbH-Gesetz – § 13 Juristische Person; Handelsgesellschaft",
+      "url": "https://www.gesetze-im-internet.de/gmbhg/__13.html",
+      "authority": "offiziell",
+      "relevance": "Rechtsstellung und Haftungsgrundlage der GmbH."
+    },
+    {
+      "id": "AKTG-1",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Aktiengesetz – § 1 Wesen der Aktiengesellschaft",
+      "url": "https://www.gesetze-im-internet.de/aktg/__1.html",
+      "authority": "offiziell",
+      "relevance": "Rechtsstellung, Grundkapital und Haftungsgrundlage der AG."
+    },
+    {
+      "id": "BGB-VOLLMACHT",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Bürgerliches Gesetzbuch – § 167 Erteilung der Vollmacht",
+      "url": "https://www.gesetze-im-internet.de/bgb/__167.html",
+      "authority": "offiziell",
+      "relevance": "Gesetzliche Grundlage der rechtsgeschäftlichen Vollmacht."
+    },
+    {
+      "id": "BBIG-2020",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Berufsbildungsgesetz",
+      "url": "https://www.gesetze-im-internet.de/bbig_2005/",
+      "authority": "offiziell",
+      "relevance": "Verbindliche Regeln zu Berufsausbildung, Ausbildungsvertrag, Pflichten, Vergütung, Freistellung, Probezeit und Beendigung."
+    },
+    {
+      "id": "ARBZG",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Arbeitszeitgesetz",
+      "url": "https://www.gesetze-im-internet.de/arbzg/",
+      "authority": "offiziell",
+      "relevance": "Verbindliche Regeln zu Arbeitszeit, Ruhepausen und Ruhezeiten."
+    },
+    {
+      "id": "BURLG",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Bundesurlaubsgesetz",
+      "url": "https://www.gesetze-im-internet.de/burlg/",
+      "authority": "offiziell",
+      "relevance": "Gesetzlicher Mindesturlaub und Urlaubsgewährung."
+    },
+    {
+      "id": "ENTGFG",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Entgeltfortzahlungsgesetz",
+      "url": "https://www.gesetze-im-internet.de/entgfg/",
+      "authority": "offiziell",
+      "relevance": "Anzeige- und Nachweispflichten sowie Entgeltfortzahlung bei Arbeitsunfähigkeit."
+    },
+    {
+      "id": "BETRVG",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Betriebsverfassungsgesetz",
+      "url": "https://www.gesetze-im-internet.de/betrvg/",
+      "authority": "offiziell",
+      "relevance": "Betriebsrat, Jugend- und Auszubildendenvertretung, Betriebsversammlung und Mitbestimmung."
+    },
+    {
+      "id": "SGB-IV",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Sozialgesetzbuch Viertes Buch – Gemeinsame Vorschriften für die Sozialversicherung",
+      "url": "https://www.gesetze-im-internet.de/sgb_4/",
+      "authority": "offiziell",
+      "relevance": "Gemeinsamer Rechtsrahmen der gesetzlichen Sozialversicherung."
+    },
+    {
+      "id": "IHKG",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Gesetz zur vorläufigen Regelung des Rechts der Industrie- und Handelskammern",
+      "url": "https://www.gesetze-im-internet.de/ihkg/",
+      "authority": "offiziell",
+      "relevance": "Rechtsstellung und Aufgaben der Industrie- und Handelskammern."
+    },
+    {
+      "id": "ARBSCHG",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Arbeitsschutzgesetz",
+      "url": "https://www.gesetze-im-internet.de/arbschg/",
+      "authority": "offiziell",
+      "relevance": "Sicherheit und Gesundheitsschutz der Beschäftigten bei der Arbeit."
+    },
+    {
+      "id": "BDSG",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Bundesdatenschutzgesetz",
+      "url": "https://www.gesetze-im-internet.de/bdsg_2018/",
+      "authority": "offiziell",
+      "relevance": "Datenschutzrechtliche Pflichten und Aufsicht im betrieblichen Kontext."
+    },
+    {
+      "id": "SGB-VII",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Sozialgesetzbuch Siebtes Buch – Gesetzliche Unfallversicherung",
+      "url": "https://www.gesetze-im-internet.de/sgb_7/",
+      "authority": "offiziell",
+      "relevance": "Gesetzliche Unfallversicherung und Pflicht zur Anzeige bestimmter Arbeitsunfälle."
+    },
+    {
+      "id": "PSA-BV",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "PSA-Benutzungsverordnung",
+      "url": "https://www.gesetze-im-internet.de/psa-bv/",
+      "authority": "offiziell",
+      "relevance": "Bereitstellung und Benutzung persönlicher Schutzausrüstungen bei der Arbeit."
+    },
+    {
+      "id": "GEWO",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Gewerbeordnung – § 106 Weisungsrecht des Arbeitgebers",
+      "url": "https://www.gesetze-im-internet.de/gewo/__106.html",
+      "authority": "offiziell",
+      "relevance": "Rechtsgrundlage für Weisungen sowie Ordnung und Verhalten im Betrieb."
+    },
+    {
+      "id": "JARBSCHG",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Jugendarbeitsschutzgesetz",
+      "url": "https://www.gesetze-im-internet.de/jarbschg/",
+      "authority": "offiziell",
+      "relevance": "Besondere Arbeitszeit-, Beschäftigungs- und Untersuchungsvorschriften für Jugendliche."
+    },
+    {
+      "id": "ESTG",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Einkommensteuergesetz – Lohnsteuerabzug",
+      "url": "https://www.gesetze-im-internet.de/estg/__38.html",
+      "authority": "offiziell",
+      "relevance": "Rechtsgrundlage für die Erhebung und Einbehaltung der Lohnsteuer vom Arbeitslohn."
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+@startuml
+!pragma layout smetana
+title Lern-Vault – relationales Zielmodell zum JSON-Schema 2.0.0
+
+hide circle
+hide methods
+skinparam linetype ortho
+skinparam shadowing false
+skinparam backgroundColor #0B0F18
+skinparam defaultFontColor #E8EDF6
+skinparam ArrowColor #77839A
+skinparam classBorderColor #526079
+skinparam classBackgroundColor #121826
+skinparam classHeaderBackgroundColor #1B2435
+skinparam noteBackgroundColor #171E2B
+skinparam noteBorderColor #526079
+skinparam noteFontColor #D5DCE9
+
+entity "Lernfeld" as Lernfeld {
+  * **id** : VARCHAR(40) <<PK>>
+  --
+  * nummer : INTEGER
+  * titel : VARCHAR(180)
+  offizielle_quelle_id : VARCHAR(60) <<FK, NULL>>
+  --
+  UNIQUE(nummer)
+}
+
+entity "Kompetenz" as Kompetenz {
+  * **id** : VARCHAR(40) <<PK>>
+  --
+  * lernfeld_id : VARCHAR(40) <<FK>>
+  * titel : VARCHAR(160)
+  herleitung : TEXT
+  * sortierung : INTEGER
+  --
+  UNIQUE(lernfeld_id, titel)
+}
+
+entity "Themencluster" as Themencluster {
+  * **id** : VARCHAR(50) <<PK>>
+  --
+  * kompetenz_id : VARCHAR(40) <<FK>>
+  * titel : VARCHAR(160)
+  * sortierung : INTEGER
+  --
+  UNIQUE(kompetenz_id, titel)
+}
+
+entity "Thema" as Thema {
+  * **id** : VARCHAR(60) <<PK>>
+  --
+  * themencluster_id : VARCHAR(50) <<FK>>
+  * titel : VARCHAR(160)
+  * sortierung : INTEGER
+  --
+  UNIQUE(themencluster_id, titel)
+}
+
+entity "Core" as Core {
+  * **id** : VARCHAR(70) <<PK>>
+  --
+  * identity_key : VARCHAR(140)
+  * short_title : VARCHAR(60)
+  * titel : VARCHAR(100)
+  * inhalt : TEXT
+  --
+  UNIQUE(identity_key)
+}
+
+entity "Core-Ausprägung" as CoreAusprägung {
+  * **id** : VARCHAR(80) <<PK>>
+  --
+  * core_id : VARCHAR(70) <<FK>>
+  * lernfeld_id : VARCHAR(40) <<FK>>
+  * kompetenz_id : VARCHAR(40) <<FK>>
+  * themencluster_id : VARCHAR(50) <<FK>>
+  * thema_id : VARCHAR(60) <<FK>>
+  * tiefengrad : TIEFENGRAD
+  kontext_inhalt : TEXT
+  kontext_verweis : TEXT
+  * sortierung : INTEGER
+  --
+  UNIQUE(core_id, lernfeld_id, kompetenz_id,
+         themencluster_id, thema_id, tiefengrad)
+}
+
+enum "TIEFENGRAD" as Tiefengrad {
+  Grundlage
+  Vertiefung
+  Spezialisierung
+}
+
+entity "Kategorie" as Kategorie {
+  * **id** : VARCHAR(20) <<PK>>
+  --
+  * bezeichnung : VARCHAR(40)
+  * farbname : VARCHAR(30)
+  * farbwert : CHAR(7)
+}
+
+entity "Core-Kategorie-Gewicht" as CoreKategorie {
+  * **core_id** : VARCHAR(70) <<PK, FK>>
+  * **kategorie_id** : VARCHAR(20) <<PK, FK>>
+  --
+  * gewicht : DECIMAL(5,4)
+  --
+  CHECK(gewicht > 0 AND gewicht <= 1)
+}
+
+entity "Quelle" as Quelle {
+  * **id** : VARCHAR(60) <<PK>>
+  --
+  * herausgeber : VARCHAR(180)
+  * titel : TEXT
+  datum : DATE
+  url : TEXT
+  autorität : VARCHAR(40)
+}
+
+entity "Core-Quellenbezug" as CoreQuelle {
+  * **core_id** : VARCHAR(70) <<PK, FK>>
+  * **quelle_id** : VARCHAR(60) <<PK, FK>>
+  * **fundstelle** : VARCHAR(300) <<PK>>
+}
+
+Lernfeld ||--|{ Kompetenz : "gliedert sich in"
+Kompetenz ||--|{ Themencluster : "enthält"
+Themencluster ||--|{ Thema : "enthält"
+Lernfeld ||--o{ CoreAusprägung : "bildet Kontext"
+Kompetenz ||--o{ CoreAusprägung : "bildet Kontext"
+Themencluster ||--o{ CoreAusprägung : "bildet Kontext"
+Thema ||--|{ CoreAusprägung : "kontextualisiert"
+Core ||--|{ CoreAusprägung : "wird ausgeprägt als"
+Tiefengrad ||--o{ CoreAusprägung : "klassifiziert"
+Core ||--|{ CoreKategorie : "trägt Gewicht"
+Kategorie ||--o{ CoreKategorie : "klassifiziert"
+Core ||--|{ CoreQuelle : "ist belegt durch"
+Quelle ||--o{ CoreQuelle : "wird zitiert in"
+Quelle |o--o{ Lernfeld : "belegt optional"
+
+note right of Core
+  Ein Core ist ein eigenständiges,
+  benanntes und didaktisch sinnvolles
+  fachliches Konzept.
+
+  Modelle, konkrete Formen und Artefakte
+  können jeweils ein Core sein.
+
+  identity_key ist die stabile fachliche
+  Identität für eine spätere Wiederverwendung.
+end note
+
+note right of CoreAusprägung
+  Normalisierte Zielerweiterung für die
+  lernfeldübergreifende Spiralprogression:
+
+  Das globale Thema und der globale Core
+  behalten ihre stabile fachliche Identität.
+  Die Core-Ausprägung ordnet den Core einem
+  konkreten Lernfeld-, Kompetenz-, Cluster-
+  und Themenkontext samt Tiefengrad zu.
+
+  Frühere Cores bleiben sichtbar; spätere
+  Lernfelder können zusätzliche oder fachlich
+  vertiefte Core-Ausprägungen ergänzen.
+
+  Der aktuelle LF1-JSON-Stand entspricht dem
+  Kontext »Grundlage«. topic_ref liefert dabei
+  die explizite Themenzuordnung.
+end note
+
+note bottom of Thema
+  Jedes sichtbare Thema besitzt mindestens
+  einen Core. Im aktuellen LF1-Datensatz:
+  33 Themen, 117 Cores, 0 leere Themen.
+end note
+
+note right of CoreKategorie
+  Pflichtregel je Core:
+  SUMME(gewicht) = 1
+
+  IT    = Blau  (#2563EB)
+  BWL   = Gelb  (#FACC15)
+  Recht = Rot   (#DC2626)
+
+  Mischfarben entstehen aus gewichteten
+  Anteilen dieser drei Grundkategorien.
+end note
+
+note bottom of CoreQuelle
+  Jeder Core besitzt mindestens einen
+  nachvollziehbaren Quellenbezug mit Fundstelle.
+end note
+
+note bottom of CoreAusprägung
+  Vault-Verbindungen sind abgeleitet,
+  keine frei gespeicherten Graphkanten:
+
+  Für ein Thema werden alle im gewählten
+  Progressionskontext sichtbaren Core-Ausprägungen
+  paarweise verbunden. So bleiben Grundlagen
+  verbunden, während Vertiefungen hinzukommen.
+
+  Aktueller LF1-Grundlagenstand: 157 Linien.
+end note
+
+legend left
+  Dieses Diagramm ist ein normalisiertes relationales Zielmodell.
+  Das JSON 2.0.0 enthält dieselbe Semantik verschachtelt und
+  besitzt keine wörtlichen Datenbanktabellen.
+
+  |= Zeichen |= Bedeutung |
+  | **fett** | Pflichtfeld |
+  | <<PK>> | Primärschlüssel |
+  | <<FK>> | Fremdschlüssel |
+  | NULL | optionale Zuordnung |
+endlegend
+
+@enduml

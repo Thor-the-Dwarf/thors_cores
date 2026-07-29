@@ -1,0 +1,67 @@
+name: TheRealDeal über GitHub Pages bereitstellen
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  vorbereiten:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Statische Website zusammenstellen
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f index.html
+          test -f doom-scroll-quiz.html
+          test -f Lernfelder.json
+          test -f Themen.json
+          test -f Cores.json
+          test -f Core-Ausprägungen.json
+          test -f Quellen.json
+
+          mkdir -p _site
+          cp \
+            index.html \
+            doom-scroll-quiz.html \
+            Lernfelder.json \
+            Themen.json \
+            Cores.json \
+            Core-Ausprägungen.json \
+            Quellen.json \
+            .nojekyll \
+            _site/
+
+      - name: GitHub Pages konfigurieren
+        uses: actions/configure-pages@v5
+
+      - name: Website-Artefakt hochladen
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  bereitstellen:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: vorbereiten
+    steps:
+      - name: GitHub Pages veröffentlichen
+        id: deployment
+        uses: actions/deploy-pages@v4
+

@@ -1,0 +1,46 @@
+{
+  "schema_version": "3.0.0",
+  "dataset_id": "de-fachinformatiker-lern-vault",
+  "updated_at": "2026-07-29",
+  "language": "de",
+  "data_role": "Lernfelder und Kompetenzen",
+  "hierarchy_note": "Kompetenzen, Themencluster und Themen sind didaktisch aus der offiziellen Zielformulierung abgeleitet. Sie sind keine wörtlichen KMK-Untertitel.",
+  "lernfelder": [
+    {
+      "id": "LF1",
+      "number": 1,
+      "title": "Das Unternehmen und die eigene Rolle im Betrieb beschreiben",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": [
+        {
+          "id": "LF1-K01",
+          "lernfeld_ref": "LF1",
+          "title": "Unternehmen im Umfeld einordnen",
+          "derivation": "Didaktisch abgeleitet aus der LF1-Zielformulierung zu Zielsetzungen, Marktstruktur, Markt- und Kundenbeziehungen, Leistungsschwerpunkten und Besonderheiten des Unternehmens.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF1-K02",
+          "lernfeld_ref": "LF1",
+          "title": "Betriebliche Strukturen beschreiben",
+          "derivation": "Didaktisch abgeleitet aus der LF1-Zielformulierung zum Unternehmen als komplexem System, zur Wertschöpfungskette, Rechtsform und zum organisatorischen Aufbau.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF1-K03",
+          "lernfeld_ref": "LF1",
+          "title": "Eigene Rolle im Betrieb klären",
+          "derivation": "Didaktisch abgeleitet aus der LF1-Zielformulierung zur eigenen Rolle, zu Handlungs- und Entscheidungsspielräumen, Vollmachten sowie Fort- und Weiterbildung.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF1-K04",
+          "lernfeld_ref": "LF1",
+          "title": "Unternehmen darstellen und reflektieren",
+          "derivation": "Didaktisch abgeleitet aus der LF1-Zielformulierung zur Informationsauswertung, adressatengerechten multimedialen Darstellung, Teamarbeit, Präsentation, Qualitätsprüfung und Reflexion.",
+          "sort_order": 4
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2673 @@
+{
+  "schema_version": "2.0.0",
+  "dataset_id": "de-fachinformatiker-lf1-cores",
+  "status": "vollständige_lf1_sammlung",
+  "metadata": {
+    "title": "Lernfeld 1 – atomare Cores",
+    "language": "de",
+    "updated_at": "2026-07-28",
+    "scope": "Vollständig ausgearbeitete didaktische Taxonomie für alle aus der Zielformulierung von Lernfeld 1 abgeleiteten Kompetenzen.",
+    "completion": {
+      "complete_competencies": [
+        "LF1-K01",
+        "LF1-K02",
+        "LF1-K03",
+        "LF1-K04"
+      ],
+      "pending_competencies": [],
+      "note": "Alle im Datensatz geführten Themen enthalten mindestens zwei atomare Cores. Kompetenzen, Themencluster und Themen sind didaktische Ableitungen und keine wörtlichen KMK-Untertitel."
+    },
+    "core_definition": "Ein Core ist ein eigenständiges, benanntes und didaktisch sinnvolles fachliches Konzept, das Lernende als Einheit erkennen und bearbeiten können. Benannte Modelle werden nicht automatisch in einzelne Phasen zerlegt.",
+    "structure_note": "Kompetenzen, Themencluster und Themen sind didaktisch aus der offiziellen Zielformulierung abgeleitet. Sie sind keine wörtlichen KMK-Untertitel."
+  },
+  "information_architecture": [
+    "Lernfeld",
+    "Kompetenz",
+    "Themencluster",
+    "Thema",
+    "Core"
+  ],
+  "core_contract": {
+    "id": "Eindeutige Datensatz-ID.",
+    "identity_key": "Stabile fachliche Identität für eine spätere Wiederverwendung desselben Cores in mehreren Themen.",
+    "short_title": "Kurze, knotentaugliche Bezeichnung.",
+    "title": "Kurzer fachlicher Titel, kein vollständiger Satz.",
+    "content": "Eigenständige verständliche Erklärung genau einer Informationseinheit.",
+    "topic_ref": "Explizite Referenz auf genau das konkrete Thema dieser Einordnung.",
+    "category_weights": "Gewichtete Zuordnung zu IT, BWL und Recht; Summe ist 1.",
+    "source_refs": "Nachvollziehbarer Quellenbezug mit Fundstellenhinweis."
+  },
+  "categories": [
+    {
+      "id": "it",
+      "label": "IT",
+      "color": {
+        "name": "Blau",
+        "hex": "#2563EB"
+      }
+    },
+    {
+      "id": "bwl",
+      "label": "BWL",
+      "color": {
+        "name": "Gelb",
+        "hex": "#FACC15"
+      }
+    },
+    {
+      "id": "recht",
+      "label": "Recht",
+      "color": {
+        "name": "Rot",
+        "hex": "#DC2626"
+      }
+    }
+  ],
+  "source_catalog": [
+    {
+      "id": "KMK-RLP-IT-2020",
+      "publisher": "Kultusministerkonferenz",
+      "title": "Rahmenlehrplan für die Ausbildungsberufe Fachinformatiker/Fachinformatikerin und IT-System-Elektroniker/IT-System-Elektronikerin",
+      "date": "2020-02-28",
+      "url": "https://www.kmk.org/service/servicebereich-berufliche-schulen/downloadbereich-rahmenlehrplaene?tx_fedownloads_single%5Baction%5D=forceDownload&tx_fedownloads_single%5Bcontroller%5D=Downloads&tx_fedownloads_single%5Bdownload%5D=45009&type=150",
+      "authority": "offiziell",
+      "relevance": "Verbindliche Zielformulierung und Inhalte von Lernfeld 1."
+    },
+    {
+      "id": "FIAusbV-HTML",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Fachinformatikerausbildungsverordnung",
+      "date": "2020-02-28",
+      "url": "https://www.gesetze-im-internet.de/fiausbv/BJNR025000020.html",
+      "authority": "offiziell",
+      "relevance": "Ausbildungsprofil und gemeinsame berufsprofilgebende Fertigkeiten, Kenntnisse und Fähigkeiten."
+    },
+    {
+      "id": "BIBB-UMSETZUNGSHILFE",
+      "publisher": "Bundesinstitut für Berufsbildung",
+      "title": "Fachinformatiker/Fachinformatikerin – Umsetzungshilfe für die Ausbildungspraxis",
+      "url": "https://www.bibb.de/dienst/publikationen/de/16661",
+      "authority": "fachlich",
+      "relevance": "Didaktische Einordnung und Erläuterung der Ausbildungsordnung."
+    },
+    {
+      "id": "BGB-705",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Bürgerliches Gesetzbuch – § 705 Rechtsnatur der Gesellschaft",
+      "url": "https://www.gesetze-im-internet.de/bgb/__705.html",
+      "authority": "offiziell",
+      "relevance": "Gesetzliche Grundlage der Gesellschaft bürgerlichen Rechts."
+    },
+    {
+      "id": "HGB-UNTERNEHMENSFORMEN",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Handelsgesetzbuch",
+      "url": "https://www.gesetze-im-internet.de/hgb/",
+      "authority": "offiziell",
+      "relevance": "Gesetzliche Grundlagen für Kaufleute, OHG und KG."
+    },
+    {
+      "id": "GMBHG-13",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "GmbH-Gesetz – § 13 Juristische Person; Handelsgesellschaft",
+      "url": "https://www.gesetze-im-internet.de/gmbhg/__13.html",
+      "authority": "offiziell",
+      "relevance": "Rechtsstellung und Haftungsgrundlage der GmbH."
+    },
+    {
+      "id": "AKTG-1",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Aktiengesetz – § 1 Wesen der Aktiengesellschaft",
+      "url": "https://www.gesetze-im-internet.de/aktg/__1.html",
+      "authority": "offiziell",
+      "relevance": "Rechtsstellung, Grundkapital und Haftungsgrundlage der AG."
+    },
+    {
+      "id": "BGB-VOLLMACHT",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Bürgerliches Gesetzbuch – § 167 Erteilung der Vollmacht",
+      "url": "https://www.gesetze-im-internet.de/bgb/__167.html",
+      "authority": "offiziell",
+      "relevance": "Gesetzliche Grundlage der rechtsgeschäftlichen Vollmacht."
+    }
+  ],
+  "lernfeld": {
+    "id": "LF1",
+    "number": 1,
+    "title": "Das Unternehmen und die eigene Rolle im Betrieb beschreiben",
+    "official_source_ref": "KMK-RLP-IT-2020",
+    "kompetenzen": [
+      {
+        "id": "LF1-K01",
+        "title": "Unternehmen im Umfeld einordnen",
+        "derivation": "Didaktisch abgeleitet aus der LF1-Zielformulierung zu Zielsetzungen, Marktstruktur, Markt- und Kundenbeziehungen, Leistungsschwerpunkten und Besonderheiten des Unternehmens.",
+        "themencluster": [
+          {
+            "id": "LF1-K01-TC01",
+            "title": "Zielsystem des Unternehmens",
+            "themen": [
+              {
+                "id": "LF1-K01-TC01-T01",
+                "title": "Ökonomische Ziele",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC01-T01-C01",
+                    "identity_key": "core.gewinn",
+                    "short_title": "Gewinn",
+                    "title": "Gewinn",
+                    "content": "Gewinn ist der positive Unterschied zwischen den Erträgen und den Aufwendungen eines Unternehmens in einem Zeitraum.",
+                    "topic_ref": "LF1-K01-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T01-C02",
+                    "identity_key": "core.rentabilitaet",
+                    "short_title": "Rentabilität",
+                    "title": "Rentabilität",
+                    "content": "Rentabilität setzt einen erzielten Erfolg ins Verhältnis zum dafür eingesetzten Kapital.",
+                    "topic_ref": "LF1-K01-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T01-C03",
+                    "identity_key": "core.liquiditaet",
+                    "short_title": "Liquidität",
+                    "title": "Liquidität",
+                    "content": "Liquidität ist die Fähigkeit eines Unternehmens, seine fälligen Zahlungsverpflichtungen rechtzeitig zu erfüllen.",
+                    "topic_ref": "LF1-K01-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T01-C04",
+                    "identity_key": "core.wachstum",
+                    "short_title": "Wachstum",
+                    "title": "Unternehmenswachstum",
+                    "content": "Unternehmenswachstum bezeichnet die dauerhafte Zunahme einer wirtschaftlichen Größe, beispielsweise Umsatz, Absatz oder Beschäftigtenzahl.",
+                    "topic_ref": "LF1-K01-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC01-T02",
+                "title": "Ökologische Ziele",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC01-T02-C01",
+                    "identity_key": "core.ressourceneffizienz",
+                    "short_title": "Ressourceneffizienz",
+                    "title": "Ressourceneffizienz",
+                    "content": "Ressourceneffizienz bedeutet, mit möglichst geringem Einsatz von Rohstoffen und Materialien einen angestrebten Nutzen zu erzielen.",
+                    "topic_ref": "LF1-K01-TC01-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökologische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T02-C02",
+                    "identity_key": "core.energieeffizienz",
+                    "short_title": "Energieeffizienz",
+                    "title": "Energieeffizienz",
+                    "content": "Energieeffizienz beschreibt das Verhältnis zwischen einem erreichten Nutzen und der dafür eingesetzten Energie.",
+                    "topic_ref": "LF1-K01-TC01-T02",
+                    "category_weights": {
+                      "it": 0.25,
+                      "bwl": 0.75
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökologische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T02-C03",
+                    "identity_key": "core.emissionsminderung",
+                    "short_title": "Emissionsminderung",
+                    "title": "Emissionsminderung",
+                    "content": "Emissionsminderung ist die Verringerung der Abgabe schädlicher Stoffe oder Energie an die Umwelt.",
+                    "topic_ref": "LF1-K01-TC01-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökologische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T02-C04",
+                    "identity_key": "core.kreislaufwirtschaft",
+                    "short_title": "Kreislaufwirtschaft",
+                    "title": "Kreislaufwirtschaft",
+                    "content": "Kreislaufwirtschaft hält Produkte und Materialien durch Wiederverwendung, Reparatur und Recycling möglichst lange im Nutzungskreislauf.",
+                    "topic_ref": "LF1-K01-TC01-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökologische Zielsetzungen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC01-T03",
+                "title": "Soziale Ziele",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC01-T03-C01",
+                    "identity_key": "core.arbeitsplatzsicherheit",
+                    "short_title": "Arbeitsplatzsicherheit",
+                    "title": "Arbeitsplatzsicherheit",
+                    "content": "Arbeitsplatzsicherheit bezeichnet den Schutz Beschäftigter vor arbeitsbedingten Unfällen und Gesundheitsgefahren.",
+                    "topic_ref": "LF1-K01-TC01-T03",
+                    "category_weights": {
+                      "recht": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: soziale Zielsetzungen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Berufsprofilgebende Position Sicherheit und Gesundheit bei der Arbeit"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T03-C02",
+                    "identity_key": "core.mitarbeitendenzufriedenheit",
+                    "short_title": "Zufriedenheit",
+                    "title": "Mitarbeitendenzufriedenheit",
+                    "content": "Mitarbeitendenzufriedenheit beschreibt, wie Beschäftigte ihre Arbeitssituation und deren Bedingungen bewerten.",
+                    "topic_ref": "LF1-K01-TC01-T03",
+                    "category_weights": {
+                      "bwl": 0.25,
+                      "recht": 0.75
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: soziale Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T03-C03",
+                    "identity_key": "core.chancengleichheit",
+                    "short_title": "Chancengleichheit",
+                    "title": "Chancengleichheit",
+                    "content": "Chancengleichheit verlangt, dass persönliche Merkmale keine sachlich unbegründeten Nachteile beim Zugang zu beruflichen Möglichkeiten verursachen.",
+                    "topic_ref": "LF1-K01-TC01-T03",
+                    "category_weights": {
+                      "recht": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: soziale Zielsetzungen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Berufsprofilgebende Position digitalisierte Arbeitswelt"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T03-C04",
+                    "identity_key": "core.faire_verguetung",
+                    "short_title": "Faire Vergütung",
+                    "title": "Faire Vergütung",
+                    "content": "Faire Vergütung ist eine nachvollziehbare und angemessene Gegenleistung für geleistete Arbeit.",
+                    "topic_ref": "LF1-K01-TC01-T03",
+                    "category_weights": {
+                      "bwl": 0.25,
+                      "recht": 0.75
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: soziale Zielsetzungen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC01-T04",
+                "title": "Unternehmensleitbild",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC01-T04-C01",
+                    "identity_key": "core.vision",
+                    "short_title": "Vision",
+                    "title": "Unternehmensvision",
+                    "content": "Eine Unternehmensvision beschreibt ein langfristig angestrebtes Zukunftsbild des Unternehmens.",
+                    "topic_ref": "LF1-K01-TC01-T04",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T04-C02",
+                    "identity_key": "core.mission",
+                    "short_title": "Mission",
+                    "title": "Unternehmensmission",
+                    "content": "Eine Unternehmensmission beschreibt den grundlegenden Zweck und Auftrag eines Unternehmens.",
+                    "topic_ref": "LF1-K01-TC01-T04",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T04-C03",
+                    "identity_key": "core.unternehmenswerte",
+                    "short_title": "Werte",
+                    "title": "Unternehmenswerte",
+                    "content": "Unternehmenswerte sind grundlegende Maßstäbe, an denen ein Unternehmen Entscheidungen und Verhalten ausrichtet.",
+                    "topic_ref": "LF1-K01-TC01-T04",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T04-C04",
+                    "identity_key": "core.leitsaetze",
+                    "short_title": "Leitsätze",
+                    "title": "Unternehmensleitsätze",
+                    "content": "Unternehmensleitsätze formulieren konkrete Orientierungen für das Handeln im Unternehmen.",
+                    "topic_ref": "LF1-K01-TC01-T04",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "LF1-K01-TC02",
+            "title": "Markt- und Kundenumfeld",
+            "themen": [
+              {
+                "id": "LF1-K01-TC02-T01",
+                "title": "Branchenstruktur",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC02-T01-C01",
+                    "identity_key": "core.branche",
+                    "short_title": "Branche",
+                    "title": "Branche",
+                    "content": "Eine Branche umfasst Unternehmen, die gleichartige oder verwandte Produkte und Dienstleistungen anbieten.",
+                    "topic_ref": "LF1-K01-TC02-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktstruktur der jeweiligen Branche"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T01-C02",
+                    "identity_key": "core.wettbewerber",
+                    "short_title": "Wettbewerber",
+                    "title": "Wettbewerber",
+                    "content": "Wettbewerber sind Anbieter, die um dieselben oder ähnliche Kundenbedürfnisse konkurrieren.",
+                    "topic_ref": "LF1-K01-TC02-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktstruktur der jeweiligen Branche"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Marktbeobachtung: Preise, Leistungen und Konditionen von Wettbewerbern"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T01-C03",
+                    "identity_key": "core.markteintrittsbarriere",
+                    "short_title": "Markteintrittsbarriere",
+                    "title": "Markteintrittsbarriere",
+                    "content": "Eine Markteintrittsbarriere erschwert neuen Anbietern den Zugang zu einem bestehenden Markt.",
+                    "topic_ref": "LF1-K01-TC02-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktstruktur der jeweiligen Branche"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC02-T02",
+                "title": "Marktbeziehungen",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC02-T02-C01",
+                    "identity_key": "core.beschaffungsmarkt",
+                    "short_title": "Beschaffungsmarkt",
+                    "title": "Beschaffungsmarkt",
+                    "content": "Auf dem Beschaffungsmarkt erwirbt ein Unternehmen die Güter und Leistungen, die es für seine Tätigkeit benötigt.",
+                    "topic_ref": "LF1-K01-TC02-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktbeziehungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T02-C02",
+                    "identity_key": "core.absatzmarkt",
+                    "short_title": "Absatzmarkt",
+                    "title": "Absatzmarkt",
+                    "content": "Auf dem Absatzmarkt bietet ein Unternehmen seine Produkte oder Dienstleistungen potenziellen Nachfragern an.",
+                    "topic_ref": "LF1-K01-TC02-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktbeziehungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T02-C03",
+                    "identity_key": "core.konkurrenzbeziehung",
+                    "short_title": "Konkurrenz",
+                    "title": "Konkurrenzbeziehung",
+                    "content": "Eine Konkurrenzbeziehung besteht, wenn mehrere Anbieter um dieselbe Nachfrage konkurrieren.",
+                    "topic_ref": "LF1-K01-TC02-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktbeziehungen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC02-T03",
+                "title": "Kundenbeziehungen",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC02-T03-C01",
+                    "identity_key": "core.zielgruppe",
+                    "short_title": "Zielgruppe",
+                    "title": "Zielgruppe",
+                    "content": "Eine Zielgruppe ist eine abgegrenzte Gruppe von Personen oder Organisationen, die mit einem Angebot gezielt angesprochen wird.",
+                    "topic_ref": "LF1-K01-TC02-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Kundenbeziehungen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Zielgruppen unterscheiden"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T03-C02",
+                    "identity_key": "core.kundenbedarf",
+                    "short_title": "Kundenbedarf",
+                    "title": "Kundenbedarf",
+                    "content": "Kundenbedarf ist die konkretisierte Nachfrage nach einer Leistung, die ein erkanntes Bedürfnis erfüllen soll.",
+                    "topic_ref": "LF1-K01-TC02-T03",
+                    "category_weights": {
+                      "it": 0.2,
+                      "bwl": 0.7999999999999999
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Kundenbeziehungen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Bedarfe von Kunden und Kundinnen feststellen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T03-C03",
+                    "identity_key": "core.kundenzufriedenheit",
+                    "short_title": "Kundenzufriedenheit",
+                    "title": "Kundenzufriedenheit",
+                    "content": "Kundenzufriedenheit entsteht, wenn die wahrgenommene Leistung die Erwartungen eines Kunden erfüllt oder übertrifft.",
+                    "topic_ref": "LF1-K01-TC02-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Kundenbeziehungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T03-C04",
+                    "identity_key": "core.kundenbindung",
+                    "short_title": "Kundenbindung",
+                    "title": "Kundenbindung",
+                    "content": "Kundenbindung bezeichnet die dauerhafte Beziehung eines Kunden zu einem Anbieter.",
+                    "topic_ref": "LF1-K01-TC02-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Kundenbeziehungen"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "LF1-K01-TC03",
+            "title": "Unternehmensprofil",
+            "themen": [
+              {
+                "id": "LF1-K01-TC03-T01",
+                "title": "Leistungsschwerpunkte",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC03-T01-C01",
+                    "identity_key": "core.sachleistung",
+                    "short_title": "Sachleistung",
+                    "title": "Sachleistung",
+                    "content": "Eine Sachleistung ist ein materielles Wirtschaftsgut, das ein Unternehmen für einen Markt bereitstellt.",
+                    "topic_ref": "LF1-K01-TC03-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Leistungsschwerpunkte des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC03-T01-C02",
+                    "identity_key": "core.dienstleistung",
+                    "short_title": "Dienstleistung",
+                    "title": "Dienstleistung",
+                    "content": "Eine Dienstleistung ist eine immaterielle Leistung, die für einen Kunden erbracht wird.",
+                    "topic_ref": "LF1-K01-TC03-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Leistungsschwerpunkte des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC03-T01-C03",
+                    "identity_key": "core.kernleistung",
+                    "short_title": "Kernleistung",
+                    "title": "Kernleistung",
+                    "content": "Die Kernleistung ist die zentrale Leistung, mit der ein Unternehmen den wesentlichen Kundennutzen erzeugt.",
+                    "topic_ref": "LF1-K01-TC03-T01",
+                    "category_weights": {
+                      "it": 0.2,
+                      "bwl": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Leistungsschwerpunkte des Unternehmens"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC03-T02",
+                "title": "Unternehmensbesonderheiten",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC03-T02-C01",
+                    "identity_key": "core.alleinstellungsmerkmal",
+                    "short_title": "Alleinstellungsmerkmal",
+                    "title": "Alleinstellungsmerkmal",
+                    "content": "Ein Alleinstellungsmerkmal ist eine Eigenschaft, durch die sich ein Angebot für die Zielgruppe erkennbar von konkurrierenden Angeboten unterscheidet.",
+                    "topic_ref": "LF1-K01-TC03-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Besonderheiten des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC03-T02-C02",
+                    "identity_key": "core.standortvorteil",
+                    "short_title": "Standortvorteil",
+                    "title": "Standortvorteil",
+                    "content": "Ein Standortvorteil ist eine günstige Eigenschaft eines Unternehmensstandorts, die seine Tätigkeit oder Wettbewerbsposition unterstützt.",
+                    "topic_ref": "LF1-K01-TC03-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Besonderheiten des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC03-T02-C03",
+                    "identity_key": "core.spezialisierung",
+                    "short_title": "Spezialisierung",
+                    "title": "Spezialisierung",
+                    "content": "Spezialisierung ist die bewusste Konzentration auf einen begrenzten Leistungs-, Kunden- oder Technologiebereich.",
+                    "topic_ref": "LF1-K01-TC03-T02",
+                    "category_weights": {
+                      "it": 0.35,
+                      "bwl": 0.65
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Besonderheiten des Unternehmens"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LF1-K02",
+        "title": "Betriebliche Strukturen beschreiben",
+        "derivation": "Didaktisch abgeleitet aus der LF1-Zielformulierung zum Unternehmen als komplexem System, zur Wertschöpfungskette, Rechtsform und zum organisatorischen Aufbau.",
+        "themencluster": [
+          {
+            "id": "LF1-K02-TC01",
+            "title": "Unternehmen als System",
+            "themen": [
+              {
+                "id": "LF1-K02-TC01-T01",
+                "title": "Unternehmensbereiche",
+                "cores": [
+                  {
+                    "id": "LF1-K02-TC01-T01-C01",
+                    "identity_key": "core.beschaffung",
+                    "short_title": "Beschaffung",
+                    "title": "Beschaffung",
+                    "content": "Die Beschaffung stellt die für die betriebliche Leistung benötigten Güter und Dienstleistungen bereit.",
+                    "topic_ref": "LF1-K02-TC01-T01",
+                    "category_weights": {
+                      "bwl": 0.9,
+                      "it": 0.1
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmen als komplexes System und Wertschöpfungskette"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC01-T01-C02",
+                    "identity_key": "core.leistungserstellung",
+                    "short_title": "Leistungserstellung",
+                    "title": "Leistungserstellung",
+                    "content": "Die Leistungserstellung wandelt betriebliche Einsatzfaktoren in Produkte oder Dienstleistungen um.",
+                    "topic_ref": "LF1-K02-TC01-T01",
+                    "category_weights": {
+                      "bwl": 0.85,
+                      "it": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmen als komplexes System und Wertschöpfungskette"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC01-T01-C03",
+                    "identity_key": "core.absatz",
+                    "short_title": "Absatz",
+                    "title": "Absatz",
+                    "content": "Der Absatz führt betriebliche Leistungen dem Markt und den Kunden zu.",
+                    "topic_ref": "LF1-K02-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmen als komplexes System und Wertschöpfungskette"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC01-T01-C04",
+                    "identity_key": "core.verwaltung",
+                    "short_title": "Verwaltung",
+                    "title": "Verwaltung",
+                    "content": "Die Verwaltung unterstützt und steuert die betrieblichen Leistungsbereiche.",
+                    "topic_ref": "LF1-K02-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmen als komplexes System und Wertschöpfungskette"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K02-TC01-T02",
+                "title": "Wechselwirkungen",
+                "cores": [
+                  {
+                    "id": "LF1-K02-TC01-T02-C01",
+                    "identity_key": "core.input_output_modell",
+                    "short_title": "Input-Output-Modell",
+                    "title": "Input-Output-Modell",
+                    "content": "Das Input-Output-Modell beschreibt ein Unternehmen als System, das Eingaben in Ergebnisse umwandelt.",
+                    "topic_ref": "LF1-K02-TC01-T02",
+                    "category_weights": {
+                      "it": 0.35,
+                      "bwl": 0.65
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmen als komplexes System"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC01-T02-C02",
+                    "identity_key": "core.rueckkopplung",
+                    "short_title": "Rückkopplung",
+                    "title": "Rückkopplung",
+                    "content": "Rückkopplung führt Informationen über Ergebnisse in die weitere Steuerung eines Systems zurück.",
+                    "topic_ref": "LF1-K02-TC01-T02",
+                    "category_weights": {
+                      "it": 0.45,
+                      "bwl": 0.55
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmen als komplexes System"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC01-T02-C03",
+                    "identity_key": "core.systemumwelt",
+                    "short_title": "Systemumwelt",
+                    "title": "Systemumwelt",
+                    "content": "Die Systemumwelt umfasst externe Akteure und Bedingungen, die auf ein Unternehmen einwirken.",
+                    "topic_ref": "LF1-K02-TC01-T02",
+                    "category_weights": {
+                      "it": 0.2,
+                      "bwl": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmen als komplexes System"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K02-TC01-T03",
+                "title": "Zielbeziehungen",
+                "cores": [
+                  {
+                    "id": "LF1-K02-TC01-T03-C01",
+                    "identity_key": "core.zielharmonie",
+                    "short_title": "Zielharmonie",
+                    "title": "Zielharmonie",
+                    "content": "Zielharmonie liegt vor, wenn die Erreichung eines Ziels die Erreichung eines anderen Ziels unterstützt.",
+                    "topic_ref": "LF1-K02-TC01-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische, ökologische und soziale Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC01-T03-C02",
+                    "identity_key": "core.zielkonflikt",
+                    "short_title": "Zielkonflikt",
+                    "title": "Zielkonflikt",
+                    "content": "Ein Zielkonflikt liegt vor, wenn die Erreichung eines Ziels die Erreichung eines anderen Ziels erschwert.",
+                    "topic_ref": "LF1-K02-TC01-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische, ökologische und soziale Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC01-T03-C03",
+                    "identity_key": "core.zielneutralitaet",
+                    "short_title": "Zielneutralität",
+                    "title": "Zielneutralität",
+                    "content": "Zielneutralität liegt vor, wenn zwei Ziele einander nicht erkennbar beeinflussen.",
+                    "topic_ref": "LF1-K02-TC01-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische, ökologische und soziale Zielsetzungen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K02-TC01-T04",
+                "title": "Wertschöpfungskette",
+                "cores": [
+                  {
+                    "id": "LF1-K02-TC01-T04-C01",
+                    "identity_key": "core.betriebliche_wertschoepfung",
+                    "short_title": "Betriebliche Wertschöpfung",
+                    "title": "Betriebliche Wertschöpfung",
+                    "content": "Betriebliche Wertschöpfung ist der durch eigene Leistung geschaffene Mehrwert gegenüber bezogenen Vorleistungen.",
+                    "topic_ref": "LF1-K02-TC01-T04",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Wertschöpfungskette des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC01-T04-C02",
+                    "identity_key": "core.wertkette_nach_porter",
+                    "short_title": "Wertkette nach Porter",
+                    "title": "Wertkette nach Porter",
+                    "content": "Die Wertkette nach Porter ist ein Modell zur Analyse wertschaffender Unternehmensaktivitäten.",
+                    "topic_ref": "LF1-K02-TC01-T04",
+                    "category_weights": {
+                      "it": 0.2,
+                      "bwl": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Wertschöpfungskette des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC01-T04-C03",
+                    "identity_key": "core.kundennutzen",
+                    "short_title": "Kundennutzen",
+                    "title": "Kundennutzen",
+                    "content": "Kundennutzen ist der vom Kunden wahrgenommene Vorteil einer Leistung zur Erfüllung seines Bedarfs.",
+                    "topic_ref": "LF1-K02-TC01-T04",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Wertschöpfungskette und Kundenbeziehungen"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "LF1-K02-TC02",
+            "title": "Recht und Organisation",
+            "themen": [
+              {
+                "id": "LF1-K02-TC02-T01",
+                "title": "Rechtsformen",
+                "cores": [
+                  {
+                    "id": "LF1-K02-TC02-T01-C01",
+                    "identity_key": "core.einzelunternehmen",
+                    "short_title": "Einzelunternehmen",
+                    "title": "Einzelunternehmen",
+                    "content": "Ein Einzelunternehmen wird von genau einer natürlichen Person auf eigene Rechnung geführt.",
+                    "topic_ref": "LF1-K02-TC02-T01",
+                    "facets": {
+                      "rechtsformgruppe": "Einzelunternehmen",
+                      "haftungsgrundsatz": "Die Inhaberin oder der Inhaber haftet grundsätzlich persönlich."
+                    },
+                    "category_weights": {
+                      "bwl": 0.2,
+                      "recht": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+                      },
+                      {
+                        "source_id": "HGB-UNTERNEHMENSFORMEN",
+                        "locator": "§ 1 Kaufmann; soweit ein Handelsgewerbe betrieben wird"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T01-C02",
+                    "identity_key": "core.gbr",
+                    "short_title": "GbR",
+                    "title": "GbR",
+                    "content": "Eine Gesellschaft bürgerlichen Rechts entsteht durch einen Gesellschaftsvertrag zur Förderung eines gemeinsamen Zwecks.",
+                    "topic_ref": "LF1-K02-TC02-T01",
+                    "facets": {
+                      "rechtsformgruppe": "Personengesellschaft",
+                      "haftungsgrundsatz": "Die persönliche Haftung der Gesellschafter richtet sich nach den gesetzlichen Regeln der GbR."
+                    },
+                    "category_weights": {
+                      "bwl": 0.2,
+                      "recht": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+                      },
+                      {
+                        "source_id": "BGB-705",
+                        "locator": "§ 705 Rechtsnatur der Gesellschaft"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T01-C03",
+                    "identity_key": "core.ohg",
+                    "short_title": "OHG",
+                    "title": "OHG",
+                    "content": "Eine offene Handelsgesellschaft betreibt ein Handelsgewerbe unter gemeinschaftlicher Firma ohne Haftungsbeschränkung der Gesellschafter.",
+                    "topic_ref": "LF1-K02-TC02-T01",
+                    "facets": {
+                      "rechtsformgruppe": "Personenhandelsgesellschaft",
+                      "haftungsgrundsatz": "Die Haftung der Gesellschafter gegenüber Gesellschaftsgläubigern ist nicht beschränkt."
+                    },
+                    "category_weights": {
+                      "bwl": 0.2,
+                      "recht": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+                      },
+                      {
+                        "source_id": "HGB-UNTERNEHMENSFORMEN",
+                        "locator": "§ 105 Begriff der offenen Handelsgesellschaft"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T01-C04",
+                    "identity_key": "core.kg",
+                    "short_title": "KG",
+                    "title": "KG",
+                    "content": "Eine Kommanditgesellschaft verbindet mindestens einen persönlich haftenden Gesellschafter mit mindestens einem Kommanditisten.",
+                    "topic_ref": "LF1-K02-TC02-T01",
+                    "facets": {
+                      "rechtsformgruppe": "Personenhandelsgesellschaft",
+                      "haftungsgrundsatz": "Komplementäre haften persönlich; die Haftung der Kommanditisten ist gesetzlich begrenzt."
+                    },
+                    "category_weights": {
+                      "bwl": 0.2,
+                      "recht": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+                      },
+                      {
+                        "source_id": "HGB-UNTERNEHMENSFORMEN",
+                        "locator": "§ 161 Begriff der Kommanditgesellschaft"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T01-C05",
+                    "identity_key": "core.gmbh",
+                    "short_title": "GmbH",
+                    "title": "GmbH",
+                    "content": "Eine Gesellschaft mit beschränkter Haftung ist eine juristische Person mit eigenständigen Rechten und Pflichten.",
+                    "topic_ref": "LF1-K02-TC02-T01",
+                    "facets": {
+                      "rechtsformgruppe": "Kapitalgesellschaft",
+                      "haftungsgrundsatz": "Für Gesellschaftsverbindlichkeiten haftet grundsätzlich nur das Gesellschaftsvermögen."
+                    },
+                    "category_weights": {
+                      "bwl": 0.2,
+                      "recht": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+                      },
+                      {
+                        "source_id": "GMBHG-13",
+                        "locator": "§ 13 Juristische Person; Handelsgesellschaft"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T01-C06",
+                    "identity_key": "core.ag",
+                    "short_title": "AG",
+                    "title": "AG",
+                    "content": "Eine Aktiengesellschaft ist eine juristische Person, deren Grundkapital in Aktien zerlegt ist.",
+                    "topic_ref": "LF1-K02-TC02-T01",
+                    "facets": {
+                      "rechtsformgruppe": "Kapitalgesellschaft",
+                      "haftungsgrundsatz": "Für Gesellschaftsverbindlichkeiten haftet grundsätzlich nur das Gesellschaftsvermögen."
+                    },
+                    "category_weights": {
+                      "bwl": 0.2,
+                      "recht": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+                      },
+                      {
+                        "source_id": "AKTG-1",
+                        "locator": "§ 1 Wesen der Aktiengesellschaft"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K02-TC02-T02",
+                "title": "Aufbauorganisation",
+                "cores": [
+                  {
+                    "id": "LF1-K02-TC02-T02-C01",
+                    "identity_key": "core.einliniensystem",
+                    "short_title": "Einliniensystem",
+                    "title": "Einliniensystem",
+                    "content": "Im Einliniensystem erhält jede Stelle Weisungen von genau einer unmittelbar übergeordneten Instanz.",
+                    "topic_ref": "LF1-K02-TC02-T02",
+                    "category_weights": {
+                      "bwl": 0.85,
+                      "recht": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: organisatorischer Aufbau des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T02-C02",
+                    "identity_key": "core.mehrliniensystem",
+                    "short_title": "Mehrliniensystem",
+                    "title": "Mehrliniensystem",
+                    "content": "Im Mehrliniensystem kann eine Stelle Weisungen von mehreren fachlich zuständigen Instanzen erhalten.",
+                    "topic_ref": "LF1-K02-TC02-T02",
+                    "category_weights": {
+                      "bwl": 0.85,
+                      "recht": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: organisatorischer Aufbau des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T02-C03",
+                    "identity_key": "core.stabliniensystem",
+                    "short_title": "Stabliniensystem",
+                    "title": "Stabliniensystem",
+                    "content": "Das Stabliniensystem ergänzt Linieninstanzen um beratende Stabsstellen ohne eigene Linienweisungsbefugnis.",
+                    "topic_ref": "LF1-K02-TC02-T02",
+                    "category_weights": {
+                      "bwl": 0.85,
+                      "recht": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: organisatorischer Aufbau des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T02-C04",
+                    "identity_key": "core.matrixorganisation",
+                    "short_title": "Matrixorganisation",
+                    "title": "Matrixorganisation",
+                    "content": "Die Matrixorganisation überlagert zwei Gliederungsdimensionen und ordnet Stellen mehreren Leitungsbeziehungen zu.",
+                    "topic_ref": "LF1-K02-TC02-T02",
+                    "category_weights": {
+                      "bwl": 0.85,
+                      "recht": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: organisatorischer Aufbau des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T02-C05",
+                    "identity_key": "core.organigramm",
+                    "short_title": "Organigramm",
+                    "title": "Organigramm",
+                    "content": "Ein Organigramm stellt Organisationseinheiten und ihre formalen Beziehungen grafisch dar.",
+                    "topic_ref": "LF1-K02-TC02-T02",
+                    "category_weights": {
+                      "it": 0.2,
+                      "bwl": 0.7,
+                      "recht": 0.1
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: organisatorischer Aufbau des Unternehmens"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K02-TC02-T03",
+                "title": "Ablauforganisation",
+                "cores": [
+                  {
+                    "id": "LF1-K02-TC02-T03-C01",
+                    "identity_key": "core.arbeitsablauf",
+                    "short_title": "Arbeitsablauf",
+                    "title": "Arbeitsablauf",
+                    "content": "Ein Arbeitsablauf ist eine geordnete Folge zusammengehöriger betrieblicher Tätigkeiten.",
+                    "topic_ref": "LF1-K02-TC02-T03",
+                    "category_weights": {
+                      "bwl": 0.7,
+                      "it": 0.3
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: organisatorischer Aufbau und betriebliche Abläufe"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T03-C02",
+                    "identity_key": "core.reihenfolge",
+                    "short_title": "Reihenfolge",
+                    "title": "Reihenfolge",
+                    "content": "Die Reihenfolge legt fest, in welcher zeitlichen Ordnung Arbeitsschritte ausgeführt werden.",
+                    "topic_ref": "LF1-K02-TC02-T03",
+                    "category_weights": {
+                      "bwl": 0.6,
+                      "it": 0.4
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: organisatorischer Aufbau und betriebliche Abläufe"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T03-C03",
+                    "identity_key": "core.durchlaufzeit",
+                    "short_title": "Durchlaufzeit",
+                    "title": "Durchlaufzeit",
+                    "content": "Die Durchlaufzeit ist die Zeitspanne vom Beginn bis zum Ende eines Arbeitsablaufs.",
+                    "topic_ref": "LF1-K02-TC02-T03",
+                    "category_weights": {
+                      "bwl": 0.7,
+                      "it": 0.3
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: organisatorischer Aufbau und betriebliche Abläufe"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K02-TC02-T04",
+                "title": "Geschäftsprozesse",
+                "cores": [
+                  {
+                    "id": "LF1-K02-TC02-T04-C01",
+                    "identity_key": "core.kernprozess",
+                    "short_title": "Kernprozess",
+                    "title": "Kernprozess",
+                    "content": "Ein Kernprozess erzeugt unmittelbar einen wesentlichen Nutzen für externe Kunden.",
+                    "topic_ref": "LF1-K02-TC02-T04",
+                    "category_weights": {
+                      "bwl": 0.7,
+                      "it": 0.3
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Wertschöpfungskette; Ausbildungsordnung: Zusammenhänge zwischen Geschäftsprozessen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T04-C02",
+                    "identity_key": "core.unterstuetzungsprozess",
+                    "short_title": "Unterstützungsprozess",
+                    "title": "Unterstützungsprozess",
+                    "content": "Ein Unterstützungsprozess stellt Leistungen für die Durchführung von Kernprozessen bereit.",
+                    "topic_ref": "LF1-K02-TC02-T04",
+                    "category_weights": {
+                      "bwl": 0.65,
+                      "it": 0.35
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Wertschöpfungskette; Ausbildungsordnung: Zusammenhänge zwischen Geschäftsprozessen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T04-C03",
+                    "identity_key": "core.managementprozess",
+                    "short_title": "Managementprozess",
+                    "title": "Managementprozess",
+                    "content": "Ein Managementprozess dient der Planung, Steuerung und Kontrolle des Unternehmens.",
+                    "topic_ref": "LF1-K02-TC02-T04",
+                    "category_weights": {
+                      "bwl": 0.8,
+                      "it": 0.2
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Wertschöpfungskette; Ausbildungsordnung: Zusammenhänge zwischen Geschäftsprozessen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K02-TC02-T04-C04",
+                    "identity_key": "core.schnittstelle",
+                    "short_title": "Schnittstelle",
+                    "title": "Schnittstelle",
+                    "content": "Eine Schnittstelle ist ein definierter Übergang zwischen beteiligten Prozessen oder Organisationseinheiten.",
+                    "topic_ref": "LF1-K02-TC02-T04",
+                    "category_weights": {
+                      "it": 0.5,
+                      "bwl": 0.5
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Wertschöpfungskette; Ausbildungsordnung: Zusammenhänge zwischen Geschäftsprozessen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LF1-K03",
+        "title": "Eigene Rolle im Betrieb klären",
+        "derivation": "Didaktisch abgeleitet aus der LF1-Zielformulierung zur eigenen Rolle, zu Handlungs- und Entscheidungsspielräumen, Vollmachten sowie Fort- und Weiterbildung.",
+        "themencluster": [
+          {
+            "id": "LF1-K03-TC01",
+            "title": "Rolle und Verantwortung",
+            "themen": [
+              {
+                "id": "LF1-K03-TC01-T01",
+                "title": "Betriebliche Rolle",
+                "cores": [
+                  {
+                    "id": "LF1-K03-TC01-T01-C01",
+                    "identity_key": "core.aufgabe",
+                    "short_title": "Aufgabe",
+                    "title": "Aufgabe",
+                    "content": "Eine Aufgabe beschreibt eine erwartete betriebliche Tätigkeit mit einem bestimmten Zweck.",
+                    "topic_ref": "LF1-K03-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: eigene Rolle innerhalb des Betriebes"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC01-T01-C02",
+                    "identity_key": "core.verantwortung",
+                    "short_title": "Verantwortung",
+                    "title": "Verantwortung",
+                    "content": "Verantwortung ist die Pflicht, für das eigene Handeln und dessen Folgen einzustehen.",
+                    "topic_ref": "LF1-K03-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: eigene Rolle innerhalb des Betriebes"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC01-T01-C03",
+                    "identity_key": "core.zustaendigkeit",
+                    "short_title": "Zuständigkeit",
+                    "title": "Zuständigkeit",
+                    "content": "Zuständigkeit legt fest, wer eine bestimmte Aufgabe bearbeiten oder entscheiden darf.",
+                    "topic_ref": "LF1-K03-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: eigene Rolle innerhalb des Betriebes"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K03-TC01-T02",
+                "title": "Handlungsspielraum",
+                "cores": [
+                  {
+                    "id": "LF1-K03-TC01-T02-C01",
+                    "identity_key": "core.eigenstaendigkeit",
+                    "short_title": "Eigenständigkeit",
+                    "title": "Eigenständigkeit",
+                    "content": "Eigenständigkeit ist das zulässige Handeln ohne vorherige Einzelanweisung.",
+                    "topic_ref": "LF1-K03-TC01-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC01-T02-C02",
+                    "identity_key": "core.richtlinie",
+                    "short_title": "Richtlinie",
+                    "title": "Richtlinie",
+                    "content": "Eine Richtlinie gibt einen verbindlichen Rahmen für wiederkehrende betriebliche Handlungen vor.",
+                    "topic_ref": "LF1-K03-TC01-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC01-T02-C03",
+                    "identity_key": "core.eskalationsweg",
+                    "short_title": "Eskalationsweg",
+                    "title": "Eskalationsweg",
+                    "content": "Ein Eskalationsweg legt fest, an welche übergeordnete Stelle ein nicht selbst lösbarer Vorgang weitergegeben wird.",
+                    "topic_ref": "LF1-K03-TC01-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K03-TC01-T03",
+                "title": "Entscheidungsspielraum",
+                "cores": [
+                  {
+                    "id": "LF1-K03-TC01-T03-C01",
+                    "identity_key": "core.entscheidungsbefugnis",
+                    "short_title": "Entscheidungsbefugnis",
+                    "title": "Entscheidungsbefugnis",
+                    "content": "Entscheidungsbefugnis ist das Recht, innerhalb festgelegter Grenzen verbindliche Entscheidungen zu treffen.",
+                    "topic_ref": "LF1-K03-TC01-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC01-T03-C02",
+                    "identity_key": "core.entscheidungskriterium",
+                    "short_title": "Entscheidungskriterium",
+                    "title": "Entscheidungskriterium",
+                    "content": "Ein Entscheidungskriterium ist ein Maßstab zur Bewertung von Handlungsalternativen.",
+                    "topic_ref": "LF1-K03-TC01-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC01-T03-C03",
+                    "identity_key": "core.rechenschaft",
+                    "short_title": "Rechenschaft",
+                    "title": "Rechenschaft",
+                    "content": "Rechenschaft ist die Pflicht, Entscheidungen und ihre Folgen nachvollziehbar zu erläutern.",
+                    "topic_ref": "LF1-K03-TC01-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K03-TC01-T04",
+                "title": "Vollmachten",
+                "cores": [
+                  {
+                    "id": "LF1-K03-TC01-T04-C01",
+                    "identity_key": "core.einzelvollmacht",
+                    "short_title": "Einzelvollmacht",
+                    "title": "Einzelvollmacht",
+                    "content": "Eine Einzelvollmacht berechtigt zur Vertretung in einem konkret bestimmten einzelnen Rechtsgeschäft.",
+                    "topic_ref": "LF1-K03-TC01-T04",
+                    "category_weights": {
+                      "bwl": 0.1,
+                      "recht": 0.9
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Vollmachten im Unternehmen"
+                      },
+                      {
+                        "source_id": "BGB-VOLLMACHT",
+                        "locator": "§ 167 Erteilung der Vollmacht"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC01-T04-C02",
+                    "identity_key": "core.generalvollmacht",
+                    "short_title": "Generalvollmacht",
+                    "title": "Generalvollmacht",
+                    "content": "Eine Generalvollmacht erfasst grundsätzlich alle rechtsgeschäftlichen Vertretungshandlungen, die zulässig übertragen werden können.",
+                    "topic_ref": "LF1-K03-TC01-T04",
+                    "category_weights": {
+                      "bwl": 0.1,
+                      "recht": 0.9
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Vollmachten im Unternehmen"
+                      },
+                      {
+                        "source_id": "BGB-VOLLMACHT",
+                        "locator": "§ 167 Erteilung der Vollmacht"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC01-T04-C03",
+                    "identity_key": "core.handlungsvollmacht",
+                    "short_title": "Handlungsvollmacht",
+                    "title": "Handlungsvollmacht",
+                    "content": "Die Handlungsvollmacht ermächtigt zu den gewöhnlichen Geschäften eines Handelsgewerbes.",
+                    "topic_ref": "LF1-K03-TC01-T04",
+                    "category_weights": {
+                      "bwl": 0.2,
+                      "recht": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Vollmachten im Unternehmen"
+                      },
+                      {
+                        "source_id": "HGB-UNTERNEHMENSFORMEN",
+                        "locator": "§ 54 Handlungsvollmacht"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC01-T04-C04",
+                    "identity_key": "core.prokura",
+                    "short_title": "Prokura",
+                    "title": "Prokura",
+                    "content": "Die Prokura ist eine gesetzlich geregelte handelsrechtliche Vollmacht mit besonders weitem Umfang.",
+                    "topic_ref": "LF1-K03-TC01-T04",
+                    "category_weights": {
+                      "bwl": 0.15,
+                      "recht": 0.85
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Vollmachten im Unternehmen"
+                      },
+                      {
+                        "source_id": "HGB-UNTERNEHMENSFORMEN",
+                        "locator": "§§ 48 bis 53 Prokura"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "LF1-K03-TC02",
+            "title": "Berufliche Entwicklung",
+            "themen": [
+              {
+                "id": "LF1-K03-TC02-T01",
+                "title": "Fortbildung",
+                "cores": [
+                  {
+                    "id": "LF1-K03-TC02-T01-C01",
+                    "identity_key": "core.anpassungsfortbildung",
+                    "short_title": "Anpassungsfortbildung",
+                    "title": "Anpassungsfortbildung",
+                    "content": "Eine Anpassungsfortbildung aktualisiert oder erweitert berufliche Kenntnisse für bestehende Aufgaben.",
+                    "topic_ref": "LF1-K03-TC02-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: betriebliche Fortbildungsmaßnahmen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC02-T01-C02",
+                    "identity_key": "core.aufstiegsfortbildung",
+                    "short_title": "Aufstiegsfortbildung",
+                    "title": "Aufstiegsfortbildung",
+                    "content": "Eine Aufstiegsfortbildung bereitet auf Aufgaben mit höherer fachlicher oder beruflicher Verantwortung vor.",
+                    "topic_ref": "LF1-K03-TC02-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: betriebliche Fortbildungsmaßnahmen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC02-T01-C03",
+                    "identity_key": "core.qualifikationsbedarf",
+                    "short_title": "Qualifikationsbedarf",
+                    "title": "Qualifikationsbedarf",
+                    "content": "Qualifikationsbedarf ist die Lücke zwischen benötigten und vorhandenen beruflichen Kompetenzen.",
+                    "topic_ref": "LF1-K03-TC02-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: betriebliche Fortbildungsmaßnahmen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K03-TC02-T02",
+                "title": "Weiterbildung",
+                "cores": [
+                  {
+                    "id": "LF1-K03-TC02-T02-C01",
+                    "identity_key": "core.formales_lernen",
+                    "short_title": "Formales Lernen",
+                    "title": "Formales Lernen",
+                    "content": "Formales Lernen findet in einem organisierten Bildungsgang mit festgelegten Lernzielen statt.",
+                    "topic_ref": "LF1-K03-TC02-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: betriebliche Weiterbildungsmaßnahmen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC02-T02-C02",
+                    "identity_key": "core.non_formales_lernen",
+                    "short_title": "Non-formales Lernen",
+                    "title": "Non-formales Lernen",
+                    "content": "Non-formales Lernen ist organisiert, findet aber außerhalb staatlich geregelter Bildungsgänge statt.",
+                    "topic_ref": "LF1-K03-TC02-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: betriebliche Weiterbildungsmaßnahmen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC02-T02-C03",
+                    "identity_key": "core.informelles_lernen",
+                    "short_title": "Informelles Lernen",
+                    "title": "Informelles Lernen",
+                    "content": "Informelles Lernen entsteht im Arbeitsalltag ohne formal organisierten Bildungsgang.",
+                    "topic_ref": "LF1-K03-TC02-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: betriebliche Weiterbildungsmaßnahmen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K03-TC02-T02-C04",
+                    "identity_key": "core.lerntransfer",
+                    "short_title": "Lerntransfer",
+                    "title": "Lerntransfer",
+                    "content": "Lerntransfer ist die Übertragung neu erworbener Kenntnisse oder Fähigkeiten auf betriebliche Aufgaben.",
+                    "topic_ref": "LF1-K03-TC02-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: betriebliche Weiterbildungsmaßnahmen"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LF1-K04",
+        "title": "Unternehmen darstellen und reflektieren",
+        "derivation": "Didaktisch abgeleitet aus der LF1-Zielformulierung zur Informationsauswertung, adressatengerechten multimedialen Darstellung, Teamarbeit, Präsentation, Qualitätsprüfung und Reflexion.",
+        "themencluster": [
+          {
+            "id": "LF1-K04-TC01",
+            "title": "Informationen erschließen",
+            "themen": [
+              {
+                "id": "LF1-K04-TC01-T01",
+                "title": "Informationsquellen",
+                "cores": [
+                  {
+                    "id": "LF1-K04-TC01-T01-C01",
+                    "identity_key": "core.primaerquelle",
+                    "short_title": "Primärquelle",
+                    "title": "Primärquelle",
+                    "content": "Eine Primärquelle enthält unmittelbare Informationen aus dem untersuchten ursprünglichen Zusammenhang.",
+                    "topic_ref": "LF1-K04-TC01-T01",
+                    "category_weights": {
+                      "it": 0.45,
+                      "bwl": 0.55
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Informationsquellen und Unternehmensleitbild"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Informationsquellen aufgabenbezogen auswerten"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC01-T01-C02",
+                    "identity_key": "core.sekundaerquelle",
+                    "short_title": "Sekundärquelle",
+                    "title": "Sekundärquelle",
+                    "content": "Eine Sekundärquelle verarbeitet, erklärt oder bewertet Informationen aus anderen Quellen.",
+                    "topic_ref": "LF1-K04-TC01-T01",
+                    "category_weights": {
+                      "it": 0.45,
+                      "bwl": 0.55
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Informationsquellen und Unternehmensleitbild"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Informationsquellen aufgabenbezogen auswerten"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC01-T01-C03",
+                    "identity_key": "core.interne_quelle",
+                    "short_title": "Interne Quelle",
+                    "title": "Interne Quelle",
+                    "content": "Eine interne Quelle entsteht innerhalb des betrachteten Unternehmens.",
+                    "topic_ref": "LF1-K04-TC01-T01",
+                    "category_weights": {
+                      "bwl": 0.6,
+                      "it": 0.4
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Informationsquellen und Unternehmensleitbild"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Informationsquellen aufgabenbezogen auswerten"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC01-T01-C04",
+                    "identity_key": "core.externe_quelle",
+                    "short_title": "Externe Quelle",
+                    "title": "Externe Quelle",
+                    "content": "Eine externe Quelle stammt von einer Stelle außerhalb des betrachteten Unternehmens.",
+                    "topic_ref": "LF1-K04-TC01-T01",
+                    "category_weights": {
+                      "bwl": 0.55,
+                      "it": 0.45
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Informationsquellen und Unternehmensleitbild"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Informationsquellen aufgabenbezogen auswerten"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K04-TC01-T02",
+                "title": "Quellenbewertung",
+                "cores": [
+                  {
+                    "id": "LF1-K04-TC01-T02-C01",
+                    "identity_key": "core.aktualitaet",
+                    "short_title": "Aktualität",
+                    "title": "Aktualität",
+                    "content": "Aktualität beschreibt, ob der Informationsstand für den vorgesehenen Zweck zeitlich noch geeignet ist.",
+                    "topic_ref": "LF1-K04-TC01-T02",
+                    "category_weights": {
+                      "it": 0.45,
+                      "bwl": 0.55
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Informationsquellen; Ausbildungsordnung: aufgabenbezogene Auswertung"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Informationsquellen aufgabenbezogen auswerten"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC01-T02-C02",
+                    "identity_key": "core.autoritaet",
+                    "short_title": "Autorität",
+                    "title": "Autorität",
+                    "content": "Autorität einer Quelle beruht auf der erkennbaren fachlichen Zuständigkeit ihres Urhebers.",
+                    "topic_ref": "LF1-K04-TC01-T02",
+                    "category_weights": {
+                      "it": 0.35,
+                      "bwl": 0.65
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Informationsquellen; Ausbildungsordnung: aufgabenbezogene Auswertung"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Informationsquellen aufgabenbezogen auswerten"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC01-T02-C03",
+                    "identity_key": "core.nachvollziehbarkeit",
+                    "short_title": "Nachvollziehbarkeit",
+                    "title": "Nachvollziehbarkeit",
+                    "content": "Nachvollziehbarkeit liegt vor, wenn Herkunft und Begründung einer Information überprüfbar sind.",
+                    "topic_ref": "LF1-K04-TC01-T02",
+                    "category_weights": {
+                      "it": 0.4,
+                      "bwl": 0.6000000000000001
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Informationsquellen; Ausbildungsordnung: aufgabenbezogene Auswertung"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Informationsquellen aufgabenbezogen auswerten"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "LF1-K04-TC02",
+            "title": "Darstellung planen",
+            "themen": [
+              {
+                "id": "LF1-K04-TC02-T01",
+                "title": "Adressatengerechte Planung",
+                "cores": [
+                  {
+                    "id": "LF1-K04-TC02-T01-C01",
+                    "identity_key": "core.zielgruppenanalyse",
+                    "short_title": "Zielgruppenanalyse",
+                    "title": "Zielgruppenanalyse",
+                    "content": "Eine Zielgruppenanalyse untersucht Merkmale, Vorwissen und Informationsbedürfnisse der vorgesehenen Adressaten.",
+                    "topic_ref": "LF1-K04-TC02-T01",
+                    "category_weights": {
+                      "it": 0.15,
+                      "bwl": 0.85
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: adressatengerechte Planung der Darstellung"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC02-T01-C02",
+                    "identity_key": "core.kommunikationsziel",
+                    "short_title": "Kommunikationsziel",
+                    "title": "Kommunikationsziel",
+                    "content": "Ein Kommunikationsziel beschreibt die beabsichtigte Wirkung einer Information auf ihre Adressaten.",
+                    "topic_ref": "LF1-K04-TC02-T01",
+                    "category_weights": {
+                      "it": 0.15,
+                      "bwl": 0.85
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: adressatengerechte Planung der Darstellung"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC02-T01-C03",
+                    "identity_key": "core.empfaengerhorizont",
+                    "short_title": "Empfängerhorizont",
+                    "title": "Empfängerhorizont",
+                    "content": "Der Empfängerhorizont umfasst Vorwissen, Sprache und Erwartungen, die bei einer Darstellung berücksichtigt werden.",
+                    "topic_ref": "LF1-K04-TC02-T01",
+                    "category_weights": {
+                      "it": 0.2,
+                      "bwl": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: adressatengerechte Planung der Darstellung"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K04-TC02-T02",
+                "title": "Multimediale Gestaltung",
+                "cores": [
+                  {
+                    "id": "LF1-K04-TC02-T02-C01",
+                    "identity_key": "core.medienwahl",
+                    "short_title": "Medienwahl",
+                    "title": "Medienwahl",
+                    "content": "Medienwahl ist die begründete Auswahl eines Informationsträgers passend zu Ziel, Inhalt und Adressaten.",
+                    "topic_ref": "LF1-K04-TC02-T02",
+                    "category_weights": {
+                      "it": 0.6,
+                      "bwl": 0.4
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: multimediale Darstellung des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC02-T02-C02",
+                    "identity_key": "core.informationsvisualisierung",
+                    "short_title": "Informationsvisualisierung",
+                    "title": "Informationsvisualisierung",
+                    "content": "Informationsvisualisierung überführt Daten oder Zusammenhänge in eine grafisch erfassbare Darstellung.",
+                    "topic_ref": "LF1-K04-TC02-T02",
+                    "category_weights": {
+                      "it": 0.7,
+                      "bwl": 0.3
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: multimediale Darstellung des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC02-T02-C03",
+                    "identity_key": "core.barrierearme_gestaltung",
+                    "short_title": "Barrierearme Gestaltung",
+                    "title": "Barrierearme Gestaltung",
+                    "content": "Barrierearme Gestaltung verringert vermeidbare Zugangs- und Verständnisbarrieren in digitalen Informationen.",
+                    "topic_ref": "LF1-K04-TC02-T02",
+                    "category_weights": {
+                      "it": 0.7,
+                      "bwl": 0.3
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: multimediale Darstellung des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC02-T02-C04",
+                    "identity_key": "core.gestaltungskonsistenz",
+                    "short_title": "Gestaltungskonsistenz",
+                    "title": "Gestaltungskonsistenz",
+                    "content": "Gestaltungskonsistenz verwendet wiederkehrende visuelle Regeln für eine einheitliche und verständliche Darstellung.",
+                    "topic_ref": "LF1-K04-TC02-T02",
+                    "category_weights": {
+                      "it": 0.65,
+                      "bwl": 0.35
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: multimediale Darstellung des Unternehmens"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "LF1-K04-TC03",
+            "title": "Zusammenarbeit und Präsentation",
+            "themen": [
+              {
+                "id": "LF1-K04-TC03-T01",
+                "title": "Teamarbeit",
+                "cores": [
+                  {
+                    "id": "LF1-K04-TC03-T01-C01",
+                    "identity_key": "core.teamrolle",
+                    "short_title": "Teamrolle",
+                    "title": "Teamrolle",
+                    "content": "Eine Teamrolle beschreibt einen wiederkehrenden Beitrag einer Person zur Zusammenarbeit im Team.",
+                    "topic_ref": "LF1-K04-TC03-T01",
+                    "category_weights": {
+                      "bwl": 0.95,
+                      "it": 0.05
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Darstellung im Team; Reflexion der Aufgabendurchführung"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Aufgabendurchführung im Team reflektieren"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC03-T01-C02",
+                    "identity_key": "core.arbeitsteilung",
+                    "short_title": "Arbeitsteilung",
+                    "title": "Arbeitsteilung",
+                    "content": "Arbeitsteilung verteilt eine Gesamtaufgabe auf mehrere beteiligte Personen.",
+                    "topic_ref": "LF1-K04-TC03-T01",
+                    "category_weights": {
+                      "bwl": 0.9,
+                      "it": 0.1
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Darstellung im Team; Reflexion der Aufgabendurchführung"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Aufgabendurchführung im Team reflektieren"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC03-T01-C03",
+                    "identity_key": "core.abstimmung",
+                    "short_title": "Abstimmung",
+                    "title": "Abstimmung",
+                    "content": "Abstimmung gleicht Tätigkeiten, Termine und Abhängigkeiten zwischen Beteiligten ab.",
+                    "topic_ref": "LF1-K04-TC03-T01",
+                    "category_weights": {
+                      "bwl": 0.9,
+                      "it": 0.1
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Darstellung im Team; Reflexion der Aufgabendurchführung"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Aufgabendurchführung im Team reflektieren"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC03-T01-C04",
+                    "identity_key": "core.feedback",
+                    "short_title": "Feedback",
+                    "title": "Feedback",
+                    "content": "Feedback ist eine Rückmeldung zu wahrgenommenem Verhalten oder Arbeitsergebnissen.",
+                    "topic_ref": "LF1-K04-TC03-T01",
+                    "category_weights": {
+                      "bwl": 0.9500000000000001,
+                      "it": 0.05
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Darstellung im Team; Reflexion der Aufgabendurchführung"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Aufgabendurchführung im Team reflektieren"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K04-TC03-T02",
+                "title": "Ergebnispräsentation",
+                "cores": [
+                  {
+                    "id": "LF1-K04-TC03-T02-C01",
+                    "identity_key": "core.kernbotschaft",
+                    "short_title": "Kernbotschaft",
+                    "title": "Kernbotschaft",
+                    "content": "Eine Kernbotschaft fasst die wichtigste Aussage einer Präsentation prägnant zusammen.",
+                    "topic_ref": "LF1-K04-TC03-T02",
+                    "category_weights": {
+                      "it": 0.2,
+                      "bwl": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Präsentation der Ergebnisse"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Sachverhalte präsentieren"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC03-T02-C02",
+                    "identity_key": "core.praesentationsdramaturgie",
+                    "short_title": "Präsentationsdramaturgie",
+                    "title": "Präsentationsdramaturgie",
+                    "content": "Präsentationsdramaturgie ordnet Inhalte zu einem nachvollziehbaren Spannungs- und Argumentationsverlauf.",
+                    "topic_ref": "LF1-K04-TC03-T02",
+                    "category_weights": {
+                      "it": 0.25,
+                      "bwl": 0.75
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Präsentation der Ergebnisse"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Sachverhalte präsentieren"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC03-T02-C03",
+                    "identity_key": "core.quellenbeleg",
+                    "short_title": "Quellenbeleg",
+                    "title": "Quellenbeleg",
+                    "content": "Ein Quellenbeleg macht die Herkunft einer präsentierten Aussage nachvollziehbar.",
+                    "topic_ref": "LF1-K04-TC03-T02",
+                    "category_weights": {
+                      "it": 0.4,
+                      "bwl": 0.6
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Präsentation der Ergebnisse"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Sachverhalte präsentieren"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "LF1-K04-TC04",
+            "title": "Qualität und Reflexion",
+            "themen": [
+              {
+                "id": "LF1-K04-TC04-T01",
+                "title": "Qualitätskriterien",
+                "cores": [
+                  {
+                    "id": "LF1-K04-TC04-T01-C01",
+                    "identity_key": "core.richtigkeit",
+                    "short_title": "Richtigkeit",
+                    "title": "Richtigkeit",
+                    "content": "Richtigkeit liegt vor, wenn dargestellte Aussagen sachlich zutreffen.",
+                    "topic_ref": "LF1-K04-TC04-T01",
+                    "category_weights": {
+                      "it": 0.35,
+                      "bwl": 0.6499999999999999
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Qualität des Handlungsproduktes anhand von Kriterien"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC04-T01-C02",
+                    "identity_key": "core.vollstaendigkeit",
+                    "short_title": "Vollständigkeit",
+                    "title": "Vollständigkeit",
+                    "content": "Vollständigkeit liegt vor, wenn alle für den Zweck erforderlichen Bestandteile enthalten sind.",
+                    "topic_ref": "LF1-K04-TC04-T01",
+                    "category_weights": {
+                      "bwl": 0.65,
+                      "it": 0.35
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Qualität des Handlungsproduktes anhand von Kriterien"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC04-T01-C03",
+                    "identity_key": "core.verstaendlichkeit",
+                    "short_title": "Verständlichkeit",
+                    "title": "Verständlichkeit",
+                    "content": "Verständlichkeit liegt vor, wenn Adressaten eine Darstellung ohne vermeidbare Schwierigkeiten erfassen können.",
+                    "topic_ref": "LF1-K04-TC04-T01",
+                    "category_weights": {
+                      "it": 0.3,
+                      "bwl": 0.7
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Qualität des Handlungsproduktes anhand von Kriterien"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K04-TC04-T02",
+                "title": "Verbesserungsmöglichkeiten",
+                "cores": [
+                  {
+                    "id": "LF1-K04-TC04-T02-C01",
+                    "identity_key": "core.soll_ist_vergleich",
+                    "short_title": "Soll-Ist-Vergleich",
+                    "title": "Soll-Ist-Vergleich",
+                    "content": "Ein Soll-Ist-Vergleich stellt einen angestrebten Zustand dem tatsächlich erreichten Zustand gegenüber.",
+                    "topic_ref": "LF1-K04-TC04-T02",
+                    "category_weights": {
+                      "it": 0.25,
+                      "bwl": 0.75
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: gemeinsame Entwicklung von Verbesserungsmöglichkeiten"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC04-T02-C02",
+                    "identity_key": "core.abweichungsanalyse",
+                    "short_title": "Abweichungsanalyse",
+                    "title": "Abweichungsanalyse",
+                    "content": "Eine Abweichungsanalyse untersucht Ursachen und Bedeutung festgestellter Unterschiede zwischen Soll und Ist.",
+                    "topic_ref": "LF1-K04-TC04-T02",
+                    "category_weights": {
+                      "it": 0.3,
+                      "bwl": 0.7
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: gemeinsame Entwicklung von Verbesserungsmöglichkeiten"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC04-T02-C03",
+                    "identity_key": "core.pdca_zyklus",
+                    "short_title": "PDCA-Zyklus",
+                    "title": "PDCA-Zyklus",
+                    "content": "Der PDCA-Zyklus ist ein Modell zur kontinuierlichen Verbesserung durch wiederholtes Planen, Umsetzen, Prüfen und Anpassen.",
+                    "topic_ref": "LF1-K04-TC04-T02",
+                    "category_weights": {
+                      "it": 0.25,
+                      "bwl": 0.75
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Qualitätsprüfung und Verbesserungsmöglichkeiten"
+                      },
+                      {
+                        "source_id": "BIBB-UMSETZUNGSHILFE",
+                        "locator": "Qualitätssicherung und kontinuierliche Verbesserung"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC04-T02-C04",
+                    "identity_key": "core.verbesserungsmassnahme",
+                    "short_title": "Verbesserungsmaßnahme",
+                    "title": "Verbesserungsmaßnahme",
+                    "content": "Eine Verbesserungsmaßnahme ist eine festgelegte Handlung zur Verringerung einer erkannten Abweichung.",
+                    "topic_ref": "LF1-K04-TC04-T02",
+                    "category_weights": {
+                      "it": 0.2,
+                      "bwl": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: gemeinsame Entwicklung von Verbesserungsmöglichkeiten"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K04-TC04-T03",
+                "title": "Rollenreflexion",
+                "cores": [
+                  {
+                    "id": "LF1-K04-TC04-T03-C01",
+                    "identity_key": "core.selbstbild",
+                    "short_title": "Selbstbild",
+                    "title": "Selbstbild",
+                    "content": "Das Selbstbild ist die eigene Vorstellung von den persönlichen Eigenschaften und der eigenen Wirkung.",
+                    "topic_ref": "LF1-K04-TC04-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Reflexion der eigenen Rolle im Betrieb"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC04-T03-C02",
+                    "identity_key": "core.fremdbild",
+                    "short_title": "Fremdbild",
+                    "title": "Fremdbild",
+                    "content": "Das Fremdbild ist die Wahrnehmung einer Person durch andere.",
+                    "topic_ref": "LF1-K04-TC04-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Reflexion der eigenen Rolle im Betrieb"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC04-T03-C03",
+                    "identity_key": "core.rollenklaerung",
+                    "short_title": "Rollenklärung",
+                    "title": "Rollenklärung",
+                    "content": "Rollenklärung macht Erwartungen, Zuständigkeiten und Grenzen einer betrieblichen Rolle transparent.",
+                    "topic_ref": "LF1-K04-TC04-T03",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Reflexion der eigenen Rolle im Betrieb"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K04-TC04-T04",
+                "title": "Handlungsreflexion",
+                "cores": [
+                  {
+                    "id": "LF1-K04-TC04-T04-C01",
+                    "identity_key": "core.ergebnisreflexion",
+                    "short_title": "Ergebnisreflexion",
+                    "title": "Ergebnisreflexion",
+                    "content": "Ergebnisreflexion bewertet die Qualität und Zielerreichung eines Arbeitsergebnisses.",
+                    "topic_ref": "LF1-K04-TC04-T04",
+                    "category_weights": {
+                      "bwl": 0.8500000000000001,
+                      "it": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Reflexion des eigenen Handelns"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC04-T04-C02",
+                    "identity_key": "core.prozessreflexion",
+                    "short_title": "Prozessreflexion",
+                    "title": "Prozessreflexion",
+                    "content": "Prozessreflexion untersucht die Vorgehensweise und Zusammenarbeit während einer Aufgabe.",
+                    "topic_ref": "LF1-K04-TC04-T04",
+                    "category_weights": {
+                      "bwl": 0.85,
+                      "it": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Reflexion des eigenen Handelns"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K04-TC04-T04-C03",
+                    "identity_key": "core.schlussfolgerung",
+                    "short_title": "Schlussfolgerung",
+                    "title": "Schlussfolgerung",
+                    "content": "Eine Schlussfolgerung leitet aus einer Reflexion eine begründete Konsequenz für zukünftiges Handeln ab.",
+                    "topic_ref": "LF1-K04-TC04-T04",
+                    "category_weights": {
+                      "bwl": 0.8500000000000001,
+                      "it": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Reflexion des eigenen Handelns"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "connection_rule": {
+    "type": "complete_topic_graph",
+    "description": "Alle Cores, die im selben Thema eingeordnet sind, werden im Vault paarweise verbunden.",
+    "generated_not_stored": true,
+    "multi_topic_reuse": "Eine spätere Wiederverwendung erfolgt über identity_key und eine separate Zuordnung; identische Cores werden nicht unkontrolliert dupliziert."
+  },
+  "validation_summary": {
+    "checked_at": "2026-07-28",
+    "json_syntax": true,
+    "competency_count": 4,
+    "topic_cluster_count": 11,
+    "topic_count": 33,
+    "core_count": 117,
+    "empty_topic_count": 0,
+    "explicit_topic_ref_count": 117,
+    "source_linked_core_count": 117,
+    "generated_topic_clique_edge_count": 157,
+    "category_palette": {
+      "it": "Blau",
+      "bwl": "Gelb",
+      "recht": "Rot"
+    },
+    "core_model_audit": "independent_named_concepts"
+  }
+}

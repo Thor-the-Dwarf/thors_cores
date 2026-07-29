@@ -1,0 +1,4142 @@
+{
+  "schema_version": "3.0.0",
+  "dataset_id": "de-fachinformatiker-lern-vault",
+  "updated_at": "2026-07-29",
+  "language": "de",
+  "data_role": "Kontextuelle Core-Ausprägungen",
+  "depth_values": [
+    "Grundlage",
+    "Vertiefung",
+    "Spezialisierung"
+  ],
+  "depth_note": "Der aktuelle LF1-Bestand ist vollständig als Grundlage eingeordnet. Spätere Lernfelder können dieselbe globale Core-Identität in einem neuen Kontext vertiefen oder spezialisieren.",
+  "connection_rule": {
+    "type": "complete_topic_graph",
+    "description": "Sichtbare Core-Ausprägungen mit derselben thema_ref werden paarweise verbunden.",
+    "generated_not_stored": true
+  },
+  "core_ausprägungen": [
+    {
+      "id": "LF1-K01-TC01-T01-C01",
+      "core_ref": "core.gewinn",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T01-C02",
+      "core_ref": "core.rentabilitaet",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T01-C03",
+      "core_ref": "core.liquiditaet",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T01-C04",
+      "core_ref": "core.wachstum",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T02-C01",
+      "core_ref": "core.ressourceneffizienz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökologische Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T02-C02",
+      "core_ref": "core.energieeffizienz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökologische Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T02-C03",
+      "core_ref": "core.emissionsminderung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökologische Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T02-C04",
+      "core_ref": "core.kreislaufwirtschaft",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökologische Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T03-C01",
+      "core_ref": "core.arbeitsplatzsicherheit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: soziale Zielsetzungen"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Berufsprofilgebende Position Sicherheit und Gesundheit bei der Arbeit"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T03-C02",
+      "core_ref": "core.mitarbeitendenzufriedenheit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: soziale Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T03-C03",
+      "core_ref": "core.chancengleichheit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: soziale Zielsetzungen"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Berufsprofilgebende Position digitalisierte Arbeitswelt"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T03-C04",
+      "core_ref": "core.faire_verguetung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: soziale Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T04-C01",
+      "core_ref": "core.vision",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T04-C02",
+      "core_ref": "core.mission",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T04-C03",
+      "core_ref": "core.unternehmenswerte",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T04-C04",
+      "core_ref": "core.leitsaetze",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T01-C01",
+      "core_ref": "core.branche",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktstruktur der jeweiligen Branche"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T01-C02",
+      "core_ref": "core.wettbewerber",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktstruktur der jeweiligen Branche"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Marktbeobachtung: Preise, Leistungen und Konditionen von Wettbewerbern"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T01-C03",
+      "core_ref": "core.markteintrittsbarriere",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktstruktur der jeweiligen Branche"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T02-C01",
+      "core_ref": "core.beschaffungsmarkt",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktbeziehungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T02-C02",
+      "core_ref": "core.absatzmarkt",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktbeziehungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T02-C03",
+      "core_ref": "core.konkurrenzbeziehung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktbeziehungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T03-C01",
+      "core_ref": "core.zielgruppe",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Kundenbeziehungen"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Zielgruppen unterscheiden"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T03-C02",
+      "core_ref": "core.kundenbedarf",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Kundenbeziehungen"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Bedarfe von Kunden und Kundinnen feststellen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T03-C03",
+      "core_ref": "core.kundenzufriedenheit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Kundenbeziehungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T03-C04",
+      "core_ref": "core.kundenbindung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Kundenbeziehungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC03-T01-C01",
+      "core_ref": "core.sachleistung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC03",
+      "thema_ref": "LF1-K01-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Leistungsschwerpunkte des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC03-T01-C02",
+      "core_ref": "core.dienstleistung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC03",
+      "thema_ref": "LF1-K01-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Leistungsschwerpunkte des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC03-T01-C03",
+      "core_ref": "core.kernleistung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC03",
+      "thema_ref": "LF1-K01-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Leistungsschwerpunkte des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC03-T02-C01",
+      "core_ref": "core.alleinstellungsmerkmal",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC03",
+      "thema_ref": "LF1-K01-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Besonderheiten des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC03-T02-C02",
+      "core_ref": "core.standortvorteil",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC03",
+      "thema_ref": "LF1-K01-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Besonderheiten des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC03-T02-C03",
+      "core_ref": "core.spezialisierung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC03",
+      "thema_ref": "LF1-K01-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Besonderheiten des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T01-C01",
+      "core_ref": "core.beschaffung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmen als komplexes System und Wertschöpfungskette"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T01-C02",
+      "core_ref": "core.leistungserstellung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmen als komplexes System und Wertschöpfungskette"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T01-C03",
+      "core_ref": "core.absatz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmen als komplexes System und Wertschöpfungskette"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T01-C04",
+      "core_ref": "core.verwaltung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmen als komplexes System und Wertschöpfungskette"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T02-C01",
+      "core_ref": "core.input_output_modell",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmen als komplexes System"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T02-C02",
+      "core_ref": "core.rueckkopplung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmen als komplexes System"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T02-C03",
+      "core_ref": "core.systemumwelt",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmen als komplexes System"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T03-C01",
+      "core_ref": "core.zielharmonie",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökonomische, ökologische und soziale Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T03-C02",
+      "core_ref": "core.zielkonflikt",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökonomische, ökologische und soziale Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T03-C03",
+      "core_ref": "core.zielneutralitaet",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökonomische, ökologische und soziale Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T04-C01",
+      "core_ref": "core.betriebliche_wertschoepfung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Wertschöpfungskette des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T04-C02",
+      "core_ref": "core.wertkette_nach_porter",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Wertschöpfungskette des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T04-C03",
+      "core_ref": "core.kundennutzen",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Wertschöpfungskette und Kundenbeziehungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C01",
+      "core_ref": "core.einzelunternehmen",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+        },
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§ 1 Kaufmann; soweit ein Handelsgewerbe betrieben wird"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C02",
+      "core_ref": "core.gbr",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+        },
+        {
+          "source_id": "BGB-705",
+          "locator": "§ 705 Rechtsnatur der Gesellschaft"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C03",
+      "core_ref": "core.ohg",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+        },
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§ 105 Begriff der offenen Handelsgesellschaft"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C04",
+      "core_ref": "core.kg",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+        },
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§ 161 Begriff der Kommanditgesellschaft"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C05",
+      "core_ref": "core.gmbh",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 5,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+        },
+        {
+          "source_id": "GMBHG-13",
+          "locator": "§ 13 Juristische Person; Handelsgesellschaft"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C06",
+      "core_ref": "core.ag",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 6,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Rechtsform des Unternehmens"
+        },
+        {
+          "source_id": "AKTG-1",
+          "locator": "§ 1 Wesen der Aktiengesellschaft"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T02-C01",
+      "core_ref": "core.einliniensystem",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T02-C02",
+      "core_ref": "core.mehrliniensystem",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T02-C03",
+      "core_ref": "core.stabliniensystem",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T02-C04",
+      "core_ref": "core.matrixorganisation",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T02-C05",
+      "core_ref": "core.organigramm",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 5,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T03-C01",
+      "core_ref": "core.arbeitsablauf",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau und betriebliche Abläufe"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T03-C02",
+      "core_ref": "core.reihenfolge",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau und betriebliche Abläufe"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T03-C03",
+      "core_ref": "core.durchlaufzeit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau und betriebliche Abläufe"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T04-C01",
+      "core_ref": "core.kernprozess",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Wertschöpfungskette; Ausbildungsordnung: Zusammenhänge zwischen Geschäftsprozessen"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T04-C02",
+      "core_ref": "core.unterstuetzungsprozess",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Wertschöpfungskette; Ausbildungsordnung: Zusammenhänge zwischen Geschäftsprozessen"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T04-C03",
+      "core_ref": "core.managementprozess",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Wertschöpfungskette; Ausbildungsordnung: Zusammenhänge zwischen Geschäftsprozessen"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T04-C04",
+      "core_ref": "core.schnittstelle",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Wertschöpfungskette; Ausbildungsordnung: Zusammenhänge zwischen Geschäftsprozessen"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Zusammenhänge zwischen den Geschäftsprozessen des Ausbildungsbetriebes"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T01-C01",
+      "core_ref": "core.aufgabe",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigene Rolle innerhalb des Betriebes"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T01-C02",
+      "core_ref": "core.verantwortung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigene Rolle innerhalb des Betriebes"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T01-C03",
+      "core_ref": "core.zustaendigkeit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigene Rolle innerhalb des Betriebes"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T02-C01",
+      "core_ref": "core.eigenstaendigkeit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T02-C02",
+      "core_ref": "core.richtlinie",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T02-C03",
+      "core_ref": "core.eskalationsweg",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T03-C01",
+      "core_ref": "core.entscheidungsbefugnis",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T03-C02",
+      "core_ref": "core.entscheidungskriterium",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T03-C03",
+      "core_ref": "core.rechenschaft",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigener Handlungs- und Entscheidungsspielraum"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T04-C01",
+      "core_ref": "core.einzelvollmacht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Vollmachten im Unternehmen"
+        },
+        {
+          "source_id": "BGB-VOLLMACHT",
+          "locator": "§ 167 Erteilung der Vollmacht"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T04-C02",
+      "core_ref": "core.generalvollmacht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Vollmachten im Unternehmen"
+        },
+        {
+          "source_id": "BGB-VOLLMACHT",
+          "locator": "§ 167 Erteilung der Vollmacht"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T04-C03",
+      "core_ref": "core.handlungsvollmacht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Vollmachten im Unternehmen"
+        },
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§ 54 Handlungsvollmacht"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC01-T04-C04",
+      "core_ref": "core.prokura",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "thema_ref": "LF1-K03-TC01-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Vollmachten im Unternehmen"
+        },
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§§ 48 bis 53 Prokura"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC02-T01-C01",
+      "core_ref": "core.anpassungsfortbildung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC02",
+      "thema_ref": "LF1-K03-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: betriebliche Fortbildungsmaßnahmen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC02-T01-C02",
+      "core_ref": "core.aufstiegsfortbildung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC02",
+      "thema_ref": "LF1-K03-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: betriebliche Fortbildungsmaßnahmen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC02-T01-C03",
+      "core_ref": "core.qualifikationsbedarf",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC02",
+      "thema_ref": "LF1-K03-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: betriebliche Fortbildungsmaßnahmen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC02-T02-C01",
+      "core_ref": "core.formales_lernen",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC02",
+      "thema_ref": "LF1-K03-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: betriebliche Weiterbildungsmaßnahmen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC02-T02-C02",
+      "core_ref": "core.non_formales_lernen",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC02",
+      "thema_ref": "LF1-K03-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: betriebliche Weiterbildungsmaßnahmen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC02-T02-C03",
+      "core_ref": "core.informelles_lernen",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC02",
+      "thema_ref": "LF1-K03-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: betriebliche Weiterbildungsmaßnahmen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC02-T02-C04",
+      "core_ref": "core.lerntransfer",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC02",
+      "thema_ref": "LF1-K03-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: betriebliche Weiterbildungsmaßnahmen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC01-T01-C01",
+      "core_ref": "core.primaerquelle",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC01",
+      "thema_ref": "LF1-K04-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Informationsquellen und Unternehmensleitbild"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Informationsquellen aufgabenbezogen auswerten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC01-T01-C02",
+      "core_ref": "core.sekundaerquelle",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC01",
+      "thema_ref": "LF1-K04-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Informationsquellen und Unternehmensleitbild"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Informationsquellen aufgabenbezogen auswerten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC01-T01-C03",
+      "core_ref": "core.interne_quelle",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC01",
+      "thema_ref": "LF1-K04-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Informationsquellen und Unternehmensleitbild"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Informationsquellen aufgabenbezogen auswerten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC01-T01-C04",
+      "core_ref": "core.externe_quelle",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC01",
+      "thema_ref": "LF1-K04-TC01-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Informationsquellen und Unternehmensleitbild"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Informationsquellen aufgabenbezogen auswerten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC01-T02-C01",
+      "core_ref": "core.aktualitaet",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC01",
+      "thema_ref": "LF1-K04-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Informationsquellen; Ausbildungsordnung: aufgabenbezogene Auswertung"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Informationsquellen aufgabenbezogen auswerten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC01-T02-C02",
+      "core_ref": "core.autoritaet",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC01",
+      "thema_ref": "LF1-K04-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Informationsquellen; Ausbildungsordnung: aufgabenbezogene Auswertung"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Informationsquellen aufgabenbezogen auswerten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC01-T02-C03",
+      "core_ref": "core.nachvollziehbarkeit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC01",
+      "thema_ref": "LF1-K04-TC01-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Informationsquellen; Ausbildungsordnung: aufgabenbezogene Auswertung"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Informationsquellen aufgabenbezogen auswerten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC02-T01-C01",
+      "core_ref": "core.zielgruppenanalyse",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC02",
+      "thema_ref": "LF1-K04-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: adressatengerechte Planung der Darstellung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC02-T01-C02",
+      "core_ref": "core.kommunikationsziel",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC02",
+      "thema_ref": "LF1-K04-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: adressatengerechte Planung der Darstellung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC02-T01-C03",
+      "core_ref": "core.empfaengerhorizont",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC02",
+      "thema_ref": "LF1-K04-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: adressatengerechte Planung der Darstellung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC02-T02-C01",
+      "core_ref": "core.medienwahl",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC02",
+      "thema_ref": "LF1-K04-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: multimediale Darstellung des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC02-T02-C02",
+      "core_ref": "core.informationsvisualisierung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC02",
+      "thema_ref": "LF1-K04-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: multimediale Darstellung des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC02-T02-C03",
+      "core_ref": "core.barrierearme_gestaltung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC02",
+      "thema_ref": "LF1-K04-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: multimediale Darstellung des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC02-T02-C04",
+      "core_ref": "core.gestaltungskonsistenz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC02",
+      "thema_ref": "LF1-K04-TC02-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: multimediale Darstellung des Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC03-T01-C01",
+      "core_ref": "core.teamrolle",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC03",
+      "thema_ref": "LF1-K04-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Darstellung im Team; Reflexion der Aufgabendurchführung"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Aufgabendurchführung im Team reflektieren"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC03-T01-C02",
+      "core_ref": "core.arbeitsteilung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC03",
+      "thema_ref": "LF1-K04-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Darstellung im Team; Reflexion der Aufgabendurchführung"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Aufgabendurchführung im Team reflektieren"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC03-T01-C03",
+      "core_ref": "core.abstimmung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC03",
+      "thema_ref": "LF1-K04-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Darstellung im Team; Reflexion der Aufgabendurchführung"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Aufgabendurchführung im Team reflektieren"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC03-T01-C04",
+      "core_ref": "core.feedback",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC03",
+      "thema_ref": "LF1-K04-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Darstellung im Team; Reflexion der Aufgabendurchführung"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Aufgabendurchführung im Team reflektieren"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC03-T02-C01",
+      "core_ref": "core.kernbotschaft",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC03",
+      "thema_ref": "LF1-K04-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Präsentation der Ergebnisse"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Sachverhalte präsentieren"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC03-T02-C02",
+      "core_ref": "core.praesentationsdramaturgie",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC03",
+      "thema_ref": "LF1-K04-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Präsentation der Ergebnisse"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Sachverhalte präsentieren"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC03-T02-C03",
+      "core_ref": "core.quellenbeleg",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC03",
+      "thema_ref": "LF1-K04-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Präsentation der Ergebnisse"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Sachverhalte präsentieren"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T01-C01",
+      "core_ref": "core.richtigkeit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Qualität des Handlungsproduktes anhand von Kriterien"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T01-C02",
+      "core_ref": "core.vollstaendigkeit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Qualität des Handlungsproduktes anhand von Kriterien"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T01-C03",
+      "core_ref": "core.verstaendlichkeit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Qualität des Handlungsproduktes anhand von Kriterien"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T02-C01",
+      "core_ref": "core.soll_ist_vergleich",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: gemeinsame Entwicklung von Verbesserungsmöglichkeiten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T02-C02",
+      "core_ref": "core.abweichungsanalyse",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: gemeinsame Entwicklung von Verbesserungsmöglichkeiten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T02-C03",
+      "core_ref": "core.pdca_zyklus",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Qualitätsprüfung und Verbesserungsmöglichkeiten"
+        },
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Qualitätssicherung und kontinuierliche Verbesserung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T02-C04",
+      "core_ref": "core.verbesserungsmassnahme",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: gemeinsame Entwicklung von Verbesserungsmöglichkeiten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T03-C01",
+      "core_ref": "core.selbstbild",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Reflexion der eigenen Rolle im Betrieb"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T03-C02",
+      "core_ref": "core.fremdbild",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Reflexion der eigenen Rolle im Betrieb"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T03-C03",
+      "core_ref": "core.rollenklaerung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Reflexion der eigenen Rolle im Betrieb"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T04-C01",
+      "core_ref": "core.ergebnisreflexion",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Reflexion des eigenen Handelns"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T04-C02",
+      "core_ref": "core.prozessreflexion",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Reflexion des eigenen Handelns"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K04-TC04-T04-C03",
+      "core_ref": "core.schlussfolgerung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "thema_ref": "LF1-K04-TC04-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Aus dem LF1-Bestand 2.0.0 migriert; der globale Core-Inhalt gilt unverändert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Reflexion des eigenen Handelns"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T01-C01",
+      "core_ref": "core.duales_ausbildungssystem",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§§ 2 und 14: Lernorte und Berufsausbildung"
+        },
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigene Rolle im Betrieb"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T01-C02",
+      "core_ref": "core.ausbildungsbetrieb",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 14: Berufsausbildung"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Ausbildungsrahmenplan"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T01-C03",
+      "core_ref": "core.berufsschule",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 2: Lernorte"
+        },
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Bildungsauftrag der Berufsschule"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T01-C04",
+      "core_ref": "core.abschlusspruefung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 38: Prüfungsgegenstand"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Prüfungsbestimmungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T02-C01",
+      "core_ref": "core.ausbildungspflicht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 14 Absatz 1 Nummer 1: Ausbildungspflicht"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T02-C02",
+      "core_ref": "core.fuersorgepflicht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 14 Absatz 1 Nummer 5: Fürsorge und Schutz"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T02-C03",
+      "core_ref": "core.freistellungspflicht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 15: Freistellung und Anrechnung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T02-C04",
+      "core_ref": "core.lernpflicht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 13 Satz 1: Bemühenspflicht"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T02-C05",
+      "core_ref": "core.berichtsheftpflicht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 5,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§§ 13 und 43: Ausbildungsnachweis"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T03-C01",
+      "core_ref": "core.vertragsparteien",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 10: Vertrag"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T03-C02",
+      "core_ref": "core.ausbildungsdauer",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 11: Vertragsabfassung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T03-C03",
+      "core_ref": "core.probezeit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 20: Probezeit"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T03-C04",
+      "core_ref": "core.ausbildungsverguetung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§§ 17 bis 19: Vergütung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T03-C05",
+      "core_ref": "core.kuendigung_ausbildung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 5,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 22: Kündigung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T04-C01",
+      "core_ref": "core.arbeitszeit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "ARBZG",
+          "locator": "§ 2: Begriffsbestimmungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T04-C02",
+      "core_ref": "core.ruhepause",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "ARBZG",
+          "locator": "§ 4: Ruhepausen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T04-C03",
+      "core_ref": "core.krankmeldung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "ENTGFG",
+          "locator": "§ 5: Anzeige- und Nachweispflichten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T04-C04",
+      "core_ref": "core.urlaubsanspruch",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "BURLG",
+          "locator": "§§ 1 und 3: Anspruch und Dauer"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T05-C01",
+      "core_ref": "core.bruttoentgelt",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Ausbildungsvertrag und Vergütung"
+        },
+        {
+          "source_id": "SGB-IV",
+          "locator": "§ 14: Arbeitsentgelt"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T05-C02",
+      "core_ref": "core.nettoentgelt",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Ausbildungsvertrag und Vergütung"
+        },
+        {
+          "source_id": "SGB-IV",
+          "locator": "§ 14 Absatz 2: Nettoarbeitsentgelt"
+        },
+        {
+          "source_id": "ESTG",
+          "locator": "§ 38: Erhebung der Lohnsteuer vom Arbeitslohn"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T05-C03",
+      "core_ref": "core.lohnsteuer",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Einordnung der Ausbildungsvergütung"
+        },
+        {
+          "source_id": "ESTG",
+          "locator": "§ 38: Erhebung der Lohnsteuer"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T05-C04",
+      "core_ref": "core.sozialabgabe",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "SGB-IV",
+          "locator": "§ 14: Arbeitsentgelt und Sozialversicherungsbezug"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T06-C01",
+      "core_ref": "core.konfliktgespraech",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T06",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Kommunikation und Konfliktklärung in der Ausbildung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T06-C02",
+      "core_ref": "core.eskalationsweg",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T06",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Kommunikation und Zusammenarbeit im Betrieb"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T06-C03",
+      "core_ref": "core.mediation",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T06",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Konfliktklärung als didaktische Vertiefung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T06-C04",
+      "core_ref": "core.beschwerderecht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T06",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "BETRVG",
+          "locator": "§§ 84 und 85: Beschwerderecht"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T01-C01",
+      "core_ref": "core.gesetz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "Gesetzlicher Rahmen der Berufsausbildung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T01-C02",
+      "core_ref": "core.tarifvertrag",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "BETRVG",
+          "locator": "Tarifvorrang und betriebliche Regelungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T01-C03",
+      "core_ref": "core.betriebsvereinbarung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BETRVG",
+          "locator": "§ 77: Durchführung gemeinsamer Beschlüsse und Betriebsvereinbarungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T01-C04",
+      "core_ref": "core.arbeitsvertrag",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "Abgrenzung und Inhalt des Berufsausbildungsvertrags"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T02-C01",
+      "core_ref": "core.betriebsrat",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "BETRVG",
+          "locator": "§§ 1 und 80: Errichtung und Aufgaben"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T02-C02",
+      "core_ref": "core.jav",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "BETRVG",
+          "locator": "§§ 60 und 70: Errichtung und Aufgaben der JAV"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T02-C03",
+      "core_ref": "core.mitbestimmungsrecht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BETRVG",
+          "locator": "§ 87: Mitbestimmungsrechte"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T02-C04",
+      "core_ref": "core.betriebsversammlung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "BETRVG",
+          "locator": "§§ 42 bis 46: Betriebsversammlung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T03-C01",
+      "core_ref": "core.krankenversicherung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "SGB-IV",
+          "locator": "§ 4: Sozialversicherung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T03-C02",
+      "core_ref": "core.pflegeversicherung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "SGB-IV",
+          "locator": "§ 4: Sozialversicherung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T03-C03",
+      "core_ref": "core.rentenversicherung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "SGB-IV",
+          "locator": "§ 4: Sozialversicherung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T03-C04",
+      "core_ref": "core.arbeitslosenversicherung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "SGB-IV",
+          "locator": "§ 4: Sozialversicherung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T03-C05",
+      "core_ref": "core.unfallversicherung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 5,
+      "source_refs": [
+        {
+          "source_id": "SGB-IV",
+          "locator": "§ 4: Sozialversicherung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T01-C01",
+      "core_ref": "core.kunde_stakeholder",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Markt- und Kundenbeziehungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T01-C02",
+      "core_ref": "core.mitarbeitende_stakeholder",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigene Rolle und soziale Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T01-C03",
+      "core_ref": "core.eigentuemer",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Unternehmen und Anspruchsgruppen"
+        },
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Unternehmen, Zielsetzungen und Marktbeziehungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T01-C04",
+      "core_ref": "core.lieferant",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Wertschöpfung und Unternehmensumfeld"
+        },
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktbeziehungen und Wertschöpfungskette"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T02-C01",
+      "core_ref": "core.ihk",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§§ 71 und 76: zuständige Stelle und Überwachung"
+        },
+        {
+          "source_id": "IHKG",
+          "locator": "§ 1: Aufgaben"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T02-C02",
+      "core_ref": "core.berufsgenossenschaft",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "SGB-IV",
+          "locator": "Träger der Sozialversicherung"
+        },
+        {
+          "source_id": "ARBSCHG",
+          "locator": "Betrieblicher Arbeitsschutz"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T02-C03",
+      "core_ref": "core.datenschutzaufsicht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BDSG",
+          "locator": "Aufsichtsbehörden"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T03-C01",
+      "core_ref": "core.arbeitsplatzsicherheit",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "ARBSCHG",
+          "locator": "§§ 3 bis 5: Pflichten und Gefährdungsbeurteilung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T03-C02",
+      "core_ref": "core.gesundheitsschutz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "ARBSCHG",
+          "locator": "§ 1: Zielsetzung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T03-C03",
+      "core_ref": "core.umweltschutz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: ökologische Zielsetzungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC04-T03-C04",
+      "core_ref": "core.datenschutz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "thema_ref": "LF1-K01-TC04-T03",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "BDSG",
+          "locator": "Schutz personenbezogener Daten"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Datenschutz und IT-Sicherheit"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T05-C01",
+      "core_ref": "core.instanz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T05-C02",
+      "core_ref": "core.stabsstelle",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau des Ausbildungsbetriebs"
+        },
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Organisatorischer Aufbau eines Unternehmens"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T05-C03",
+      "core_ref": "core.ausfuehrende_stelle",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau des Ausbildungsbetriebs"
+        },
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Stellen und Aufgabenverteilung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T06-C01",
+      "core_ref": "core.funktionale_organisation",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T06",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: organisatorischer Aufbau und Leistungsschwerpunkte"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T06-C02",
+      "core_ref": "core.divisionale_organisation",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T06",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Organisationsformen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T06-C03",
+      "core_ref": "core.delegation",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T06",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: eigene Rolle, Handlungs- und Entscheidungsspielräume"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T04-C01",
+      "core_ref": "core.angebot",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktstruktur und Marktbeziehungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T04-C02",
+      "core_ref": "core.nachfrage",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktstruktur und Kundenbeziehungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T04-C03",
+      "core_ref": "core.monopol",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktstruktur"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC02-T04-C04",
+      "core_ref": "core.oligopol",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "thema_ref": "LF1-K01-TC02-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Marktstruktur"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T05-FLUSS-C01",
+      "core_ref": "core.geldfluss",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T05-FLUSS",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Wertschöpfungskette"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T05-FLUSS-C02",
+      "core_ref": "core.leistungsfluss",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T05-FLUSS",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Wertschöpfungskette"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T05-FLUSS-C03",
+      "core_ref": "core.informationsfluss",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T05-FLUSS",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch aus den kuratierten LF01-Sources abgeleitet und mit offizieller Quelle klassifiziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Daten und Informationen aufgabenbezogen verarbeiten"
+        },
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Wertschöpfungskette"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T01-C01",
+      "core_ref": "core.gefaehrdungsbeurteilung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische LF1-Praxisvertiefung zu Sicherheit und Gesundheit im Arbeitsalltag; mit verbindlichen Rechtsquellen belegt.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "ARBSCHG",
+          "locator": "§ 5: Beurteilung der Arbeitsbedingungen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T01-C02",
+      "core_ref": "core.sicherheitsunterweisung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische LF1-Praxisvertiefung zu Sicherheit und Gesundheit im Arbeitsalltag; mit verbindlichen Rechtsquellen belegt.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "ARBSCHG",
+          "locator": "§ 12: Unterweisung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T01-C03",
+      "core_ref": "core.persoenliche_schutzausruestung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische LF1-Praxisvertiefung zu Sicherheit und Gesundheit im Arbeitsalltag; mit verbindlichen Rechtsquellen belegt.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "ARBSCHG",
+          "locator": "§ 4: Allgemeine Grundsätze"
+        },
+        {
+          "source_id": "PSA-BV",
+          "locator": "§§ 2 bis 3: Bereitstellung und Benutzung persönlicher Schutzausrüstung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T01-C04",
+      "core_ref": "core.unfallmeldung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische LF1-Praxisvertiefung zu Sicherheit und Gesundheit im Arbeitsalltag; mit verbindlichen Rechtsquellen belegt.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "SGB-VII",
+          "locator": "§ 193: Pflicht zur Anzeige eines Versicherungsfalls"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T01-C05",
+      "core_ref": "core.erste_hilfe",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische LF1-Praxisvertiefung zu Sicherheit und Gesundheit im Arbeitsalltag; mit verbindlichen Rechtsquellen belegt.",
+      "sort_order": 5,
+      "source_refs": [
+        {
+          "source_id": "ARBSCHG",
+          "locator": "§ 10: Erste Hilfe und sonstige Notfallmaßnahmen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T01-C06",
+      "core_ref": "core.gefahr_und_risiko",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische LF1-Praxisvertiefung zu Sicherheit und Gesundheit im Arbeitsalltag; mit verbindlichen Rechtsquellen belegt.",
+      "sort_order": 6,
+      "source_refs": [
+        {
+          "source_id": "ARBSCHG",
+          "locator": "§§ 4 bis 5: Gefahrenvermeidung und Beurteilung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C07",
+      "core_ref": "core.unternehmen",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische Begriffsdifferenzierung innerhalb des bestehenden Themas Rechtsformen; mit Handelsrecht und Ausbildungshilfe belegt.",
+      "sort_order": 7,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Unternehmen und betriebliche Einordnung"
+        },
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§§ 1 bis 3: Handelsgewerbe und Unternehmen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C08",
+      "core_ref": "core.betrieb",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische Begriffsdifferenzierung innerhalb des bestehenden Themas Rechtsformen; mit Handelsrecht und Ausbildungshilfe belegt.",
+      "sort_order": 8,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Betrieb und betriebliche Organisation"
+        },
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§ 1: Betrieb eines Handelsgewerbes"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C09",
+      "core_ref": "core.firma",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische Begriffsdifferenzierung innerhalb des bestehenden Themas Rechtsformen; mit Handelsrecht und Ausbildungshilfe belegt.",
+      "sort_order": 9,
+      "source_refs": [
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§ 17: Begriff der Firma"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C10",
+      "core_ref": "core.handelsregister",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische Begriffsdifferenzierung innerhalb des bestehenden Themas Rechtsformen; mit Handelsrecht und Ausbildungshilfe belegt.",
+      "sort_order": 10,
+      "source_refs": [
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§§ 8 und 29: Handelsregister und Anmeldung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC02-T01-C11",
+      "core_ref": "core.kaufmann",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "thema_ref": "LF1-K02-TC02-T01",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische Begriffsdifferenzierung innerhalb des bestehenden Themas Rechtsformen; mit Handelsrecht und Ausbildungshilfe belegt.",
+      "sort_order": 11,
+      "source_refs": [
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§ 1: Kaufmann und Handelsgewerbe"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T05-C01",
+      "core_ref": "core.strategisches_ziel",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische methodische Vertiefung der verbindlichen LF1-Unternehmensziele; ohne bereits vorhandene Zielkonflikt- oder Qualitätskonzepte zu duplizieren.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Zielsetzungen des Unternehmens"
+        },
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Unternehmensziele und Planung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T05-C02",
+      "core_ref": "core.operatives_ziel",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische methodische Vertiefung der verbindlichen LF1-Unternehmensziele; ohne bereits vorhandene Zielkonflikt- oder Qualitätskonzepte zu duplizieren.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Zielsetzungen des Unternehmens"
+        },
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Unternehmensziele und Planung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T05-C03",
+      "core_ref": "core.smart_ziel",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische methodische Vertiefung der verbindlichen LF1-Unternehmensziele; ohne bereits vorhandene Zielkonflikt- oder Qualitätskonzepte zu duplizieren.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Ziele konkret und überprüfbar formulieren"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T05-C04",
+      "core_ref": "core.zielkennzahl",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische methodische Vertiefung der verbindlichen LF1-Unternehmensziele; ohne bereits vorhandene Zielkonflikt- oder Qualitätskonzepte zu duplizieren.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Zielsetzungen darstellen und bewerten"
+        },
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Unternehmensziele und Qualitätsprüfung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K01-TC01-T05-C05",
+      "core_ref": "core.zielerreichungsgrad",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "thema_ref": "LF1-K01-TC01-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische methodische Vertiefung der verbindlichen LF1-Unternehmensziele; ohne bereits vorhandene Zielkonflikt- oder Qualitätskonzepte zu duplizieren.",
+      "sort_order": 5,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeld 1: Ergebnisse bewerten und Verbesserungsmöglichkeiten reflektieren"
+        },
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Ziel- und Qualitätskontrolle"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T05-C01",
+      "core_ref": "core.umsatz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische Abgrenzung betrieblicher Leistungs- und Erfolgsgrößen; bestehende Cores Gewinn und Wertschöpfung werden bewusst nicht erneut zugeordnet.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "HGB-UNTERNEHMENSFORMEN",
+          "locator": "§ 277 Absatz 1: Umsatzerlöse"
+        },
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Betriebliche Wertschöpfung und wirtschaftliche Größen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T05-C02",
+      "core_ref": "core.produktionswert",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische Abgrenzung betrieblicher Leistungs- und Erfolgsgrößen; bestehende Cores Gewinn und Wertschöpfung werden bewusst nicht erneut zugeordnet.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Leistungserstellung und betriebliche Wertschöpfung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K02-TC01-T05-C03",
+      "core_ref": "core.vorleistung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "thema_ref": "LF1-K02-TC01-T05",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktisch didaktische Abgrenzung betrieblicher Leistungs- und Erfolgsgrößen; bestehende Cores Gewinn und Wertschöpfung werden bewusst nicht erneut zugeordnet.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Beschaffung, Leistungserstellung und Wertschöpfung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T07-C01",
+      "core_ref": "core.ausbildungsordnung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T07",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Systematisierung von Ausbildungsordnung, schulischem Rahmen und betrieblicher Ausbildungsplanung; vorhandene Cores des dualen Systems werden nicht dupliziert.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 5: Ausbildungsordnung"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Verordnung und Ausbildungsberufsbild"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T07-C02",
+      "core_ref": "core.ausbildungsrahmenplan",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T07",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Systematisierung von Ausbildungsordnung, schulischem Rahmen und betrieblicher Ausbildungsplanung; vorhandene Cores des dualen Systems werden nicht dupliziert.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 5 Absatz 1 Nummer 4: Ausbildungsrahmenplan"
+        },
+        {
+          "source_id": "FIAusbV-HTML",
+          "locator": "Anlagen: Ausbildungsrahmenplan"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T07-C03",
+      "core_ref": "core.betrieblicher_ausbildungsplan",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T07",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Systematisierung von Ausbildungsordnung, schulischem Rahmen und betrieblicher Ausbildungsplanung; vorhandene Cores des dualen Systems werden nicht dupliziert.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "BBIG-2020",
+          "locator": "§ 11: sachliche und zeitliche Gliederung der Ausbildung"
+        },
+        {
+          "source_id": "BIBB-UMSETZUNGSHILFE",
+          "locator": "Betrieblicher Ausbildungsplan"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC03-T07-C04",
+      "core_ref": "core.rahmenlehrplan",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "thema_ref": "LF1-K03-TC03-T07",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Systematisierung von Ausbildungsordnung, schulischem Rahmen und betrieblicher Ausbildungsplanung; vorhandene Cores des dualen Systems werden nicht dupliziert.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "KMK-RLP-IT-2020",
+          "locator": "Lernfeldstruktur und Lernfeld 1"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T04-C01",
+      "core_ref": "core.weisungsrecht",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Abgrenzung von konkreter Weisung, Weisungsrecht, betrieblichen Ordnungsregeln und ihren rechtlichen Grenzen.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "GEWO",
+          "locator": "§ 106: Weisungsrecht des Arbeitgebers"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T04-C02",
+      "core_ref": "core.weisung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Abgrenzung von konkreter Weisung, Weisungsrecht, betrieblichen Ordnungsregeln und ihren rechtlichen Grenzen.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "GEWO",
+          "locator": "§ 106: Bestimmung von Inhalt, Ort und Zeit der Arbeitsleistung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T04-C03",
+      "core_ref": "core.betriebsordnung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Abgrenzung von konkreter Weisung, Weisungsrecht, betrieblichen Ordnungsregeln und ihren rechtlichen Grenzen.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "GEWO",
+          "locator": "§ 106: Ordnung und Verhalten im Betrieb"
+        },
+        {
+          "source_id": "BETRVG",
+          "locator": "§ 87 Absatz 1 Nummer 1: Ordnung des Betriebs"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T04-C04",
+      "core_ref": "core.billiges_ermessen",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Abgrenzung von konkreter Weisung, Weisungsrecht, betrieblichen Ordnungsregeln und ihren rechtlichen Grenzen.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "GEWO",
+          "locator": "§ 106: Ausübung nach billigem Ermessen"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC04-T04-C05",
+      "core_ref": "core.weisungsgrenze",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "thema_ref": "LF1-K03-TC04-T04",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Abgrenzung von konkreter Weisung, Weisungsrecht, betrieblichen Ordnungsregeln und ihren rechtlichen Grenzen.",
+      "sort_order": 5,
+      "source_refs": [
+        {
+          "source_id": "GEWO",
+          "locator": "§ 106: Grenzen durch Vertrag, Betriebsvereinbarung, Tarifvertrag und Gesetz"
+        },
+        {
+          "source_id": "BETRVG",
+          "locator": "§ 87: Mitbestimmungsrechte"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T02-C01",
+      "core_ref": "core.jugendarbeitsschutzgesetz",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Vertiefung der besonderen gesetzlichen Schutzregeln für minderjährige Beschäftigte; vorhandene allgemeine Arbeitszeit-, Pausen-, Freistellungs- und Unterweisungs-Cores werden nicht erneut angelegt.",
+      "sort_order": 1,
+      "source_refs": [
+        {
+          "source_id": "JARBSCHG",
+          "locator": "§§ 1 bis 2: Geltungsbereich und Begriffe"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T02-C02",
+      "core_ref": "core.arbeitszeit_jugendlicher",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Vertiefung der besonderen gesetzlichen Schutzregeln für minderjährige Beschäftigte; vorhandene allgemeine Arbeitszeit-, Pausen-, Freistellungs- und Unterweisungs-Cores werden nicht erneut angelegt.",
+      "sort_order": 2,
+      "source_refs": [
+        {
+          "source_id": "JARBSCHG",
+          "locator": "§ 8: Dauer der Arbeitszeit"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T02-C03",
+      "core_ref": "core.fuenf_tage_woche",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Vertiefung der besonderen gesetzlichen Schutzregeln für minderjährige Beschäftigte; vorhandene allgemeine Arbeitszeit-, Pausen-, Freistellungs- und Unterweisungs-Cores werden nicht erneut angelegt.",
+      "sort_order": 3,
+      "source_refs": [
+        {
+          "source_id": "JARBSCHG",
+          "locator": "§ 15: Fünf-Tage-Woche"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T02-C04",
+      "core_ref": "core.nachtarbeitsverbot",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Vertiefung der besonderen gesetzlichen Schutzregeln für minderjährige Beschäftigte; vorhandene allgemeine Arbeitszeit-, Pausen-, Freistellungs- und Unterweisungs-Cores werden nicht erneut angelegt.",
+      "sort_order": 4,
+      "source_refs": [
+        {
+          "source_id": "JARBSCHG",
+          "locator": "§ 14: Nachtruhe"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T02-C05",
+      "core_ref": "core.gefaehrliche_arbeiten",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Vertiefung der besonderen gesetzlichen Schutzregeln für minderjährige Beschäftigte; vorhandene allgemeine Arbeitszeit-, Pausen-, Freistellungs- und Unterweisungs-Cores werden nicht erneut angelegt.",
+      "sort_order": 5,
+      "source_refs": [
+        {
+          "source_id": "JARBSCHG",
+          "locator": "§ 22: Gefährliche Arbeiten"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T02-C06",
+      "core_ref": "core.erstuntersuchung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Vertiefung der besonderen gesetzlichen Schutzregeln für minderjährige Beschäftigte; vorhandene allgemeine Arbeitszeit-, Pausen-, Freistellungs- und Unterweisungs-Cores werden nicht erneut angelegt.",
+      "sort_order": 6,
+      "source_refs": [
+        {
+          "source_id": "JARBSCHG",
+          "locator": "§ 32: Erstuntersuchung"
+        }
+      ]
+    },
+    {
+      "id": "LF1-K03-TC05-T02-C07",
+      "core_ref": "core.nachuntersuchung",
+      "lernfeld_ref": "LF1",
+      "kompetenz_ref": "LF1-K03",
+      "themencluster_ref": "LF1-K03-TC05",
+      "thema_ref": "LF1-K03-TC05-T02",
+      "tiefengrad": "Grundlage",
+      "context_content": null,
+      "context_reference": "Didaktische LF1-Vertiefung der besonderen gesetzlichen Schutzregeln für minderjährige Beschäftigte; vorhandene allgemeine Arbeitszeit-, Pausen-, Freistellungs- und Unterweisungs-Cores werden nicht erneut angelegt.",
+      "sort_order": 7,
+      "source_refs": [
+        {
+          "source_id": "JARBSCHG",
+          "locator": "§ 33: Erste Nachuntersuchung"
+        }
+      ]
+    }
+  ]
+}

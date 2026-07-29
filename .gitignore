@@ -1,0 +1,25 @@
+.DS_Store
+Thumbs.db
+
+# IDE- und Editorzustände
+.idea/
+.vscode/
+*.iml
+*.swp
+*~
+
+# Temporäre Office-Dateien
+~$*
+*.tmp
+*.bak
+
+# Lokale Vorschau und Diagnose
+*.log
+.http-server/
+node_modules/
+
+# Lokale Geheimnisse dürfen nie veröffentlicht werden
+.env
+.env.*
+!.env.example
+

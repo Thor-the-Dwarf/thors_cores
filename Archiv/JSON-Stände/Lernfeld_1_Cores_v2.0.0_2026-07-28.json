@@ -1,0 +1,772 @@
+{
+  "schema_version": "2.0.0",
+  "dataset_id": "de-fachinformatiker-lf1-cores",
+  "status": "kohärente_teilsammlung",
+  "metadata": {
+    "title": "Lernfeld 1 – atomare Cores",
+    "language": "de",
+    "updated_at": "2026-07-28",
+    "scope": "Vollständig ausgearbeitete erste Scheibe für die Kompetenz „Unternehmen im Umfeld einordnen“.",
+    "completion": {
+      "complete_competencies": [
+        "LF1-K01"
+      ],
+      "pending_competencies": [
+        "Betriebliche Strukturen beschreiben",
+        "Eigene Rolle im Betrieb klären",
+        "Unternehmen darstellen und reflektieren"
+      ],
+      "note": "Die Datei ist noch keine vollständige Abdeckung von Lernfeld 1. Sie ist ein fachlich und strukturell kohärenter Ausgangspunkt für die weitere Prüfung."
+    },
+    "core_definition": "Ein Core ist die kleinste fachlich sinnvolle, eigenständig verständliche Informationseinheit. Prozesse, Kapitel, Kompetenzen, Themen und vollständige Lernaufträge sind keine Cores.",
+    "structure_note": "Kompetenzen, Themencluster und Themen sind didaktisch aus der offiziellen Zielformulierung abgeleitet. Sie sind keine wörtlichen KMK-Untertitel."
+  },
+  "information_architecture": [
+    "Lernfeld",
+    "Kompetenz",
+    "Themencluster",
+    "Thema",
+    "Core"
+  ],
+  "core_contract": {
+    "id": "Eindeutige Datensatz-ID.",
+    "identity_key": "Stabile fachliche Identität für eine spätere Wiederverwendung desselben Cores in mehreren Themen.",
+    "short_title": "Kurze, knotentaugliche Bezeichnung.",
+    "title": "Kurzer fachlicher Titel, kein vollständiger Satz.",
+    "content": "Eigenständige verständliche Erklärung genau einer Informationseinheit.",
+    "topic_ref": "Explizite Referenz auf genau das konkrete Thema dieser Einordnung.",
+    "category_weights": "Gewichtete Zuordnung zu IT, BWL inklusive Projektmanagement und WiSo; Summe ist 1.",
+    "source_refs": "Nachvollziehbarer Quellenbezug mit Fundstellenhinweis."
+  },
+  "categories": [
+    {
+      "id": "it",
+      "label": "IT",
+      "color": {
+        "name": "Blau",
+        "hex": "#2563EB"
+      }
+    },
+    {
+      "id": "bwl",
+      "label": "BWL inklusive Projektmanagement",
+      "color": {
+        "name": "Gelb",
+        "hex": "#FACC15"
+      }
+    },
+    {
+      "id": "wiso",
+      "label": "WiSo",
+      "color": {
+        "name": "Rot",
+        "hex": "#DC2626"
+      }
+    }
+  ],
+  "source_catalog": [
+    {
+      "id": "KMK-RLP-IT-2020",
+      "publisher": "Kultusministerkonferenz",
+      "title": "Rahmenlehrplan für die Ausbildungsberufe Fachinformatiker/Fachinformatikerin und IT-System-Elektroniker/IT-System-Elektronikerin",
+      "date": "2020-02-28",
+      "url": "https://www.kmk.org/service/servicebereich-berufliche-schulen/downloadbereich-rahmenlehrplaene?tx_fedownloads_single%5Baction%5D=forceDownload&tx_fedownloads_single%5Bcontroller%5D=Downloads&tx_fedownloads_single%5Bdownload%5D=45009&type=150",
+      "authority": "offiziell",
+      "relevance": "Verbindliche Zielformulierung und Inhalte von Lernfeld 1."
+    },
+    {
+      "id": "FIAusbV-HTML",
+      "publisher": "Bundesministerium der Justiz / Bundesamt für Justiz",
+      "title": "Fachinformatikerausbildungsverordnung",
+      "date": "2020-02-28",
+      "url": "https://www.gesetze-im-internet.de/fiausbv/BJNR025000020.html",
+      "authority": "offiziell",
+      "relevance": "Ausbildungsprofil und gemeinsame berufsprofilgebende Fertigkeiten, Kenntnisse und Fähigkeiten."
+    },
+    {
+      "id": "BIBB-UMSETZUNGSHILFE",
+      "publisher": "Bundesinstitut für Berufsbildung",
+      "title": "Fachinformatiker/Fachinformatikerin – Umsetzungshilfe für die Ausbildungspraxis",
+      "url": "https://www.bibb.de/dienst/publikationen/de/16661",
+      "authority": "fachlich",
+      "relevance": "Didaktische Einordnung und Erläuterung der Ausbildungsordnung."
+    }
+  ],
+  "lernfeld": {
+    "id": "LF1",
+    "number": 1,
+    "title": "Das Unternehmen und die eigene Rolle im Betrieb beschreiben",
+    "official_source_ref": "KMK-RLP-IT-2020",
+    "kompetenzen": [
+      {
+        "id": "LF1-K01",
+        "title": "Unternehmen im Umfeld einordnen",
+        "derivation": "Didaktisch abgeleitet aus der LF1-Zielformulierung zu Zielsetzungen, Marktstruktur, Markt- und Kundenbeziehungen, Leistungsschwerpunkten und Besonderheiten des Unternehmens.",
+        "themencluster": [
+          {
+            "id": "LF1-K01-TC01",
+            "title": "Zielsystem des Unternehmens",
+            "themen": [
+              {
+                "id": "LF1-K01-TC01-T01",
+                "title": "Ökonomische Ziele",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC01-T01-C01",
+                    "identity_key": "core.gewinn",
+                    "short_title": "Gewinn",
+                    "title": "Gewinn",
+                    "content": "Gewinn ist der positive Unterschied zwischen den Erträgen und den Aufwendungen eines Unternehmens in einem Zeitraum.",
+                    "topic_ref": "LF1-K01-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T01-C02",
+                    "identity_key": "core.rentabilitaet",
+                    "short_title": "Rentabilität",
+                    "title": "Rentabilität",
+                    "content": "Rentabilität setzt einen erzielten Erfolg ins Verhältnis zum dafür eingesetzten Kapital.",
+                    "topic_ref": "LF1-K01-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T01-C03",
+                    "identity_key": "core.liquiditaet",
+                    "short_title": "Liquidität",
+                    "title": "Liquidität",
+                    "content": "Liquidität ist die Fähigkeit eines Unternehmens, seine fälligen Zahlungsverpflichtungen rechtzeitig zu erfüllen.",
+                    "topic_ref": "LF1-K01-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T01-C04",
+                    "identity_key": "core.wachstum",
+                    "short_title": "Wachstum",
+                    "title": "Unternehmenswachstum",
+                    "content": "Unternehmenswachstum bezeichnet die dauerhafte Zunahme einer wirtschaftlichen Größe, beispielsweise Umsatz, Absatz oder Beschäftigtenzahl.",
+                    "topic_ref": "LF1-K01-TC01-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökonomische Zielsetzungen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC01-T02",
+                "title": "Ökologische Ziele",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC01-T02-C01",
+                    "identity_key": "core.ressourceneffizienz",
+                    "short_title": "Ressourceneffizienz",
+                    "title": "Ressourceneffizienz",
+                    "content": "Ressourceneffizienz bedeutet, mit möglichst geringem Einsatz von Rohstoffen und Materialien einen angestrebten Nutzen zu erzielen.",
+                    "topic_ref": "LF1-K01-TC01-T02",
+                    "category_weights": {
+                      "bwl": 0.45,
+                      "wiso": 0.55
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökologische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T02-C02",
+                    "identity_key": "core.energieeffizienz",
+                    "short_title": "Energieeffizienz",
+                    "title": "Energieeffizienz",
+                    "content": "Energieeffizienz beschreibt das Verhältnis zwischen einem erreichten Nutzen und der dafür eingesetzten Energie.",
+                    "topic_ref": "LF1-K01-TC01-T02",
+                    "category_weights": {
+                      "it": 0.25,
+                      "bwl": 0.25,
+                      "wiso": 0.5
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökologische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T02-C03",
+                    "identity_key": "core.emissionsminderung",
+                    "short_title": "Emissionsminderung",
+                    "title": "Emissionsminderung",
+                    "content": "Emissionsminderung ist die Verringerung der Abgabe schädlicher Stoffe oder Energie an die Umwelt.",
+                    "topic_ref": "LF1-K01-TC01-T02",
+                    "category_weights": {
+                      "bwl": 0.25,
+                      "wiso": 0.75
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökologische Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T02-C04",
+                    "identity_key": "core.kreislaufwirtschaft",
+                    "short_title": "Kreislaufwirtschaft",
+                    "title": "Kreislaufwirtschaft",
+                    "content": "Kreislaufwirtschaft hält Produkte und Materialien durch Wiederverwendung, Reparatur und Recycling möglichst lange im Nutzungskreislauf.",
+                    "topic_ref": "LF1-K01-TC01-T02",
+                    "category_weights": {
+                      "bwl": 0.4,
+                      "wiso": 0.6
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: ökologische Zielsetzungen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC01-T03",
+                "title": "Soziale Ziele",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC01-T03-C01",
+                    "identity_key": "core.arbeitsplatzsicherheit",
+                    "short_title": "Arbeitsplatzsicherheit",
+                    "title": "Arbeitsplatzsicherheit",
+                    "content": "Arbeitsplatzsicherheit bezeichnet den Schutz Beschäftigter vor arbeitsbedingten Unfällen und Gesundheitsgefahren.",
+                    "topic_ref": "LF1-K01-TC01-T03",
+                    "category_weights": {
+                      "wiso": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: soziale Zielsetzungen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Berufsprofilgebende Position Sicherheit und Gesundheit bei der Arbeit"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T03-C02",
+                    "identity_key": "core.mitarbeitendenzufriedenheit",
+                    "short_title": "Zufriedenheit",
+                    "title": "Mitarbeitendenzufriedenheit",
+                    "content": "Mitarbeitendenzufriedenheit beschreibt, wie Beschäftigte ihre Arbeitssituation und deren Bedingungen bewerten.",
+                    "topic_ref": "LF1-K01-TC01-T03",
+                    "category_weights": {
+                      "bwl": 0.25,
+                      "wiso": 0.75
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: soziale Zielsetzungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T03-C03",
+                    "identity_key": "core.chancengleichheit",
+                    "short_title": "Chancengleichheit",
+                    "title": "Chancengleichheit",
+                    "content": "Chancengleichheit verlangt, dass persönliche Merkmale keine sachlich unbegründeten Nachteile beim Zugang zu beruflichen Möglichkeiten verursachen.",
+                    "topic_ref": "LF1-K01-TC01-T03",
+                    "category_weights": {
+                      "wiso": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: soziale Zielsetzungen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Berufsprofilgebende Position digitalisierte Arbeitswelt"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T03-C04",
+                    "identity_key": "core.faire_verguetung",
+                    "short_title": "Faire Vergütung",
+                    "title": "Faire Vergütung",
+                    "content": "Faire Vergütung ist eine nachvollziehbare und angemessene Gegenleistung für geleistete Arbeit.",
+                    "topic_ref": "LF1-K01-TC01-T03",
+                    "category_weights": {
+                      "bwl": 0.25,
+                      "wiso": 0.75
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: soziale Zielsetzungen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC01-T04",
+                "title": "Unternehmensleitbild",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC01-T04-C01",
+                    "identity_key": "core.vision",
+                    "short_title": "Vision",
+                    "title": "Unternehmensvision",
+                    "content": "Eine Unternehmensvision beschreibt ein langfristig angestrebtes Zukunftsbild des Unternehmens.",
+                    "topic_ref": "LF1-K01-TC01-T04",
+                    "category_weights": {
+                      "bwl": 0.8,
+                      "wiso": 0.2
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T04-C02",
+                    "identity_key": "core.mission",
+                    "short_title": "Mission",
+                    "title": "Unternehmensmission",
+                    "content": "Eine Unternehmensmission beschreibt den grundlegenden Zweck und Auftrag eines Unternehmens.",
+                    "topic_ref": "LF1-K01-TC01-T04",
+                    "category_weights": {
+                      "bwl": 0.8,
+                      "wiso": 0.2
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T04-C03",
+                    "identity_key": "core.unternehmenswerte",
+                    "short_title": "Werte",
+                    "title": "Unternehmenswerte",
+                    "content": "Unternehmenswerte sind grundlegende Maßstäbe, an denen ein Unternehmen Entscheidungen und Verhalten ausrichtet.",
+                    "topic_ref": "LF1-K01-TC01-T04",
+                    "category_weights": {
+                      "bwl": 0.4,
+                      "wiso": 0.6
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC01-T04-C04",
+                    "identity_key": "core.leitsaetze",
+                    "short_title": "Leitsätze",
+                    "title": "Unternehmensleitsätze",
+                    "content": "Unternehmensleitsätze formulieren konkrete Orientierungen für das Handeln im Unternehmen.",
+                    "topic_ref": "LF1-K01-TC01-T04",
+                    "category_weights": {
+                      "bwl": 0.5,
+                      "wiso": 0.5
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Unternehmensleitbild als Informationsquelle"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "LF1-K01-TC02",
+            "title": "Markt- und Kundenumfeld",
+            "themen": [
+              {
+                "id": "LF1-K01-TC02-T01",
+                "title": "Branchenstruktur",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC02-T01-C01",
+                    "identity_key": "core.branche",
+                    "short_title": "Branche",
+                    "title": "Branche",
+                    "content": "Eine Branche umfasst Unternehmen, die gleichartige oder verwandte Produkte und Dienstleistungen anbieten.",
+                    "topic_ref": "LF1-K01-TC02-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktstruktur der jeweiligen Branche"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T01-C02",
+                    "identity_key": "core.wettbewerber",
+                    "short_title": "Wettbewerber",
+                    "title": "Wettbewerber",
+                    "content": "Wettbewerber sind Anbieter, die um dieselben oder ähnliche Kundenbedürfnisse konkurrieren.",
+                    "topic_ref": "LF1-K01-TC02-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktstruktur der jeweiligen Branche"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Marktbeobachtung: Preise, Leistungen und Konditionen von Wettbewerbern"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T01-C03",
+                    "identity_key": "core.markteintrittsbarriere",
+                    "short_title": "Markteintrittsbarriere",
+                    "title": "Markteintrittsbarriere",
+                    "content": "Eine Markteintrittsbarriere erschwert neuen Anbietern den Zugang zu einem bestehenden Markt.",
+                    "topic_ref": "LF1-K01-TC02-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktstruktur der jeweiligen Branche"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC02-T02",
+                "title": "Marktbeziehungen",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC02-T02-C01",
+                    "identity_key": "core.beschaffungsmarkt",
+                    "short_title": "Beschaffungsmarkt",
+                    "title": "Beschaffungsmarkt",
+                    "content": "Auf dem Beschaffungsmarkt erwirbt ein Unternehmen die Güter und Leistungen, die es für seine Tätigkeit benötigt.",
+                    "topic_ref": "LF1-K01-TC02-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktbeziehungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T02-C02",
+                    "identity_key": "core.absatzmarkt",
+                    "short_title": "Absatzmarkt",
+                    "title": "Absatzmarkt",
+                    "content": "Auf dem Absatzmarkt bietet ein Unternehmen seine Produkte oder Dienstleistungen potenziellen Nachfragern an.",
+                    "topic_ref": "LF1-K01-TC02-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktbeziehungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T02-C03",
+                    "identity_key": "core.konkurrenzbeziehung",
+                    "short_title": "Konkurrenz",
+                    "title": "Konkurrenzbeziehung",
+                    "content": "Eine Konkurrenzbeziehung besteht, wenn mehrere Anbieter um dieselbe Nachfrage konkurrieren.",
+                    "topic_ref": "LF1-K01-TC02-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Marktbeziehungen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC02-T03",
+                "title": "Kundenbeziehungen",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC02-T03-C01",
+                    "identity_key": "core.zielgruppe",
+                    "short_title": "Zielgruppe",
+                    "title": "Zielgruppe",
+                    "content": "Eine Zielgruppe ist eine abgegrenzte Gruppe von Personen oder Organisationen, die mit einem Angebot gezielt angesprochen wird.",
+                    "topic_ref": "LF1-K01-TC02-T03",
+                    "category_weights": {
+                      "bwl": 0.85,
+                      "wiso": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Kundenbeziehungen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Zielgruppen unterscheiden"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T03-C02",
+                    "identity_key": "core.kundenbedarf",
+                    "short_title": "Kundenbedarf",
+                    "title": "Kundenbedarf",
+                    "content": "Kundenbedarf ist die konkretisierte Nachfrage nach einer Leistung, die ein erkanntes Bedürfnis erfüllen soll.",
+                    "topic_ref": "LF1-K01-TC02-T03",
+                    "category_weights": {
+                      "it": 0.2,
+                      "bwl": 0.7,
+                      "wiso": 0.1
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Kundenbeziehungen"
+                      },
+                      {
+                        "source_id": "FIAusbV-HTML",
+                        "locator": "Bedarfe von Kunden und Kundinnen feststellen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T03-C03",
+                    "identity_key": "core.kundenzufriedenheit",
+                    "short_title": "Kundenzufriedenheit",
+                    "title": "Kundenzufriedenheit",
+                    "content": "Kundenzufriedenheit entsteht, wenn die wahrgenommene Leistung die Erwartungen eines Kunden erfüllt oder übertrifft.",
+                    "topic_ref": "LF1-K01-TC02-T03",
+                    "category_weights": {
+                      "bwl": 0.8,
+                      "wiso": 0.2
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Kundenbeziehungen"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC02-T03-C04",
+                    "identity_key": "core.kundenbindung",
+                    "short_title": "Kundenbindung",
+                    "title": "Kundenbindung",
+                    "content": "Kundenbindung bezeichnet die dauerhafte Beziehung eines Kunden zu einem Anbieter.",
+                    "topic_ref": "LF1-K01-TC02-T03",
+                    "category_weights": {
+                      "bwl": 0.85,
+                      "wiso": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Kundenbeziehungen"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "LF1-K01-TC03",
+            "title": "Unternehmensprofil",
+            "themen": [
+              {
+                "id": "LF1-K01-TC03-T01",
+                "title": "Leistungsschwerpunkte",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC03-T01-C01",
+                    "identity_key": "core.sachleistung",
+                    "short_title": "Sachleistung",
+                    "title": "Sachleistung",
+                    "content": "Eine Sachleistung ist ein materielles Wirtschaftsgut, das ein Unternehmen für einen Markt bereitstellt.",
+                    "topic_ref": "LF1-K01-TC03-T01",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Leistungsschwerpunkte des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC03-T01-C02",
+                    "identity_key": "core.dienstleistung",
+                    "short_title": "Dienstleistung",
+                    "title": "Dienstleistung",
+                    "content": "Eine Dienstleistung ist eine immaterielle Leistung, die für einen Kunden erbracht wird.",
+                    "topic_ref": "LF1-K01-TC03-T01",
+                    "category_weights": {
+                      "bwl": 0.85,
+                      "wiso": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Leistungsschwerpunkte des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC03-T01-C03",
+                    "identity_key": "core.kernleistung",
+                    "short_title": "Kernleistung",
+                    "title": "Kernleistung",
+                    "content": "Die Kernleistung ist die zentrale Leistung, mit der ein Unternehmen den wesentlichen Kundennutzen erzeugt.",
+                    "topic_ref": "LF1-K01-TC03-T01",
+                    "category_weights": {
+                      "it": 0.2,
+                      "bwl": 0.8
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Leistungsschwerpunkte des Unternehmens"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "LF1-K01-TC03-T02",
+                "title": "Unternehmensbesonderheiten",
+                "cores": [
+                  {
+                    "id": "LF1-K01-TC03-T02-C01",
+                    "identity_key": "core.alleinstellungsmerkmal",
+                    "short_title": "Alleinstellungsmerkmal",
+                    "title": "Alleinstellungsmerkmal",
+                    "content": "Ein Alleinstellungsmerkmal ist eine Eigenschaft, durch die sich ein Angebot für die Zielgruppe erkennbar von konkurrierenden Angeboten unterscheidet.",
+                    "topic_ref": "LF1-K01-TC03-T02",
+                    "category_weights": {
+                      "bwl": 1.0
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Besonderheiten des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC03-T02-C02",
+                    "identity_key": "core.standortvorteil",
+                    "short_title": "Standortvorteil",
+                    "title": "Standortvorteil",
+                    "content": "Ein Standortvorteil ist eine günstige Eigenschaft eines Unternehmensstandorts, die seine Tätigkeit oder Wettbewerbsposition unterstützt.",
+                    "topic_ref": "LF1-K01-TC03-T02",
+                    "category_weights": {
+                      "bwl": 0.85,
+                      "wiso": 0.15
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Besonderheiten des Unternehmens"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "LF1-K01-TC03-T02-C03",
+                    "identity_key": "core.spezialisierung",
+                    "short_title": "Spezialisierung",
+                    "title": "Spezialisierung",
+                    "content": "Spezialisierung ist die bewusste Konzentration auf einen begrenzten Leistungs-, Kunden- oder Technologiebereich.",
+                    "topic_ref": "LF1-K01-TC03-T02",
+                    "category_weights": {
+                      "it": 0.35,
+                      "bwl": 0.65
+                    },
+                    "source_refs": [
+                      {
+                        "source_id": "KMK-RLP-IT-2020",
+                        "locator": "Lernfeld 1: Besonderheiten des Unternehmens"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "connection_rule": {
+    "type": "complete_topic_graph",
+    "description": "Alle Cores, die im selben Thema eingeordnet sind, werden im Vault paarweise verbunden.",
+    "generated_not_stored": true,
+    "multi_topic_reuse": "Eine spätere Wiederverwendung erfolgt über identity_key und eine separate Zuordnung; identische Cores werden nicht unkontrolliert dupliziert."
+  }
+}

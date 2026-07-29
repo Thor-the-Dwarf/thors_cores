@@ -1,0 +1,442 @@
+{
+  "schema_version": "3.0.0",
+  "dataset_id": "de-fachinformatiker-lern-vault",
+  "updated_at": "2026-07-29",
+  "language": "de",
+  "data_role": "Globale Themencluster und Themen mit expliziten Elternreferenzen",
+  "normalization_note": "Die stabilen IDs bleiben beim Ausbau weiterer Lernfelder erhalten. kompetenz_ref und themencluster_ref bilden die derzeitige LF1-Einordnung ab.",
+  "extension_validation": {
+    "rule_id": "THEMA-EIGENSTAENDIGKEIT-1",
+    "description": "Ein neues Thema darf weder denselben normalisierten fachlichen Begriff wie ein Core tragen noch ausschließlich bereits in anderen Themen verwendete Cores neu zusammenstellen.",
+    "title_normalization": "Unicode NFKD, diakritische Zeichen entfernen, Kleinschreibung, anschließend alle nicht alphanumerischen Zeichen entfernen.",
+    "machine_checks": [
+      "Der normalisierte Thementitel ist ungleich short_title und title jedes Cores.",
+      "Jedes Thema besitzt mindestens eine Core-Ausprägung, deren Core im aktiven Datenbestand nicht zugleich einem anderen Thema zugeordnet ist."
+    ],
+    "semantic_review_required": "Teilgleichheiten, Synonyme und fachlich ähnliche Formulierungen müssen vor Aufnahme manuell geprüft werden; unklare Treffer dürfen nicht automatisch gelöscht, umbenannt oder freigegeben werden."
+  },
+  "themencluster": [
+    {
+      "id": "LF1-K01-TC01",
+      "kompetenz_ref": "LF1-K01",
+      "title": "Zielsystem des Unternehmens",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K01-TC02",
+      "kompetenz_ref": "LF1-K01",
+      "title": "Markt- und Kundenumfeld",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K01-TC03",
+      "kompetenz_ref": "LF1-K01",
+      "title": "Unternehmensprofil",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K02-TC01",
+      "kompetenz_ref": "LF1-K02",
+      "title": "Unternehmen als System",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K02-TC02",
+      "kompetenz_ref": "LF1-K02",
+      "title": "Recht und Organisation",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K03-TC01",
+      "kompetenz_ref": "LF1-K03",
+      "title": "Rolle und Verantwortung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K03-TC02",
+      "kompetenz_ref": "LF1-K03",
+      "title": "Berufliche Entwicklung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K04-TC01",
+      "kompetenz_ref": "LF1-K04",
+      "title": "Informationen erschließen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K04-TC02",
+      "kompetenz_ref": "LF1-K04",
+      "title": "Darstellung planen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K04-TC03",
+      "kompetenz_ref": "LF1-K04",
+      "title": "Zusammenarbeit und Präsentation",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K04-TC04",
+      "kompetenz_ref": "LF1-K04",
+      "title": "Qualität und Reflexion",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K01-TC04",
+      "kompetenz_ref": "LF1-K01",
+      "title": "Stakeholder und Institutionen",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K03-TC03",
+      "kompetenz_ref": "LF1-K03",
+      "title": "Ausbildung und Arbeitsverhältnis",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K03-TC04",
+      "kompetenz_ref": "LF1-K03",
+      "title": "Mitbestimmung und Sozialrahmen",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K03-TC05",
+      "kompetenz_ref": "LF1-K03",
+      "title": "Sicherheit im Arbeitsalltag",
+      "sort_order": 5
+    }
+  ],
+  "themen": [
+    {
+      "id": "LF1-K01-TC01-T01",
+      "themencluster_ref": "LF1-K01-TC01",
+      "title": "Ökonomische Ziele",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K01-TC01-T02",
+      "themencluster_ref": "LF1-K01-TC01",
+      "title": "Ökologische Ziele",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K01-TC01-T03",
+      "themencluster_ref": "LF1-K01-TC01",
+      "title": "Soziale Ziele",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K01-TC01-T04",
+      "themencluster_ref": "LF1-K01-TC01",
+      "title": "Unternehmensleitbild",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K01-TC02-T01",
+      "themencluster_ref": "LF1-K01-TC02",
+      "title": "Branchenstruktur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K01-TC02-T02",
+      "themencluster_ref": "LF1-K01-TC02",
+      "title": "Marktbeziehungen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K01-TC02-T03",
+      "themencluster_ref": "LF1-K01-TC02",
+      "title": "Kundenbeziehungen",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K01-TC03-T01",
+      "themencluster_ref": "LF1-K01-TC03",
+      "title": "Leistungsschwerpunkte",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K01-TC03-T02",
+      "themencluster_ref": "LF1-K01-TC03",
+      "title": "Unternehmensbesonderheiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K02-TC01-T01",
+      "themencluster_ref": "LF1-K02-TC01",
+      "title": "Unternehmensbereiche",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K02-TC01-T02",
+      "themencluster_ref": "LF1-K02-TC01",
+      "title": "Wechselwirkungen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K02-TC01-T03",
+      "themencluster_ref": "LF1-K02-TC01",
+      "title": "Zielbeziehungen",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K02-TC01-T04",
+      "themencluster_ref": "LF1-K02-TC01",
+      "title": "Wertschöpfungskette",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K02-TC02-T01",
+      "themencluster_ref": "LF1-K02-TC02",
+      "title": "Rechtsformen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K02-TC02-T02",
+      "themencluster_ref": "LF1-K02-TC02",
+      "title": "Aufbauorganisation",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K02-TC02-T03",
+      "themencluster_ref": "LF1-K02-TC02",
+      "title": "Ablauforganisation",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K02-TC02-T04",
+      "themencluster_ref": "LF1-K02-TC02",
+      "title": "Geschäftsprozesse",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K03-TC01-T01",
+      "themencluster_ref": "LF1-K03-TC01",
+      "title": "Betriebliche Rolle",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K03-TC01-T02",
+      "themencluster_ref": "LF1-K03-TC01",
+      "title": "Handlungsspielraum",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K03-TC01-T03",
+      "themencluster_ref": "LF1-K03-TC01",
+      "title": "Entscheidungsspielraum",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K03-TC01-T04",
+      "themencluster_ref": "LF1-K03-TC01",
+      "title": "Vollmachten",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K03-TC02-T01",
+      "themencluster_ref": "LF1-K03-TC02",
+      "title": "Fortbildung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K03-TC02-T02",
+      "themencluster_ref": "LF1-K03-TC02",
+      "title": "Weiterbildung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K04-TC01-T01",
+      "themencluster_ref": "LF1-K04-TC01",
+      "title": "Informationsquellen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K04-TC01-T02",
+      "themencluster_ref": "LF1-K04-TC01",
+      "title": "Quellenbewertung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K04-TC02-T01",
+      "themencluster_ref": "LF1-K04-TC02",
+      "title": "Adressatengerechte Planung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K04-TC02-T02",
+      "themencluster_ref": "LF1-K04-TC02",
+      "title": "Multimediale Gestaltung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K04-TC03-T01",
+      "themencluster_ref": "LF1-K04-TC03",
+      "title": "Teamarbeit",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K04-TC03-T02",
+      "themencluster_ref": "LF1-K04-TC03",
+      "title": "Ergebnispräsentation",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K04-TC04-T01",
+      "themencluster_ref": "LF1-K04-TC04",
+      "title": "Qualitätskriterien",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K04-TC04-T02",
+      "themencluster_ref": "LF1-K04-TC04",
+      "title": "Verbesserungsmöglichkeiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K04-TC04-T03",
+      "themencluster_ref": "LF1-K04-TC04",
+      "title": "Rollenreflexion",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K04-TC04-T04",
+      "themencluster_ref": "LF1-K04-TC04",
+      "title": "Handlungsreflexion",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K03-TC03-T01",
+      "themencluster_ref": "LF1-K03-TC03",
+      "title": "Ausbildungsrahmen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K03-TC03-T02",
+      "themencluster_ref": "LF1-K03-TC03",
+      "title": "Rechte und Pflichten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K03-TC03-T03",
+      "themencluster_ref": "LF1-K03-TC03",
+      "title": "Ausbildungsvertrag",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K03-TC03-T04",
+      "themencluster_ref": "LF1-K03-TC03",
+      "title": "Arbeitsalltag",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K03-TC03-T05",
+      "themencluster_ref": "LF1-K03-TC03",
+      "title": "Vergütung",
+      "sort_order": 5
+    },
+    {
+      "id": "LF1-K03-TC03-T06",
+      "themencluster_ref": "LF1-K03-TC03",
+      "title": "Konflikt- und Gesprächswege",
+      "sort_order": 6
+    },
+    {
+      "id": "LF1-K03-TC04-T01",
+      "themencluster_ref": "LF1-K03-TC04",
+      "title": "Regelwerk im Arbeitsverhältnis",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K03-TC04-T02",
+      "themencluster_ref": "LF1-K03-TC04",
+      "title": "Interessenvertretung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K03-TC04-T03",
+      "themencluster_ref": "LF1-K03-TC04",
+      "title": "Sozialversicherung",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K01-TC04-T01",
+      "themencluster_ref": "LF1-K01-TC04",
+      "title": "Stakeholder",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K01-TC04-T02",
+      "themencluster_ref": "LF1-K01-TC04",
+      "title": "Kammern und Behörden",
+      "sort_order": 2
+    },
+    {
+      "id": "LF1-K01-TC04-T03",
+      "themencluster_ref": "LF1-K01-TC04",
+      "title": "Betriebliche Verantwortung",
+      "sort_order": 3
+    },
+    {
+      "id": "LF1-K02-TC02-T05",
+      "themencluster_ref": "LF1-K02-TC02",
+      "title": "Stellen und Hierarchie",
+      "sort_order": 5
+    },
+    {
+      "id": "LF1-K02-TC02-T06",
+      "themencluster_ref": "LF1-K02-TC02",
+      "title": "Organisationsgliederung",
+      "sort_order": 6
+    },
+    {
+      "id": "LF1-K01-TC02-T04",
+      "themencluster_ref": "LF1-K01-TC02",
+      "title": "Marktmechanismen",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K02-TC02-T05-FLUSS",
+      "themencluster_ref": "LF1-K02-TC02",
+      "title": "Betriebliche Flüsse",
+      "sort_order": 7
+    },
+    {
+      "id": "LF1-K03-TC05-T01",
+      "themencluster_ref": "LF1-K03-TC05",
+      "title": "Arbeitsschutzpraxis",
+      "sort_order": 1
+    },
+    {
+      "id": "LF1-K01-TC01-T05",
+      "themencluster_ref": "LF1-K01-TC01",
+      "title": "Zielplanung",
+      "sort_order": 5
+    },
+    {
+      "id": "LF1-K02-TC01-T05",
+      "themencluster_ref": "LF1-K02-TC01",
+      "title": "Leistungs- und Erfolgsgrößen",
+      "sort_order": 5
+    },
+    {
+      "id": "LF1-K03-TC03-T07",
+      "themencluster_ref": "LF1-K03-TC03",
+      "title": "Ausbildungsordnung und Ausbildungsplan",
+      "sort_order": 7
+    },
+    {
+      "id": "LF1-K03-TC04-T04",
+      "themencluster_ref": "LF1-K03-TC04",
+      "title": "Weisung und Betriebsordnung",
+      "sort_order": 4
+    },
+    {
+      "id": "LF1-K03-TC05-T02",
+      "themencluster_ref": "LF1-K03-TC05",
+      "title": "Jugendarbeitsschutz",
+      "sort_order": 2
+    }
+  ]
+}

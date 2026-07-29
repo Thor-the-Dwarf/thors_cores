@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dynamisches ERD der aktuellen TheRealDeal-JSON-Daten">
+  <title>ERD · TheRealDeal</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --hintergrund: #070a11;
+      --fläche: #121826;
+      --fläche-hell: #1b2435;
+      --text: #eef2f9;
+      --gedimmt: #9ba8bc;
+      --linie: #526079;
+      --bezug: #82a6ff;
+      --fehler: #f87171;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      min-width: 320px;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      color: var(--text);
+      background: var(--hintergrund);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    header {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      min-height: 60px;
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(183, 195, 220, 0.18);
+      background: rgba(10, 14, 23, 0.96);
+      backdrop-filter: blur(14px);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(0.9rem, 2vw, 1.08rem);
+      text-align: center;
+    }
+
+    header a,
+    header button {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border: 1px solid rgba(183, 195, 220, 0.2);
+      border-radius: 10px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      font: inherit;
+      font-size: 0.76rem;
+      font-weight: 750;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    header a:hover,
+    header a:focus-visible,
+    header button:hover,
+    header button:focus-visible {
+      border-color: rgba(130, 166, 255, 0.52);
+      background: rgba(130, 166, 255, 0.12);
+      outline: none;
+    }
+
+    .status {
+      margin: 0;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(183, 195, 220, 0.12);
+      color: var(--gedimmt);
+      background: rgba(13, 18, 29, 0.82);
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .status[data-zustand="fehler"] {
+      color: #fecaca;
+      background: rgba(127, 29, 29, 0.28);
+    }
+
+    .diagramm-scroll {
+      width: 100%;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    .diagramm {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(220px, 1fr));
+      grid-template-rows: repeat(3, auto);
+      gap: 74px 58px;
+      width: max(1180px, 100%);
+      min-height: 900px;
+      padding: 48px;
+      isolation: isolate;
+    }
+
+    .verbindungen {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .verbindungen path {
+      fill: none;
+      stroke: rgba(130, 166, 255, 0.58);
+      stroke-width: 1.4;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .verbindungen text {
+      fill: #cbd8ef;
+      stroke: #070a11;
+      stroke-width: 5px;
+      paint-order: stroke;
+      font-size: 11px;
+      font-weight: 750;
+      text-anchor: middle;
+    }
+
+    .entität {
+      align-self: start;
+      min-width: 0;
+      border: 1px solid var(--linie);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--fläche);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+    }
+
+    .entität header {
+      position: static;
+      display: block;
+      min-height: 0;
+      padding: 10px 12px;
+      border: 0;
+      border-bottom: 1px solid var(--linie);
+      background: var(--fläche-hell);
+      backdrop-filter: none;
+    }
+
+    .entität h2 {
+      margin: 0;
+      font-size: 0.88rem;
+    }
+
+    .entität-meta {
+      margin: 3px 0 0;
+      color: var(--gedimmt);
+      font-size: 0.66rem;
+      font-weight: 700;
+    }
+
+    .felder {
+      margin: 0;
+      padding: 8px 0;
+      list-style: none;
+    }
+
+    .felder li {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 4px 11px;
+      color: #dce4f1;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.68rem;
+      line-height: 1.3;
+    }
+
+    .felder li[data-referenz="true"] {
+      color: #b9ceff;
+    }
+
+    .feld-typ {
+      flex: 0 0 auto;
+      color: #7f8ca1;
+    }
+
+    .beziehungen {
+      padding: 0 16px 28px;
+    }
+
+    .beziehungen h2 {
+      margin: 0 0 10px;
+      font-size: 0.88rem;
+    }
+
+    .beziehungen ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .beziehungen li {
+      padding: 8px 10px;
+      border: 1px solid rgba(183, 195, 220, 0.14);
+      border-radius: 8px;
+      color: #cbd5e4;
+      background: rgba(255, 255, 255, 0.025);
+      font-size: 0.7rem;
+      line-height: 1.4;
+    }
+
+    .beziehungen li[data-ungültig="true"] {
+      border-color: rgba(248, 113, 113, 0.48);
+      color: #fecaca;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      header button {
+        grid-column: 1 / -1;
+        min-height: 34px;
+      }
+
+      .status {
+        text-align: left;
+      }
+
+      .diagramm {
+        gap: 62px 42px;
+        width: 1060px;
+        min-height: 860px;
+        padding: 34px 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">← Vault</a>
+    <h1>Dynamisches ERD des Lern-Vaults</h1>
+    <button id="neu-laden" type="button">JSON neu laden</button>
+  </header>
+  <p id="schema-status" class="status" role="status">Aktuelle JSON-Dateien werden ausgewertet …</p>
+  <main>
+    <div class="diagramm-scroll">
+      <section id="diagramm" class="diagramm" aria-label="Entity-Relationship-Diagramm">
+        <svg id="verbindungen" class="verbindungen" aria-hidden="true">
+          <defs>
+            <marker id="pfeil" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#82a6ff"></path>
+            </marker>
+          </defs>
+        </svg>
+      </section>
+    </div>
+    <section class="beziehungen" aria-labelledby="beziehungen-titel">
+      <h2 id="beziehungen-titel">Aus den JSON-Referenzen abgeleitete Beziehungen</h2>
+      <ul id="beziehungsliste"></ul>
+    </section>
+  </main>
+
+  <script>
+    (async () => {
+      "use strict";
+
+      const status = document.querySelector("#schema-status");
+      const diagramm = document.querySelector("#diagramm");
+      const verbindungen = document.querySelector("#verbindungen");
+      const beziehungsliste = document.querySelector("#beziehungsliste");
+      const SVG_NS = "http://www.w3.org/2000/svg";
+
+      document.querySelector("#neu-laden").addEventListener("click", () => location.reload());
+
+      function wertTyp(items, feld) {
+        const wert = items.map(item => item[feld]).find(item => item !== null && item !== undefined);
+        if (Array.isArray(wert)) return "Array";
+        if (wert && typeof wert === "object") return "Objekt";
+        if (wert === undefined) return "unbekannt";
+        return typeof wert;
+      }
+
+      function felderErmitteln(items) {
+        const felder = [];
+        const gesehen = new Set();
+        items.slice(0, 40).forEach(item => {
+          Object.keys(item).forEach(feld => {
+            if (gesehen.has(feld)) return;
+            gesehen.add(feld);
+            felder.push({ name: feld, typ: wertTyp(items, feld) });
+          });
+        });
+        return felder;
+      }
+
+      function istReferenz(feld) {
+        return feld.endsWith("_ref")
+          || feld.endsWith("_refs")
+          || feld === "source_refs"
+          || feld === "category_weights";
+      }
+
+      function entitätRendern(spezifikation) {
+        const artikel = document.createElement("article");
+        artikel.className = "entität";
+        artikel.dataset.entität = spezifikation.id;
+        artikel.style.gridColumn = spezifikation.spalte;
+        artikel.style.gridRow = spezifikation.zeile;
+
+        const kopf = document.createElement("header");
+        const titel = document.createElement("h2");
+        const meta = document.createElement("p");
+        const liste = document.createElement("ul");
+        titel.textContent = spezifikation.titel;
+        meta.className = "entität-meta";
+        meta.textContent = `${spezifikation.datei} · ${spezifikation.items.length} Einträge`;
+        liste.className = "felder";
+
+        felderErmitteln(spezifikation.items).forEach(feld => {
+          const eintrag = document.createElement("li");
+          const name = document.createElement("span");
+          const typ = document.createElement("span");
+          eintrag.dataset.referenz = String(istReferenz(feld.name));
+          name.textContent = feld.name;
+          typ.className = "feld-typ";
+          typ.textContent = feld.typ;
+          eintrag.append(name, typ);
+          liste.append(eintrag);
+        });
+
+        kopf.append(titel, meta);
+        artikel.append(kopf, liste);
+        diagramm.append(artikel);
+      }
+
+      function beziehungenRendern(beziehungen) {
+        beziehungsliste.textContent = "";
+        beziehungen.forEach(beziehung => {
+          const eintrag = document.createElement("li");
+          eintrag.dataset.ungültig = String(beziehung.ungültig > 0);
+          eintrag.textContent =
+            `${beziehung.vonTitel} → ${beziehung.zuTitel} · ${beziehung.feld} · ` +
+            `${beziehung.anzahl} Bezüge` +
+            (beziehung.ungültig ? ` · ${beziehung.ungültig} nicht auflösbar` : "");
+          beziehungsliste.append(eintrag);
+        });
+      }
+
+      function verbindungenZeichnen(beziehungen) {
+        verbindungen.querySelectorAll("path[data-beziehung], text").forEach(element => element.remove());
+        const diagrammRechteck = diagramm.getBoundingClientRect();
+
+        beziehungen.forEach((beziehung, index) => {
+          const startElement = diagramm.querySelector(`[data-entität="${beziehung.von}"]`);
+          const zielElement = diagramm.querySelector(`[data-entität="${beziehung.zu}"]`);
+          if (!startElement || !zielElement) return;
+
+          const start = startElement.getBoundingClientRect();
+          const ziel = zielElement.getBoundingClientRect();
+          const startMitte = {
+            x: start.left - diagrammRechteck.left + start.width / 2,
+            y: start.top - diagrammRechteck.top + start.height / 2
+          };
+          const zielMitte = {
+            x: ziel.left - diagrammRechteck.left + ziel.width / 2,
+            y: ziel.top - diagrammRechteck.top + ziel.height / 2
+          };
+          const horizontal = Math.abs(zielMitte.x - startMitte.x)
+            >= Math.abs(zielMitte.y - startMitte.y);
+          const richtung = horizontal
+            ? Math.sign(zielMitte.x - startMitte.x) || 1
+            : Math.sign(zielMitte.y - startMitte.y) || 1;
+          const x1 = horizontal
+            ? startMitte.x + richtung * start.width / 2
+            : startMitte.x;
+          const y1 = horizontal
+            ? startMitte.y
+            : startMitte.y + richtung * start.height / 2;
+          const x2 = horizontal
+            ? zielMitte.x - richtung * ziel.width / 2
+            : zielMitte.x;
+          const y2 = horizontal
+            ? zielMitte.y
+            : zielMitte.y - richtung * ziel.height / 2;
+          const abstand = 18 + (index % 4) * 8;
+          const pfad = document.createElementNS(SVG_NS, "path");
+          const beschriftung = document.createElementNS(SVG_NS, "text");
+
+          pfad.dataset.beziehung = beziehung.feld;
+          pfad.setAttribute("marker-end", "url(#pfeil)");
+          pfad.setAttribute(
+            "d",
+            horizontal
+              ? `M ${x1} ${y1} C ${(x1 + x2) / 2} ${y1 + abstand}, ${(x1 + x2) / 2} ${y2 - abstand}, ${x2} ${y2}`
+              : `M ${x1} ${y1} C ${x1 + abstand} ${(y1 + y2) / 2}, ${x2 - abstand} ${(y1 + y2) / 2}, ${x2} ${y2}`
+          );
+          beschriftung.setAttribute("x", String((x1 + x2) / 2));
+          beschriftung.setAttribute("y", String((y1 + y2) / 2 - 5));
+          beschriftung.textContent = `${beziehung.feld} (${beziehung.anzahl})`;
+          verbindungen.append(pfad, beschriftung);
+        });
+      }
+
+      function referenzenPrüfen(vonMenge, items, feld) {
+        const werte = items.map(item => item[feld]).filter(Boolean);
+        return {
+          anzahl: werte.length,
+          ungültig: werte.filter(wert => !vonMenge.has(wert)).length
+        };
+      }
+
+      try {
+        const dateien = [
+          "Lernfelder.json",
+          "Themen.json",
+          "Cores.json",
+          "Core-Ausprägungen.json",
+          "Quellen.json"
+        ];
+        const cacheMarker = Date.now();
+        const daten = Object.fromEntries(await Promise.all(dateien.map(async datei => {
+          const antwort = await fetch(`${datei}?stand=${cacheMarker}`, { cache: "no-store" });
+          if (!antwort.ok) throw new Error(`${datei}: HTTP ${antwort.status}`);
+          return [datei, await antwort.json()];
+        })));
+
+        const lernfelder = daten["Lernfelder.json"].lernfelder ?? [];
+        const kompetenzen = lernfelder.flatMap(lernfeld => lernfeld.kompetenzen ?? []);
+        const themencluster = daten["Themen.json"].themencluster ?? [];
+        const themen = daten["Themen.json"].themen ?? [];
+        const kategorien = daten["Cores.json"].categories ?? [];
+        const cores = daten["Cores.json"].cores ?? [];
+        const ausprägungen = daten["Core-Ausprägungen.json"].core_ausprägungen ?? [];
+        const quellen = daten["Quellen.json"].quellen ?? [];
+
+        const spezifikationen = [
+          { id: "kategorie", titel: "Kategorie", datei: "Cores.json", items: kategorien, spalte: "1", zeile: "1" },
+          { id: "core", titel: "Core", datei: "Cores.json", items: cores, spalte: "2", zeile: "1" },
+          { id: "quelle", titel: "Quelle", datei: "Quellen.json", items: quellen, spalte: "4", zeile: "1" },
+          { id: "thema", titel: "Thema", datei: "Themen.json", items: themen, spalte: "1", zeile: "2" },
+          { id: "themencluster", titel: "Themencluster", datei: "Themen.json", items: themencluster, spalte: "2", zeile: "2" },
+          { id: "kompetenz", titel: "Kompetenz", datei: "Lernfelder.json", items: kompetenzen, spalte: "3", zeile: "2" },
+          { id: "lernfeld", titel: "Lernfeld", datei: "Lernfelder.json", items: lernfelder, spalte: "4", zeile: "2" },
+          { id: "ausprägung", titel: "Core-Ausprägung", datei: "Core-Ausprägungen.json", items: ausprägungen, spalte: "2 / span 2", zeile: "3" }
+        ];
+        spezifikationen.forEach(entitätRendern);
+
+        const mengen = {
+          lernfeld: new Set(lernfelder.map(item => item.id)),
+          kompetenz: new Set(kompetenzen.map(item => item.id)),
+          themencluster: new Set(themencluster.map(item => item.id)),
+          thema: new Set(themen.map(item => item.id)),
+          core: new Set(cores.map(item => item.id)),
+          quelle: new Set(quellen.map(item => item.id)),
+          kategorie: new Set(kategorien.map(item => item.id))
+        };
+        const beziehungen = [];
+
+        function bezug(von, vonTitel, zu, zuTitel, items, feld) {
+          const prüfung = referenzenPrüfen(mengen[von], items, feld);
+          beziehungen.push({ von, vonTitel, zu, zuTitel, feld, ...prüfung });
+        }
+
+        bezug("lernfeld", "Lernfeld", "kompetenz", "Kompetenz", kompetenzen, "lernfeld_ref");
+        bezug("kompetenz", "Kompetenz", "themencluster", "Themencluster", themencluster, "kompetenz_ref");
+        bezug("themencluster", "Themencluster", "thema", "Thema", themen, "themencluster_ref");
+        bezug("core", "Core", "ausprägung", "Core-Ausprägung", ausprägungen, "core_ref");
+        bezug("lernfeld", "Lernfeld", "ausprägung", "Core-Ausprägung", ausprägungen, "lernfeld_ref");
+        bezug("kompetenz", "Kompetenz", "ausprägung", "Core-Ausprägung", ausprägungen, "kompetenz_ref");
+        bezug("themencluster", "Themencluster", "ausprägung", "Core-Ausprägung", ausprägungen, "themencluster_ref");
+        bezug("thema", "Thema", "ausprägung", "Core-Ausprägung", ausprägungen, "thema_ref");
+        bezug("quelle", "Quelle", "lernfeld", "Lernfeld", lernfelder, "official_source_ref");
+
+        const kategorieBezüge = cores.flatMap(core =>
+          Object.keys(core.category_weights ?? {}).map(kategorieId => kategorieId)
+        );
+        beziehungen.push({
+          von: "kategorie",
+          vonTitel: "Kategorie",
+          zu: "core",
+          zuTitel: "Core",
+          feld: "category_weights",
+          anzahl: kategorieBezüge.length,
+          ungültig: kategorieBezüge.filter(id => !mengen.kategorie.has(id)).length
+        });
+
+        const coreQuellen = cores.flatMap(core => core.evidence_source_refs ?? []);
+        beziehungen.push({
+          von: "quelle",
+          vonTitel: "Quelle",
+          zu: "core",
+          zuTitel: "Core",
+          feld: "evidence_source_refs",
+          anzahl: coreQuellen.length,
+          ungültig: coreQuellen.filter(id => !mengen.quelle.has(id)).length
+        });
+
+        const ausprägungsQuellen = ausprägungen.flatMap(ausprägung =>
+          (ausprägung.source_refs ?? []).map(bezug => bezug.source_id)
+        );
+        beziehungen.push({
+          von: "quelle",
+          vonTitel: "Quelle",
+          zu: "ausprägung",
+          zuTitel: "Core-Ausprägung",
+          feld: "source_refs[].source_id",
+          anzahl: ausprägungsQuellen.length,
+          ungültig: ausprägungsQuellen.filter(id => !mengen.quelle.has(id)).length
+        });
+
+        beziehungenRendern(beziehungen);
+        const schemaVersionen = [...new Set(dateien.map(datei => daten[datei].schema_version))];
+        const ungültig = beziehungen.reduce((summe, beziehung) => summe + beziehung.ungültig, 0);
+        status.textContent =
+          `Schema ${schemaVersionen.join(" / ")} · ` +
+          `${lernfelder.length} Lernfeld · ${kompetenzen.length} Kompetenzen · ` +
+          `${themencluster.length} Themencluster · ${themen.length} Themen · ` +
+          `${cores.length} Cores · ${ausprägungen.length} Core-Ausprägungen · ` +
+          `${quellen.length} Quellen · ${ungültig} nicht auflösbare Referenzen`;
+        status.dataset.zustand = ungültig ? "fehler" : "bereit";
+
+        requestAnimationFrame(() => verbindungenZeichnen(beziehungen));
+        new ResizeObserver(() => verbindungenZeichnen(beziehungen)).observe(diagramm);
+      } catch (fehler) {
+        status.dataset.zustand = "fehler";
+        status.textContent = `ERD konnte nicht aus den aktuellen JSON-Dateien erzeugt werden: ${fehler.message}`;
+      }
+    })();
+  </script>
+</body>
+</html>

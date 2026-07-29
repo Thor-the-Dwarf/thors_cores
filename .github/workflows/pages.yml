@@ -43,6 +43,7 @@ jobs:
             Cores.json \
             Core-Ausprägungen.json \
             Quellen.json \
+            erd.html \
             .nojekyll \
             _site/
 
@@ -64,4 +65,3 @@ jobs:
       - name: GitHub Pages veröffentlichen
         id: deployment
         uses: actions/deploy-pages@v4
-

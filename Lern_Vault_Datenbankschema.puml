@@ -1,6 +1,6 @@
 @startuml
 !pragma layout smetana
-title Lern-Vault – relationales Zielmodell zum JSON-Schema 2.0.0
+title Lern-Vault – relationales Zielmodell zum JSON-Schema 3.0.0
 
 hide circle
 hide methods
@@ -166,14 +166,15 @@ note right of CoreAusprägung
   vertiefte Core-Ausprägungen ergänzen.
 
   Der aktuelle LF1-JSON-Stand entspricht dem
-  Kontext »Grundlage«. topic_ref liefert dabei
+  Kontext »Grundlage«. thema_ref liefert dabei
   die explizite Themenzuordnung.
 end note
 
 note bottom of Thema
   Jedes sichtbare Thema besitzt mindestens
-  einen Core. Im aktuellen LF1-Datensatz:
-  33 Themen, 117 Cores, 0 leere Themen.
+  eine Core-Ausprägung. Im aktuellen LF1-Datensatz:
+  55 Themen, 213 globale Cores,
+  215 Core-Ausprägungen, 0 leere Themen.
 end note
 
 note right of CoreKategorie
@@ -202,13 +203,14 @@ note bottom of CoreAusprägung
   paarweise verbunden. So bleiben Grundlagen
   verbunden, während Vertiefungen hinzukommen.
 
-  Aktueller LF1-Grundlagenstand: 157 Linien.
+  Aktueller LF1-Grundlagenstand: 358 Linien.
 end note
 
 legend left
   Dieses Diagramm ist ein normalisiertes relationales Zielmodell.
-  Das JSON 2.0.0 enthält dieselbe Semantik verschachtelt und
-  besitzt keine wörtlichen Datenbanktabellen.
+  Die fünf JSON-Dateien nach Schema 3.0.0 enthalten dieselbe
+  Semantik normalisiert und besitzen keine wörtlichen
+  Datenbanktabellen.
 
   |= Zeichen |= Bedeutung |
   | **fett** | Pflichtfeld |

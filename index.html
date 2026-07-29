@@ -2047,6 +2047,11 @@
             location.href = "doom-scroll-quiz.html";
             return;
           }
+          if (aktionsname === "Community") {
+            coreMenüSchließen();
+            location.href = "community.html";
+            return;
+          }
           const überschrift = document.createElement("strong");
           const hinweis = document.createElement("span");
           überschrift.textContent = `${aktionsname} · ${coreTitel}`;

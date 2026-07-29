@@ -2,7 +2,8 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=10, user-scalable=yes">
   <meta name="description" content="Didaktische Navigation für Lernfeld 1">
   <title>TheRealDeal · Lernfeld 1</title>
   <style>
@@ -62,6 +63,11 @@
         var(--fläche);
       box-shadow: 18px 0 54px rgba(0, 0, 0, 0.18);
       backdrop-filter: blur(18px);
+      touch-action: pan-x pan-y pinch-zoom;
+    }
+
+    .navigation.quiz-übergang-aktiv {
+      will-change: transform, width, height, opacity;
     }
 
     .ordnerbaum {
@@ -790,6 +796,7 @@
         var(--fläche);
       box-shadow: -18px 0 54px rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(18px);
+      touch-action: pan-x pan-y pinch-zoom;
     }
 
     .app.settings-offen .settings-drawer {
@@ -833,6 +840,7 @@
       background: rgba(10, 14, 23, 0.94);
       box-shadow: 0 -12px 34px rgba(0, 0, 0, 0.34);
       backdrop-filter: blur(14px);
+      touch-action: pan-x pan-y pinch-zoom;
     }
 
     .bottom-app-bar__seite {
@@ -1125,6 +1133,7 @@
 
       const raster = document.querySelector("#core-raster");
       const viewport = document.querySelector("#vault-viewport");
+      const navigation = document.querySelector("#folder-tree-drawer");
       const linienEbene = document.querySelector("#themen-linien");
       const tooltip = document.querySelector("#vault-tooltip");
       const radialMenü = document.querySelector("#core-radialmenü");
@@ -1153,6 +1162,8 @@
       let quizAuswahlAktiv = false;
       let quizAußenPointerId = null;
       let quizAußenKlickUnterdrücken = false;
+      let navigationWarSichtbarVorQuiz = true;
+      let navigationÜbergang = null;
 
       function folderTreeSichtbarSetzen(sichtbar) {
         app.classList.toggle("navigation-geschlossen", !sichtbar);
@@ -1429,7 +1440,44 @@
           `Doom Scroll Quiz starten · ${anzahl} ${anzahl === 1 ? "Thema" : "Themen"}`;
       }
 
+      function navigationÜbergangAnimieren(von, zu, beimEnde) {
+        navigationÜbergang?.cancel();
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches ||
+            typeof navigation.animate !== "function") {
+          navigation.classList.remove("quiz-übergang-aktiv");
+          beimEnde?.();
+          return;
+        }
+        navigation.classList.add("quiz-übergang-aktiv");
+        const deltaX = von.left - zu.left;
+        const deltaY = von.top - zu.top;
+        const zielTransform = getComputedStyle(navigation).transform;
+        navigationÜbergang = navigation.animate([
+          {
+            transform: `translate(${deltaX}px, ${deltaY}px) ${zielTransform}`,
+            width: `${von.width}px`,
+            height: `${von.height}px`,
+            opacity: String(von.opacity)
+          },
+          {
+            transform: zielTransform,
+            width: `${zu.width}px`,
+            height: `${zu.height}px`,
+            opacity: String(zu.opacity)
+          }
+        ], {
+          duration: 320,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+        });
+        navigationÜbergang.finished.finally(() => {
+          navigation.classList.remove("quiz-übergang-aktiv");
+          navigationÜbergang = null;
+          beimEnde?.();
+        });
+      }
+
       function quizAuswahlmodusBeenden() {
+        const start = navigation.getBoundingClientRect();
         quizAuswahlAktiv = false;
         app.classList.remove("quiz-auswahlmodus");
         quizAuswahlhinweis.hidden = true;
@@ -1441,12 +1489,20 @@
           checkbox.disabled = true;
         });
         quizAuswahlAktualisieren();
+        const ziel = navigation.getBoundingClientRect();
+        navigationÜbergangAnimieren(
+          { ...start, opacity: 1 },
+          { ...ziel, opacity: navigationWarSichtbarVorQuiz ? 1 : 0 },
+          () => folderTreeSichtbarSetzen(navigationWarSichtbarVorQuiz)
+        );
       }
 
       function quizAuswahlmodusStarten() {
         bereichsfokusZurücksetzen();
         settingsDrawerSichtbarSetzen(false);
+        navigationWarSichtbarVorQuiz = !app.classList.contains("navigation-geschlossen");
         folderTreeSichtbarSetzen(true);
+        const start = navigation.getBoundingClientRect();
         quizAuswahlAktiv = true;
         quizAußenPointerId = null;
         quizAußenKlickUnterdrücken = false;
@@ -1461,6 +1517,11 @@
           checkbox.disabled = nachgeordneteThemenCheckboxen(checkbox).length === 0;
         });
         quizAuswahlAktualisieren();
+        const ziel = navigation.getBoundingClientRect();
+        navigationÜbergangAnimieren(
+          { ...start, opacity: navigationWarSichtbarVorQuiz ? 1 : 0 },
+          { ...ziel, opacity: 1 }
+        );
       }
 
       function quizAuswahlmodusUmschalten() {

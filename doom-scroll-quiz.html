@@ -89,21 +89,44 @@
     }
 
     .feed {
+      position: relative;
       min-height: 0;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(126, 53, 216, 0.7) transparent;
+      overflow: hidden;
       border-radius: 28px;
-      touch-action: pan-x pan-y pinch-zoom;
+      touch-action: pan-y pinch-zoom;
+      cursor: grab;
+    }
+
+    .feed.zieht {
+      cursor: grabbing;
+    }
+
+    .karten-spur {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+      transition: transform 320ms cubic-bezier(0.22, 0.72, 0.18, 1);
+    }
+
+    .feed.zieht .karten-spur {
+      transition: none;
     }
 
     .quiz-karte {
-      min-height: 100%;
-      scroll-snap-align: start;
+      min-width: 100%;
+      height: 100%;
+      flex: 0 0 100%;
       display: grid;
       place-items: center;
       padding: 28px 8vw;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: none;
+    }
+
+    .quiz-karte::-webkit-scrollbar {
+      display: none;
     }
 
     .aufgabe {
@@ -277,6 +300,17 @@
       cursor: pointer;
     }
 
+    .nav:focus-visible,
+    .prüfen:focus-visible {
+      outline: 3px solid var(--cyan);
+      outline-offset: 3px;
+    }
+
+    .nav:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
     .nav {
       width: 52px;
       border: 1.5px solid rgba(180, 205, 239, 0.46);
@@ -307,6 +341,12 @@
       .quiz-fuß { grid-template-columns: 1fr; }
       .fortschritt { justify-self: center; }
       .prüfen { min-width: 190px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .karten-spur {
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -366,9 +406,9 @@
     <footer class="quiz-fuß">
       <div></div>
       <div class="steuerung">
-        <button id="vorherige" class="nav" type="button" aria-label="Zur vorherigen Platzhalterkarte">↑</button>
+        <button id="vorherige" class="nav" type="button" aria-label="Zur vorherigen Platzhalterkarte">←</button>
         <button id="prüfen" class="prüfen" type="button">Dummy prüfen</button>
-        <button id="nächste" class="nav" type="button" aria-label="Zur nächsten Platzhalterkarte">↓</button>
+        <button id="nächste" class="nav" type="button" aria-label="Zur nächsten Platzhalterkarte">→</button>
       </div>
       <div id="fortschritt" class="fortschritt">1 / 3</div>
     </footer>
@@ -380,12 +420,35 @@
       const feed = document.querySelector("#feed");
       const karten = [...document.querySelectorAll(".quiz-karte")];
       const fortschritt = document.querySelector("#fortschritt");
+      const vorherige = document.querySelector("#vorherige");
+      const prüfen = document.querySelector("#prüfen");
+      const nächste = document.querySelector("#nächste");
+      const kartenSpur = document.createElement("div");
+      kartenSpur.className = "karten-spur";
+      karten.forEach(karte => kartenSpur.append(karte));
+      feed.append(kartenSpur);
       let aktiv = 0;
+      let zug = null;
 
-      function karteAnzeigen(index) {
+      function karteAnzeigen(index, { fokus = false, animiert = true } = {}) {
         aktiv = Math.max(0, Math.min(karten.length - 1, index));
-        karten[aktiv].scrollIntoView({ behavior: "smooth", block: "start" });
+        feed.classList.remove("zieht");
+        kartenSpur.style.transition = animiert ? "" : "none";
+        kartenSpur.style.transform = `translate3d(${-aktiv * 100}%, 0, 0)`;
+        if (!animiert) {
+          requestAnimationFrame(() => kartenSpur.style.removeProperty("transition"));
+        }
+        karten.forEach((karte, index) => {
+          const inaktiv = index !== aktiv;
+          karte.inert = inaktiv;
+          karte.setAttribute("aria-hidden", String(inaktiv));
+        });
+        vorherige.disabled = aktiv === 0;
+        nächste.disabled = aktiv === karten.length - 1;
         fortschritt.textContent = `${aktiv + 1} / ${karten.length}`;
+        if (fokus) {
+          (nächste.disabled ? prüfen : nächste).focus({ preventScroll: true });
+        }
       }
 
       document.querySelectorAll(".antwort").forEach(antwort => {
@@ -396,9 +459,9 @@
         });
       });
 
-      document.querySelector("#vorherige").addEventListener("click", () => karteAnzeigen(aktiv - 1));
-      document.querySelector("#nächste").addEventListener("click", () => karteAnzeigen(aktiv + 1));
-      document.querySelector("#prüfen").addEventListener("click", () => {
+      vorherige.addEventListener("click", () => karteAnzeigen(aktiv - 1, { fokus: true }));
+      nächste.addEventListener("click", () => karteAnzeigen(aktiv + 1, { fokus: true }));
+      prüfen.addEventListener("click", () => {
         const leerstand = karten[aktiv].querySelector(".leerstand");
         leerstand.textContent = "Noch keine fachliche Auswertung hinterlegt.";
       });
@@ -407,15 +470,87 @@
         else location.href = "index.html";
       });
 
-      const beobachter = new IntersectionObserver(einträge => {
-        const sichtbar = einträge
-          .filter(eintrag => eintrag.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!sichtbar) return;
-        aktiv = Number(sichtbar.target.dataset.index);
-        fortschritt.textContent = `${aktiv + 1} / ${karten.length}`;
-      }, { root: feed, threshold: [0.55, 0.8] });
-      karten.forEach(karte => beobachter.observe(karte));
+      feed.addEventListener("pointerdown", ereignis => {
+        if (!ereignis.isPrimary || ereignis.button !== 0) return;
+        if (ereignis.target.closest("button, input, label, select, textarea")) return;
+        zug = {
+          pointerId: ereignis.pointerId,
+          startX: ereignis.clientX,
+          startY: ereignis.clientY,
+          horizontal: false
+        };
+      });
+
+      feed.addEventListener("pointermove", ereignis => {
+        if (!zug || zug.pointerId !== ereignis.pointerId) return;
+        const deltaX = ereignis.clientX - zug.startX;
+        const deltaY = ereignis.clientY - zug.startY;
+        if (!zug.horizontal) {
+          if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < 8) return;
+          if (Math.abs(deltaY) >= Math.abs(deltaX)) {
+            zug = null;
+            return;
+          }
+          zug.horizontal = true;
+          feed.classList.add("zieht");
+          feed.setPointerCapture(ereignis.pointerId);
+        }
+        ereignis.preventDefault();
+        const amRand =
+          (aktiv === 0 && deltaX > 0) ||
+          (aktiv === karten.length - 1 && deltaX < 0);
+        const verschiebung = amRand ? deltaX * 0.28 : deltaX;
+        kartenSpur.style.transform =
+          `translate3d(calc(${-aktiv * 100}% + ${verschiebung}px), 0, 0)`;
+      });
+
+      function zugBeenden(ereignis) {
+        if (!zug || zug.pointerId !== ereignis.pointerId) return;
+        const deltaX = ereignis.clientX - zug.startX;
+        const horizontal = zug.horizontal;
+        zug = null;
+        if (feed.hasPointerCapture(ereignis.pointerId)) {
+          feed.releasePointerCapture(ereignis.pointerId);
+        }
+        const schwelle = Math.min(100, feed.clientWidth * 0.14);
+        const richtung =
+          horizontal && Math.abs(deltaX) >= schwelle
+            ? (deltaX < 0 ? 1 : -1)
+            : 0;
+        karteAnzeigen(aktiv + richtung, { fokus: richtung !== 0 });
+      }
+
+      feed.addEventListener("pointerup", zugBeenden);
+      feed.addEventListener("pointercancel", zugBeenden);
+
+      document.addEventListener("keydown", ereignis => {
+        if (
+          ereignis.defaultPrevented ||
+          ereignis.altKey ||
+          ereignis.ctrlKey ||
+          ereignis.metaKey
+        ) return;
+        const ziel = ereignis.target;
+        if (
+          ziel.matches("input, textarea, select") ||
+          ziel.closest("[contenteditable='true']")
+        ) return;
+        if (ereignis.key === "ArrowLeft" && !vorherige.disabled) {
+          ereignis.preventDefault();
+          vorherige.click();
+        } else if (ereignis.key === "ArrowRight" && !nächste.disabled) {
+          ereignis.preventDefault();
+          nächste.click();
+        } else if (
+          ereignis.key === "Enter" &&
+          [vorherige, prüfen, nächste].includes(document.activeElement)
+        ) {
+          ereignis.preventDefault();
+          document.activeElement.click();
+        }
+      });
+
+      karteAnzeigen(0, { fokus: true, animiert: false });
     })();
   </script>
 </body>

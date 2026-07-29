@@ -107,7 +107,7 @@
       overflow: hidden;
       cursor: grab;
       overscroll-behavior: contain;
-      touch-action: auto;
+      touch-action: none;
     }
 
     .diagramm-scroll.zieht {
@@ -358,7 +358,7 @@
       }, { passive: false });
 
       diagrammViewport.addEventListener("pointerdown", ereignis => {
-        if (ereignis.button !== 0 || ereignis.pointerType === "touch") return;
+        if (ereignis.button !== 0 || !ereignis.isPrimary) return;
         ereignis.preventDefault();
         canvasZug = {
           pointerId: ereignis.pointerId,

@@ -1,10 +1,10 @@
 {
   "schema_version": "3.0.0",
   "dataset_id": "de-fachinformatiker-lern-vault",
-  "updated_at": "2026-07-29",
+  "updated_at": "2026-07-30",
   "language": "de",
   "data_role": "Lernfelder und Kompetenzen",
-  "hierarchy_note": "Kompetenzen, Themencluster und Themen sind didaktisch aus der offiziellen Zielformulierung abgeleitet. Sie sind keine wörtlichen KMK-Untertitel.",
+  "hierarchy_note": "Lernfeldnummern und -titel entsprechen dem KMK-Rahmenlehrplan. Nur LF1 besitzt derzeit eine fachlich ausgearbeitete Unterstruktur; für weitere Lernfelder werden keine Kompetenzen, Themen oder Cores vorweggenommen.",
   "lernfelder": [
     {
       "id": "LF1",
@@ -41,6 +41,158 @@
           "sort_order": 4
         }
       ]
+    },
+    {
+      "id": "LF2",
+      "number": 2,
+      "title": "Arbeitsplätze nach Kundenwunsch ausstatten",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF3",
+      "number": 3,
+      "title": "Clients in Netzwerke einbinden",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF4",
+      "number": 4,
+      "title": "Schutzbedarfsanalyse im eigenen Arbeitsbereich durchführen",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF5",
+      "number": 5,
+      "title": "Software zur Verwaltung von Daten anpassen",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF6",
+      "number": 6,
+      "title": "Serviceanfragen bearbeiten",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF7",
+      "number": 7,
+      "title": "Cyber-physische Systeme ergänzen",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF8",
+      "number": 8,
+      "title": "Daten systemübergreifend bereitstellen",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF9",
+      "number": 9,
+      "title": "Netzwerke und Dienste bereitstellen",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF10a",
+      "number": "10a",
+      "title": "Benutzerschnittstellen gestalten und entwickeln",
+      "fachrichtung_ref": "anwendungsentwicklung",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF11a",
+      "number": "11a",
+      "title": "Funktionalität in Anwendungen realisieren",
+      "fachrichtung_ref": "anwendungsentwicklung",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF12a",
+      "number": "12a",
+      "title": "Kundenspezifische Anwendungsentwicklung durchführen",
+      "fachrichtung_ref": "anwendungsentwicklung",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF10b",
+      "number": "10b",
+      "title": "Serverdienste bereitstellen und Administrationsaufgaben automatisieren",
+      "fachrichtung_ref": "systemintegration",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF11b",
+      "number": "11b",
+      "title": "Betrieb und Sicherheit vernetzter Systeme gewährleisten",
+      "fachrichtung_ref": "systemintegration",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF12b",
+      "number": "12b",
+      "title": "Kundenspezifische Systemintegration durchführen",
+      "fachrichtung_ref": "systemintegration",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF10c",
+      "number": "10c",
+      "title": "Werkzeuge des maschinellen Lernens einsetzen",
+      "fachrichtung_ref": "daten-prozessanalyse",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF11c",
+      "number": "11c",
+      "title": "Prozesse analysieren und gestalten",
+      "fachrichtung_ref": "daten-prozessanalyse",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF12c",
+      "number": "12c",
+      "title": "Kundenspezifische Prozess- und Datenanalyse durchführen",
+      "fachrichtung_ref": "daten-prozessanalyse",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF10d",
+      "number": "10d",
+      "title": "Cyber-physische Systeme entwickeln",
+      "fachrichtung_ref": "digitale-vernetzung",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF11d",
+      "number": "11d",
+      "title": "Betrieb und Sicherheit vernetzter Systeme gewährleisten",
+      "fachrichtung_ref": "digitale-vernetzung",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
+    },
+    {
+      "id": "LF12d",
+      "number": "12d",
+      "title": "Kundenspezifisches cyber-physisches System optimieren",
+      "fachrichtung_ref": "digitale-vernetzung",
+      "official_source_ref": "KMK-RLP-IT-2020",
+      "kompetenzen": []
     }
   ]
 }

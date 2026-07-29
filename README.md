@@ -1,6 +1,6 @@
-# TheRealDeal
+# Thors Core
 
-TheRealDeal ist ein lokaler Lern-Vault für Lernfeld 1. Die Startseite zeigt den
+Thors Core ist ein lokaler Lern-Vault für Lernfeld 1. Die Startseite zeigt den
 Folder Tree und den navigierbaren Core-Graphen. Das Doom Scroll Quiz ist aktuell
 ein bewusst fachfreier UI-Dummy.
 
@@ -43,13 +43,13 @@ PlantUML- und PNG-Dateien werden ebenfalls nicht veröffentlicht.
 
 ## Später über GitHub Pages veröffentlichen
 
-1. Für `TheRealDeal` ein eigenes Git-Repository anlegen oder den Ordner als
+1. Für Thors Core ein eigenes Git-Repository anlegen oder den Projektordner als
    eigenständiges Repository auf GitHub übertragen.
 2. Den Standardbranch `main` verwenden.
 3. In GitHub unter **Settings → Pages → Build and deployment** als Quelle
    **GitHub Actions** auswählen.
 4. Die Dateien auf `main` pushen oder den Workflow
-   **TheRealDeal über GitHub Pages bereitstellen** manuell starten.
+   **Thors Core über GitHub Pages bereitstellen** manuell starten.
 5. Nach erfolgreichem Lauf ist die von GitHub angezeigte Pages-Adresse auch vom
    Smartphone erreichbar.
 

@@ -5,7 +5,7 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=10, user-scalable=yes">
   <meta name="description" content="Didaktische Navigation für Lernfeld 1">
-  <title>TheRealDeal · Lernfeld 1</title>
+  <title>Thors Core</title>
   <style>
     :root {
       color-scheme: dark;
@@ -1291,11 +1291,24 @@
         return summary;
       }
 
-      const BAUM_EXPANSION_SCHLÜSSEL = "therealdeal.folder-tree.expansion.v1";
+      const BAUM_EXPANSION_SCHLÜSSEL = "thors-core.folder-tree.expansion.v1";
+      const VERALTETER_BAUM_EXPANSION_SCHLÜSSEL = [
+        "thereal",
+        "deal.folder-tree.expansion.v1"
+      ].join("");
 
       function baumExpansionLaden() {
         try {
-          const gespeichert = JSON.parse(localStorage.getItem(BAUM_EXPANSION_SCHLÜSSEL));
+          const aktuell = localStorage.getItem(BAUM_EXPANSION_SCHLÜSSEL);
+          const veraltet = aktuell === null
+            ? localStorage.getItem(VERALTETER_BAUM_EXPANSION_SCHLÜSSEL)
+            : null;
+          const rohzustand = aktuell ?? veraltet;
+          const gespeichert = JSON.parse(rohzustand);
+          if (aktuell === null && veraltet !== null) {
+            localStorage.setItem(BAUM_EXPANSION_SCHLÜSSEL, veraltet);
+            localStorage.removeItem(VERALTETER_BAUM_EXPANSION_SCHLÜSSEL);
+          }
           if (!gespeichert || typeof gespeichert !== "object" || Array.isArray(gespeichert)) {
             return null;
           }
@@ -1319,6 +1332,7 @@
         );
         try {
           localStorage.setItem(BAUM_EXPANSION_SCHLÜSSEL, JSON.stringify(zustand));
+          localStorage.removeItem(VERALTETER_BAUM_EXPANSION_SCHLÜSSEL);
         } catch {
           // Der Folder Tree bleibt auch ohne verfügbaren Browserspeicher bedienbar.
         }

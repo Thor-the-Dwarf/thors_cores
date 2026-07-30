@@ -227,6 +227,32 @@
       --ordnerfarbe: #82a6ff;
     }
 
+    .lernfeld-zeile {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 49px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      font: inherit;
+      font-size: 0.96rem;
+      font-weight: 750;
+      line-height: 1.3;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .lernfeld-zeile:hover,
+    .lernfeld-zeile:focus-visible,
+    .lernfeld-zeile[aria-pressed="true"] {
+      border-color: rgba(130, 166, 255, 0.34);
+      background: rgba(130, 166, 255, 0.1);
+      outline: none;
+    }
+
     .ebene {
       position: relative;
       margin: 5px 0 0 18px;
@@ -650,10 +676,10 @@
     }
 
     .fortschrittslegende {
-      position: absolute;
-      right: 16px;
-      bottom: 16px;
-      z-index: 5;
+      position: fixed;
+      left: var(--fortschrittslegende-links, 16px);
+      bottom: calc(var(--app-bar-höhe) + 16px);
+      z-index: 24;
       display: grid;
       gap: 5px;
       margin: 0;
@@ -666,6 +692,7 @@
       line-height: 1.15;
       list-style: none;
       pointer-events: auto;
+      transition: left 160ms ease;
     }
 
     .fortschrittslegende[hidden] {
@@ -896,32 +923,17 @@
       line-height: 1.4;
     }
 
-    .lernfeld-katalog__hinweis {
-      margin: 2px 12px 10px;
-      padding: 0 10px 8px;
-      color: var(--gedimmt);
-      font-size: 0.7rem;
-      line-height: 1.4;
-    }
-
-    .lernfeld-katalog__link {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 7px 10px;
-      border: 1px solid rgba(130, 166, 255, 0.24);
-      border-radius: 8px;
-      color: #dce7fb;
-      background: rgba(130, 166, 255, 0.08);
-      font-weight: 800;
+    .lernfeld-katalog__titel {
+      min-width: 0;
+      color: inherit;
       text-decoration: none;
     }
 
-    .lernfeld-katalog__link:hover,
-    .lernfeld-katalog__link:focus-visible {
-      border-color: rgba(130, 166, 255, 0.55);
-      background: rgba(130, 166, 255, 0.16);
-      outline: none;
+    .lernfeld-katalog__titel:hover,
+    .lernfeld-katalog__titel:focus-visible {
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .fachrichtungs-leerstand {
@@ -1160,8 +1172,22 @@
 
     }
 
+    @media (max-width: 640px) {
+      .app.legende-sichtbar:not(.navigation-geschlossen) .navigation {
+        width: min(440px, calc(100vw - 150px));
+        min-width: 160px;
+      }
+
+      .fortschrittslegende {
+        gap: 4px;
+        padding: 8px;
+        font-size: 0.6rem;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      summary::after { transition: none; }
+      summary::after,
+      .fortschrittslegende { transition: none; }
     }
   </style>
   <link rel="stylesheet" href="app-navigation.css">
@@ -1239,7 +1265,10 @@
       </div>
       <button id="fortschritts-prototyp" class="entdeckungsaktion" type="button"
               aria-controls="core-raster fortschrittslegende"
-              aria-pressed="true">Fortschritts-Prototyp</button>
+              aria-pressed="true">Fortschritte anzeigen</button>
+      <button id="legende-umschalten" class="entdeckungsaktion" type="button"
+              aria-controls="fortschrittslegende"
+              aria-pressed="true">Legende anzeigen</button>
       <a class="entdeckungsaktion" href="erd.html">ERD / Datenmodell anzeigen</a>
     </aside>
   </main>
@@ -1308,6 +1337,7 @@
       const coreLeerstand = document.querySelector("#core-leerstand");
       const fortschrittsPrototyp = document.querySelector("#fortschritts-prototyp");
       const fortschrittslegende = document.querySelector("#fortschrittslegende");
+      const legendeUmschalten = document.querySelector("#legende-umschalten");
       const appBarDoomScrollQuiz = document.querySelector("#doom-scroll-quiz-app-bar");
       const app = document.querySelector(".app");
       const folderTreeUmschalten = document.querySelector("#folder-tree-umschalten");
@@ -1328,12 +1358,50 @@
       let aktiverCoreIndex = null;
       let unterdrückterCoreKlick = null;
       let fortschrittPrototypAktiv = true;
+      let legendeEingeblendet = true;
       let quizAuswahlAktiv = false;
       let quizAußenPointerId = null;
       let quizAußenKlickUnterdrücken = false;
       let navigationWarSichtbarVorQuiz = true;
       let navigationÜbergang = null;
       let lernfelderKatalog = [];
+      let aktiveDaten = null;
+      const LEGENDE_SICHTBAR_SCHLÜSSEL = "thors-core.legende-sichtbar.v1";
+
+      try {
+        legendeEingeblendet =
+          localStorage.getItem(LEGENDE_SICHTBAR_SCHLÜSSEL) !== "false";
+      } catch {
+        legendeEingeblendet = true;
+      }
+
+      function legendenPositionAktualisieren() {
+        if (fortschrittslegende.hidden) return;
+        const abstand = window.innerWidth <= 640 ? 8 : 16;
+        const viewportRechteck = viewport.getBoundingClientRect();
+        const navigationRechteck = navigation.getBoundingClientRect();
+        const navigationLinksVerankert =
+          navigationRechteck.width > 0 && navigationRechteck.left <= abstand;
+        const gewünschtePosition = navigationLinksVerankert
+          ? navigationRechteck.right + abstand
+          : viewportRechteck.left + abstand;
+        const maximalePosition = Math.max(
+          abstand,
+          window.innerWidth - fortschrittslegende.offsetWidth - abstand
+        );
+        fortschrittslegende.style.setProperty(
+          "--fortschrittslegende-links",
+          `${Math.max(abstand, Math.min(gewünschtePosition, maximalePosition))}px`
+        );
+      }
+
+      function legendenSichtbarkeitAnwenden() {
+        const sichtbar = fortschrittPrototypAktiv && legendeEingeblendet;
+        fortschrittslegende.hidden = !sichtbar;
+        legendeUmschalten.setAttribute("aria-pressed", String(legendeEingeblendet));
+        app.classList.toggle("legende-sichtbar", sichtbar);
+        if (sichtbar) requestAnimationFrame(legendenPositionAktualisieren);
+      }
 
       function folderTreeSichtbarSetzen(sichtbar) {
         app.classList.toggle("navigation-geschlossen", !sichtbar);
@@ -1342,7 +1410,10 @@
           "aria-label",
           sichtbar ? "Folder Tree schließen" : "Folder Tree öffnen"
         );
-        requestAnimationFrame(() => einpassen());
+        requestAnimationFrame(() => {
+          legendenPositionAktualisieren();
+          einpassen();
+        });
       }
 
       folderTreeUmschalten.addEventListener("click", () => {
@@ -1376,6 +1447,32 @@
       window.addEventListener("hashchange", () => einstellungenAusAdresseÖffnen());
       einstellungenAusAdresseÖffnen(false);
 
+      legendeUmschalten.addEventListener("click", () => {
+        legendeEingeblendet = !legendeEingeblendet;
+        try {
+          localStorage.setItem(
+            LEGENDE_SICHTBAR_SCHLÜSSEL,
+            String(legendeEingeblendet)
+          );
+        } catch {
+          // Die Auswahl bleibt für die laufende Sitzung im Speicher der Seite.
+        }
+        legendenSichtbarkeitAnwenden();
+      });
+
+      legendenSichtbarkeitAnwenden();
+
+      const legendenGrößenBeobachter = "ResizeObserver" in window
+        ? new ResizeObserver(legendenPositionAktualisieren)
+        : null;
+      legendenGrößenBeobachter?.observe(navigation);
+      legendenGrößenBeobachter?.observe(viewport);
+      legendenGrößenBeobachter?.observe(fortschrittslegende);
+      window.visualViewport?.addEventListener(
+        "resize",
+        legendenPositionAktualisieren
+      );
+
       const FACHRICHTUNG_SCHLÜSSEL = "thors-core.fachrichtung.v1";
       const GÜLTIGE_FACHRICHTUNGEN = new Set([
         "anwendungsentwicklung",
@@ -1383,9 +1480,6 @@
         "daten-prozessanalyse",
         "digitale-vernetzung"
       ]);
-      const angefragtesLernfeldId =
-        new URLSearchParams(location.search).get("lernfeld") || "LF1";
-
       try {
         const gespeichert = localStorage.getItem(FACHRICHTUNG_SCHLÜSSEL);
         fachrichtungAuswahl.value = GÜLTIGE_FACHRICHTUNGEN.has(gespeichert)
@@ -1405,11 +1499,8 @@
         } catch {
           // Die sichtbare Auswahl bleibt auch ohne verfügbaren Browserspeicher bedienbar.
         }
-        if (lernfelderKatalog.length) {
-          lernfeldKatalogRendern(
-            document.querySelector("#ordnerbaum"),
-            lernfelderKatalog
-          );
+        if (aktiveDaten && !quizAuswahlAktiv) {
+          baumRendern(aktiveDaten);
         }
       });
 
@@ -1496,153 +1587,71 @@
         }
       }
 
-      function lernfeldKatalogRendern(baum, lernfelder) {
-        baum.querySelectorAll(".lernfeld-katalog, .fachrichtungs-leerstand")
-          .forEach(element => element.remove());
-        const gespeicherteExpansion = baumExpansionLaden();
+      function sichtbareLernfelder(datensatz) {
         const fachrichtung = fachrichtungAuswahl.value;
-        lernfelder
-          .filter(lernfeld =>
-            lernfeld.id !== angefragtesLernfeldId &&
-            (!lernfeld.fachrichtung_ref || lernfeld.fachrichtung_ref === fachrichtung)
-          )
-          .forEach(lernfeld => {
-            const eintrag = document.createElement("li");
-            const details = document.createElement("details");
-            const zusammenfassung = baumZusammenfassung(
-              `Lernfeld ${lernfeld.number} · ${lernfeld.title}`,
-              lernfeld
-            );
-            const hinweis = document.createElement("p");
-            const link = document.createElement("a");
-            const ziel = new URL(location.href);
-            eintrag.className = "lernfeld lernfeld-katalog";
-            hinweis.className = "lernfeld-katalog__hinweis";
-            link.className = "lernfeld-katalog__link";
-            link.textContent = "Inhalte öffnen";
-            ziel.searchParams.set("lernfeld", lernfeld.id);
-            ziel.hash = "";
-            link.href = ziel;
-            hinweis.append(link);
-            baumDetailsInitialisieren(
-              details,
-              `lernfeld:${lernfeld.id}`,
-              false,
-              gespeicherteExpansion
-            );
-            details.append(zusammenfassung, hinweis);
-            eintrag.append(details);
-            baum.append(eintrag);
-          });
-
-        if (!fachrichtung) {
-          const leerstand = document.createElement("li");
-          leerstand.className = "fachrichtungs-leerstand";
-          leerstand.textContent =
-            "Wähle in den Einstellungen eine Fachrichtung, um die Lernfelder 10–12 anzuzeigen.";
-          baum.append(leerstand);
-        }
-
-        baumInteraktionenEinrichten();
+        return datensatz.lernfelder.filter(lernfeld =>
+          !lernfeld.fachrichtung_ref || lernfeld.fachrichtung_ref === fachrichtung
+        );
       }
 
       function baumRendern(datensatz) {
         const baum = document.querySelector("#ordnerbaum");
         baum.replaceChildren();
         lernfelderKatalog = datensatz.lernfelder;
-        const gespeicherteExpansion = baumExpansionLaden();
-        const lernfeldEintrag = document.createElement("li");
-        const lernfeldDetails = document.createElement("details");
-        const kompetenzListe = document.createElement("ul");
-        lernfeldEintrag.className = "lernfeld";
-        baumDetailsInitialisieren(
-          lernfeldDetails,
-          `lernfeld:${datensatz.lernfeld.id ?? datensatz.lernfeld.number}`,
-          true,
-          gespeicherteExpansion
-        );
-        kompetenzListe.className = "ebene kompetenzen";
-        lernfeldDetails.append(
-          baumZusammenfassung(
-            `Lernfeld ${datensatz.lernfeld.number} · ${datensatz.lernfeld.title}`,
-            datensatz.lernfeld
-          ),
-          kompetenzListe
-        );
-        lernfeldEintrag.append(lernfeldDetails);
-        baum.append(lernfeldEintrag);
-
-        datensatz.lernfeld.kompetenzen.forEach((kompetenz, kompetenzIndex) => {
-          const kompetenzEintrag = document.createElement("li");
-          const kompetenzDetails = document.createElement("details");
-          const clusterListe = document.createElement("ul");
-          const kompetenzZusammenfassung = baumZusammenfassung(kompetenz.title, kompetenz);
-          kompetenzEintrag.className = "kompetenz";
-          baumDetailsInitialisieren(
-            kompetenzDetails,
-            `kompetenz:${kompetenz.id}`,
-            kompetenzIndex === 0,
-            gespeicherteExpansion
+        sichtbareLernfelder(datensatz).forEach(lernfeld => {
+          const eintrag = document.createElement("li");
+          const schaltfläche = document.createElement("button");
+          const themaIds = lernfeld.kompetenzen.flatMap(kompetenz =>
+            kompetenz.themencluster.flatMap(cluster =>
+              cluster.themen.map(thema => thema.id)
+            )
           );
-          clusterListe.className = "ebene clusterliste";
-          kompetenzZusammenfassung.dataset.fokusId = `kompetenz:${kompetenz.id}`;
-          kompetenzZusammenfassung.dataset.themaIds = kompetenz.themencluster
-            .flatMap(cluster => cluster.themen.map(thema => thema.id))
-            .join(" ");
-          kompetenzDetails.append(
-            kompetenzZusammenfassung,
-            clusterListe
-          );
-          kompetenzEintrag.append(kompetenzDetails);
-          kompetenzListe.append(kompetenzEintrag);
-
-          kompetenz.themencluster.forEach((cluster, clusterIndex) => {
-            const clusterEintrag = document.createElement("li");
-            const clusterDetails = document.createElement("details");
-            const themenListe = document.createElement("ul");
-            const clusterZusammenfassung = baumZusammenfassung(cluster.title, cluster);
-            clusterEintrag.className = "cluster";
-            baumDetailsInitialisieren(
-              clusterDetails,
-              `cluster:${cluster.id}`,
-              kompetenzIndex === 0 && clusterIndex === 0,
-              gespeicherteExpansion
+          eintrag.className = "lernfeld";
+          schaltfläche.type = "button";
+          schaltfläche.className = "lernfeld-zeile";
+          schaltfläche.textContent =
+            `Lernfeld ${lernfeld.number} · ${lernfeld.title}`;
+          schaltfläche.setAttribute("aria-pressed", "false");
+          schaltfläche.addEventListener("click", () => {
+            bereichFokussieren(
+              `lernfeld:${lernfeld.id}`,
+              themaIds,
+              schaltfläche
             );
-            themenListe.className = "ebene themenliste";
-            clusterZusammenfassung.dataset.fokusId = `cluster:${cluster.id}`;
-            clusterZusammenfassung.dataset.themaIds = cluster.themen
-              .map(thema => thema.id)
-              .join(" ");
-            clusterDetails.append(
-              clusterZusammenfassung,
-              themenListe
-            );
-            clusterEintrag.append(clusterDetails);
-            clusterListe.append(clusterEintrag);
+          });
+          eintrag.append(schaltfläche);
+          baum.append(eintrag);
+        });
 
-            cluster.themen.forEach(thema => {
-              const themaEintrag = document.createElement("li");
-              themaEintrag.className = "thema";
-              themaEintrag.dataset.themaId = thema.id;
-              themaEintrag.dataset.fokusId = `thema:${thema.id}`;
-              themaEintrag.dataset.themaIds = thema.id;
-              themaEintrag.style.setProperty(
-                "--ordnerfarbe",
-                farbeMischen(gemittelteGewichte(thema))
-              );
-              themaEintrag.textContent = thema.title;
-              themenListe.append(themaEintrag);
-              themaTitelZuId.set(thema.title, thema.id);
+        if (!fachrichtungAuswahl.value) {
+          const leerstand = document.createElement("li");
+          leerstand.className = "fachrichtungs-leerstand";
+          leerstand.textContent =
+            "Wähle in den Einstellungen eine Fachrichtung, um die Lernfelder 10–12 anzuzeigen.";
+          baum.append(leerstand);
+        }
+      }
+
+      function quizThemenRendern(datensatz) {
+        const baum = document.querySelector("#ordnerbaum");
+        baum.replaceChildren();
+        sichtbareLernfelder(datensatz).forEach(lernfeld => {
+          lernfeld.kompetenzen.forEach(kompetenz => {
+            kompetenz.themencluster.forEach(cluster => {
+              cluster.themen.forEach(thema => {
+                const themaEintrag = document.createElement("li");
+                themaEintrag.className = "thema";
+                themaEintrag.dataset.themaId = thema.id;
+                themaEintrag.dataset.fokusId = `thema:${thema.id}`;
+                themaEintrag.dataset.themaIds = thema.id;
+                themaEintrag.textContent =
+                  `LF ${lernfeld.number} · ${thema.title}`;
+                baum.append(themaEintrag);
+              });
             });
           });
         });
-
-        lernfeldKatalogRendern(baum, datensatz.lernfelder);
-
-        baum.addEventListener("toggle", ereignis => {
-          if (!(ereignis.target instanceof HTMLDetailsElement)) return;
-          baumExpansionSpeichern(baum);
-        }, true);
+        baumInteraktionenEinrichten();
       }
 
       function baumInteraktionenEinrichten() {
@@ -1798,6 +1807,7 @@
           checkbox.disabled = true;
         });
         quizAuswahlAktualisieren();
+        if (aktiveDaten) baumRendern(aktiveDaten);
         const ziel = navigationRechteck();
         navigationÜbergangAnimieren(
           { ...start, opacity: 1 },
@@ -1817,6 +1827,7 @@
         quizAußenKlickUnterdrücken = false;
         coreMenüSchließen();
         app.classList.add("quiz-auswahlmodus");
+        if (aktiveDaten) quizThemenRendern(aktiveDaten);
         quizAuswahlhinweis.hidden = false;
         quizAuswahlaktionen.hidden = false;
         appBarDoomScrollQuiz.setAttribute("aria-pressed", "true");
@@ -1926,7 +1937,7 @@
         }
       }
 
-      function datenZusammenbauen(pakete, lernfeldId = "LF1") {
+      function datenZusammenbauen(pakete) {
         const lernfelderDatei = pakete["Lernfelder.json"];
         const themenDatei = pakete["Themen.json"];
         const coresDatei = pakete["Cores.json"];
@@ -1993,50 +2004,35 @@
           }
         });
 
-        const lernfeldQuelle = lernfelderDatei.lernfelder
-          .find(lernfeldEintrag => lernfeldEintrag.id === lernfeldId);
-        if (!lernfeldQuelle) {
-          throw new Error(`Unbekanntes Lernfeld: ${lernfeldId}`);
-        }
-        const lernfeld = {
-          id: lernfeldQuelle.id,
-          number: lernfeldQuelle.number,
-          title: lernfeldQuelle.title,
-          official_source_ref: lernfeldQuelle.official_source_ref,
+        const lernfelder = lernfelderDatei.lernfelder.map(lernfeldQuelle => ({
+          ...lernfeldQuelle,
           kompetenzen: lernfeldQuelle.kompetenzen
             .slice()
             .sort((a, b) => a.sort_order - b.sort_order)
             .map(kompetenz => ({
-              id: kompetenz.id,
-              title: kompetenz.title,
-              derivation: kompetenz.derivation,
+              ...kompetenz,
               themencluster: themenDatei.themencluster
                 .filter(cluster => cluster.kompetenz_ref === kompetenz.id)
                 .sort((a, b) => a.sort_order - b.sort_order)
                 .map(cluster => ({
-                  id: cluster.id,
-                  title: cluster.title,
+                  ...cluster,
                   themen: themenDatei.themen
                     .filter(thema => thema.themencluster_ref === cluster.id)
                     .sort((a, b) => a.sort_order - b.sort_order)
-                    .map(thema => {
-                      const vorkommen = (ausprägungenNachThema.get(thema.id) || [])
+                    .map(thema => ({
+                      ...thema,
+                      cores: (ausprägungenNachThema.get(thema.id) || [])
                         .filter(ausprägung =>
                           ausprägung.lernfeld_ref === lernfeldQuelle.id &&
                           ausprägung.kompetenz_ref === kompetenz.id &&
                           ausprägung.themencluster_ref === cluster.id
                         )
-                        .sort((a, b) => a.sort_order - b.sort_order);
-                      if (!vorkommen.length) {
-                        throw new Error(`Sichtbares Thema ohne Core-Ausprägung: ${thema.id}`);
-                      }
-                      return {
-                        id: thema.id,
-                        title: thema.title,
-                        cores: vorkommen.map(ausprägung => {
+                        .sort((a, b) => a.sort_order - b.sort_order)
+                        .map(ausprägung => {
                           const core = coreNachId.get(ausprägung.core_ref);
                           return {
                             id: ausprägung.id,
+                            core_ref: ausprägung.core_ref,
                             identity_key: core.identity_key,
                             short_title: core.short_title,
                             title: core.title,
@@ -2049,15 +2045,13 @@
                             source_refs: ausprägung.source_refs
                           };
                         })
-                      };
-                    })
+                    }))
                 }))
             }))
-        };
+        }));
         return {
           schema_version: "3.0.0",
-          lernfeld,
-          lernfelder: lernfelderDatei.lernfelder
+          lernfelder
         };
       }
 
@@ -2077,32 +2071,50 @@
       }
 
       const datenpakete = await datenLaden();
-      const daten = datenZusammenbauen(datenpakete, angefragtesLernfeldId);
-      if (!daten.lernfeld?.kompetenzen) {
+      const daten = datenZusammenbauen(datenpakete);
+      aktiveDaten = daten;
+      if (!daten.lernfelder?.length) {
         throw new Error("Die normalisierten Datensätze konnten nicht zusammengesetzt werden.");
       }
       baumRendern(daten);
-      baumInteraktionenEinrichten();
-      const cores = [];
-      daten.lernfeld.kompetenzen.forEach(kompetenz => {
-        kompetenz.themencluster.forEach(cluster => {
-          cluster.themen.forEach(thema => {
-            if (thema.title) themaTitelZuId.set(thema.title, thema.id);
-            thema.cores.forEach(core => {
-              cores.push([
-                core.title || core.short_title,
-                farbeMischen(core.category_weights),
-                [core.topic_ref || thema.id],
-                cluster.id,
-                cluster.title,
-                core.identity_key,
-                core.content,
-                thema.title
-              ]);
+      const coresNachIdentität = new Map();
+      daten.lernfelder.forEach(lernfeld => {
+        lernfeld.kompetenzen.forEach(kompetenz => {
+          kompetenz.themencluster.forEach(cluster => {
+            cluster.themen.forEach(thema => {
+              if (thema.title) themaTitelZuId.set(thema.title, thema.id);
+              thema.cores.forEach(core => {
+                const schlüssel = core.core_ref || core.identity_key;
+                if (!coresNachIdentität.has(schlüssel)) {
+                  coresNachIdentität.set(schlüssel, {
+                    titel: core.title || core.short_title,
+                    farbe: farbeMischen(core.category_weights),
+                    themen: new Set(),
+                    clusterId: cluster.id,
+                    clusterTitel: cluster.title,
+                    coreId: core.identity_key,
+                    inhalt: core.content,
+                    themaTitel: thema.title
+                  });
+                }
+                coresNachIdentität.get(schlüssel).themen.add(
+                  core.topic_ref || thema.id
+                );
+              });
             });
           });
         });
       });
+      const cores = [...coresNachIdentität.values()].map(core => [
+        core.titel,
+        core.farbe,
+        [...core.themen],
+        core.clusterId,
+        core.clusterTitel,
+        core.coreId,
+        core.inhalt,
+        core.themaTitel
+      ]);
 
       const prototypStützwerte = [0, 10, 30, 50, 100];
       const beispielFortschritte = cores.map((core, index) =>
@@ -2442,6 +2454,523 @@ nachuntersuchung medical loop
         return [`core.${id}`, { hauptmotiv, aussage }];
       }));
 
+      const neueCoreIconSpezifikationen = Object.fromEntries(`
+kundenwunsch hand target
+anforderung clipboard target
+auswahlkriterium filter choice
+muss_kriterium checkbadge filter
+ce_kennzeichnung checkbadge building
+produktzertifikat checkbadge document
+schutzklasse shield stairs
+arbeitssichere_inbetriebnahme helmet check
+datenblatt document chart
+technische_kenngrosse chart wrench
+nutzwertanalyse balance star
+kriteriengewicht balance percent
+ergonomie person align
+barrierearme_bedienung access hand
+recyclingfahigkeit cycle leaf
+quantitativer_angebotsvergleich compare coin
+qualitativer_angebotsvergleich compare star
+bezugspreis cart coin
+lieferzuverlassigkeit box checkbadge
+zuschlagskalkulation chart plus
+verbindliches_angebot contract check
+kaufvertrag contract cart
+wareneingangsprufung box magnifier
+hardwareintegration gear link
+treiber gear arrows
+arbeitsplatzkonfiguration screen wrench
+funktionsprufung_arbeitsplatz screen checkbadge
+ubergabeprotokoll clipboard handshake
+benutzereinweisung speech screen
+verbesserungsvorschlag message up
+netzwerkanforderung hub clipboard
+leistungskriterium_netzwerk hub chart
+netzwerkadapter screen link
+netzwerkbetriebssystem screen gear
+physischer_netzwerkplan hub box
+logischer_netzwerkplan hub path
+osi_modell stairs link
+ethernet link arrows
+ipv4_adresse pin hub
+subnetzmaske filter hub
+dhcp hub outbound
+standardgateway gate outbound
+twisted_pair_kabel link split
+wlan cloud hub
+total_cost_of_ownership coin cycle
+energiebedarf_netzwerkclient bolt screen
+dns book globe
+fully_qualified_domain_name quote globe
+dateifreigabe document outbound
+netzwerkdrucker screen document
+authentisierung key person
+autorisierung lock choice
+host_firewall shield screen
+patchstand wrench clock
+icmp_echo message loop
+traceroute path hub
+loopback_test loop checkbadge
+portprufung gate magnifier
+netzwerk_prufprotokoll clipboard hub
+konfigurationsdokumentation document wrench
+netzwerkoptimierung hub up
+wirtschaftlichkeitsvergleich_netzwerk compare chart
+vertraulichkeit eye lock
+integritat shield checkbadge
+verfugbarkeit clock checkbadge
+it_sicherheitsleitlinie document compass
+sicherheitsrichtlinie document shield
+informationswert diamond document
+verantwortlicher_fur_informationswerte key diamond
+geltungsbereich gate grid
+systemgrenze gate compass
+schadensszenario warning eye
+schadenshohe warning chart
+schutzbedarf shield chart
+schutzbedarfskategorie shield funnel
+bedrohung warning outbound
+schwachstelle shield close
+eintrittswahrscheinlichkeit percent warning
+risikomatrix warning grid
+maximumprinzip up shield
+kumulationseffekt many plus
+verteilungseffekt split warning
+abhangigkeitsanalyse chain magnifier
+schutzbedarfsfeststellung magnifier shield
+bedrohungskatalog book warning
+begrundung_der_einstufung quote stairs
+analyseversion document clock
+soll_ist_abgleich_sicherheit compare shield
+sicherheitslucke openlock warning
+technische_sicherheitsmassnahme gear shield
+organisatorische_sicherheitsmassnahme hierarchy shield
+massnahmenverantwortung person clipboard
+wirksamkeitsprufung checkbadge magnifier
+kontinuierliche_sicherheitsverbesserung cycle up
+sicherheitsbewusstsein eye shield
+datum calendar document
+information document eye
+datenquelle enter document
+datenqualitat grid checkbadge
+csv grid quote
+json hierarchy document
+dateibasierte_speicherung document box
+datenbank store hierarchy
+entitat box diamond
+attribut quote box
+primarschlussel one key
+fremdschlussel key link
+change_request document choice
+akzeptanzkriterium check clipboard
+testfall clipboard magnifier
+grenzwerttest filter checkbadge
+crud cycle store
+validierung checkbadge gate
+select_abfrage magnifier store
+filterbedingung filter store
+funktion gear task
+modul box gear
+quellcodedokumentation gear pen
+benutzerdokumentation person book
+soll_ist_vergleich_test compare checkbadge
+testprotokoll_software clipboard checkbadge
+softwarefehler warning gear
+regressionstest loop magnifier
+traceability path clipboard
+abnahmetest handshake checkbadge
+retrospektive mirror cycle
+lessons_learned book mirror
+direkter_kundenkontakt speech person
+indirekter_kundenkontakt message group
+ticket clipboard message
+kategorisierung funnel clipboard
+service_level_agreement clock contract
+servicezeit calendar clock
+reaktionszeit timer enter
+losungszeit timer check
+incident warning clock
+service_request hand clipboard
+prioritat stairs flag
+dringlichkeit clock warning
+offene_frage question speech
+geschlossene_frage question lock
+first_level_support support one
+eskalation stairs support
+fehlerhypothese magnifier question
+ausschlussverfahren filter close
+workaround wrench path
+known_error warning book
+bearbeitungsstatus clock task
+statusmeldung message clock
+aktives_zuhoren speech eye
+deeskalation speech down
+losungsdokumentation document check
+ticketabschluss clipboard close
+servicefeedback message check
+first_contact_resolution handshake one
+sla_erfullungsgrad percent contract
+durchschnittliche_losungszeit chart timer
+wissensdatenbank book store
+problem_management warning cycle
+cyber_physisches_system gear globe
+eingebettetes_system gear box
+erweiterungspunkt plus hub
+schnittstellenanforderung link clipboard
+informationsfluss_cps message arrows
+regelkreis cycle gear
+energiefluss bolt arrows
+stofffluss box arrows
+sensor eye bolt
+messbereich chart filter
+aktor gear hand
+stellglied gear choice
+versorgungsspannung bolt enter
+signalpegel chart bolt
+softwarebibliothek book gear
+kommunikationsprotokoll message link
+pinbelegung link grid
+pull_up_widerstand bolt up
+i2c hub split
+spi arrows hub
+geratetreiber_cps gear key
+protokollimplementierung link wrench
+inbetriebnahmesequenz order gear
+fail_safe_zustand shield down
+messwert chart target
+messunsicherheit chart question
+elektrische_leistung bolt chart
+energiebilanz balance bolt
+betriebssicherheit_cps shield gear
+datensicherheit_cps lock gear
+messprotokoll_cps clipboard chart
+optimierungshypothese question up
+strukturierte_datenquelle grid enter
+semistrukturierte_datenquelle hierarchy enter
+dateiimport document enter
+programmierschnittstelle link screen
+datenaktualitat clock grid
+datenvollstandigkeit grid magnifier
+nutzungsrecht_an_daten contract grid
+zweckbindung target lock
+schema_mapping compare grid
+datentypkonvertierung arrows quote
+etl funnel arrows
+datenbereinigung wrench grid
+api_schlussel key screen
+transportverschlusselung lock arrows
+rollenbasierte_zugriffskontrolle person lock
+minimalprinzip filter minus
+rest_schnittstelle hub document
+paginierung order document
+normalisierung_von_datenwerten align grid
+deduplizierung compare one
+commit checkbadge plus
+merge link plus
+continuous_integration cycle link
+konfigurationsvariable wrench quote
+betriebsanleitung_datenpipeline arrows book
+schnittstellendokumentation document link
+datenherkunftsnachweis document path
+fehlerprotokoll_datenpipeline warning clipboard
+werkzeugkriterium wrench filter
+reproduzierbarer_build loop gear
+dokumentationsvollstandigkeit document checkbadge
+dokumentationsverstandlichkeit document align
+kommunikationsbeziehung message handshake
+bandbreitenbedarf arrows chart
+latenz clock link
+dienstverfugbarkeit clock store
+dns_dienst book hub
+dhcp_dienst hub clock
+webdienst globe gear
+verzeichnisdienst tree key
+subnetz hub gate
+vlan split hub
+routing path arrows
+statische_route path pin
+on_premises building store
+cloud_dienst cloud gear
+kapazitatsplanung chart compass
+skalierbarkeit up chart
+mac_adress_tabelle grid hub
+trunk_port link many
+router hub compass
+network_address_translation arrows globe
+dienstkonfiguration wrench store
+dienstabhangigkeit chain gear
+port_messung gate chart
+durchsatzmessung arrows timer
+paketfilter filter shield
+netzwerkzugangskontrolle gate key
+vpn lock globe
+tls lock handshake
+netzwerkabnahmetest hub checkbadge
+netzwerkdokumentation document hub
+erweiterbarkeit plus tree
+technische_schuld warning coin
+ist_prozess arrows mirror
+informationsobjekt document diamond
+bpmn arrows grid
+swimlane split arrows
+medienbruch close link
+prozessengpass gate arrows
+soll_prozess compass arrows
+prozessautomatisierung gear cycle
+persona person mirror
+user_journey person path
+wireframe screen pen
+prototyp wrench screen
+responsive_design screen arrows
+breakpoint screen split
+user_story speech clipboard
+product_backlog clipboard order
+formularvalidierung screen filter
+ereignisbehandlung bolt gear
+ui_komponente screen box
+anwendungszustand screen neutral
+datensparsame_voreinstellung filter lock
+einwilligungsdialog screen contract
+tastaturbedienbarkeit access key
+semantisches_markup document hierarchy
+usability_test person magnifier
+aufgabenerfolgsrate percent task
+ui_integrationstest link checkbadge
+end_to_end_test chain checkbadge
+prozesskostensatz coin gear
+prozesskostenreduktion coin down
+entwicklungskosten coin wrench
+amortisationsdauer clock coin
+applikationsserver store gear
+datenbankserver grid store
+virtuelle_maschine screen cloud
+container box shield
+hochverfugbarkeit clock many
+administrierbarkeit wrench building
+lizenzmetrik percent coin
+betriebskosten coin factory
+baseline_konfiguration compass wrench
+konfigurationsparameter wrench percent
+patch_management wrench cycle
+wartungsfenster calendar wrench
+recovery_point_objective pin document
+recovery_time_objective timer loop
+monitoring_metrik eye chart
+alarmgrenzwert warning filter
+service_account person gear
+secret_management key shield
+angriffsflache target warning
+hardening shield wrench
+health_check medical gear
+log_aggregation many document
+kapazitatsalarm chart warning
+eskalationsregel_betrieb stairs warning
+administrationsskript document task
+idempotenz loop one
+deklarative_konfiguration document target
+konfigurationsdrift wrench warning
+dry_run path check
+rollback loop down
+automatisierungsgrad percent gear
+zeitersparnis_durch_automatisierung clock up
+klassifikation funnel chart
+regression chart path
+clustering group grid
+anomalieerkennung warning magnifier
+ml_zielvariable chart flag
+erfolgsmetrik_ml checkbadge chart
+business_case_ml briefcase chart
+baseline_verfahren compass compare
+feature diamond grid
+label flag box
+trainingsdatensatz grid book
+testdatensatz_ml clipboard grid
+sampling_bias balance group
+klassenungleichgewicht balance chart
+personenbezug person contract
+fairnesskriterium balance checkbadge
+notebook book screen
+ml_bibliothek book chart
+ml_pipeline arrows funnel
+hyperparameter filter gear
+importer_ml enter grid
+schema_validierung hierarchy checkbadge
+feature_scaling chart align
+one_hot_encoding grid one
+precision percent target
+recall enter percent
+overfitting chart down
+kreuzvalidierung cycle checkbadge
+data_drift grid warning
+model_drift gear warning
+erklarbarkeit eye question
+human_in_the_loop person cycle
+cps_anwendungsfall gear target
+betriebsbedingung factory filter
+echtzeitanforderung timer bolt
+zuverlassigkeitsanforderung shield check
+mensch_maschine_schnittstelle person screen
+systemfeedback gear message
+ki_komponente gear chart
+autonomiegrad stairs gear
+edge_gerat pin gear
+gateway_cps gate gear
+publish_subscribe outbound group
+mqtt message hub
+ot_netz factory hub
+it_ot_ubergang link factory
+redundanz_cps many gear
+watchdog eye warning
+abtastrate timer chart
+kalibrierung wrench target
+pulsweitenmodulation bolt percent
+verriegelung lock bolt
+telemetrie chart outbound
+befehlsnachricht message bolt
+dashboard_cps screen chart
+alarmprioritat warning stairs
+hardware_in_the_loop_test gear loop
+systemintegrationstest_cps hub gear
+fehlerinjektion warning enter
+not_halt_konzept cross close
+wartungsanleitung_cps wrench book
+multimediale_betriebsdokumentation screen book
+menschliche_aufsicht person eye
+verantwortungszuordnung_ki key gear
+domanenobjekt globe box
+wertobjekt diamond box
+geschaftsregel briefcase document
+invariante lock checkbadge
+liste order box
+dictionary book key
+stack stairs box
+queue order arrows
+separation_of_concerns split gear
+kohasion link gear
+kopplung chain link
+dependency_injection enter link
+uml_klassendiagramm tree box
+uml_sequenzdiagramm stairs message
+inkrement plus cycle
+sprint timer cycle
+klasse box hierarchy
+interface gate document
+exception warning bolt
+fehlerbehandlung warning shield
+repository_pattern store shield
+object_relational_mapping compare store
+api_vertrag contract link
+openapi link book
+unit_test one checkbadge
+test_double mirror checkbadge
+integrationstest link magnifier
+testautomatisierung gear checkbadge
+code_coverage percent document
+testpyramide stairs checkbadge
+refactoring wrench gear
+definition_of_done flag checkbadge
+netzwerkzone gate hub
+datenflussanalyse arrows magnifier
+authentizitat key checkbadge
+verbindlichkeit contract lock
+angriffsvektor outbound warning
+exploit openlock bolt
+informationssicherheitsrisiko warning lock
+risikoeigentumer person warning
+risikovermeidung close warning
+risikominderung down warning
+risikoakzeptanz hand warning
+risikotransfer arrows shield
+defense_in_depth shield many
+demilitarisierte_zone gate shield
+mehrfaktor_authentisierung many key
+privileged_access_management crown lock
+intrusion_detection_system eye hub
+intrusion_prevention_system shield hub
+endpoint_detection_and_response screen warning
+secure_configuration wrench shield
+incident_response_plan warning order
+sicherheitsrolle person shield
+security_awareness eye speech
+phishing_simulation message warning
+vulnerability_scan magnifier openlock
+penetrationstest key magnifier
+sicherheitsniveau stairs shield
+kontrollwirksamkeit checkbadge shield
+risikobericht warning document
+massnahmenplan_sicherheit clipboard shield
+relative_sicherheit balance shield
+angemessenheit_einer_massnahme balance wrench
+event_log calendar message
+case_id key clipboard
+liegezeit clock pause
+datenerzeuger factory document
+datennutzer person document
+deskriptive_analyse chart eye
+prozesskennzahl chart gear
+prozessschnittstelle gate link
+system_of_record crown store
+batch_verarbeitung many arrows
+ereignisgesteuerte_verarbeitung bolt cycle
+kosten_nutzen_analyse balance coin
+nutzwert_prozesslosung star gear
+machbarkeitsnachweis document briefcase
+proof_of_concept wrench check
+workflow_engine gear order
+geschaftsprozessregel arrows document
+message_queue message order
+webhook outbound link
+soll_prozessmodell compass grid
+datenflussdiagramm arrows screen
+betriebskonzept_prozesslosung factory compass
+administrationshandbuch_prozesslosung factory book
+stakeholderanalyse_prozess group magnifier
+change_kommunikation message wrench
+pilotbetrieb flag factory
+hypercare_phase support clock
+return_on_investment coin up
+automatisierungsnutzen star up
+ressourcenverbrauch_prozess leaf gear
+rebound_effekt_digitalisierung loop leaf
+projektauftrag clipboard flag
+projektstakeholder group clipboard
+anforderungsanalyse magnifier target
+projektrahmenbedingung gate clipboard
+projektziel target flag
+liefergegenstand box flag
+schulungsbedarf school question
+abnahmekriterium checkbadge handshake
+arbeitspaket box task
+meilenstein pin flag
+projektablaufplan calendar arrows
+kritischer_pfad path warning
+ressourcenplan group calendar
+kapazitatsabgleich balance many
+aufwandsschatzung timer coin
+projektkosten clipboard coin
+losungsvariante choice wrench
+entscheidungsmatrix grid choice
+datenschutzprufung lock magnifier
+sicherheitsanforderung shield clipboard
+leistungsbeschreibung document star
+projektangebot contract briefcase
+projektimplementierung gear flag
+projektqualitatssicherung checkbadge flag
+projektprasentation speech flag
+benutzerschulung school person
+produktubergabe box handshake
+projektdokumentation document flag
+projektzielerreichung checkbadge target
+projektwirtschaftlichkeit coin target
+projektkundenfeedback speech group
+projektreflexion mirror flag
+      `.trim().split("\n").map(zeile => {
+        const [id, hauptmotiv, aussage] = zeile.trim().split(/\s+/);
+        return [`core.${id}`, { hauptmotiv, aussage }];
+      }));
+      Object.assign(coreIconSpezifikationen, neueCoreIconSpezifikationen);
+
       const iconKompositionsFamilien = {
         schutz: new Set([
           "shield", "lock", "openlock", "helmet", "warning", "medical", "cross"
@@ -2773,7 +3302,7 @@ nachuntersuchung medical loop
           "aria-pressed",
           String(fortschrittPrototypAktiv)
         );
-        fortschrittslegende.hidden = !fortschrittPrototypAktiv;
+        legendenSichtbarkeitAnwenden();
         knotenElemente.forEach((punkt, index) => {
           punkt.setAttribute("aria-label", coreBeschriftung(index));
         });
@@ -3079,7 +3608,7 @@ nachuntersuchung medical loop
         aktivesThema = zurücksetzen ? null : fokusId;
         aktiveThemenIds = new Set(zurücksetzen ? [] : themaIds);
 
-        document.querySelectorAll(".thema-fokus").forEach(schaltfläche => {
+        document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
           schaltfläche.setAttribute(
             "aria-pressed",
             String(!zurücksetzen && schaltfläche === auslöser)
@@ -3093,7 +3622,7 @@ nachuntersuchung medical loop
         if (!aktivesThema) return;
         aktivesThema = null;
         aktiveThemenIds = new Set();
-        document.querySelectorAll(".thema-fokus").forEach(schaltfläche => {
+        document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
           schaltfläche.setAttribute("aria-pressed", "false");
         });
         fokusDarstellungAktualisieren();
@@ -3362,7 +3891,10 @@ nachuntersuchung medical loop
 
       viewport.addEventListener("pointerup", ziehenBeenden);
       viewport.addEventListener("pointercancel", ziehenBeenden);
-      window.addEventListener("resize", einpassen);
+      window.addEventListener("resize", () => {
+        legendenPositionAktualisieren();
+        einpassen();
+      });
       einpassen();
       simulationStarten({ automatischEinpassen: true, schritte: 120 });
 

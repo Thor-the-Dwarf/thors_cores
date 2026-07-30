@@ -1,0 +1,123 @@
+:root {
+  --app-bar-höhe: calc(62px + env(safe-area-inset-bottom, 0px));
+}
+
+.top-app-bar__settings {
+  position: absolute;
+  right: max(10px, env(safe-area-inset-right, 0px));
+  bottom: 7px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid rgba(183, 195, 220, 0.2);
+  border-radius: 11px;
+  color: #eef2f9;
+  background: rgba(255, 255, 255, 0.04);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.top-app-bar__settings:hover,
+.top-app-bar__settings:focus-visible {
+  border-color: rgba(130, 166, 255, 0.58);
+  background: rgba(130, 166, 255, 0.14);
+  outline: none;
+}
+
+.bottom-app-bar {
+  position: fixed;
+  z-index: 90;
+  inset: auto 0 0;
+  min-height: var(--app-bar-höhe);
+  padding: 6px max(10px, env(safe-area-inset-right, 0px))
+    calc(6px + env(safe-area-inset-bottom, 0px))
+    max(10px, env(safe-area-inset-left, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-top: 1px solid rgba(183, 195, 220, 0.2);
+  color: #eef2f9;
+  background: rgba(10, 14, 23, 0.96);
+  box-shadow: 0 -12px 34px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(14px);
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.bottom-app-bar--mit-menü {
+  justify-content: space-between;
+}
+
+.bottom-app-bar__navigation,
+.bottom-app-bar__menübereich {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.bottom-app-bar__aktion,
+.bottom-app-bar__menü {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(183, 195, 220, 0.2);
+  border-radius: 12px;
+  color: #eef2f9;
+  background: rgba(255, 255, 255, 0.04);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.bottom-app-bar__aktion:hover,
+.bottom-app-bar__aktion:focus-visible,
+.bottom-app-bar__menü:hover,
+.bottom-app-bar__menü:focus-visible {
+  border-color: rgba(130, 166, 255, 0.58);
+  background: rgba(130, 166, 255, 0.14);
+  outline: none;
+}
+
+.bottom-app-bar__aktion[aria-current="page"] {
+  border-color: rgba(70, 215, 255, 0.65);
+  color: #a7ecff;
+  background: rgba(70, 215, 255, 0.13);
+  cursor: default;
+}
+
+.bottom-app-bar svg,
+.top-app-bar__settings svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.burger-icon {
+  display: grid;
+  gap: 4px;
+  width: 20px;
+}
+
+.burger-icon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+@media (max-width: 520px) {
+  .bottom-app-bar__aktion,
+  .bottom-app-bar__menü {
+    width: 42px;
+    height: 42px;
+  }
+}

@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Artefaktansicht · Thors Core</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --hintergrund: #080d18;
+      --fläche: #111a2b;
+      --text: #f5f7fb;
+      --leise: #9cabc1;
+      --cyan: #46d7ff;
+      --violett: #9c66ef;
+      --top-app-bar-höhe: calc(52px + env(safe-area-inset-top, 0px));
+      --app-bar-höhe: calc(62px + env(safe-area-inset-bottom, 0px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(70, 215, 255, 0.09), transparent 34rem),
+        var(--hintergrund);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .top-app-bar {
+      position: fixed;
+      z-index: 20;
+      inset: 0 0 auto;
+      min-height: var(--top-app-bar-höhe);
+      padding: calc(8px + env(safe-area-inset-top, 0px)) 64px 8px 16px;
+      display: grid;
+      place-items: center;
+      border-bottom: 1px solid rgba(183, 195, 220, 0.2);
+      background: rgba(10, 14, 23, 0.96);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(14px);
+    }
+
+    .top-app-bar__text {
+      margin: 0;
+      font-size: clamp(0.78rem, 2.4vw, 0.92rem);
+      font-weight: 850;
+      text-align: center;
+    }
+
+    main {
+      width: min(1100px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: calc(var(--top-app-bar-höhe) + 28px) 0 calc(var(--app-bar-höhe) + 34px);
+    }
+
+    .kopf {
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 14px 18px;
+      align-items: center;
+    }
+
+    .zurück {
+      min-height: 44px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(183, 195, 220, 0.3);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(17, 26, 43, 0.78);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .überschrift {
+      min-width: 0;
+    }
+
+    .form {
+      margin: 0 0 5px;
+      color: var(--cyan);
+      font-size: 0.78rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.35rem, 4vw, 2.55rem);
+      line-height: 1.08;
+      overflow-wrap: anywhere;
+    }
+
+    .metadaten {
+      grid-column: 2;
+      margin: 0;
+      color: var(--leise);
+      font-size: 0.85rem;
+    }
+
+    .vorschau {
+      overflow: hidden;
+      border: 1px solid rgba(183, 195, 220, 0.2);
+      border-radius: 22px;
+      background: rgba(17, 26, 43, 0.78);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+    }
+
+    .vorschau__leiste {
+      min-height: 48px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(183, 195, 220, 0.15);
+      color: var(--leise);
+      font-size: 0.76rem;
+      font-weight: 750;
+    }
+
+    .status {
+      padding: 5px 9px;
+      border: 1px solid rgba(70, 215, 255, 0.28);
+      border-radius: 999px;
+      color: #c8f4ff;
+      background: rgba(70, 215, 255, 0.08);
+    }
+
+    .dokument {
+      padding: clamp(14px, 3vw, 30px);
+      background:
+        linear-gradient(135deg, rgba(156, 102, 239, 0.055), transparent 42%),
+        #0b1220;
+    }
+
+    .dokument svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 13px;
+      background: #f7f8fb;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
+    }
+
+    .hinweis {
+      margin: 16px 4px 0;
+      color: var(--leise);
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+
+    .fehler {
+      padding: 30px;
+      border: 1px solid rgba(255, 99, 132, 0.3);
+      border-radius: 18px;
+      background: rgba(255, 99, 132, 0.08);
+    }
+
+    @media (max-width: 600px) {
+      main {
+        width: min(100% - 20px, 1100px);
+      }
+
+      .kopf {
+        grid-template-columns: 1fr;
+      }
+
+      .zurück {
+        width: max-content;
+      }
+
+      .metadaten {
+        grid-column: 1;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="app-navigation.css">
+</head>
+<body>
+  <header class="top-app-bar">
+    <p class="top-app-bar__text">Wiederholung ist die Mutter des Lernens</p>
+    <a class="top-app-bar__settings" href="index.html#einstellungen"
+       aria-label="Einstellungen öffnen">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.86 2.86-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.55v-.09A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.86-2.86.06-.06A1.7 1.7 0 0 0 4.1 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H2.3V9.55h.1A1.7 1.7 0 0 0 4.1 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06L6.56 3.7l.06.06A1.7 1.7 0 0 0 8.5 4.1a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V2.3h4.05v.1A1.7 1.7 0 0 0 15 4.1a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.86 2.86-.06.06A1.7 1.7 0 0 0 19.4 8.5a1.7 1.7 0 0 0 .6 1 1.7 1.7 0 0 0 1.1.4h.1v4.05h-.1A1.7 1.7 0 0 0 19.4 15Z"></path>
+      </svg>
+    </a>
+  </header>
+  <main>
+    <div id="inhalt">
+      <div class="kopf">
+        <a class="zurück" href="artefakte.html">← Artefakte</a>
+        <div class="überschrift">
+          <p id="form" class="form"></p>
+          <h1 id="titel"></h1>
+        </div>
+        <p id="metadaten" class="metadaten"></p>
+      </div>
+      <section class="vorschau" aria-labelledby="titel">
+        <div class="vorschau__leiste">
+          <span>Browserbasierte Anschauungsansicht</span>
+          <span id="status" class="status"></span>
+        </div>
+        <div class="dokument">
+          <svg id="dokumentgrafik" viewBox="0 0 1000 650" role="img"
+               aria-labelledby="svg-titel svg-beschreibung">
+            <title id="svg-titel"></title>
+            <desc id="svg-beschreibung">Schematische Vorschau der Dokumentform.</desc>
+            <rect width="1000" height="650" rx="16" fill="#f7f8fb"/>
+            <rect width="1000" height="82" rx="16" fill="#17233a"/>
+            <rect y="66" width="1000" height="16" fill="#17233a"/>
+            <circle cx="42" cy="41" r="7" fill="#46d7ff"/>
+            <text id="svg-form" x="70" y="49" fill="#f7f8fb" font-size="22"
+                  font-family="system-ui" font-weight="700"></text>
+            <text id="svg-zweck" x="55" y="132" fill="#17233a" font-size="27"
+                  font-family="system-ui" font-weight="800"></text>
+
+            <g id="ansicht-checkliste">
+              <rect x="55" y="165" width="890" height="410" rx="12" fill="#fff" stroke="#d7deea"/>
+              <g font-family="system-ui" font-size="18" fill="#26344c">
+                <rect x="85" y="205" width="24" height="24" rx="4" fill="#e9f9fd" stroke="#46b7d7"/>
+                <path d="m91 216 6 6 13-16" fill="none" stroke="#1689aa" stroke-width="4"/>
+                <text x="130" y="224">Dokumentkopf und Verantwortlichkeit geprüft</text>
+                <rect x="85" y="270" width="24" height="24" rx="4" fill="#e9f9fd" stroke="#46b7d7"/>
+                <path d="m91 281 6 6 13-16" fill="none" stroke="#1689aa" stroke-width="4"/>
+                <text x="130" y="289">Inhalt vollständig und nachvollziehbar</text>
+                <rect x="85" y="335" width="24" height="24" rx="4" fill="#fff" stroke="#8d9bb0"/>
+                <text x="130" y="354">Nachweise und Freigabe dokumentiert</text>
+                <rect x="85" y="415" width="400" height="110" rx="8" fill="#f6f8fb" stroke="#d7deea"/>
+                <text x="105" y="447" font-weight="700">Prüfvermerk</text>
+                <line x1="105" y1="476" x2="455" y2="476" stroke="#bdc7d6"/>
+                <line x1="105" y1="500" x2="380" y2="500" stroke="#bdc7d6"/>
+              </g>
+            </g>
+
+            <g id="ansicht-test">
+              <rect x="55" y="165" width="890" height="410" rx="12" fill="#fff" stroke="#d7deea"/>
+              <g font-family="system-ui" fill="#26344c">
+                <text x="85" y="205" font-size="17" font-weight="800">Voraussetzung</text>
+                <rect x="85" y="220" width="830" height="48" rx="7" fill="#f2f5f9"/>
+                <text x="105" y="251" font-size="17">Definierter Ausgangszustand und gültige Testdaten</text>
+                <text x="85" y="310" font-size="17" font-weight="800">Testschritte und erwartetes Ergebnis</text>
+                <rect x="85" y="330" width="830" height="58" rx="7" fill="#f2f5f9"/>
+                <text x="105" y="365" font-size="17">1 · Eingabe ausführen  →  erwartete Systemreaktion prüfen</text>
+                <rect x="85" y="405" width="590" height="58" rx="7" fill="#f2f5f9"/>
+                <text x="105" y="440" font-size="17">2 · Ergebnis und Abweichung dokumentieren</text>
+                <rect x="700" y="405" width="215" height="58" rx="7" fill="#e5f7ed" stroke="#75c99b"/>
+                <text x="746" y="440" font-size="18" font-weight="800" fill="#23754a">BESTANDEN</text>
+              </g>
+            </g>
+
+            <g id="ansicht-tabelle">
+              <rect x="55" y="165" width="890" height="410" rx="12" fill="#fff" stroke="#d7deea"/>
+              <rect x="75" y="190" width="850" height="48" rx="6" fill="#dff5fb"/>
+              <g stroke="#cbd5e2" fill="none">
+                <path d="M75 238h850M75 300h850M75 362h850M75 424h850M75 486h850M75 548h850"/>
+                <path d="M300 190v358M610 190v358M790 190v358"/>
+              </g>
+              <g font-family="system-ui" font-size="16" fill="#26344c">
+                <text x="95" y="221" font-weight="800">Kriterium</text>
+                <text x="320" y="221" font-weight="800">Beschreibung</text>
+                <text x="630" y="221" font-weight="800">Nachweis</text>
+                <text x="810" y="221" font-weight="800">Status</text>
+                <text x="95" y="276">01</text><text x="320" y="276">Erster dokumentierter Eintrag</text>
+                <text x="810" y="276" fill="#23754a">erfüllt</text>
+                <text x="95" y="338">02</text><text x="320" y="338">Zweiter dokumentierter Eintrag</text>
+                <text x="810" y="338" fill="#a36d14">offen</text>
+              </g>
+            </g>
+
+            <g id="ansicht-diagramm">
+              <rect x="55" y="165" width="890" height="410" rx="12" fill="#fff" stroke="#d7deea"/>
+              <g fill="none" stroke="#798ba7" stroke-width="3">
+                <path d="M260 275h150M590 275h150"/>
+                <path d="M500 350v90"/>
+              </g>
+              <g font-family="system-ui" font-size="18" font-weight="750" text-anchor="middle">
+                <rect x="90" y="230" width="170" height="90" rx="12" fill="#e6f8fc" stroke="#46b7d7"/>
+                <text x="175" y="282" fill="#1b5162">Ausgangspunkt</text>
+                <rect x="410" y="230" width="180" height="90" rx="12" fill="#eee7fb" stroke="#9c66ef"/>
+                <text x="500" y="282" fill="#50317e">Verarbeitung</text>
+                <rect x="740" y="230" width="170" height="90" rx="12" fill="#e5f7ed" stroke="#75c99b"/>
+                <text x="825" y="282" fill="#23754a">Ergebnis</text>
+                <rect x="410" y="440" width="180" height="78" rx="39" fill="#f7eddc" stroke="#d9a651"/>
+                <text x="500" y="486" fill="#7a5418">Entscheidung</text>
+              </g>
+            </g>
+
+            <g id="ansicht-code">
+              <rect x="55" y="165" width="890" height="410" rx="12" fill="#111827"/>
+              <rect x="55" y="165" width="890" height="42" rx="12" fill="#202b3e"/>
+              <circle cx="82" cy="186" r="6" fill="#ff6b6b"/>
+              <circle cx="103" cy="186" r="6" fill="#ffd166"/>
+              <circle cx="124" cy="186" r="6" fill="#72d69a"/>
+              <g font-family="ui-monospace, monospace" font-size="18">
+                <text x="90" y="252" fill="#9ca3af">01</text>
+                <text x="140" y="252" fill="#c4b5fd">dokument</text>
+                <text x="245" y="252" fill="#e5e7eb">= {</text>
+                <text x="90" y="292" fill="#9ca3af">02</text>
+                <text x="170" y="292" fill="#7dd3fc">"zweck"</text>
+                <text x="265" y="292" fill="#e5e7eb">:</text>
+                <text x="290" y="292" fill="#86efac">"nachvollziehbarer Nachweis"</text>
+                <text x="90" y="332" fill="#9ca3af">03</text>
+                <text x="170" y="332" fill="#7dd3fc">"status"</text>
+                <text x="265" y="332" fill="#e5e7eb">:</text>
+                <text x="290" y="332" fill="#86efac">"geprüft"</text>
+                <text x="90" y="372" fill="#9ca3af">04</text>
+                <text x="140" y="372" fill="#e5e7eb">}</text>
+              </g>
+            </g>
+
+            <g id="ansicht-text">
+              <rect x="145" y="165" width="710" height="410" rx="8" fill="#fff" stroke="#d7deea"/>
+              <rect x="190" y="205" width="310" height="16" rx="8" fill="#23324c"/>
+              <rect x="190" y="245" width="590" height="9" rx="5" fill="#c5cedb"/>
+              <rect x="190" y="270" width="560" height="9" rx="5" fill="#c5cedb"/>
+              <rect x="190" y="295" width="585" height="9" rx="5" fill="#c5cedb"/>
+              <rect x="190" y="340" width="240" height="13" rx="7" fill="#5c7192"/>
+              <rect x="190" y="375" width="590" height="9" rx="5" fill="#c5cedb"/>
+              <rect x="190" y="400" width="535" height="9" rx="5" fill="#c5cedb"/>
+              <rect x="190" y="425" width="570" height="9" rx="5" fill="#c5cedb"/>
+              <rect x="190" y="470" width="590" height="62" rx="8" fill="#eaf7fb" stroke="#9fd8e7"/>
+            </g>
+          </svg>
+        </div>
+      </section>
+      <p class="hinweis">Diese eigenständige Browseransicht veranschaulicht Form und Zweck der
+        tatsächlich vorhandenen Vorlage. Sie verändert und veröffentlicht die Quelldatei nicht.</p>
+    </div>
+  </main>
+  <footer class="bottom-app-bar" aria-label="App-Navigation">
+    <nav class="bottom-app-bar__navigation" aria-label="Seitennavigation">
+      <a class="bottom-app-bar__aktion" href="index.html" aria-label="Vault öffnen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.4"></circle><circle cx="17.5" cy="6.5" r="2.4"></circle><circle cx="17.5" cy="17.5" r="2.4"></circle><path d="m8.2 10.9 7.1-3.4M8.2 13.1l7.1 3.4"></path></svg>
+      </a>
+      <a class="bottom-app-bar__aktion" href="artefakte.html" aria-label="Artefakte öffnen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5h8v2M3 12h18M10 12v2h4v-2"></path></svg>
+      </a>
+      <a class="bottom-app-bar__aktion" href="doom-scroll-quiz.html"
+         aria-label="Doom Scroll Quiz öffnen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10M9 8h6M12 7v10m-3.5-3.5L12 17l3.5-3.5M7 20h10"></path></svg>
+      </a>
+    </nav>
+  </footer>
+  <script>
+    (async () => {
+      "use strict";
+
+      const FORMEN = {
+        bpmn: "BPMN-Prozessmodell", css: "Stylesheet", csv: "CSV-Datei",
+        docx: "Textdokument", drawio: "Diagrammdatei", html: "HTML-Dokument",
+        ini: "Konfigurationsdatei", json: "JSON-Datei", md: "Markdown-Dokument",
+        puml: "PlantUML-Diagramm", py: "Python-Datei", sql: "SQL-Datei",
+        txt: "Textdatei", xlsx: "Arbeitsmappe"
+      };
+      const BEREICHE = {
+        analysen: "Analyse-Tools", plaene: "Planungs-Tools",
+        umsetzung: "Umsetzungs-Tools", tests: "Test-Tools",
+        abschluss: "Abschluss-Tools", qualitaet: "Qualitätsvorgaben",
+        wartung: "Wartungs-Tools"
+      };
+      const parameter = new URLSearchParams(location.search);
+      const dateiname = parameter.get("datei") || "";
+      const bereich = parameter.get("bereich") || "";
+      const relevant = parameter.get("relevant") === "true";
+      const endung = dateiname.match(/\.([^.]+)$/)?.[1].toLowerCase() || "";
+      const form = FORMEN[endung];
+      const zweck = dokumentzweck(dateiname);
+
+      const istBekannteVorlage = await artefaktIstBekannt(
+        dateiname,
+        bereich,
+        relevant
+      );
+      if (!dateiname || !form || !BEREICHE[bereich] || !zweck || !istBekannteVorlage) {
+        document.querySelector("#inhalt").innerHTML =
+          '<div class="fehler"><h1>Artefakt nicht gefunden</h1>' +
+          '<p>Diese Ansichtsadresse gehört zu keiner unterstützten Vorlage.</p>' +
+          '<a class="zurück" href="artefakte.html">← Zur Artefaktübersicht</a></div>';
+        return;
+      }
+
+      document.title = `${zweck} · Artefaktansicht`;
+      document.querySelector("#form").textContent = form;
+      document.querySelector("#titel").textContent = zweck;
+      document.querySelector("#metadaten").textContent =
+        `${BEREICHE[bereich]} · Verifizierte Dokumentvorlage`;
+      document.querySelector("#status").textContent = relevant
+        ? "🔥 prüfungsrelevant"
+        : "Anschauungsmaterial";
+      document.querySelector("#svg-form").textContent = form;
+      document.querySelector("#svg-zweck").textContent = kürzen(zweck, 56);
+      document.querySelector("#svg-titel").textContent = `${form}: ${zweck}`;
+
+      const ansicht = ansichtFür(dateiname, endung);
+      document.querySelectorAll("#dokumentgrafik > g").forEach(gruppe => {
+        gruppe.style.display = gruppe.id === `ansicht-${ansicht}` ? "block" : "none";
+      });
+
+      function ansichtFür(name, dateiendung) {
+        const titel = name.toLowerCase();
+        if (/checkliste|vollständigkeitscheck/.test(titel)) return "checkliste";
+        if (/testfall|testprotokoll|nachtest|abnahme/.test(titel)) return "test";
+        if (["bpmn", "drawio", "puml"].includes(dateiendung)) return "diagramm";
+        if (["xlsx", "csv"].includes(dateiendung)) return "tabelle";
+        if (["css", "html", "ini", "json", "py", "sql"].includes(dateiendung)) return "code";
+        return "text";
+      }
+
+      async function artefaktIstBekannt(name, bereichsschlüssel, istRelevant) {
+        try {
+          const übersicht = await fetch("artefakte.html").then(antwort => {
+            if (!antwort.ok) throw new Error("Artefaktkatalog nicht erreichbar");
+            return antwort.text();
+          });
+          const katalogTreffer = übersicht.match(
+            /const baumDaten = (\{[\s\S]*?\n      \});\n\n      const FACHRICHTUNG/
+          );
+          if (!katalogTreffer) return false;
+          const katalog = Function(`"use strict"; return (${katalogTreffer[1]})`)();
+          const gruppe = istRelevant ? "Prüfungsrelevante" : "Weitere";
+          return katalog[bereichsschlüssel]?.[gruppe]?.includes(name) === true;
+        } catch {
+          return false;
+        }
+      }
+
+      function dokumentzweck(name) {
+        const roh = name.replace(/^_+/, "").replace(/\.[^.]+$/, "").replace(/_/g, " ");
+        const testfall = roh.match(/^Testfall (.+)$/i);
+        if (testfall) return `Testfallbeschreibung – ${testfall[1]}`;
+        if (/^FIAE test /i.test(roh)) return roh.replace(/^FIAE test /i, "FIAE Test – ");
+        if (/^beispiel import$/i.test(roh)) return "Beispieldaten für den Import";
+        if (/^beispiel export$/i.test(roh)) return "Beispieldaten für den Export";
+        if (/^demo daten$/i.test(roh)) return "Demodaten";
+        if (/^pytest$/i.test(roh)) return "Pytest-Konfiguration";
+        return roh;
+      }
+
+      function kürzen(text, länge) {
+        return text.length > länge ? `${text.slice(0, länge - 1)}…` : text;
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -3492,14 +3492,13 @@ projektreflexion mirror flag
         thema: { breite: 96, höhe: 70, radius: 54 },
         core: { breite: 44, höhe: 44, radius: 31 }
       };
-      const layoutSpalten = {
-        lernfeld: { startX: 360, schrittX: 250 },
-        kompetenz: { startX: 1450, schrittX: 250 },
-        themencluster: { startX: 2750, schrittX: 225 },
-        thema: { startX: 4300, schrittX: 190 },
-        core: { startX: 6400, schrittX: 150 }
+      const layoutBereiche = {
+        lernfeld: { startX: 360, endeX: 1160, maximaleReihen: 8 },
+        kompetenz: { startX: 1320, endeX: 2460, maximaleReihen: 14 },
+        themencluster: { startX: 2600, endeX: 4020, maximaleReihen: 22 },
+        thema: { startX: 4140, endeX: 6120, maximaleReihen: 28 },
+        core: { startX: 6040, endeX: 8840, maximaleReihen: 32 }
       };
-      const MAXIMALE_REIHEN = 54;
       const indicesNachTyp = new Map(
         Object.keys(knotenGrößen).map(typ => [typ, []])
       );
@@ -3509,16 +3508,29 @@ projektreflexion mirror flag
 
       const positionen = new Array(graphKnoten.length);
       indicesNachTyp.forEach((indizes, typ) => {
-        const layout = layoutSpalten[typ];
-        const reihen = Math.min(MAXIMALE_REIHEN, indizes.length);
+        const layout = layoutBereiche[typ];
+        const reihen = Math.min(layout.maximaleReihen, indizes.length);
+        const spalten = Math.ceil(indizes.length / reihen);
+        const schrittX = spalten <= 1
+          ? 0
+          : (layout.endeX - layout.startX) / (spalten - 1);
         const nutzhöhe = WELT_HÖHE - 420;
         indizes.forEach((graphIndex, typIndex) => {
-          const spalte = Math.floor(typIndex / MAXIMALE_REIHEN);
-          const reihe = typIndex % MAXIMALE_REIHEN;
-          const ankerX = layout.startX + spalte * layout.schrittX;
-          const ankerY = 210 + (
-            reihen <= 1 ? nutzhöhe / 2 : reihe * nutzhöhe / (reihen - 1)
+          const spalte = Math.floor(typIndex / reihen);
+          const reihe = typIndex % reihen;
+          const reihenInSpalte = Math.min(
+            reihen,
+            indizes.length - spalte * reihen
           );
+          const xWelle = Math.sin((reihe + 1) * 1.73 + spalte) * 18;
+          const yVersatz = (spalte % 2 === 0 ? -0.16 : 0.32)
+            * nutzhöhe / Math.max(2, reihenInSpalte);
+          const ankerX = layout.startX + spalte * schrittX + xWelle;
+          const ankerY = 210 + (
+            reihenInSpalte <= 1
+              ? nutzhöhe / 2
+              : reihe * nutzhöhe / (reihenInSpalte - 1)
+          ) + yVersatz;
           positionen[graphIndex] = {
             x: ankerX,
             y: ankerY,
@@ -3803,8 +3815,8 @@ projektreflexion mirror flag
 
         positionen.forEach(punkt => {
           if (punkt.fixiert) return;
-          punkt.vx += (punkt.ankerX - punkt.x) * 0.012 * alpha;
-          punkt.vy += (punkt.ankerY - punkt.y) * 0.006 * alpha;
+          punkt.vx += (punkt.ankerX - punkt.x) * 0.009 * alpha;
+          punkt.vy += (punkt.ankerY - punkt.y) * 0.0045 * alpha;
           punkt.vx *= 0.76;
           punkt.vy *= 0.76;
           punkt.x = Math.max(

@@ -535,6 +535,7 @@
       position: relative;
       min-width: 0;
       overflow: hidden;
+      background-color: #080b11;
       background-image:
         linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
@@ -753,7 +754,7 @@
       color: #eef2f9;
       background: transparent;
       font: inherit;
-      cursor: grab;
+      cursor: pointer;
       transform: translate(-50%, -50%);
       isolation: isolate;
       transition: transform 140ms ease, opacity 180ms ease;
@@ -798,12 +799,6 @@
       z-index: 15;
       outline: none;
       transform: translate(-50%, -50%) scale(1.06);
-    }
-
-    .vault-knoten.wird-gezogen {
-      z-index: 18;
-      cursor: grabbing;
-      transform: translate(-50%, -50%) scale(1.08);
     }
 
     .vault-knoten.abgeblendet {
@@ -1617,7 +1612,6 @@
       let aktivesThema = null;
       let aktiveThemenIds = new Set();
       let aktiverCoreIndex = null;
-      let unterdrückterCoreKlick = null;
       let fortschrittPrototypAktiv = true;
       let legendeEingeblendet = false;
       let rasterEingeblendet = true;
@@ -3931,20 +3925,12 @@ projektreflexion mirror flag
       raster.addEventListener("focusout", ereignis => {
         if (ereignis.target.closest(".core-karte")) tooltip.classList.remove("sichtbar");
       });
-      raster.addEventListener("pointerdown", ereignis => {
-        const punkt = ereignis.target.closest(".vault-knoten");
-        if (punkt) knotenZiehenStarten(ereignis, Number(punkt.dataset.index), punkt);
-      });
       raster.addEventListener("click", ereignis => {
         const punkt = ereignis.target.closest(".core-karte");
         if (!punkt) return;
         ereignis.stopPropagation();
         if (aktivesThema) return;
         const index = Number(punkt.dataset.index);
-        if (unterdrückterCoreKlick === index) {
-          unterdrückterCoreKlick = null;
-          return;
-        }
         coreMenüUmschalten(index);
       });
 
@@ -4851,8 +4837,6 @@ projektreflexion mirror flag
       let letzterPunkt = null;
       let hintergrundStartPunkt = null;
       let hintergrundBewegt = false;
-      let gezogenerKnoten = null;
-      let dragDarstellungsFrame = null;
       const vaultZeiger = new Map();
       let vaultPinch = null;
 
@@ -4896,45 +4880,6 @@ projektreflexion mirror flag
         verschiebungX = viewport.clientWidth / 2 - graphMitteX * zoom;
         verschiebungY = viewport.clientHeight / 2 - graphMitteY * zoom;
         transformationAnwenden();
-      }
-
-      function knotenZiehenStarten(ereignis, index, element) {
-        if (ereignis.button !== 0) return;
-        ereignis.preventDefault();
-        ereignis.stopPropagation();
-        gezogenerKnoten = {
-          index,
-          element,
-          pointerId: ereignis.pointerId,
-          startX: ereignis.clientX,
-          startY: ereignis.clientY,
-          ursprungX: positionen[index].x,
-          ursprungY: positionen[index].y,
-          zielX: positionen[index].x,
-          zielY: positionen[index].y,
-          aktiv: false
-        };
-        element.setPointerCapture(ereignis.pointerId);
-      }
-
-      function gezogenenKnotenPositionAnwenden() {
-        if (!gezogenerKnoten?.aktiv) return;
-        const punkt = positionen[gezogenerKnoten.index];
-        punkt.fixiert = true;
-        punkt.vx = 0;
-        punkt.vy = 0;
-        punkt.x = gezogenerKnoten.zielX;
-        punkt.y = gezogenerKnoten.zielY;
-      }
-
-      function dragDarstellungAnfordern() {
-        gezogenenKnotenPositionAnwenden();
-        if (dragDarstellungsFrame !== null) return;
-        const index = gezogenerKnoten.index;
-        dragDarstellungsFrame = requestAnimationFrame(() => {
-          dragDarstellungsFrame = null;
-          graphElementeAktualisieren([index]);
-        });
       }
 
       function zoomSetzen(neuerZoom, fokusX, fokusY) {
@@ -5007,22 +4952,6 @@ projektreflexion mirror flag
             return;
           }
         }
-        if (gezogenerKnoten && ereignis.pointerId === gezogenerKnoten.pointerId) {
-          const dx = (ereignis.clientX - gezogenerKnoten.startX) / zoom;
-          const dy = (ereignis.clientY - gezogenerKnoten.startY) / zoom;
-          if (!gezogenerKnoten.aktiv && Math.hypot(dx, dy) > 4 / zoom) {
-            gezogenerKnoten.aktiv = true;
-            gezogenerKnoten.element.classList.add("wird-gezogen");
-            positionen[gezogenerKnoten.index].fixiert = true;
-          }
-          if (gezogenerKnoten.aktiv) {
-            gezogenerKnoten.zielX = gezogenerKnoten.ursprungX + dx;
-            gezogenerKnoten.zielY = gezogenerKnoten.ursprungY + dy;
-            gezogenerKnoten.element.dataset.fixiert = "true";
-            dragDarstellungAnfordern();
-          }
-          return;
-        }
         if (!zieht) return;
         const dx = ereignis.clientX - letzterPunkt.x;
         const dy = ereignis.clientY - letzterPunkt.y;
@@ -5050,27 +4979,6 @@ projektreflexion mirror flag
             viewport.classList.remove("zieht");
             return;
           }
-        }
-        if (gezogenerKnoten &&
-            (!ereignis || ereignis.pointerId === gezogenerKnoten.pointerId)) {
-          const { index, element, aktiv } = gezogenerKnoten;
-          gezogenenKnotenPositionAnwenden();
-          if (dragDarstellungsFrame !== null) {
-            cancelAnimationFrame(dragDarstellungsFrame);
-            dragDarstellungsFrame = null;
-          }
-          element.classList.remove("wird-gezogen");
-          gezogenerKnoten = null;
-          if (aktiv) {
-            unterdrückterCoreKlick = index;
-            const punkt = positionen[index];
-            punkt.ankerX = punkt.x;
-            punkt.ankerY = punkt.y;
-            punkt.fixiert = false;
-            element.dataset.fixiert = "false";
-            graphElementeAktualisieren([index]);
-          }
-          return;
         }
         const warHintergrundZug = zieht;
         const warHintergrundBewegt = hintergrundBewegt;

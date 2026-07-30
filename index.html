@@ -195,16 +195,37 @@
     }
 
     summary::after {
-      content: "›";
+      content: none;
+    }
+
+    .baum-aufklappen {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
       margin-left: auto;
+      padding: 0;
+      border: 0;
+      border-radius: 7px;
       color: var(--gedimmt);
+      background: transparent;
+      font: inherit;
       font-size: 1rem;
       line-height: 1;
+      cursor: pointer;
       transform: rotate(0);
       transition: transform 150ms ease;
     }
 
-    details[open] > summary::after {
+    .baum-aufklappen:hover,
+    .baum-aufklappen:focus-visible {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      outline: 1px solid rgba(130, 166, 255, 0.34);
+    }
+
+    details[open] > summary .baum-aufklappen {
       transform: rotate(90deg);
     }
 
@@ -1186,7 +1207,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      summary::after,
+      .baum-aufklappen,
       .fortschrittslegende { transition: none; }
     }
   </style>
@@ -1596,30 +1617,104 @@
 
       function baumRendern(datensatz) {
         const baum = document.querySelector("#ordnerbaum");
+        const gespeichert = baumExpansionLaden();
         baum.replaceChildren();
         lernfelderKatalog = datensatz.lernfelder;
-        sichtbareLernfelder(datensatz).forEach(lernfeld => {
+        sichtbareLernfelder(datensatz).forEach((lernfeld, lernfeldIndex) => {
           const eintrag = document.createElement("li");
-          const schaltfläche = document.createElement("button");
+          const details = document.createElement("details");
           const themaIds = lernfeld.kompetenzen.flatMap(kompetenz =>
             kompetenz.themencluster.flatMap(cluster =>
               cluster.themen.map(thema => thema.id)
             )
           );
           eintrag.className = "lernfeld";
-          schaltfläche.type = "button";
-          schaltfläche.className = "lernfeld-zeile";
-          schaltfläche.textContent =
-            `Lernfeld ${lernfeld.number} · ${lernfeld.title}`;
-          schaltfläche.setAttribute("aria-pressed", "false");
-          schaltfläche.addEventListener("click", () => {
-            bereichFokussieren(
-              `lernfeld:${lernfeld.id}`,
-              themaIds,
-              schaltfläche
+          baumDetailsInitialisieren(
+            details,
+            `lernfeld:${lernfeld.id}`,
+            lernfeldIndex === 0,
+            gespeichert
+          );
+          const zusammenfassung = baumZusammenfassung(
+            `Lernfeld ${lernfeld.number} · ${lernfeld.title}`,
+            lernfeld
+          );
+          zusammenfassung.dataset.fokusId = `lernfeld:${lernfeld.id}`;
+          zusammenfassung.dataset.themaIds = themaIds.join(" ");
+          const kompetenzListe = document.createElement("ul");
+          kompetenzListe.className = "ebene";
+
+          lernfeld.kompetenzen.forEach((kompetenz, kompetenzIndex) => {
+            const kompetenzEintrag = document.createElement("li");
+            const kompetenzDetails = document.createElement("details");
+            const kompetenzThemaIds = kompetenz.themencluster.flatMap(cluster =>
+              cluster.themen.map(thema => thema.id)
             );
+            kompetenzEintrag.className = "kompetenz";
+            baumDetailsInitialisieren(
+              kompetenzDetails,
+              `kompetenz:${kompetenz.id}`,
+              lernfeldIndex === 0 && kompetenzIndex === 0,
+              gespeichert
+            );
+            const kompetenzZusammenfassung = baumZusammenfassung(
+              kompetenz.title,
+              kompetenz
+            );
+            kompetenzZusammenfassung.dataset.fokusId = `kompetenz:${kompetenz.id}`;
+            kompetenzZusammenfassung.dataset.themaIds = kompetenzThemaIds.join(" ");
+            const clusterListe = document.createElement("ul");
+            clusterListe.className = "ebene";
+
+            kompetenz.themencluster.forEach((cluster, clusterIndex) => {
+              const clusterEintrag = document.createElement("li");
+              const clusterDetails = document.createElement("details");
+              const clusterThemaIds = cluster.themen.map(thema => thema.id);
+              clusterEintrag.className = "cluster";
+              baumDetailsInitialisieren(
+                clusterDetails,
+                `themencluster:${cluster.id}`,
+                lernfeldIndex === 0 && kompetenzIndex === 0 && clusterIndex === 0,
+                gespeichert
+              );
+              const clusterZusammenfassung = baumZusammenfassung(
+                cluster.title,
+                cluster
+              );
+              clusterZusammenfassung.dataset.fokusId = `themencluster:${cluster.id}`;
+              clusterZusammenfassung.dataset.themaIds = clusterThemaIds.join(" ");
+              const themenListe = document.createElement("ul");
+              themenListe.className = "ebene";
+
+              cluster.themen.forEach(thema => {
+                const themaEintrag = document.createElement("li");
+                themaEintrag.className = "thema";
+                themaEintrag.dataset.themaId = thema.id;
+                themaEintrag.dataset.fokusId = `thema:${thema.id}`;
+                themaEintrag.dataset.themaIds = thema.id;
+                themaEintrag.textContent = thema.title;
+                themenListe.append(themaEintrag);
+              });
+
+              clusterDetails.append(
+                clusterZusammenfassung,
+                themenListe
+              );
+              clusterEintrag.append(clusterDetails);
+              clusterListe.append(clusterEintrag);
+            });
+
+            kompetenzDetails.append(
+              kompetenzZusammenfassung,
+              clusterListe
+            );
+            kompetenzEintrag.append(kompetenzDetails);
+            kompetenzListe.append(kompetenzEintrag);
           });
-          eintrag.append(schaltfläche);
+
+          details.append(zusammenfassung, kompetenzListe);
+          details.addEventListener("toggle", () => baumExpansionSpeichern(baum));
+          eintrag.append(details);
           baum.append(eintrag);
         });
 
@@ -1630,28 +1725,11 @@
             "Wähle in den Einstellungen eine Fachrichtung, um die Lernfelder 10–12 anzuzeigen.";
           baum.append(leerstand);
         }
+        baumInteraktionenEinrichten();
       }
 
       function quizThemenRendern(datensatz) {
-        const baum = document.querySelector("#ordnerbaum");
-        baum.replaceChildren();
-        sichtbareLernfelder(datensatz).forEach(lernfeld => {
-          lernfeld.kompetenzen.forEach(kompetenz => {
-            kompetenz.themencluster.forEach(cluster => {
-              cluster.themen.forEach(thema => {
-                const themaEintrag = document.createElement("li");
-                themaEintrag.className = "thema";
-                themaEintrag.dataset.themaId = thema.id;
-                themaEintrag.dataset.fokusId = `thema:${thema.id}`;
-                themaEintrag.dataset.themaIds = thema.id;
-                themaEintrag.textContent =
-                  `LF ${lernfeld.number} · ${thema.title}`;
-                baum.append(themaEintrag);
-              });
-            });
-          });
-        });
-        baumInteraktionenEinrichten();
+        baumRendern(datensatz);
       }
 
       function baumInteraktionenEinrichten() {
@@ -1659,12 +1737,31 @@
           .forEach(baumeintrag => {
           const bezeichnung = baumeintrag.textContent.trim();
           const checkbox = document.createElement("input");
+          const aufklappen = document.createElement("button");
+          const details = baumeintrag.parentElement;
           baumeintrag.dataset.baumInteraktionen = "initialisiert";
           checkbox.type = "checkbox";
           checkbox.className = "baum-checkbox";
           checkbox.disabled = true;
           checkbox.setAttribute("aria-label", `${bezeichnung} auswählen`);
           checkbox.addEventListener("click", ereignis => ereignis.stopPropagation());
+          aufklappen.type = "button";
+          aufklappen.className = "baum-aufklappen";
+          aufklappen.textContent = "›";
+          const aufklappStatusAktualisieren = () => {
+            aufklappen.setAttribute("aria-expanded", String(details.open));
+            aufklappen.setAttribute(
+              "aria-label",
+              `${bezeichnung} ${details.open ? "zuklappen" : "aufklappen"}`
+            );
+          };
+          aufklappen.addEventListener("click", ereignis => {
+            ereignis.preventDefault();
+            ereignis.stopPropagation();
+            details.open = !details.open;
+          });
+          details.addEventListener("toggle", aufklappStatusAktualisieren);
+          aufklappStatusAktualisieren();
           if (baumeintrag.dataset.fokusId) {
             const fokus = document.createElement("button");
             fokus.type = "button";
@@ -1681,9 +1778,10 @@
               );
             });
             baumeintrag.textContent = "";
-            baumeintrag.append(checkbox, fokus);
+            baumeintrag.append(checkbox, fokus, aufklappen);
           } else {
             baumeintrag.prepend(checkbox);
+            baumeintrag.append(aufklappen);
           }
         });
 
@@ -3608,7 +3706,7 @@ projektreflexion mirror flag
         aktivesThema = zurücksetzen ? null : fokusId;
         aktiveThemenIds = new Set(zurücksetzen ? [] : themaIds);
 
-        document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
+        document.querySelectorAll(".thema-fokus").forEach(schaltfläche => {
           schaltfläche.setAttribute(
             "aria-pressed",
             String(!zurücksetzen && schaltfläche === auslöser)
@@ -3622,7 +3720,7 @@ projektreflexion mirror flag
         if (!aktivesThema) return;
         aktivesThema = null;
         aktiveThemenIds = new Set();
-        document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
+        document.querySelectorAll(".thema-fokus").forEach(schaltfläche => {
           schaltfläche.setAttribute("aria-pressed", "false");
         });
         fokusDarstellungAktualisieren();

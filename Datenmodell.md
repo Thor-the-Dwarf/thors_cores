@@ -18,7 +18,11 @@ Wiederkehrende Begriffe werden als globale Core-Identität wiederverwendet und e
 
 Die Kategorien sind `IT` = Blau, `BWL` = Gelb und `Recht` = Rot. Gewichtete Anteile erzeugen Mischfarben; ihre Summe beträgt je Core `1`.
 
-Vault-Verbindungen werden nicht als beliebige Kanten gespeichert. Sichtbare Core-Ausprägungen mit derselben `thema_ref` werden zur Laufzeit paarweise verbunden.
+Die sichtbare Vault folgt ausschließlich der fachlichen Hierarchie:
+`Lernfeld → Kompetenzbereich → Themencluster → Thema → Core-Ausprägung`.
+Zwischen Cores werden keine sichtbaren Themencliquen erzeugt. Die
+Themenzuordnung über `thema_ref` bleibt für Folder Tree, Fokus und Quiz-Auswahl
+erhalten.
 
 Aktueller validierter Umfang:
 

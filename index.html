@@ -538,8 +538,8 @@
       position: absolute;
       left: 0;
       top: 0;
-      width: 2600px;
-      height: 2000px;
+      width: 9200px;
+      height: 5800px;
       transform-origin: 0 0;
       will-change: transform;
     }
@@ -718,6 +718,158 @@
       display: none;
     }
 
+    #fortschritts-prototyp,
+    #legende-umschalten,
+    .fortschrittslegende {
+      display: none !important;
+    }
+
+    .vault-knoten {
+      position: absolute;
+      z-index: 1;
+      width: var(--knoten-breite);
+      height: var(--knoten-höhe);
+      min-height: 0;
+      padding: 0;
+      border: 0;
+      color: #eef2f9;
+      background: transparent;
+      font: inherit;
+      cursor: grab;
+      transform: translate(-50%, -50%);
+      isolation: isolate;
+      transition: transform 140ms ease, opacity 180ms ease;
+    }
+
+    .vault-knoten::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: -32%;
+      border-radius: var(--knoten-radius, 50%);
+      background: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--knoten-farbe, #8298bf) 58%, transparent) 0%,
+        color-mix(in srgb, var(--knoten-farbe, #8298bf) 24%, transparent) 48%,
+        transparent 73%
+      );
+      clip-path: var(--knoten-form, none);
+      opacity: 0.72;
+      pointer-events: none;
+    }
+
+    .vault-knoten::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      border: 1px solid color-mix(
+        in srgb,
+        var(--knoten-farbe, #8298bf) 36%,
+        rgba(255, 255, 255, 0.16)
+      );
+      border-radius: var(--knoten-radius, 50%);
+      background: #05070b;
+      clip-path: var(--knoten-form, none);
+      pointer-events: none;
+    }
+
+    .vault-knoten:hover,
+    .vault-knoten:focus-visible {
+      z-index: 15;
+      outline: none;
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .vault-knoten.wird-gezogen {
+      z-index: 18;
+      cursor: grabbing;
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    .vault-knoten.abgeblendet {
+      opacity: 0.12;
+    }
+
+    .vault-knoten.hervorgehoben {
+      z-index: 8;
+      opacity: 1;
+    }
+
+    .knoten-beschriftung {
+      position: relative;
+      z-index: 2;
+      display: -webkit-box;
+      max-width: calc(100% - 22px);
+      margin: 0 auto;
+      overflow: hidden;
+      color: #dfe6f2;
+      font-size: 0.7rem;
+      font-weight: 700;
+      line-height: 1.22;
+      text-align: center;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      pointer-events: none;
+    }
+
+    .knoten-lernfeld {
+      --knoten-breite: 210px;
+      --knoten-höhe: 118px;
+      --knoten-radius: 32px;
+    }
+
+    .knoten-lernfeld .knoten-beschriftung {
+      font-size: 0.86rem;
+      font-weight: 780;
+    }
+
+    .knoten-kompetenz {
+      --knoten-breite: 158px;
+      --knoten-höhe: 104px;
+      --knoten-form: polygon(
+        24% 3%, 76% 3%, 82% 7%, 97% 43%, 97% 57%, 82% 93%,
+        76% 97%, 24% 97%, 18% 93%, 3% 57%, 3% 43%, 18% 7%
+      );
+    }
+
+    .knoten-themencluster {
+      --knoten-breite: 126px;
+      --knoten-höhe: 88px;
+      --knoten-form: polygon(
+        18% 4%, 82% 4%, 96% 18%, 100% 50%, 96% 82%,
+        82% 96%, 18% 96%, 4% 82%, 0 50%, 4% 18%
+      );
+    }
+
+    .knoten-thema {
+      --knoten-breite: 96px;
+      --knoten-höhe: 70px;
+      --knoten-form: polygon(
+        26% 3%, 74% 3%, 80% 6%, 94% 20%, 97% 26%, 97% 74%,
+        94% 80%, 80% 94%, 74% 97%, 26% 97%, 20% 94%, 6% 80%,
+        3% 74%, 3% 26%, 6% 20%, 20% 6%
+      );
+    }
+
+    .knoten-thema .knoten-beschriftung,
+    .knoten-themencluster .knoten-beschriftung {
+      font-size: 0.59rem;
+      -webkit-line-clamp: 4;
+    }
+
+    .core-karte {
+      --knoten-breite: 44px;
+      --knoten-höhe: 44px;
+      --knoten-radius: 50%;
+      cursor: help;
+    }
+
+    .core-karte .knoten-beschriftung,
+    .core-symbol {
+      display: none;
+    }
+
     .core-karte:hover,
     .core-karte:focus-visible {
       z-index: 15;
@@ -795,7 +947,7 @@
       filter: brightness(1.2);
     }
 
-    .core-raster.radial-fokus .core-karte {
+    .core-raster.radial-fokus .vault-knoten {
       opacity: 0.34;
       filter: saturate(0.58) brightness(0.62);
     }
@@ -1347,18 +1499,17 @@
       const quizAuswahlaktionen = document.querySelector("#quiz-auswahlaktionen");
       const quizAuswahlStarten = document.querySelector("#quiz-auswahl-starten");
       const quizAuswahlAbbrechen = document.querySelector("#quiz-auswahl-abbrechen");
-      const WELT_BREITE = 2600;
-      const WELT_HÖHE = 2000;
+      const WELT_BREITE = 9200;
+      const WELT_HÖHE = 5800;
       const CORE_GRÖSSE = 44;
       const CORE_LAYOUT_GRÖSSE = 88;
-      const FEDERLÄNGE = 152;
       const themaTitelZuId = new Map();
       let aktivesThema = null;
       let aktiveThemenIds = new Set();
       let aktiverCoreIndex = null;
       let unterdrückterCoreKlick = null;
-      let fortschrittPrototypAktiv = true;
-      let legendeEingeblendet = true;
+      let fortschrittPrototypAktiv = false;
+      let legendeEingeblendet = false;
       let quizAuswahlAktiv = false;
       let quizAußenPointerId = null;
       let quizAußenKlickUnterdrücken = false;
@@ -2077,44 +2228,122 @@
         throw new Error("Die normalisierten Datensätze konnten nicht zusammengesetzt werden.");
       }
       baumRendern(daten);
-      const coresNachIdentität = new Map();
+      const graphKnoten = [];
+      const kanten = [];
+      const cores = [];
+
+      function graphKnotenHinzufügen(knoten) {
+        const index = graphKnoten.length;
+        graphKnoten.push({
+          ...knoten,
+          themen: [...new Set(knoten.themen)]
+        });
+        return index;
+      }
+
+      function hierarchieKanteHinzufügen(a, b, themen) {
+        kanten.push({
+          a,
+          b,
+          themen: [...new Set(themen)]
+        });
+      }
+
       daten.lernfelder.forEach(lernfeld => {
+        const lernfeldThemen = lernfeld.kompetenzen.flatMap(kompetenz =>
+          kompetenz.themencluster.flatMap(cluster =>
+            cluster.themen.map(thema => thema.id)
+          )
+        );
+        const lernfeldIndex = graphKnotenHinzufügen({
+          id: `lernfeld:${lernfeld.id}`,
+          typ: "lernfeld",
+          titel: `LF ${lernfeld.number} · ${lernfeld.title}`,
+          farbe: farbeMischen(gemittelteGewichte(lernfeld)),
+          themen: lernfeldThemen
+        });
+
         lernfeld.kompetenzen.forEach(kompetenz => {
+          const kompetenzThemen = kompetenz.themencluster.flatMap(cluster =>
+            cluster.themen.map(thema => thema.id)
+          );
+          const kompetenzIndex = graphKnotenHinzufügen({
+            id: `kompetenz:${kompetenz.id}`,
+            typ: "kompetenz",
+            titel: kompetenz.title,
+            farbe: farbeMischen(gemittelteGewichte(kompetenz)),
+            themen: kompetenzThemen
+          });
+          hierarchieKanteHinzufügen(
+            lernfeldIndex,
+            kompetenzIndex,
+            kompetenzThemen
+          );
+
           kompetenz.themencluster.forEach(cluster => {
+            const clusterThemen = cluster.themen.map(thema => thema.id);
+            const clusterIndex = graphKnotenHinzufügen({
+              id: `themencluster:${cluster.id}`,
+              typ: "themencluster",
+              titel: cluster.title,
+              farbe: farbeMischen(gemittelteGewichte(cluster)),
+              themen: clusterThemen
+            });
+            hierarchieKanteHinzufügen(
+              kompetenzIndex,
+              clusterIndex,
+              clusterThemen
+            );
+
             cluster.themen.forEach(thema => {
               if (thema.title) themaTitelZuId.set(thema.title, thema.id);
+              const themaIndex = graphKnotenHinzufügen({
+                id: `thema:${thema.id}`,
+                typ: "thema",
+                titel: thema.title,
+                farbe: farbeMischen(gemittelteGewichte(thema)),
+                themen: [thema.id]
+              });
+              hierarchieKanteHinzufügen(
+                clusterIndex,
+                themaIndex,
+                [thema.id]
+              );
+
               thema.cores.forEach(core => {
-                const schlüssel = core.core_ref || core.identity_key;
-                if (!coresNachIdentität.has(schlüssel)) {
-                  coresNachIdentität.set(schlüssel, {
-                    titel: core.title || core.short_title,
-                    farbe: farbeMischen(core.category_weights),
-                    themen: new Set(),
-                    clusterId: cluster.id,
-                    clusterTitel: cluster.title,
-                    coreId: core.identity_key,
-                    inhalt: core.content,
-                    themaTitel: thema.title
-                  });
-                }
-                coresNachIdentität.get(schlüssel).themen.add(
-                  core.topic_ref || thema.id
+                const coreIndex = cores.length;
+                const coreDaten = [
+                  core.title || core.short_title,
+                  farbeMischen(core.category_weights),
+                  [core.topic_ref || thema.id],
+                  cluster.id,
+                  cluster.title,
+                  core.identity_key,
+                  core.content,
+                  thema.title
+                ];
+                cores.push(coreDaten);
+                const graphCoreIndex = graphKnotenHinzufügen({
+                  id: `core:${core.id}`,
+                  typ: "core",
+                  titel: coreDaten[0],
+                  farbe: coreDaten[1],
+                  themen: coreDaten[2],
+                  coreIndex,
+                  coreId: core.identity_key,
+                  inhalt: core.content,
+                  themaTitel: thema.title
+                });
+                hierarchieKanteHinzufügen(
+                  themaIndex,
+                  graphCoreIndex,
+                  [thema.id]
                 );
               });
             });
           });
         });
       });
-      const cores = [...coresNachIdentität.values()].map(core => [
-        core.titel,
-        core.farbe,
-        [...core.themen],
-        core.clusterId,
-        core.clusterTitel,
-        core.coreId,
-        core.inhalt,
-        core.themaTitel
-      ]);
 
       const prototypStützwerte = [0, 10, 30, 50, 100];
       const beispielFortschritte = cores.map((core, index) =>
@@ -3156,6 +3385,410 @@ projektreflexion mirror flag
         };
       }
 
+      const knotenGrößen = {
+        lernfeld: { breite: 210, höhe: 118, radius: 112 },
+        kompetenz: { breite: 158, höhe: 104, radius: 86 },
+        themencluster: { breite: 126, höhe: 88, radius: 70 },
+        thema: { breite: 96, höhe: 70, radius: 54 },
+        core: { breite: 44, höhe: 44, radius: 31 }
+      };
+      const layoutSpalten = {
+        lernfeld: { startX: 360, schrittX: 250 },
+        kompetenz: { startX: 1450, schrittX: 250 },
+        themencluster: { startX: 2750, schrittX: 225 },
+        thema: { startX: 4300, schrittX: 190 },
+        core: { startX: 6400, schrittX: 150 }
+      };
+      const MAXIMALE_REIHEN = 54;
+      const indicesNachTyp = new Map(
+        Object.keys(knotenGrößen).map(typ => [typ, []])
+      );
+      graphKnoten.forEach((knoten, index) => {
+        indicesNachTyp.get(knoten.typ).push(index);
+      });
+
+      const positionen = new Array(graphKnoten.length);
+      indicesNachTyp.forEach((indizes, typ) => {
+        const layout = layoutSpalten[typ];
+        const reihen = Math.min(MAXIMALE_REIHEN, indizes.length);
+        const nutzhöhe = WELT_HÖHE - 420;
+        indizes.forEach((graphIndex, typIndex) => {
+          const spalte = Math.floor(typIndex / MAXIMALE_REIHEN);
+          const reihe = typIndex % MAXIMALE_REIHEN;
+          const ankerX = layout.startX + spalte * layout.schrittX;
+          const ankerY = 210 + (
+            reihen <= 1 ? nutzhöhe / 2 : reihe * nutzhöhe / (reihen - 1)
+          );
+          positionen[graphIndex] = {
+            x: ankerX,
+            y: ankerY,
+            ankerX,
+            ankerY,
+            radius: knotenGrößen[typ].radius,
+            vx: 0,
+            vy: 0,
+            fixiert: false
+          };
+        });
+      });
+
+      const basisPfad = linienEbene.querySelector(".themen-linie-basis");
+      const fokusPfad = linienEbene.querySelector(".themen-linie-fokus");
+      const knotenElemente = [];
+
+      graphKnoten.forEach((knoten, index) => {
+        const punkt = document.createElement("button");
+        const beschriftung = document.createElement("span");
+        punkt.type = "button";
+        punkt.className = `vault-knoten knoten-${knoten.typ}`;
+        if (knoten.typ === "core") punkt.classList.add("core-karte");
+        punkt.style.setProperty("--knoten-farbe", knoten.farbe);
+        punkt.style.left = `${positionen[index].x}px`;
+        punkt.style.top = `${positionen[index].y}px`;
+        punkt.dataset.index = index;
+        punkt.dataset.knotenTyp = knoten.typ;
+        punkt.dataset.themen = knoten.themen.join(" ");
+        punkt.dataset.coreId = knoten.coreId || "";
+        punkt.setAttribute(
+          "aria-label",
+          knoten.typ === "core"
+            ? knoten.titel
+            : `${knoten.typ === "themencluster" ? "Themencluster" : knoten.typ}: ${knoten.titel}`
+        );
+        beschriftung.className = "knoten-beschriftung";
+        beschriftung.textContent = knoten.titel;
+        punkt.append(beschriftung);
+        raster.append(punkt);
+        knotenElemente.push(punkt);
+      });
+
+      function coreTooltipText(graphIndex) {
+        return graphKnoten[graphIndex].titel;
+      }
+
+      raster.addEventListener("pointerover", ereignis => {
+        const punkt = ereignis.target.closest(".core-karte");
+        if (!punkt || punkt.contains(ereignis.relatedTarget)) return;
+        tooltip.textContent = coreTooltipText(Number(punkt.dataset.index));
+        tooltip.classList.add("sichtbar");
+        tooltip.style.left = `${ereignis.clientX}px`;
+        tooltip.style.top = `${ereignis.clientY + 16}px`;
+      });
+      raster.addEventListener("pointermove", ereignis => {
+        if (!ereignis.target.closest(".core-karte")) return;
+        tooltip.style.left = `${ereignis.clientX}px`;
+        tooltip.style.top = `${ereignis.clientY + 16}px`;
+      });
+      raster.addEventListener("pointerout", ereignis => {
+        const punkt = ereignis.target.closest(".core-karte");
+        if (punkt &&
+            !punkt.contains(ereignis.relatedTarget) &&
+            !tooltip.contains(ereignis.relatedTarget)) {
+          tooltip.classList.remove("sichtbar");
+        }
+      });
+      tooltip.addEventListener("pointerleave", () => {
+        tooltip.classList.remove("sichtbar");
+      });
+      raster.addEventListener("focusin", ereignis => {
+        const punkt = ereignis.target.closest(".core-karte");
+        if (!punkt) return;
+        const rechteck = punkt.getBoundingClientRect();
+        tooltip.textContent = coreTooltipText(Number(punkt.dataset.index));
+        tooltip.style.left = `${rechteck.left + rechteck.width / 2}px`;
+        tooltip.style.top = `${rechteck.bottom + 12}px`;
+        tooltip.classList.add("sichtbar");
+      });
+      raster.addEventListener("focusout", ereignis => {
+        if (ereignis.target.closest(".core-karte")) tooltip.classList.remove("sichtbar");
+      });
+      raster.addEventListener("pointerdown", ereignis => {
+        const punkt = ereignis.target.closest(".vault-knoten");
+        if (punkt) knotenZiehenStarten(ereignis, Number(punkt.dataset.index), punkt);
+      });
+      raster.addEventListener("click", ereignis => {
+        const punkt = ereignis.target.closest(".core-karte");
+        if (!punkt) return;
+        ereignis.stopPropagation();
+        if (aktivesThema) return;
+        const index = Number(punkt.dataset.index);
+        if (unterdrückterCoreKlick === index) {
+          unterdrückterCoreKlick = null;
+          return;
+        }
+        coreMenüUmschalten(index);
+      });
+
+      function radialMenüPositionieren() {
+        if (aktiverCoreIndex === null || radialMenü.hidden) return;
+        const viewportRechteck = viewport.getBoundingClientRect();
+        const weltpunkt = positionen[aktiverCoreIndex];
+        const mitteX = weltpunkt.x * zoom + verschiebungX;
+        const mitteY = weltpunkt.y * zoom + verschiebungY;
+        let winkel = [-90, 30, 150];
+        if (mitteX < 170) winkel = [-60, 0, 60];
+        else if (viewportRechteck.width - mitteX < 170) winkel = [120, 180, 240];
+        else if (mitteY < 105) winkel = [30, 90, 150];
+        else if (viewportRechteck.height - mitteY < 105) winkel = [-150, -90, -30];
+        const radius = Math.max(82, Math.min(132, 260 * zoom));
+        const menüSkala = Math.max(0.9, Math.min(1.08, 0.84 + zoom * 0.5));
+        radialMenü.style.setProperty("--radial-skala", menüSkala);
+        const verbinder = radialMenü.querySelectorAll(".radial-verbinder line");
+        radialMenü.querySelectorAll(".radialaktion").forEach((aktion, index) => {
+          const bogenmaß = winkel[index] * Math.PI / 180;
+          const x = Math.max(68, Math.min(
+            viewportRechteck.width - 68,
+            mitteX + Math.cos(bogenmaß) * radius
+          ));
+          const y = Math.max(24, Math.min(
+            viewportRechteck.height - 24,
+            mitteY + Math.sin(bogenmaß) * radius
+          ));
+          aktion.style.left = `${x}px`;
+          aktion.style.top = `${y}px`;
+          verbinder[index].setAttribute("x1", mitteX);
+          verbinder[index].setAttribute("y1", mitteY);
+          verbinder[index].setAttribute("x2", x);
+          verbinder[index].setAttribute("y2", y);
+        });
+      }
+
+      function coreMenüSchließen() {
+        if (aktiverCoreIndex !== null) {
+          knotenElemente[aktiverCoreIndex]?.classList.remove("menü-aktiv");
+        }
+        aktiverCoreIndex = null;
+        raster.classList.remove("radial-fokus");
+        radialMenü.hidden = true;
+      }
+
+      function coreMenüUmschalten(index) {
+        if (aktiverCoreIndex === index) {
+          coreMenüSchließen();
+          return;
+        }
+        coreMenüSchließen();
+        aktiverCoreIndex = index;
+        knotenElemente[index].classList.add("menü-aktiv");
+        raster.classList.add("radial-fokus");
+        tooltip.classList.remove("sichtbar");
+        coreLeerstand.hidden = true;
+        radialMenü.hidden = false;
+        radialMenüPositionieren();
+      }
+
+      radialMenü.querySelectorAll(".radialaktion").forEach(aktion => {
+        aktion.addEventListener("pointerdown", ereignis => ereignis.stopPropagation());
+        aktion.addEventListener("click", ereignis => {
+          ereignis.stopPropagation();
+          const coreTitel = graphKnoten[aktiverCoreIndex]?.titel || "Core";
+          const aktionsname = aktion.dataset.aktion;
+          if (aktionsname === "Doom Scroll Quiz") {
+            coreMenüSchließen();
+            location.href = "doom-scroll-quiz.html";
+            return;
+          }
+          if (aktionsname === "Community") {
+            coreMenüSchließen();
+            location.href = "community.html";
+            return;
+          }
+          const überschrift = document.createElement("strong");
+          const hinweis = document.createElement("span");
+          überschrift.textContent = `${aktionsname} · ${coreTitel}`;
+          hinweis.textContent =
+            "Für diesen Core sind in diesem Bereich noch keine Inhalte hinterlegt.";
+          coreLeerstand.replaceChildren(überschrift, hinweis);
+          coreLeerstand.hidden = false;
+          coreMenüSchließen();
+        });
+      });
+
+      function pfadErstellen(kantenAuswahl) {
+        return kantenAuswahl.map(kante => {
+          const a = positionen[kante.a];
+          const b = positionen[kante.b];
+          return `M${a.x.toFixed(1)},${a.y.toFixed(1)}L${b.x.toFixed(1)},${b.y.toFixed(1)}`;
+        }).join("");
+      }
+
+      function kantePasstZumFokus(kante) {
+        return kante.themen.some(themaId => aktiveThemenIds.has(themaId));
+      }
+
+      function graphElementeAktualisieren() {
+        knotenElemente.forEach((punkt, index) => {
+          punkt.style.left = `${positionen[index].x}px`;
+          punkt.style.top = `${positionen[index].y}px`;
+        });
+        basisPfad.setAttribute("d", pfadErstellen(kanten));
+        fokusPfad.setAttribute(
+          "d",
+          aktivesThema ? pfadErstellen(kanten.filter(kantePasstZumFokus)) : ""
+        );
+        radialMenüPositionieren();
+      }
+
+      function simulationsSchritt(alpha) {
+        const zellengröße = 260;
+        const zellen = new Map();
+        positionen.forEach((punkt, index) => {
+          const zelleX = Math.floor(punkt.x / zellengröße);
+          const zelleY = Math.floor(punkt.y / zellengröße);
+          const schlüssel = `${zelleX}:${zelleY}`;
+          if (!zellen.has(schlüssel)) zellen.set(schlüssel, []);
+          zellen.get(schlüssel).push(index);
+        });
+
+        for (let a = 0; a < positionen.length; a += 1) {
+          const pa = positionen[a];
+          const zelleX = Math.floor(pa.x / zellengröße);
+          const zelleY = Math.floor(pa.y / zellengröße);
+          for (let offsetX = -1; offsetX <= 1; offsetX += 1) {
+            for (let offsetY = -1; offsetY <= 1; offsetY += 1) {
+              const nachbarn = zellen.get(`${zelleX + offsetX}:${zelleY + offsetY}`);
+              if (!nachbarn) continue;
+              for (const b of nachbarn) {
+                if (b <= a) continue;
+                const pb = positionen[b];
+                let dx = pb.x - pa.x;
+                let dy = pb.y - pa.y;
+                let distanz = Math.hypot(dx, dy);
+                if (distanz < 0.1) {
+                  dx = ((a * 17 + b * 31) % 7 - 3) * 0.1;
+                  dy = ((a * 29 + b * 13) % 7 - 3) * 0.1;
+                  distanz = Math.max(0.1, Math.hypot(dx, dy));
+                }
+                const mindestabstand = pa.radius + pb.radius + 12;
+                if (distanz >= mindestabstand) continue;
+                const kraft = (mindestabstand - distanz) * 0.075 * alpha;
+                const fx = dx / distanz * kraft;
+                const fy = dy / distanz * kraft;
+                if (!pa.fixiert) {
+                  pa.vx -= fx;
+                  pa.vy -= fy;
+                }
+                if (!pb.fixiert) {
+                  pb.vx += fx;
+                  pb.vy += fy;
+                }
+              }
+            }
+          }
+        }
+
+        kanten.forEach(kante => {
+          const pa = positionen[kante.a];
+          const pb = positionen[kante.b];
+          const dx = pb.x - pa.x;
+          const dy = pb.y - pa.y;
+          const distanz = Math.max(0.1, Math.hypot(dx, dy));
+          const ankerDistanz = Math.hypot(
+            pb.ankerX - pa.ankerX,
+            pb.ankerY - pa.ankerY
+          );
+          const sollDistanz = Math.max(180, ankerDistanz * 0.88);
+          const kraft = (distanz - sollDistanz) * 0.0045 * alpha;
+          const fx = dx / distanz * kraft;
+          const fy = dy / distanz * kraft;
+          if (!pa.fixiert) {
+            pa.vx += fx;
+            pa.vy += fy;
+          }
+          if (!pb.fixiert) {
+            pb.vx -= fx;
+            pb.vy -= fy;
+          }
+        });
+
+        positionen.forEach(punkt => {
+          if (punkt.fixiert) return;
+          punkt.vx += (punkt.ankerX - punkt.x) * 0.012 * alpha;
+          punkt.vy += (punkt.ankerY - punkt.y) * 0.006 * alpha;
+          punkt.vx *= 0.76;
+          punkt.vy *= 0.76;
+          punkt.x = Math.max(
+            punkt.radius,
+            Math.min(WELT_BREITE - punkt.radius, punkt.x + punkt.vx)
+          );
+          punkt.y = Math.max(
+            punkt.radius,
+            Math.min(WELT_HÖHE - punkt.radius, punkt.y + punkt.vy)
+          );
+        });
+      }
+
+      let simulationsLauf = 0;
+
+      function simulationStarten({ automatischEinpassen = false, schritte = 72 } = {}) {
+        const eigenerLauf = ++simulationsLauf;
+        let iteration = 0;
+        raster.dataset.simulation = "läuft";
+        function frame() {
+          if (eigenerLauf !== simulationsLauf) return;
+          for (let schritt = 0; schritt < 3; schritt += 1) {
+            const alpha = Math.max(0.08, 1 - iteration / schritte);
+            simulationsSchritt(alpha);
+            iteration += 1;
+          }
+          graphElementeAktualisieren();
+          if (automatischEinpassen && iteration % 30 === 0) einpassen();
+          const bewegung = positionen.reduce(
+            (summe, punkt) => summe + Math.hypot(punkt.vx, punkt.vy),
+            0
+          ) / positionen.length;
+          if (iteration < schritte && (iteration < 42 || bewegung > 0.04)) {
+            requestAnimationFrame(frame);
+          } else {
+            raster.dataset.simulation = "gesetzt";
+            if (automatischEinpassen) einpassen();
+          }
+        }
+        requestAnimationFrame(frame);
+      }
+
+      graphElementeAktualisieren();
+
+      function bereichFokussieren(fokusId, themaIds, auslöser) {
+        if (quizAuswahlAktiv) return;
+        coreMenüSchließen();
+        const zurücksetzen = aktivesThema === fokusId;
+        aktivesThema = zurücksetzen ? null : fokusId;
+        aktiveThemenIds = new Set(zurücksetzen ? [] : themaIds);
+        document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
+          schaltfläche.setAttribute(
+            "aria-pressed",
+            String(!zurücksetzen && schaltfläche === auslöser)
+          );
+        });
+        fokusDarstellungAktualisieren();
+      }
+
+      function bereichsfokusZurücksetzen() {
+        if (!aktivesThema) return;
+        aktivesThema = null;
+        aktiveThemenIds = new Set();
+        document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
+          schaltfläche.setAttribute("aria-pressed", "false");
+        });
+        fokusDarstellungAktualisieren();
+      }
+
+      function fokusDarstellungAktualisieren() {
+        knotenElemente.forEach((punkt, index) => {
+          const passt = aktivesThema && graphKnoten[index].themen
+            .some(themaId => aktiveThemenIds.has(themaId));
+          punkt.classList.toggle("hervorgehoben", Boolean(passt));
+          punkt.classList.toggle("abgeblendet", Boolean(aktivesThema && !passt));
+        });
+        linienEbene.classList.toggle("fokus-aktiv", Boolean(aktivesThema));
+        fokusPfad.setAttribute(
+          "d",
+          aktivesThema ? pfadErstellen(kanten.filter(kantePasstZumFokus)) : ""
+        );
+      }
+
+      if (false) {
       const coreIdentitäten = new Set(cores.map(core => core[5]));
       const fehlendeIcons = [...coreIdentitäten]
         .filter(coreId => !coreIconSpezifikationen[coreId]);
@@ -3192,25 +3825,6 @@ projektreflexion mirror flag
           vy: 0,
           fixiert: false
         };
-      });
-
-      const themen = new Map();
-      cores.forEach(([, , zuordnungen = []], index) => {
-        zuordnungen.forEach(thema => {
-          if (!themen.has(thema)) themen.set(thema, []);
-          themen.get(thema).push(index);
-        });
-      });
-
-      const kanten = [];
-      themen.forEach((indizes, thema) => {
-        if (indizes.length < 2) return;
-        for (let index = 1; index < indizes.length; index += 1) {
-          kanten.push({ a: indizes[index - 1], b: indizes[index], thema });
-        }
-        if (indizes.length > 2) {
-          kanten.push({ a: indizes[indizes.length - 1], b: indizes[0], thema });
-        }
       });
 
       const basisPfad = linienEbene.querySelector(".themen-linie-basis");
@@ -3645,6 +4259,8 @@ projektreflexion mirror flag
         );
       }
 
+      }
+
       let zoom = 0.34;
       let verschiebungX = 0;
       let verschiebungY = 0;
@@ -3664,7 +4280,7 @@ projektreflexion mirror flag
 
       function graphGrenzenBerechnen() {
         return positionen.reduce((grenzen, punkt, index) => {
-          const radius = CORE_LAYOUT_GRÖSSE / 2 + 24;
+          const radius = punkt.radius + 24;
           grenzen.links = Math.min(grenzen.links, punkt.x - radius);
           grenzen.rechts = Math.max(grenzen.rechts, punkt.x + radius);
           grenzen.oben = Math.min(grenzen.oben, punkt.y - radius);
@@ -3683,7 +4299,7 @@ projektreflexion mirror flag
         const graphGrenzen = graphGrenzenBerechnen();
         const graphBreite = Math.max(1, graphGrenzen.rechts - graphGrenzen.links);
         const graphHöhe = Math.max(1, graphGrenzen.unten - graphGrenzen.oben);
-        zoom = Math.max(0.12, Math.min(
+        zoom = Math.max(0.035, Math.min(
           1.1,
           Math.max(1, viewport.clientWidth - rand * 2) / graphBreite,
           Math.max(1, viewport.clientHeight - rand * 2) / graphHöhe
@@ -3744,7 +4360,7 @@ projektreflexion mirror flag
       }
 
       function zoomSetzen(neuerZoom, fokusX, fokusY) {
-        const begrenzt = Math.max(0.12, Math.min(1.5, neuerZoom));
+        const begrenzt = Math.max(0.035, Math.min(1.5, neuerZoom));
         const weltX = (fokusX - verschiebungX) / zoom;
         const weltY = (fokusY - verschiebungY) / zoom;
         zoom = begrenzt;
@@ -3784,7 +4400,7 @@ projektreflexion mirror flag
           }
         }
         if (ereignis.button !== 0 || !ereignis.isPrimary) return;
-        if (ereignis.target.closest(".core-karte")) return;
+        if (ereignis.target.closest(".vault-knoten")) return;
         if (ereignis.target.closest(".radialaktion")) return;
         if (ereignis.target.closest(".fortschrittslegende")) return;
         zieht = true;

@@ -764,7 +764,7 @@
       content: "";
       position: absolute;
       z-index: -1;
-      inset: -32%;
+      inset: 0;
       border-radius: var(--knoten-radius, 50%);
       background: radial-gradient(
         circle,
@@ -775,6 +775,7 @@
       clip-path: var(--knoten-form, none);
       opacity: 0.72;
       pointer-events: none;
+      transform: scale(1.34);
     }
 
     .vault-knoten::after {
@@ -833,9 +834,9 @@
     }
 
     .knoten-lernfeld {
-      --knoten-breite: 210px;
-      --knoten-höhe: 118px;
-      --knoten-radius: 32px;
+      --knoten-breite: 148px;
+      --knoten-höhe: 148px;
+      --knoten-radius: 24px;
     }
 
     .knoten-lernfeld .knoten-beschriftung {
@@ -844,31 +845,27 @@
     }
 
     .knoten-kompetenz {
-      --knoten-breite: 158px;
-      --knoten-höhe: 104px;
-      --knoten-form: polygon(
-        24% 3%, 76% 3%, 82% 7%, 97% 43%, 97% 57%, 82% 93%,
-        76% 97%, 24% 97%, 18% 93%, 3% 57%, 3% 43%, 18% 7%
+      --knoten-breite: 140px;
+      --knoten-höhe: 121px;
+      --knoten-radius: 0;
+      --knoten-form: path(
+        "M45 0 L95 0 Q105 0 110 8.66 L135 51.94 Q140 60.62 135 69.28 L110 112.58 Q105 121 95 121 L45 121 Q35 121 30 112.58 L5 69.28 Q0 60.62 5 51.94 L30 8.66 Q35 0 45 0 Z"
       );
     }
 
     .knoten-themencluster {
-      --knoten-breite: 126px;
-      --knoten-höhe: 88px;
-      --knoten-form: polygon(
-        18% 4%, 82% 4%, 96% 18%, 100% 50%, 96% 82%,
-        82% 96%, 18% 96%, 4% 82%, 0 50%, 4% 18%
+      --knoten-breite: 116px;
+      --knoten-höhe: 116px;
+      --knoten-radius: 0;
+      --knoten-form: path(
+        "M43 0 L73 0 Q82 0 88.36 6.36 L109.64 27.64 Q116 34 116 43 L116 73 Q116 82 109.64 88.36 L88.36 109.64 Q82 116 73 116 L43 116 Q34 116 27.64 109.64 L6.36 88.36 Q0 82 0 73 L0 43 Q0 34 6.36 27.64 L27.64 6.36 Q34 0 43 0 Z"
       );
     }
 
     .knoten-thema {
-      --knoten-breite: 96px;
+      --knoten-breite: 104px;
       --knoten-höhe: 70px;
-      --knoten-form: polygon(
-        26% 3%, 74% 3%, 80% 6%, 94% 20%, 97% 26%, 97% 74%,
-        94% 80%, 80% 94%, 74% 97%, 26% 97%, 20% 94%, 6% 80%,
-        3% 74%, 3% 26%, 6% 20%, 20% 6%
-      );
+      --knoten-radius: 50%;
     }
 
     .knoten-thema .knoten-beschriftung,
@@ -884,8 +881,7 @@
       cursor: help;
     }
 
-    .core-karte .knoten-beschriftung,
-    .core-symbol {
+    .core-karte .knoten-beschriftung {
       display: none;
     }
 
@@ -3596,17 +3592,11 @@ projektreflexion mirror flag
       }
 
       const knotenGrößen = {
-        lernfeld: { breite: 210, höhe: 118, radius: 112 },
-        kompetenz: { breite: 158, höhe: 104, radius: 86 },
-        themencluster: { breite: 126, höhe: 88, radius: 70 },
-        thema: { breite: 96, höhe: 70, radius: 54 },
+        lernfeld: { breite: 148, höhe: 148, radius: 112 },
+        kompetenz: { breite: 140, höhe: 121, radius: 78 },
+        themencluster: { breite: 116, höhe: 116, radius: 82 },
+        thema: { breite: 104, höhe: 70, radius: 63 },
         core: { breite: 44, höhe: 44, radius: 31 }
-      };
-      const layoutBereiche = {
-        lernfeld: { startX: 360, endeX: 1160, maximaleReihen: 8 },
-        kompetenz: { startX: 1320, endeX: 2460, maximaleReihen: 14 },
-        themencluster: { startX: 2600, endeX: 4020, maximaleReihen: 22 },
-        thema: { startX: 4140, endeX: 6120, maximaleReihen: 28 }
       };
       const indicesNachTyp = new Map(
         Object.keys(knotenGrößen).map(typ => [typ, []])
@@ -3615,63 +3605,112 @@ projektreflexion mirror flag
         indicesNachTyp.get(knoten.typ).push(index);
       });
 
-      const positionen = new Array(graphKnoten.length);
-      indicesNachTyp.forEach((indizes, typ) => {
-        if (typ === "core") {
-          indizes.forEach((graphIndex, typIndex) => {
-            const winkel = typIndex * 2.3999632297;
-            const radius = 56 * Math.sqrt(typIndex + 1);
-            const ankerX = WELT_BREITE / 2
-              + Math.cos(winkel) * radius * 2.1;
-            const ankerY = WELT_HÖHE / 2
-              + Math.sin(winkel) * radius * 1.55;
-            positionen[graphIndex] = {
-              x: ankerX,
-              y: ankerY,
-              ankerX,
-              ankerY,
-              radius: knotenGrößen[typ].radius,
-              vx: 0,
-              vy: 0,
-              fixiert: false
-            };
-          });
-          return;
+      function deterministischerWert(schlüssel) {
+        let hash = 2166136261;
+        for (let index = 0; index < schlüssel.length; index += 1) {
+          hash ^= schlüssel.charCodeAt(index);
+          hash = Math.imul(hash, 16777619);
         }
-        const layout = layoutBereiche[typ];
-        const reihen = Math.min(layout.maximaleReihen, indizes.length);
-        const spalten = Math.ceil(indizes.length / reihen);
-        const schrittX = spalten <= 1
-          ? 0
-          : (layout.endeX - layout.startX) / (spalten - 1);
-        const nutzhöhe = WELT_HÖHE - 420;
-        indizes.forEach((graphIndex, typIndex) => {
-          const spalte = Math.floor(typIndex / reihen);
-          const reihe = typIndex % reihen;
-          const reihenInSpalte = Math.min(
-            reihen,
-            indizes.length - spalte * reihen
+        return (hash >>> 0) / 4294967296;
+      }
+
+      const elternIndex = new Map(kanten.map(kante => [kante.b, kante.a]));
+      const wurzelZentren = [];
+      const weltRand = 760;
+
+      indicesNachTyp.get("lernfeld").forEach((graphIndex, wurzelIndex) => {
+        const knotenId = graphKnoten[graphIndex].id;
+        let besterKandidat = null;
+        const kandidatenAnzahl = wurzelIndex === 0 ? 1 : 40;
+        for (let kandidat = 0; kandidat < kandidatenAnzahl; kandidat += 1) {
+          const x = weltRand + deterministischerWert(
+            `${knotenId}:wurzel-x:${kandidat}`
+          ) * (WELT_BREITE - weltRand * 2);
+          const y = weltRand + deterministischerWert(
+            `${knotenId}:wurzel-y:${kandidat}`
+          ) * (WELT_HÖHE - weltRand * 2);
+          const nachbarAbstand = wurzelZentren.length
+            ? Math.min(...wurzelZentren.map(
+              zentrum => Math.hypot(x - zentrum.x, y - zentrum.y)
+            ))
+            : Infinity;
+          const randAbstand = Math.min(
+            x - weltRand,
+            WELT_BREITE - weltRand - x,
+            y - weltRand,
+            WELT_HÖHE - weltRand - y
           );
-          const xWelle = Math.sin((reihe + 1) * 1.73 + spalte) * 18;
-          const yVersatz = (spalte % 2 === 0 ? -0.16 : 0.32)
-            * nutzhöhe / Math.max(2, reihenInSpalte);
-          const ankerX = layout.startX + spalte * schrittX + xWelle;
-          const ankerY = 210 + (
-            reihenInSpalte <= 1
-              ? nutzhöhe / 2
-              : reihe * nutzhöhe / (reihenInSpalte - 1)
-          ) + yVersatz;
-          positionen[graphIndex] = {
-            x: ankerX,
-            y: ankerY,
-            ankerX,
-            ankerY,
-            radius: knotenGrößen[typ].radius,
-            vx: 0,
-            vy: 0,
-            fixiert: false
-          };
-        });
+          const wertung = nachbarAbstand + randAbstand * 0.22;
+          if (!besterKandidat || wertung > besterKandidat.wertung) {
+            besterKandidat = { x, y, wertung };
+          }
+        }
+        wurzelZentren.push(besterKandidat);
+      });
+
+      const organischeAbstände = {
+        kompetenz: { min: 420, max: 760 },
+        themencluster: { min: 270, max: 520 },
+        thema: { min: 170, max: 350 },
+        core: { min: 92, max: 235 }
+      };
+      const positionen = new Array(graphKnoten.length);
+      let nächsterWurzelIndex = 0;
+      graphKnoten.forEach((knoten, graphIndex) => {
+        let ankerX;
+        let ankerY;
+        if (knoten.typ === "lernfeld") {
+          const zentrum = wurzelZentren[nächsterWurzelIndex];
+          nächsterWurzelIndex += 1;
+          ankerX = zentrum.x;
+          ankerY = zentrum.y;
+        } else {
+          const elternPosition = positionen[elternIndex.get(graphIndex)];
+          const abstand = organischeAbstände[knoten.typ];
+          const winkel = deterministischerWert(`${knoten.id}:winkel`)
+            * Math.PI * 2;
+          const radius = abstand.min + Math.sqrt(
+            deterministischerWert(`${knoten.id}:radius`)
+          ) * (abstand.max - abstand.min);
+          ankerX = elternPosition.ankerX + Math.cos(winkel) * radius;
+          ankerY = elternPosition.ankerY + Math.sin(winkel) * radius;
+        }
+        const knotenRadius = knotenGrößen[knoten.typ].radius;
+        ankerX = Math.max(
+          knotenRadius,
+          Math.min(WELT_BREITE - knotenRadius, ankerX)
+        );
+        ankerY = Math.max(
+          knotenRadius,
+          Math.min(WELT_HÖHE - knotenRadius, ankerY)
+        );
+        positionen[graphIndex] = {
+          x: ankerX,
+          y: ankerY,
+          ankerX,
+          ankerY,
+          radius: knotenRadius,
+          vx: 0,
+          vy: 0,
+          fixiert: false
+        };
+      });
+
+      const coreIconMasken = new Map();
+      graphKnoten.forEach(knoten => {
+        if (knoten.typ !== "core" ||
+            coreIconMasken.has(knoten.coreId) ||
+            !coreIconSpezifikationen[knoten.coreId]) return;
+        coreIconMasken.set(
+          knoten.coreId,
+          coreIconMaskeErstellen(
+            knoten.coreId,
+            coreIconSpezifikationen[knoten.coreId]
+          )
+        );
+      });
+      coreIconMasken.forEach(icon => {
+        raster.style.setProperty(`--core-icon-${icon.cssId}`, icon.maske);
       });
 
       const basisPfad = linienEbene.querySelector(".themen-linie-basis");
@@ -3684,6 +3723,7 @@ projektreflexion mirror flag
         const fortschrittsring = knoten.typ === "core"
           ? document.createElement("span")
           : null;
+        const icon = coreIconMasken.get(knoten.coreId);
         punkt.type = "button";
         punkt.className = `vault-knoten knoten-${knoten.typ}`;
         if (knoten.typ === "core") {
@@ -3705,6 +3745,20 @@ projektreflexion mirror flag
           fortschrittsring.setAttribute("aria-hidden", "true");
         }
         punkt.style.setProperty("--knoten-farbe", knoten.farbe);
+        if (icon) {
+          const symbol = document.createElement("span");
+          punkt.style.setProperty("--core-farbe", knoten.farbe);
+          punkt.style.setProperty(
+            "--core-icon",
+            `var(--core-icon-${icon.cssId})`
+          );
+          punkt.dataset.iconHauptmotiv = icon.hauptmotiv;
+          punkt.dataset.iconAussage = icon.aussage;
+          punkt.dataset.iconKomposition = icon.komposition;
+          symbol.className = "core-symbol";
+          symbol.setAttribute("aria-hidden", "true");
+          punkt.append(symbol);
+        }
         punkt.style.left = `${positionen[index].x}px`;
         punkt.style.top = `${positionen[index].y}px`;
         punkt.dataset.index = index;

@@ -227,6 +227,32 @@
       --ordnerfarbe: #82a6ff;
     }
 
+    .lernfeld-zeile {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 49px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      font: inherit;
+      font-size: 0.96rem;
+      font-weight: 750;
+      line-height: 1.3;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .lernfeld-zeile:hover,
+    .lernfeld-zeile:focus-visible,
+    .lernfeld-zeile[aria-pressed="true"] {
+      border-color: rgba(130, 166, 255, 0.34);
+      background: rgba(130, 166, 255, 0.1);
+      outline: none;
+    }
+
     .ebene {
       position: relative;
       margin: 5px 0 0 18px;
@@ -650,10 +676,10 @@
     }
 
     .fortschrittslegende {
-      position: absolute;
-      right: 16px;
-      bottom: 16px;
-      z-index: 5;
+      position: fixed;
+      left: var(--fortschrittslegende-links, 16px);
+      bottom: calc(var(--app-bar-höhe) + 16px);
+      z-index: 24;
       display: grid;
       gap: 5px;
       margin: 0;
@@ -666,6 +692,7 @@
       line-height: 1.15;
       list-style: none;
       pointer-events: auto;
+      transition: left 160ms ease;
     }
 
     .fortschrittslegende[hidden] {
@@ -896,32 +923,17 @@
       line-height: 1.4;
     }
 
-    .lernfeld-katalog__hinweis {
-      margin: 2px 12px 10px;
-      padding: 0 10px 8px;
-      color: var(--gedimmt);
-      font-size: 0.7rem;
-      line-height: 1.4;
-    }
-
-    .lernfeld-katalog__link {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 7px 10px;
-      border: 1px solid rgba(130, 166, 255, 0.24);
-      border-radius: 8px;
-      color: #dce7fb;
-      background: rgba(130, 166, 255, 0.08);
-      font-weight: 800;
+    .lernfeld-katalog__titel {
+      min-width: 0;
+      color: inherit;
       text-decoration: none;
     }
 
-    .lernfeld-katalog__link:hover,
-    .lernfeld-katalog__link:focus-visible {
-      border-color: rgba(130, 166, 255, 0.55);
-      background: rgba(130, 166, 255, 0.16);
-      outline: none;
+    .lernfeld-katalog__titel:hover,
+    .lernfeld-katalog__titel:focus-visible {
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .fachrichtungs-leerstand {
@@ -1160,8 +1172,22 @@
 
     }
 
+    @media (max-width: 640px) {
+      .app.legende-sichtbar:not(.navigation-geschlossen) .navigation {
+        width: min(440px, calc(100vw - 150px));
+        min-width: 160px;
+      }
+
+      .fortschrittslegende {
+        gap: 4px;
+        padding: 8px;
+        font-size: 0.6rem;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      summary::after { transition: none; }
+      summary::after,
+      .fortschrittslegende { transition: none; }
     }
   </style>
   <link rel="stylesheet" href="app-navigation.css">
@@ -1239,7 +1265,10 @@
       </div>
       <button id="fortschritts-prototyp" class="entdeckungsaktion" type="button"
               aria-controls="core-raster fortschrittslegende"
-              aria-pressed="true">Fortschritts-Prototyp</button>
+              aria-pressed="true">Fortschritte anzeigen</button>
+      <button id="legende-umschalten" class="entdeckungsaktion" type="button"
+              aria-controls="fortschrittslegende"
+              aria-pressed="true">Legende anzeigen</button>
       <a class="entdeckungsaktion" href="erd.html">ERD / Datenmodell anzeigen</a>
     </aside>
   </main>
@@ -1301,6 +1330,7 @@
       const coreLeerstand = document.querySelector("#core-leerstand");
       const fortschrittsPrototyp = document.querySelector("#fortschritts-prototyp");
       const fortschrittslegende = document.querySelector("#fortschrittslegende");
+      const legendeUmschalten = document.querySelector("#legende-umschalten");
       const appBarDoomScrollQuiz = document.querySelector("#doom-scroll-quiz-app-bar");
       const app = document.querySelector(".app");
       const folderTreeUmschalten = document.querySelector("#folder-tree-umschalten");
@@ -1321,12 +1351,50 @@
       let aktiverCoreIndex = null;
       let unterdrückterCoreKlick = null;
       let fortschrittPrototypAktiv = true;
+      let legendeEingeblendet = true;
       let quizAuswahlAktiv = false;
       let quizAußenPointerId = null;
       let quizAußenKlickUnterdrücken = false;
       let navigationWarSichtbarVorQuiz = true;
       let navigationÜbergang = null;
       let lernfelderKatalog = [];
+      let aktiveDaten = null;
+      const LEGENDE_SICHTBAR_SCHLÜSSEL = "thors-core.legende-sichtbar.v1";
+
+      try {
+        legendeEingeblendet =
+          localStorage.getItem(LEGENDE_SICHTBAR_SCHLÜSSEL) !== "false";
+      } catch {
+        legendeEingeblendet = true;
+      }
+
+      function legendenPositionAktualisieren() {
+        if (fortschrittslegende.hidden) return;
+        const abstand = window.innerWidth <= 640 ? 8 : 16;
+        const viewportRechteck = viewport.getBoundingClientRect();
+        const navigationRechteck = navigation.getBoundingClientRect();
+        const navigationLinksVerankert =
+          navigationRechteck.width > 0 && navigationRechteck.left <= abstand;
+        const gewünschtePosition = navigationLinksVerankert
+          ? navigationRechteck.right + abstand
+          : viewportRechteck.left + abstand;
+        const maximalePosition = Math.max(
+          abstand,
+          window.innerWidth - fortschrittslegende.offsetWidth - abstand
+        );
+        fortschrittslegende.style.setProperty(
+          "--fortschrittslegende-links",
+          `${Math.max(abstand, Math.min(gewünschtePosition, maximalePosition))}px`
+        );
+      }
+
+      function legendenSichtbarkeitAnwenden() {
+        const sichtbar = fortschrittPrototypAktiv && legendeEingeblendet;
+        fortschrittslegende.hidden = !sichtbar;
+        legendeUmschalten.setAttribute("aria-pressed", String(legendeEingeblendet));
+        app.classList.toggle("legende-sichtbar", sichtbar);
+        if (sichtbar) requestAnimationFrame(legendenPositionAktualisieren);
+      }
 
       function folderTreeSichtbarSetzen(sichtbar) {
         app.classList.toggle("navigation-geschlossen", !sichtbar);
@@ -1335,7 +1403,10 @@
           "aria-label",
           sichtbar ? "Folder Tree schließen" : "Folder Tree öffnen"
         );
-        requestAnimationFrame(() => einpassen());
+        requestAnimationFrame(() => {
+          legendenPositionAktualisieren();
+          einpassen();
+        });
       }
 
       folderTreeUmschalten.addEventListener("click", () => {
@@ -1369,6 +1440,32 @@
       window.addEventListener("hashchange", () => einstellungenAusAdresseÖffnen());
       einstellungenAusAdresseÖffnen(false);
 
+      legendeUmschalten.addEventListener("click", () => {
+        legendeEingeblendet = !legendeEingeblendet;
+        try {
+          localStorage.setItem(
+            LEGENDE_SICHTBAR_SCHLÜSSEL,
+            String(legendeEingeblendet)
+          );
+        } catch {
+          // Die Auswahl bleibt für die laufende Sitzung im Speicher der Seite.
+        }
+        legendenSichtbarkeitAnwenden();
+      });
+
+      legendenSichtbarkeitAnwenden();
+
+      const legendenGrößenBeobachter = "ResizeObserver" in window
+        ? new ResizeObserver(legendenPositionAktualisieren)
+        : null;
+      legendenGrößenBeobachter?.observe(navigation);
+      legendenGrößenBeobachter?.observe(viewport);
+      legendenGrößenBeobachter?.observe(fortschrittslegende);
+      window.visualViewport?.addEventListener(
+        "resize",
+        legendenPositionAktualisieren
+      );
+
       const FACHRICHTUNG_SCHLÜSSEL = "thors-core.fachrichtung.v1";
       const GÜLTIGE_FACHRICHTUNGEN = new Set([
         "anwendungsentwicklung",
@@ -1376,9 +1473,6 @@
         "daten-prozessanalyse",
         "digitale-vernetzung"
       ]);
-      const angefragtesLernfeldId =
-        new URLSearchParams(location.search).get("lernfeld") || "LF1";
-
       try {
         const gespeichert = localStorage.getItem(FACHRICHTUNG_SCHLÜSSEL);
         fachrichtungAuswahl.value = GÜLTIGE_FACHRICHTUNGEN.has(gespeichert)
@@ -1398,11 +1492,8 @@
         } catch {
           // Die sichtbare Auswahl bleibt auch ohne verfügbaren Browserspeicher bedienbar.
         }
-        if (lernfelderKatalog.length) {
-          lernfeldKatalogRendern(
-            document.querySelector("#ordnerbaum"),
-            lernfelderKatalog
-          );
+        if (aktiveDaten && !quizAuswahlAktiv) {
+          baumRendern(aktiveDaten);
         }
       });
 
@@ -1489,153 +1580,71 @@
         }
       }
 
-      function lernfeldKatalogRendern(baum, lernfelder) {
-        baum.querySelectorAll(".lernfeld-katalog, .fachrichtungs-leerstand")
-          .forEach(element => element.remove());
-        const gespeicherteExpansion = baumExpansionLaden();
+      function sichtbareLernfelder(datensatz) {
         const fachrichtung = fachrichtungAuswahl.value;
-        lernfelder
-          .filter(lernfeld =>
-            lernfeld.id !== angefragtesLernfeldId &&
-            (!lernfeld.fachrichtung_ref || lernfeld.fachrichtung_ref === fachrichtung)
-          )
-          .forEach(lernfeld => {
-            const eintrag = document.createElement("li");
-            const details = document.createElement("details");
-            const zusammenfassung = baumZusammenfassung(
-              `Lernfeld ${lernfeld.number} · ${lernfeld.title}`,
-              lernfeld
-            );
-            const hinweis = document.createElement("p");
-            const link = document.createElement("a");
-            const ziel = new URL(location.href);
-            eintrag.className = "lernfeld lernfeld-katalog";
-            hinweis.className = "lernfeld-katalog__hinweis";
-            link.className = "lernfeld-katalog__link";
-            link.textContent = "Inhalte öffnen";
-            ziel.searchParams.set("lernfeld", lernfeld.id);
-            ziel.hash = "";
-            link.href = ziel;
-            hinweis.append(link);
-            baumDetailsInitialisieren(
-              details,
-              `lernfeld:${lernfeld.id}`,
-              false,
-              gespeicherteExpansion
-            );
-            details.append(zusammenfassung, hinweis);
-            eintrag.append(details);
-            baum.append(eintrag);
-          });
-
-        if (!fachrichtung) {
-          const leerstand = document.createElement("li");
-          leerstand.className = "fachrichtungs-leerstand";
-          leerstand.textContent =
-            "Wähle in den Einstellungen eine Fachrichtung, um die Lernfelder 10–12 anzuzeigen.";
-          baum.append(leerstand);
-        }
-
-        baumInteraktionenEinrichten();
+        return datensatz.lernfelder.filter(lernfeld =>
+          !lernfeld.fachrichtung_ref || lernfeld.fachrichtung_ref === fachrichtung
+        );
       }
 
       function baumRendern(datensatz) {
         const baum = document.querySelector("#ordnerbaum");
         baum.replaceChildren();
         lernfelderKatalog = datensatz.lernfelder;
-        const gespeicherteExpansion = baumExpansionLaden();
-        const lernfeldEintrag = document.createElement("li");
-        const lernfeldDetails = document.createElement("details");
-        const kompetenzListe = document.createElement("ul");
-        lernfeldEintrag.className = "lernfeld";
-        baumDetailsInitialisieren(
-          lernfeldDetails,
-          `lernfeld:${datensatz.lernfeld.id ?? datensatz.lernfeld.number}`,
-          true,
-          gespeicherteExpansion
-        );
-        kompetenzListe.className = "ebene kompetenzen";
-        lernfeldDetails.append(
-          baumZusammenfassung(
-            `Lernfeld ${datensatz.lernfeld.number} · ${datensatz.lernfeld.title}`,
-            datensatz.lernfeld
-          ),
-          kompetenzListe
-        );
-        lernfeldEintrag.append(lernfeldDetails);
-        baum.append(lernfeldEintrag);
-
-        datensatz.lernfeld.kompetenzen.forEach((kompetenz, kompetenzIndex) => {
-          const kompetenzEintrag = document.createElement("li");
-          const kompetenzDetails = document.createElement("details");
-          const clusterListe = document.createElement("ul");
-          const kompetenzZusammenfassung = baumZusammenfassung(kompetenz.title, kompetenz);
-          kompetenzEintrag.className = "kompetenz";
-          baumDetailsInitialisieren(
-            kompetenzDetails,
-            `kompetenz:${kompetenz.id}`,
-            kompetenzIndex === 0,
-            gespeicherteExpansion
+        sichtbareLernfelder(datensatz).forEach(lernfeld => {
+          const eintrag = document.createElement("li");
+          const schaltfläche = document.createElement("button");
+          const themaIds = lernfeld.kompetenzen.flatMap(kompetenz =>
+            kompetenz.themencluster.flatMap(cluster =>
+              cluster.themen.map(thema => thema.id)
+            )
           );
-          clusterListe.className = "ebene clusterliste";
-          kompetenzZusammenfassung.dataset.fokusId = `kompetenz:${kompetenz.id}`;
-          kompetenzZusammenfassung.dataset.themaIds = kompetenz.themencluster
-            .flatMap(cluster => cluster.themen.map(thema => thema.id))
-            .join(" ");
-          kompetenzDetails.append(
-            kompetenzZusammenfassung,
-            clusterListe
-          );
-          kompetenzEintrag.append(kompetenzDetails);
-          kompetenzListe.append(kompetenzEintrag);
-
-          kompetenz.themencluster.forEach((cluster, clusterIndex) => {
-            const clusterEintrag = document.createElement("li");
-            const clusterDetails = document.createElement("details");
-            const themenListe = document.createElement("ul");
-            const clusterZusammenfassung = baumZusammenfassung(cluster.title, cluster);
-            clusterEintrag.className = "cluster";
-            baumDetailsInitialisieren(
-              clusterDetails,
-              `cluster:${cluster.id}`,
-              kompetenzIndex === 0 && clusterIndex === 0,
-              gespeicherteExpansion
+          eintrag.className = "lernfeld";
+          schaltfläche.type = "button";
+          schaltfläche.className = "lernfeld-zeile";
+          schaltfläche.textContent =
+            `Lernfeld ${lernfeld.number} · ${lernfeld.title}`;
+          schaltfläche.setAttribute("aria-pressed", "false");
+          schaltfläche.addEventListener("click", () => {
+            bereichFokussieren(
+              `lernfeld:${lernfeld.id}`,
+              themaIds,
+              schaltfläche
             );
-            themenListe.className = "ebene themenliste";
-            clusterZusammenfassung.dataset.fokusId = `cluster:${cluster.id}`;
-            clusterZusammenfassung.dataset.themaIds = cluster.themen
-              .map(thema => thema.id)
-              .join(" ");
-            clusterDetails.append(
-              clusterZusammenfassung,
-              themenListe
-            );
-            clusterEintrag.append(clusterDetails);
-            clusterListe.append(clusterEintrag);
+          });
+          eintrag.append(schaltfläche);
+          baum.append(eintrag);
+        });
 
-            cluster.themen.forEach(thema => {
-              const themaEintrag = document.createElement("li");
-              themaEintrag.className = "thema";
-              themaEintrag.dataset.themaId = thema.id;
-              themaEintrag.dataset.fokusId = `thema:${thema.id}`;
-              themaEintrag.dataset.themaIds = thema.id;
-              themaEintrag.style.setProperty(
-                "--ordnerfarbe",
-                farbeMischen(gemittelteGewichte(thema))
-              );
-              themaEintrag.textContent = thema.title;
-              themenListe.append(themaEintrag);
-              themaTitelZuId.set(thema.title, thema.id);
+        if (!fachrichtungAuswahl.value) {
+          const leerstand = document.createElement("li");
+          leerstand.className = "fachrichtungs-leerstand";
+          leerstand.textContent =
+            "Wähle in den Einstellungen eine Fachrichtung, um die Lernfelder 10–12 anzuzeigen.";
+          baum.append(leerstand);
+        }
+      }
+
+      function quizThemenRendern(datensatz) {
+        const baum = document.querySelector("#ordnerbaum");
+        baum.replaceChildren();
+        sichtbareLernfelder(datensatz).forEach(lernfeld => {
+          lernfeld.kompetenzen.forEach(kompetenz => {
+            kompetenz.themencluster.forEach(cluster => {
+              cluster.themen.forEach(thema => {
+                const themaEintrag = document.createElement("li");
+                themaEintrag.className = "thema";
+                themaEintrag.dataset.themaId = thema.id;
+                themaEintrag.dataset.fokusId = `thema:${thema.id}`;
+                themaEintrag.dataset.themaIds = thema.id;
+                themaEintrag.textContent =
+                  `LF ${lernfeld.number} · ${thema.title}`;
+                baum.append(themaEintrag);
+              });
             });
           });
         });
-
-        lernfeldKatalogRendern(baum, datensatz.lernfelder);
-
-        baum.addEventListener("toggle", ereignis => {
-          if (!(ereignis.target instanceof HTMLDetailsElement)) return;
-          baumExpansionSpeichern(baum);
-        }, true);
+        baumInteraktionenEinrichten();
       }
 
       function baumInteraktionenEinrichten() {
@@ -1791,6 +1800,7 @@
           checkbox.disabled = true;
         });
         quizAuswahlAktualisieren();
+        if (aktiveDaten) baumRendern(aktiveDaten);
         const ziel = navigationRechteck();
         navigationÜbergangAnimieren(
           { ...start, opacity: 1 },
@@ -1810,6 +1820,7 @@
         quizAußenKlickUnterdrücken = false;
         coreMenüSchließen();
         app.classList.add("quiz-auswahlmodus");
+        if (aktiveDaten) quizThemenRendern(aktiveDaten);
         quizAuswahlhinweis.hidden = false;
         quizAuswahlaktionen.hidden = false;
         appBarDoomScrollQuiz.setAttribute("aria-pressed", "true");
@@ -1919,7 +1930,7 @@
         }
       }
 
-      function datenZusammenbauen(pakete, lernfeldId = "LF1") {
+      function datenZusammenbauen(pakete) {
         const lernfelderDatei = pakete["Lernfelder.json"];
         const themenDatei = pakete["Themen.json"];
         const coresDatei = pakete["Cores.json"];
@@ -1986,50 +1997,35 @@
           }
         });
 
-        const lernfeldQuelle = lernfelderDatei.lernfelder
-          .find(lernfeldEintrag => lernfeldEintrag.id === lernfeldId);
-        if (!lernfeldQuelle) {
-          throw new Error(`Unbekanntes Lernfeld: ${lernfeldId}`);
-        }
-        const lernfeld = {
-          id: lernfeldQuelle.id,
-          number: lernfeldQuelle.number,
-          title: lernfeldQuelle.title,
-          official_source_ref: lernfeldQuelle.official_source_ref,
+        const lernfelder = lernfelderDatei.lernfelder.map(lernfeldQuelle => ({
+          ...lernfeldQuelle,
           kompetenzen: lernfeldQuelle.kompetenzen
             .slice()
             .sort((a, b) => a.sort_order - b.sort_order)
             .map(kompetenz => ({
-              id: kompetenz.id,
-              title: kompetenz.title,
-              derivation: kompetenz.derivation,
+              ...kompetenz,
               themencluster: themenDatei.themencluster
                 .filter(cluster => cluster.kompetenz_ref === kompetenz.id)
                 .sort((a, b) => a.sort_order - b.sort_order)
                 .map(cluster => ({
-                  id: cluster.id,
-                  title: cluster.title,
+                  ...cluster,
                   themen: themenDatei.themen
                     .filter(thema => thema.themencluster_ref === cluster.id)
                     .sort((a, b) => a.sort_order - b.sort_order)
-                    .map(thema => {
-                      const vorkommen = (ausprägungenNachThema.get(thema.id) || [])
+                    .map(thema => ({
+                      ...thema,
+                      cores: (ausprägungenNachThema.get(thema.id) || [])
                         .filter(ausprägung =>
                           ausprägung.lernfeld_ref === lernfeldQuelle.id &&
                           ausprägung.kompetenz_ref === kompetenz.id &&
                           ausprägung.themencluster_ref === cluster.id
                         )
-                        .sort((a, b) => a.sort_order - b.sort_order);
-                      if (!vorkommen.length) {
-                        throw new Error(`Sichtbares Thema ohne Core-Ausprägung: ${thema.id}`);
-                      }
-                      return {
-                        id: thema.id,
-                        title: thema.title,
-                        cores: vorkommen.map(ausprägung => {
+                        .sort((a, b) => a.sort_order - b.sort_order)
+                        .map(ausprägung => {
                           const core = coreNachId.get(ausprägung.core_ref);
                           return {
                             id: ausprägung.id,
+                            core_ref: ausprägung.core_ref,
                             identity_key: core.identity_key,
                             short_title: core.short_title,
                             title: core.title,
@@ -2042,15 +2038,13 @@
                             source_refs: ausprägung.source_refs
                           };
                         })
-                      };
-                    })
+                    }))
                 }))
             }))
-        };
+        }));
         return {
           schema_version: "3.0.0",
-          lernfeld,
-          lernfelder: lernfelderDatei.lernfelder
+          lernfelder
         };
       }
 
@@ -2070,32 +2064,50 @@
       }
 
       const datenpakete = await datenLaden();
-      const daten = datenZusammenbauen(datenpakete, angefragtesLernfeldId);
-      if (!daten.lernfeld?.kompetenzen) {
+      const daten = datenZusammenbauen(datenpakete);
+      aktiveDaten = daten;
+      if (!daten.lernfelder?.length) {
         throw new Error("Die normalisierten Datensätze konnten nicht zusammengesetzt werden.");
       }
       baumRendern(daten);
-      baumInteraktionenEinrichten();
-      const cores = [];
-      daten.lernfeld.kompetenzen.forEach(kompetenz => {
-        kompetenz.themencluster.forEach(cluster => {
-          cluster.themen.forEach(thema => {
-            if (thema.title) themaTitelZuId.set(thema.title, thema.id);
-            thema.cores.forEach(core => {
-              cores.push([
-                core.title || core.short_title,
-                farbeMischen(core.category_weights),
-                [core.topic_ref || thema.id],
-                cluster.id,
-                cluster.title,
-                core.identity_key,
-                core.content,
-                thema.title
-              ]);
+      const coresNachIdentität = new Map();
+      daten.lernfelder.forEach(lernfeld => {
+        lernfeld.kompetenzen.forEach(kompetenz => {
+          kompetenz.themencluster.forEach(cluster => {
+            cluster.themen.forEach(thema => {
+              if (thema.title) themaTitelZuId.set(thema.title, thema.id);
+              thema.cores.forEach(core => {
+                const schlüssel = core.core_ref || core.identity_key;
+                if (!coresNachIdentität.has(schlüssel)) {
+                  coresNachIdentität.set(schlüssel, {
+                    titel: core.title || core.short_title,
+                    farbe: farbeMischen(core.category_weights),
+                    themen: new Set(),
+                    clusterId: cluster.id,
+                    clusterTitel: cluster.title,
+                    coreId: core.identity_key,
+                    inhalt: core.content,
+                    themaTitel: thema.title
+                  });
+                }
+                coresNachIdentität.get(schlüssel).themen.add(
+                  core.topic_ref || thema.id
+                );
+              });
             });
           });
         });
       });
+      const cores = [...coresNachIdentität.values()].map(core => [
+        core.titel,
+        core.farbe,
+        [...core.themen],
+        core.clusterId,
+        core.clusterTitel,
+        core.coreId,
+        core.inhalt,
+        core.themaTitel
+      ]);
 
       const prototypStützwerte = [0, 10, 30, 50, 100];
       const beispielFortschritte = cores.map((core, index) =>
@@ -2766,7 +2778,7 @@ nachuntersuchung medical loop
           "aria-pressed",
           String(fortschrittPrototypAktiv)
         );
-        fortschrittslegende.hidden = !fortschrittPrototypAktiv;
+        legendenSichtbarkeitAnwenden();
         knotenElemente.forEach((punkt, index) => {
           punkt.setAttribute("aria-label", coreBeschriftung(index));
         });
@@ -3072,7 +3084,7 @@ nachuntersuchung medical loop
         aktivesThema = zurücksetzen ? null : fokusId;
         aktiveThemenIds = new Set(zurücksetzen ? [] : themaIds);
 
-        document.querySelectorAll(".thema-fokus").forEach(schaltfläche => {
+        document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
           schaltfläche.setAttribute(
             "aria-pressed",
             String(!zurücksetzen && schaltfläche === auslöser)
@@ -3086,7 +3098,7 @@ nachuntersuchung medical loop
         if (!aktivesThema) return;
         aktivesThema = null;
         aktiveThemenIds = new Set();
-        document.querySelectorAll(".thema-fokus").forEach(schaltfläche => {
+        document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
           schaltfläche.setAttribute("aria-pressed", "false");
         });
         fokusDarstellungAktualisieren();
@@ -3355,7 +3367,10 @@ nachuntersuchung medical loop
 
       viewport.addEventListener("pointerup", ziehenBeenden);
       viewport.addEventListener("pointercancel", ziehenBeenden);
-      window.addEventListener("resize", einpassen);
+      window.addEventListener("resize", () => {
+        legendenPositionAktualisieren();
+        einpassen();
+      });
       einpassen();
       simulationStarten({ automatischEinpassen: true, schritte: 120 });
 

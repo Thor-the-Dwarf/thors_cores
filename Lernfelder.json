@@ -4,7 +4,7 @@
   "updated_at": "2026-07-30",
   "language": "de",
   "data_role": "Lernfelder und Kompetenzen",
-  "hierarchy_note": "Lernfeldnummern und -titel entsprechen dem KMK-Rahmenlehrplan. Nur LF1 besitzt derzeit eine fachlich ausgearbeitete Unterstruktur; für weitere Lernfelder werden keine Kompetenzen, Themen oder Cores vorweggenommen.",
+  "hierarchy_note": "Alle Fachinformatiker-Lernfelder und Fachrichtungsvarianten entsprechen dem KMK-Rahmenlehrplan. Kompetenzbereiche, Themencluster, Themen und Core-Ausprägungen sind aus den offiziellen Zielformulierungen redaktionell abgeleitet.",
   "lernfelder": [
     {
       "id": "LF1",
@@ -40,63 +40,322 @@
           "derivation": "Didaktisch abgeleitet aus der LF1-Zielformulierung zur Informationsauswertung, adressatengerechten multimedialen Darstellung, Teamarbeit, Präsentation, Qualitätsprüfung und Reflexion.",
           "sort_order": 4
         }
-      ]
+      ],
+      "training_year": 1,
+      "time_guideline_hours": 40,
+      "competency_statement": "Die Schülerinnen und Schüler präsentieren ihr Unternehmen hinsichtlich seiner Wertschöpfungskette und beschreiben ihre eigene Rolle im Betrieb."
     },
     {
       "id": "LF2",
       "number": 2,
       "title": "Arbeitsplätze nach Kundenwunsch ausstatten",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF2-K01",
+          "lernfeld_ref": "LF2",
+          "title": "Kundenbedarf und Auswahlkriterien ermitteln",
+          "derivation": "Didaktisch aus der offiziellen LF2-Zielformulierung abgeleitet: Kundenwunsch, Anforderungen an Soft- und Hardware, Auswahlkriterien sowie Normen und Vorschriften.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF2-K02",
+          "lernfeld_ref": "LF2",
+          "title": "Produkte technisch, ökologisch und wirtschaftlich vergleichen",
+          "derivation": "Didaktisch aus der offiziellen LF2-Zielformulierung abgeleitet: Datenblätter, Produktbeschreibungen, Nutzwertanalyse, Kenngrößen, Ergonomie, Nachhaltigkeit und Energieeffizienz.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF2-K03",
+          "lernfeld_ref": "LF2",
+          "title": "Beschaffung und Angebot durchführen",
+          "derivation": "Didaktisch aus der offiziellen LF2-Zielformulierung abgeleitet: Bezugsquellen, Angebotsvergleich, Lieferantenauswahl, Zuschlagssätze, Kaufvertrag und Wareneingang.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF2-K04",
+          "lernfeld_ref": "LF2",
+          "title": "Arbeitsplatz integrieren, übergeben und bewerten",
+          "derivation": "Didaktisch aus der offiziellen LF2-Zielformulierung abgeleitet: Integration, Konfiguration, Inbetriebnahme, Übergabeprotokoll, Kundenzufriedenheit und Verbesserung.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 1,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF2 ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF3",
       "number": 3,
       "title": "Clients in Netzwerke einbinden",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF3-K01",
+          "lernfeld_ref": "LF3",
+          "title": "Netzwerkanforderungen und Bestand analysieren",
+          "derivation": "Didaktisch aus der offiziellen LF3-Zielformulierung abgeleitet: Kundengespräch, Leistungskriterien, bestehende Infrastruktur, Komponenten, Standards und Netzwerkpläne.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF3-K02",
+          "lernfeld_ref": "LF3",
+          "title": "Clientintegration planen",
+          "derivation": "Didaktisch aus der offiziellen LF3-Zielformulierung abgeleitet: anforderungsgerechtes Konzept, ökologische und wirtschaftliche Gesichtspunkte, Energieeffizienz und Komponentenauswahl.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF3-K03",
+          "lernfeld_ref": "LF3",
+          "title": "Clients konfigurieren und einbinden",
+          "derivation": "Didaktisch aus der offiziellen LF3-Zielformulierung abgeleitet: Komponentenauswahl, Clientkonfiguration und Netzwerkeinbindung.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF3-K04",
+          "lernfeld_ref": "LF3",
+          "title": "Funktion prüfen und Integration optimieren",
+          "derivation": "Didaktisch aus der offiziellen LF3-Zielformulierung abgeleitet: systematische Funktionsprüfung, Protokollierung, Wirtschaftlichkeit, Ökologie und Optimierung.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 1,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF3 ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF4",
       "number": 4,
       "title": "Schutzbedarfsanalyse im eigenen Arbeitsbereich durchführen",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF4-K01",
+          "lernfeld_ref": "LF4",
+          "title": "Informationssicherheit und Vorgaben erschließen",
+          "derivation": "Didaktisch aus der offiziellen LF4-Zielformulierung abgeleitet: Schutzziele, rechtliche Regelungen, betriebliche Vorgaben und Sicherheitsleitlinie.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF4-K02",
+          "lernfeld_ref": "LF4",
+          "title": "Schutzbedarf und Schadensszenarien analysieren",
+          "derivation": "Didaktisch aus der offiziellen LF4-Zielformulierung abgeleitet: Klassifikation von Schadensszenarien, Schutzbedarf und Gewichtung möglicher Bedrohungen.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF4-K03",
+          "lernfeld_ref": "LF4",
+          "title": "Schutzbedarfsanalyse durchführen und dokumentieren",
+          "derivation": "Didaktisch aus der offiziellen LF4-Zielformulierung abgeleitet: Bedrohungsfaktoren aufnehmen und Analyse nachvollziehbar dokumentieren.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF4-K04",
+          "lernfeld_ref": "LF4",
+          "title": "Maßnahmen empfehlen, umsetzen und reflektieren",
+          "derivation": "Didaktisch aus der offiziellen LF4-Zielformulierung abgeleitet: Abgleich mit Sicherheitsleitlinie, Maßnahmenempfehlung, Umsetzung und Verantwortung im Sicherheitsprozess.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 1,
+      "time_guideline_hours": 40,
+      "competency_statement": "Die in LF4 ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF5",
       "number": 5,
       "title": "Software zur Verwaltung von Daten anpassen",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF5-K01",
+          "lernfeld_ref": "LF5",
+          "title": "Daten und Speicheranforderungen analysieren",
+          "derivation": "Didaktisch aus der offiziellen LF5-Zielformulierung abgeleitet: Herkunft, Art, Verfügbarkeit, Datenschutz, Datensicherheit, Datenformate und Speicherlösungen.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF5-K02",
+          "lernfeld_ref": "LF5",
+          "title": "Datenmodell und Anpassung planen",
+          "derivation": "Didaktisch aus der offiziellen LF5-Zielformulierung abgeleitet: Anwendung zur Datenverwaltung planen, Vorgehen festlegen und Testfälle entwickeln.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF5-K03",
+          "lernfeld_ref": "LF5",
+          "title": "Anwendung anpassen und dokumentieren",
+          "derivation": "Didaktisch aus der offiziellen LF5-Zielformulierung abgeleitet: Implementierung im Team und Softwaredokumentation.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF5-K04",
+          "lernfeld_ref": "LF5",
+          "title": "Anwendung testen und Entwicklungsprozess evaluieren",
+          "derivation": "Didaktisch aus der offiziellen LF5-Zielformulierung abgeleitet: Funktion prüfen, Eignung beurteilen und Softwareentwicklungsprozess bewerten.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 1,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF5 ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF6",
       "number": 6,
       "title": "Serviceanfragen bearbeiten",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF6-K01",
+          "lernfeld_ref": "LF6",
+          "title": "Serviceanfragen annehmen und vertraglich einordnen",
+          "derivation": "Didaktisch aus der offiziellen LF6-Zielformulierung abgeleitet: direkter und indirekter Kundenkontakt, SLA, Reaktionszeit, Status und Service-Management-System.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF6-K02",
+          "lernfeld_ref": "LF6",
+          "title": "Anfragen diagnostisch einordnen",
+          "derivation": "Didaktisch aus der offiziellen LF6-Zielformulierung abgeleitet: systematisches Fragen, Support-Level und fachliche Standards.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF6-K03",
+          "lernfeld_ref": "LF6",
+          "title": "Lösung umsetzen und Beteiligte informieren",
+          "derivation": "Didaktisch aus der offiziellen LF6-Zielformulierung abgeleitet: Lösungsmöglichkeiten, Bearbeitungsstatus, situationsgerechte Kommunikation, Fremdsprache und Deeskalation.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF6-K04",
+          "lernfeld_ref": "LF6",
+          "title": "Servicequalität auswerten und verbessern",
+          "derivation": "Didaktisch aus der offiziellen LF6-Zielformulierung abgeleitet: Reflexion von Bearbeitung und Gespräch, Diskussion der Fälle und Qualitätssteigerung.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 2,
+      "time_guideline_hours": 40,
+      "competency_statement": "Die in LF6 ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF7",
       "number": 7,
       "title": "Cyber-physische Systeme ergänzen",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF7-K01",
+          "lernfeld_ref": "LF7",
+          "title": "Cyber-physisches System und Kundenauftrag analysieren",
+          "derivation": "Didaktisch aus der offiziellen LF7-Zielformulierung abgeleitet: bestehendes CPS, Ergänzungsauftrag, Datenfluss, Kommunikation sowie Energie-, Stoff- und Informationsflüsse.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF7-K02",
+          "lernfeld_ref": "LF7",
+          "title": "Komponenten und technische Kommunikation planen",
+          "derivation": "Didaktisch aus der offiziellen LF7-Zielformulierung abgeleitet: Kriterien für Energieversorgung, Hardware, Bibliotheken, Protokolle und technische Unterlagen.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF7-K03",
+          "lernfeld_ref": "LF7",
+          "title": "Komponenten integrieren und System in Betrieb nehmen",
+          "derivation": "Didaktisch aus der offiziellen LF7-Zielformulierung abgeleitet: funktionales Zusammenführen von Komponenten und bestehendem CPS.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF7-K04",
+          "lernfeld_ref": "LF7",
+          "title": "Betriebswerte prüfen und CPS bewerten",
+          "derivation": "Didaktisch aus der offiziellen LF7-Zielformulierung abgeleitet: Funktionsprüfung, Messung, Energievalidierung, Protokollierung, Betriebs- und Datensicherheit.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 2,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF7 ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF8",
       "number": 8,
       "title": "Daten systemübergreifend bereitstellen",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF8-K01",
+          "lernfeld_ref": "LF8",
+          "title": "Dezentrale Datenquellen analysieren und auswählen",
+          "derivation": "Didaktisch aus der offiziellen LF8-Zielformulierung abgeleitet: Struktur, Rechtsrahmen, Zugriffsmöglichkeiten, Mechanismen und Heterogenität.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF8-K02",
+          "lernfeld_ref": "LF8",
+          "title": "Sichere Datenbereitstellung konzipieren",
+          "derivation": "Didaktisch aus der offiziellen LF8-Zielformulierung abgeleitet: Konzepte zur Bereitstellung und weitere Verarbeitung unter Beachtung der Informationssicherheit.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF8-K03",
+          "lernfeld_ref": "LF8",
+          "title": "Datenpipeline arbeitsteilig implementieren",
+          "derivation": "Didaktisch aus der offiziellen LF8-Zielformulierung abgeleitet: ortsunabhängige Zusammenarbeit, Entwicklungswerkzeuge und passende Produkte.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF8-K04",
+          "lernfeld_ref": "LF8",
+          "title": "Datenprodukt übergeben und Qualität reflektieren",
+          "derivation": "Didaktisch aus der offiziellen LF8-Zielformulierung abgeleitet: Handhabungsdokumentation, Fremdsprache, Werkzeugeignung und Dokumentationsqualität.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 2,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF8 ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF9",
       "number": 9,
       "title": "Netzwerke und Dienste bereitstellen",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF9-K01",
+          "lernfeld_ref": "LF9",
+          "title": "Netzwerk- und Dienstanforderungen ermitteln",
+          "derivation": "Didaktisch aus der offiziellen LF9-Zielformulierung abgeleitet: Kundenkommunikation, Komponenten, Dienste, Leistungsmerkmale und Sicherheitsmerkmale.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF9-K02",
+          "lernfeld_ref": "LF9",
+          "title": "Netzwerk und Dienste dimensionieren",
+          "derivation": "Didaktisch aus der offiziellen LF9-Zielformulierung abgeleitet: interne und externe Ressourcen, Nachhaltigkeit, technische und wirtschaftliche Eignung.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF9-K03",
+          "lernfeld_ref": "LF9",
+          "title": "Infrastruktur konfigurieren und Dienste implementieren",
+          "derivation": "Didaktisch aus der offiziellen LF9-Zielformulierung abgeleitet: Installation, Konfiguration, Standards, Funktionsprüfungen, Messungen und Dokumentation.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF9-K04",
+          "lernfeld_ref": "LF9",
+          "title": "Lösung bewerten und zukunftsfähig verbessern",
+          "derivation": "Didaktisch aus der offiziellen LF9-Zielformulierung abgeleitet: Anforderungen, Datensicherheit, Datenschutz, Kundenzufriedenheit, Zukunftsfähigkeit und Vorgehen.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 2,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF9 ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF10a",
@@ -104,7 +363,39 @@
       "title": "Benutzerschnittstellen gestalten und entwickeln",
       "fachrichtung_ref": "anwendungsentwicklung",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF10a-K01",
+          "lernfeld_ref": "LF10a",
+          "title": "Geschäftsprozesse und Informationsflüsse analysieren",
+          "derivation": "Didaktisch aus der offiziellen LF10a-Zielformulierung abgeleitet: betriebliche Abläufe, Geschäftsprozesse, modellhafte Darstellung und Optimierung.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF10a-K02",
+          "lernfeld_ref": "LF10a",
+          "title": "Benutzerschnittstellen agil gestalten",
+          "derivation": "Didaktisch aus der offiziellen LF10a-Zielformulierung abgeleitet: unterschiedliche Endgeräte und Betriebssysteme, vollständiger Informationsfluss und agile Methoden.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF10a-K03",
+          "lernfeld_ref": "LF10a",
+          "title": "Oberflächenfunktionalität implementieren",
+          "derivation": "Didaktisch aus der offiziellen LF10a-Zielformulierung abgeleitet: Bibliotheken, Module, vollständige Prozessabbildung und Datenschutz.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF10a-K04",
+          "lernfeld_ref": "LF10a",
+          "title": "Benutzerfreundlichkeit, Funktion und Wirtschaftlichkeit prüfen",
+          "derivation": "Didaktisch aus der offiziellen LF10a-Zielformulierung abgeleitet: Datenschutzkonformität, Usability, funktionale Richtigkeit, Prozess- und Entwicklungskosten.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF10a ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF11a",
@@ -112,7 +403,39 @@
       "title": "Funktionalität in Anwendungen realisieren",
       "fachrichtung_ref": "anwendungsentwicklung",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF11a-K01",
+          "lernfeld_ref": "LF11a",
+          "title": "Datenstrukturen und Funktionalitäten ableiten",
+          "derivation": "Didaktisch aus der offiziellen LF11a-Zielformulierung abgeleitet: Informationsobjekte, Prozessbeschreibungen, Datenstrukturen und Funktionen.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF11a-K02",
+          "lernfeld_ref": "LF11a",
+          "title": "Modulare Softwarekomponenten planen",
+          "derivation": "Didaktisch aus der offiziellen LF11a-Zielformulierung abgeleitet: Module, Diagramme, Modelle, Entwicklungsmethode und iterative Kundenabstimmung.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF11a-K03",
+          "lernfeld_ref": "LF11a",
+          "title": "Komponenten realisieren und Datenquellen anbinden",
+          "derivation": "Didaktisch aus der offiziellen LF11a-Zielformulierung abgeleitet: Teamarbeit, Implementierung, Datenquellen und Schnittstellendokumentation.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF11a-K04",
+          "lernfeld_ref": "LF11a",
+          "title": "Funktion automatisiert testen und Module überarbeiten",
+          "derivation": "Didaktisch aus der offiziellen LF11a-Zielformulierung abgeleitet: Testfälle, automatisierte Testverfahren, Kundenkriterien und Überarbeitung.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF11a ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF12a",
@@ -120,7 +443,39 @@
       "title": "Kundenspezifische Anwendungsentwicklung durchführen",
       "fachrichtung_ref": "anwendungsentwicklung",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF12a-K01",
+          "lernfeld_ref": "LF12a",
+          "title": "Kundenauftrag zur Anwendungsentwicklung klären",
+          "derivation": "Didaktisch aus der offiziellen LF12a-Zielformulierung abgeleitet: Anforderungsanalyse, Projektziele, Ergebnisse, Schulungsbedarfe und Rahmenbedingungen.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF12a-K02",
+          "lernfeld_ref": "LF12a",
+          "title": "Projekt für Anwendungsentwicklung planen und kalkulieren",
+          "derivation": "Didaktisch aus der offiziellen LF12a-Zielformulierung abgeleitet: personelle und technische Ressourcen, Projektplanung und Kalkulation.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF12a-K03",
+          "lernfeld_ref": "LF12a",
+          "title": "Lösungsvarianten bewerten und Softwarelösung umsetzen",
+          "derivation": "Didaktisch aus der offiziellen LF12a-Zielformulierung abgeleitet: Lösungsvarianten, Datenschutz, Datensicherheit, Leistungsdokument, Angebot, Implementierung und Qualitätssicherung.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF12a-K04",
+          "lernfeld_ref": "LF12a",
+          "title": "Projektergebnis übergeben und Anwendungsentwicklungsprojekt bewerten",
+          "derivation": "Didaktisch aus der offiziellen LF12a-Zielformulierung abgeleitet: Präsentation, Schulung, Produktübergabe, Dokumentation, Zielerreichung, Wirtschaftlichkeit, Skalierbarkeit, Verlässlichkeit und Kundenrückmeldung.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 120,
+      "competency_statement": "Die in LF12a ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF10b",
@@ -128,7 +483,39 @@
       "title": "Serverdienste bereitstellen und Administrationsaufgaben automatisieren",
       "fachrichtung_ref": "systemintegration",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF10b-K01",
+          "lernfeld_ref": "LF10b",
+          "title": "Serverdienste und Plattformen auswählen",
+          "derivation": "Didaktisch aus der offiziellen LF10b-Zielformulierung abgeleitet: Kundenanforderungen, Verfügbarkeit, Skalierbarkeit, Administrierbarkeit, Wirtschaftlichkeit und Sicherheit.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF10b-K02",
+          "lernfeld_ref": "LF10b",
+          "title": "Einrichtung, Aktualisierung und Sicherung konzipieren",
+          "derivation": "Didaktisch aus der offiziellen LF10b-Zielformulierung abgeleitet: Konfiguration, Einrichtung, Aktualisierung, Datensicherung und Überwachung.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF10b-K03",
+          "lernfeld_ref": "LF10b",
+          "title": "Dienste implementieren, testen und überwachen",
+          "derivation": "Didaktisch aus der offiziellen LF10b-Zielformulierung abgeleitet: betriebliche Vorgaben, Lizenzierung, Test, Monitoring, kritische Zustände und Dokumentation.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF10b-K04",
+          "lernfeld_ref": "LF10b",
+          "title": "Administration automatisieren und Lösung optimieren",
+          "derivation": "Didaktisch aus der offiziellen LF10b-Zielformulierung abgeleitet: kundenspezifische Automatisierung, Test, Optimierung und Beurteilung.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF10b ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF11b",
@@ -136,7 +523,39 @@
       "title": "Betrieb und Sicherheit vernetzter Systeme gewährleisten",
       "fachrichtung_ref": "systemintegration",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF11b-K01",
+          "lernfeld_ref": "LF11b",
+          "title": "Schutzbedarf vernetzter Systeme ermitteln",
+          "derivation": "Didaktisch aus der offiziellen LF11b-Zielformulierung abgeleitet: Kundengespräch, Schutzziele, vernetzte Systeme und Sicherheitsanforderungen.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF11b-K02",
+          "lernfeld_ref": "LF11b",
+          "title": "Schutzmaßnahmen risikoorientiert planen",
+          "derivation": "Didaktisch aus der offiziellen LF11b-Zielformulierung abgeleitet: Sicherheitsleitlinien, rechtliche Regelungen und Minimierung der Eintrittswahrscheinlichkeit.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF11b-K03",
+          "lernfeld_ref": "LF11b",
+          "title": "Maßnahmen technisch und organisatorisch umsetzen",
+          "derivation": "Didaktisch aus der offiziellen LF11b-Zielformulierung abgeleitet: technische und organisatorische Rahmenbedingungen.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF11b-K04",
+          "lernfeld_ref": "LF11b",
+          "title": "Sicherheitsniveau prüfen, dokumentieren und reflektieren",
+          "derivation": "Didaktisch aus der offiziellen LF11b-Zielformulierung abgeleitet: Prüfung, Kundenanforderungen, Maßnahmen, Wirtschaftlichkeit und relative Sicherheit.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF11b ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF12b",
@@ -144,7 +563,39 @@
       "title": "Kundenspezifische Systemintegration durchführen",
       "fachrichtung_ref": "systemintegration",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF12b-K01",
+          "lernfeld_ref": "LF12b",
+          "title": "Kundenauftrag zur Systemintegration klären",
+          "derivation": "Didaktisch aus der offiziellen LF12b-Zielformulierung abgeleitet: Anforderungsanalyse, Projektziele, Ergebnisse, Schulungsbedarfe und Rahmenbedingungen.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF12b-K02",
+          "lernfeld_ref": "LF12b",
+          "title": "Projekt für Systemintegration planen und kalkulieren",
+          "derivation": "Didaktisch aus der offiziellen LF12b-Zielformulierung abgeleitet: personelle und technische Ressourcen, Projektplanung und Kalkulation.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF12b-K03",
+          "lernfeld_ref": "LF12b",
+          "title": "Lösungsvarianten bewerten und integrierte Infrastruktur umsetzen",
+          "derivation": "Didaktisch aus der offiziellen LF12b-Zielformulierung abgeleitet: Lösungsvarianten, Datenschutz, Datensicherheit, Leistungsdokument, Angebot, Implementierung und Qualitätssicherung.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF12b-K04",
+          "lernfeld_ref": "LF12b",
+          "title": "Projektergebnis übergeben und Systemintegrationsprojekt bewerten",
+          "derivation": "Didaktisch aus der offiziellen LF12b-Zielformulierung abgeleitet: Präsentation, Schulung, Produktübergabe, Dokumentation, Zielerreichung, Wirtschaftlichkeit, Skalierbarkeit, Verlässlichkeit und Kundenrückmeldung.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 120,
+      "competency_statement": "Die in LF12b ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF10c",
@@ -152,7 +603,39 @@
       "title": "Werkzeuge des maschinellen Lernens einsetzen",
       "fachrichtung_ref": "daten-prozessanalyse",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF10c-K01",
+          "lernfeld_ref": "LF10c",
+          "title": "Einsatzpotenzial maschinellen Lernens bewerten",
+          "derivation": "Didaktisch aus der offiziellen LF10c-Zielformulierung abgeleitet: Einsatzmöglichkeiten, kundenspezifische Problemstellung und betriebswirtschaftliche Eignung.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF10c-K02",
+          "lernfeld_ref": "LF10c",
+          "title": "Datenquellen auswählen und verantwortungsvoll zusammenführen",
+          "derivation": "Didaktisch aus der offiziellen LF10c-Zielformulierung abgeleitet: freie und kommerzielle Datenquellen, Eignung, Datenschutz, Moral und Wirtschaftlichkeit.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF10c-K03",
+          "lernfeld_ref": "LF10c",
+          "title": "ML-Werkzeuge und Datenimport implementieren",
+          "derivation": "Didaktisch aus der offiziellen LF10c-Zielformulierung abgeleitet: Werkzeuge, Systeme, technische Vorbereitung und Importschnittstellen.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF10c-K04",
+          "lernfeld_ref": "LF10c",
+          "title": "Lernfortschritt überwachen und Modellwirkung reflektieren",
+          "derivation": "Didaktisch aus der offiziellen LF10c-Zielformulierung abgeleitet: technische Funktionsfähigkeit, Lernfortschritt, Wirksamkeit, Datenschutz, Moral und Wirtschaftlichkeit.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF10c ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF11c",
@@ -160,7 +643,39 @@
       "title": "Prozesse analysieren und gestalten",
       "fachrichtung_ref": "daten-prozessanalyse",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF11c-K01",
+          "lernfeld_ref": "LF11c",
+          "title": "Prozessdaten und Informationsfluss analysieren",
+          "derivation": "Didaktisch aus der offiziellen LF11c-Zielformulierung abgeleitet: kundenspezifische Prozessdarstellung, Digitalisierung, Informationsfluss und vorgegebenes Auswertungsverfahren.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF11c-K02",
+          "lernfeld_ref": "LF11c",
+          "title": "Digitalisierungslösungen planen und wirtschaftlich auswählen",
+          "derivation": "Didaktisch aus der offiziellen LF11c-Zielformulierung abgeleitet: technische Lösungen und betriebswirtschaftliche Auswahl.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF11c-K03",
+          "lernfeld_ref": "LF11c",
+          "title": "Digitalisierten Prozess implementieren und dokumentieren",
+          "derivation": "Didaktisch aus der offiziellen LF11c-Zielformulierung abgeleitet: Umsetzung und auch fremdsprachliche Kundendokumentation.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF11c-K04",
+          "lernfeld_ref": "LF11c",
+          "title": "Prozesstransformation begleiten und Wirkung bewerten",
+          "derivation": "Didaktisch aus der offiziellen LF11c-Zielformulierung abgeleitet: Kundenbegleitung, Anpassung der Prozessdarstellung sowie ökonomische und ökologische Reflexion.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF11c ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF12c",
@@ -168,7 +683,39 @@
       "title": "Kundenspezifische Prozess- und Datenanalyse durchführen",
       "fachrichtung_ref": "daten-prozessanalyse",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF12c-K01",
+          "lernfeld_ref": "LF12c",
+          "title": "Kundenauftrag zur Prozess- und Datenanalyse klären",
+          "derivation": "Didaktisch aus der offiziellen LF12c-Zielformulierung abgeleitet: Anforderungsanalyse, Projektziele, Ergebnisse, Schulungsbedarfe und Rahmenbedingungen.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF12c-K02",
+          "lernfeld_ref": "LF12c",
+          "title": "Projekt für Prozess- und Datenanalyse planen und kalkulieren",
+          "derivation": "Didaktisch aus der offiziellen LF12c-Zielformulierung abgeleitet: personelle und technische Ressourcen, Projektplanung und Kalkulation.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF12c-K03",
+          "lernfeld_ref": "LF12c",
+          "title": "Lösungsvarianten bewerten und Daten- und Prozesslösung umsetzen",
+          "derivation": "Didaktisch aus der offiziellen LF12c-Zielformulierung abgeleitet: Lösungsvarianten, Datenschutz, Datensicherheit, Leistungsdokument, Angebot, Implementierung und Qualitätssicherung.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF12c-K04",
+          "lernfeld_ref": "LF12c",
+          "title": "Projektergebnis übergeben und Prozess- und Datenanalyseprojekt bewerten",
+          "derivation": "Didaktisch aus der offiziellen LF12c-Zielformulierung abgeleitet: Präsentation, Schulung, Produktübergabe, Dokumentation, Zielerreichung, Wirtschaftlichkeit, Skalierbarkeit, Verlässlichkeit und Kundenrückmeldung.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 120,
+      "competency_statement": "Die in LF12c ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF10d",
@@ -176,7 +723,39 @@
       "title": "Cyber-physische Systeme entwickeln",
       "fachrichtung_ref": "digitale-vernetzung",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF10d-K01",
+          "lernfeld_ref": "LF10d",
+          "title": "Kundenauftrag und Interaktionen analysieren",
+          "derivation": "Didaktisch aus der offiziellen LF10d-Zielformulierung abgeleitet: CPS-Entwicklung sowie Interaktion zwischen Mensch, Maschine und künstlicher Intelligenz.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF10d-K02",
+          "lernfeld_ref": "LF10d",
+          "title": "CPS-Architektur und Vernetzung planen",
+          "derivation": "Didaktisch aus der offiziellen LF10d-Zielformulierung abgeleitet: Komponenten, Vernetzung, Programmierung, Interaktion sowie interne und externe Netze und Dienste.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF10d-K03",
+          "lernfeld_ref": "LF10d",
+          "title": "Sensoren, Aktoren, Software und Schnittstellen implementieren",
+          "derivation": "Didaktisch aus der offiziellen LF10d-Zielformulierung abgeleitet: Vernetzung, Programmierung, Datenübertragung, Visualisierung und Interaktion.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF10d-K04",
+          "lernfeld_ref": "LF10d",
+          "title": "Gesamtsystem testen, dokumentieren und ethisch bewerten",
+          "derivation": "Didaktisch aus der offiziellen LF10d-Zielformulierung abgeleitet: Testkonzepte, Bedienung, Wartung, Wirtschaftlichkeit, Skalierbarkeit, Verlässlichkeit und Ethik.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF10d ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF11d",
@@ -184,7 +763,39 @@
       "title": "Betrieb und Sicherheit vernetzter Systeme gewährleisten",
       "fachrichtung_ref": "digitale-vernetzung",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF11d-K01",
+          "lernfeld_ref": "LF11d",
+          "title": "Schutzbedarf vernetzter Systeme ermitteln",
+          "derivation": "Didaktisch aus der offiziellen LF11d-Zielformulierung abgeleitet: Kundengespräch, Schutzziele, vernetzte Systeme und Sicherheitsanforderungen.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF11d-K02",
+          "lernfeld_ref": "LF11d",
+          "title": "Schutzmaßnahmen risikoorientiert planen",
+          "derivation": "Didaktisch aus der offiziellen LF11d-Zielformulierung abgeleitet: Sicherheitsleitlinien, rechtliche Regelungen und Minimierung der Eintrittswahrscheinlichkeit.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF11d-K03",
+          "lernfeld_ref": "LF11d",
+          "title": "Maßnahmen technisch und organisatorisch umsetzen",
+          "derivation": "Didaktisch aus der offiziellen LF11d-Zielformulierung abgeleitet: technische und organisatorische Rahmenbedingungen.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF11d-K04",
+          "lernfeld_ref": "LF11d",
+          "title": "Sicherheitsniveau prüfen, dokumentieren und reflektieren",
+          "derivation": "Didaktisch aus der offiziellen LF11d-Zielformulierung abgeleitet: Prüfung, Kundenanforderungen, Maßnahmen, Wirtschaftlichkeit und relative Sicherheit.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 80,
+      "competency_statement": "Die in LF11d ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     },
     {
       "id": "LF12d",
@@ -192,7 +803,39 @@
       "title": "Kundenspezifisches cyber-physisches System optimieren",
       "fachrichtung_ref": "digitale-vernetzung",
       "official_source_ref": "KMK-RLP-IT-2020",
-      "kompetenzen": []
+      "kompetenzen": [
+        {
+          "id": "LF12d-K01",
+          "lernfeld_ref": "LF12d",
+          "title": "Kundenauftrag zur CPS-Optimierung klären",
+          "derivation": "Didaktisch aus der offiziellen LF12d-Zielformulierung abgeleitet: Anforderungsanalyse, Projektziele, Ergebnisse, Schulungsbedarfe und Rahmenbedingungen.",
+          "sort_order": 1
+        },
+        {
+          "id": "LF12d-K02",
+          "lernfeld_ref": "LF12d",
+          "title": "Projekt für CPS-Optimierung planen und kalkulieren",
+          "derivation": "Didaktisch aus der offiziellen LF12d-Zielformulierung abgeleitet: personelle und technische Ressourcen, Projektplanung und Kalkulation.",
+          "sort_order": 2
+        },
+        {
+          "id": "LF12d-K03",
+          "lernfeld_ref": "LF12d",
+          "title": "Lösungsvarianten bewerten und cyber-physische Lösung umsetzen",
+          "derivation": "Didaktisch aus der offiziellen LF12d-Zielformulierung abgeleitet: Lösungsvarianten, Datenschutz, Datensicherheit, Leistungsdokument, Angebot, Implementierung und Qualitätssicherung.",
+          "sort_order": 3
+        },
+        {
+          "id": "LF12d-K04",
+          "lernfeld_ref": "LF12d",
+          "title": "Projektergebnis übergeben und CPS-Optimierungsprojekt bewerten",
+          "derivation": "Didaktisch aus der offiziellen LF12d-Zielformulierung abgeleitet: Präsentation, Schulung, Produktübergabe, Dokumentation, Zielerreichung, Wirtschaftlichkeit, Skalierbarkeit, Verlässlichkeit und Kundenrückmeldung.",
+          "sort_order": 4
+        }
+      ],
+      "training_year": 3,
+      "time_guideline_hours": 120,
+      "competency_statement": "Die in LF12d ausgewiesenen Kompetenzbereiche bilden die Handlungsphasen und verbindlichen Inhalte der offiziellen KMK-Zielformulierung ab."
     }
   ]
 }

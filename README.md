@@ -44,6 +44,11 @@ funktioniert deshalb lokal und unter GitHub Pages.
 Alle Cores werden im Vault gleichwertig dargestellt. Das aktive Datenmodell
 kennt keine Trennung in Kern- und Ergänzungs-Cores.
 
+Die Vault-Darstellung zeigt 1.511 Knoten auf fünf klar unterscheidbaren Ebenen
+und ausschließlich die 1.490 direkten Hierarchiekanten von Lernfeld über
+Kompetenzbereich, Themencluster und Thema bis zum Core. Core-zu-Core-Clusternetze
+werden nicht gezeichnet.
+
 Der vollständige Stand umfasst 21 Lernfeldvarianten, 84 Kompetenzbereiche,
 175 Themencluster, 375 Themen, 723 globale Core-Identitäten und 856
 Core-Ausprägungen. Lernfelder des ersten Ausbildungsjahres sind als

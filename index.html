@@ -541,6 +541,10 @@
       background-size: 48px 48px;
     }
 
+    .app.raster-ausgeblendet .arbeitsfläche {
+      background-image: none;
+    }
+
     .core-inhalt {
       width: 100%;
       height: 100%;
@@ -592,8 +596,8 @@
     }
 
     .themen-linie-fokus {
-      stroke: rgba(255, 255, 255, 0.68);
-      stroke-width: 2.8;
+      stroke: rgba(130, 166, 255, 0.86);
+      stroke-width: 1;
       opacity: 1;
     }
 
@@ -610,7 +614,7 @@
       cursor: help;
       transform: translate(-50%, -50%);
       isolation: isolate;
-      --aktive-core-farbe: var(--prototyp-kategoriefarbe, var(--core-farbe));
+      --aktive-core-farbe: var(--core-kategoriefarbe, var(--core-farbe));
       transition: transform 140ms ease, opacity 180ms ease;
     }
 
@@ -651,11 +655,6 @@
       pointer-events: none;
     }
 
-    .core-raster.fortschritt-prototyp .core-karte {
-      --aktive-core-farbe: var(--prototyp-kategoriefarbe);
-      --knoten-farbe: var(--prototyp-kategoriefarbe);
-    }
-
     .core-fortschrittsring {
       position: absolute;
       z-index: 2;
@@ -663,7 +662,7 @@
       border-radius: 50%;
       background: conic-gradient(
         from -90deg,
-        var(--prototyp-kategoriefarbe) 0deg var(--core-fortschrittswinkel),
+        var(--core-kategoriefarbe) 0deg var(--core-fortschrittswinkel),
         transparent var(--core-fortschrittswinkel) 360deg
       );
       -webkit-mask: radial-gradient(
@@ -1003,7 +1002,7 @@
 
     .radial-verbinder line {
       stroke: rgba(210, 221, 241, 0.48);
-      stroke-width: 1.25;
+      stroke-width: 1;
       stroke-dasharray: 3 4;
       vector-effect: non-scaling-stroke;
     }
@@ -1512,6 +1511,9 @@
       <button id="legende-umschalten" class="entdeckungsaktion" type="button"
               aria-controls="fortschrittslegende"
               aria-pressed="true">Legende anzeigen</button>
+      <button id="raster-umschalten" class="entdeckungsaktion" type="button"
+              aria-controls="vault-viewport"
+              aria-pressed="true">Raster ausblenden</button>
     </aside>
 
     <aside id="admin-drawer" class="admin-drawer" aria-label="Admin"
@@ -1594,6 +1596,7 @@
       const fortschrittsPrototyp = document.querySelector("#fortschritts-prototyp");
       const fortschrittslegende = document.querySelector("#fortschrittslegende");
       const legendeUmschalten = document.querySelector("#legende-umschalten");
+      const rasterUmschalten = document.querySelector("#raster-umschalten");
       const appBarDoomScrollQuiz = document.querySelector("#doom-scroll-quiz-app-bar");
       const app = document.querySelector(".app");
       const folderTreeUmschalten = document.querySelector("#folder-tree-umschalten");
@@ -1617,6 +1620,7 @@
       let unterdrückterCoreKlick = null;
       let fortschrittPrototypAktiv = true;
       let legendeEingeblendet = false;
+      let rasterEingeblendet = true;
       let quizAuswahlAktiv = false;
       let quizAußenPointerId = null;
       let quizAußenKlickUnterdrücken = false;
@@ -1624,13 +1628,22 @@
       let navigationÜbergang = null;
       let lernfelderKatalog = [];
       let aktiveDaten = null;
+      const FORTSCHRITT_SICHTBAR_SCHLÜSSEL =
+        "thors-core.fortschritt-sichtbar.v1";
       const LEGENDE_SICHTBAR_SCHLÜSSEL = "thors-core.legende-sichtbar.v1";
+      const RASTER_SICHTBAR_SCHLÜSSEL = "thors-core.raster-sichtbar.v1";
 
       try {
+        fortschrittPrototypAktiv =
+          localStorage.getItem(FORTSCHRITT_SICHTBAR_SCHLÜSSEL) !== "false";
         legendeEingeblendet =
           localStorage.getItem(LEGENDE_SICHTBAR_SCHLÜSSEL) !== "false";
+        rasterEingeblendet =
+          localStorage.getItem(RASTER_SICHTBAR_SCHLÜSSEL) !== "false";
       } catch {
+        fortschrittPrototypAktiv = true;
         legendeEingeblendet = true;
+        rasterEingeblendet = true;
       }
 
       function legendenPositionAktualisieren() {
@@ -1654,7 +1667,7 @@
       }
 
       function legendenSichtbarkeitAnwenden() {
-        const sichtbar = fortschrittPrototypAktiv && legendeEingeblendet;
+        const sichtbar = legendeEingeblendet;
         fortschrittslegende.hidden = !sichtbar;
         legendeUmschalten.setAttribute("aria-pressed", String(legendeEingeblendet));
         legendeUmschalten.textContent =
@@ -1753,6 +1766,31 @@
       });
 
       legendenSichtbarkeitAnwenden();
+
+      function rasterSichtbarkeitAnwenden() {
+        app.classList.toggle("raster-ausgeblendet", !rasterEingeblendet);
+        rasterUmschalten.setAttribute(
+          "aria-pressed",
+          String(rasterEingeblendet)
+        );
+        rasterUmschalten.textContent =
+          rasterEingeblendet ? "Raster ausblenden" : "Raster anzeigen";
+      }
+
+      rasterUmschalten.addEventListener("click", () => {
+        rasterEingeblendet = !rasterEingeblendet;
+        try {
+          localStorage.setItem(
+            RASTER_SICHTBAR_SCHLÜSSEL,
+            String(rasterEingeblendet)
+          );
+        } catch {
+          // Die Auswahl bleibt für die laufende Sitzung im Speicher der Seite.
+        }
+        rasterSichtbarkeitAnwenden();
+      });
+
+      rasterSichtbarkeitAnwenden();
 
       const legendenGrößenBeobachter = "ResizeObserver" in window
         ? new ResizeObserver(legendenPositionAktualisieren)
@@ -2569,7 +2607,7 @@
       const beispielFortschritte = cores.map((core, index) =>
         prototypStützwerte[index] ?? ((index * 37 + 11) % 100 + 1)
       );
-      const prototypKategorien = [
+      const KATEGORIE_FARBEN = [
         { name: "BWL", farbe: "rgb(250, 204, 21)" },
         { name: "WiSo", farbe: "rgb(249, 115, 22)" },
         { name: "Recht", farbe: "rgb(139, 92, 246)" },
@@ -2578,8 +2616,8 @@
         { name: "Softwareentwicklung", farbe: "rgb(34, 197, 94)" },
         { name: "Infrastruktur", farbe: "rgb(37, 99, 235)" }
       ];
-      const beispielKategorien = cores.map(
-        (core, index) => prototypKategorien[index % prototypKategorien.length]
+      const coreKategorien = cores.map(
+        (core, index) => KATEGORIE_FARBEN[index % KATEGORIE_FARBEN.length]
       );
       const iconTeile = {
         coin: `<circle cx="12" cy="12" r="8"/><path d="M9 9.5h5a2 2 0 010 4H9m3-6v9"/>`,
@@ -3757,9 +3795,9 @@ projektreflexion mirror flag
         punkt.className = `vault-knoten knoten-${knoten.typ}`;
         if (knoten.typ === "core") {
           const fortschritt = beispielFortschritte[knoten.coreIndex];
-          const kategorie = beispielKategorien[knoten.coreIndex];
+          const kategorie = coreKategorien[knoten.coreIndex];
           punkt.classList.add("core-karte");
-          punkt.style.setProperty("--prototyp-kategoriefarbe", kategorie.farbe);
+          punkt.style.setProperty("--core-kategoriefarbe", kategorie.farbe);
           punkt.style.setProperty(
             "--core-fortschrittswinkel",
             `${fortschritt * 3.6}deg`
@@ -3769,11 +3807,16 @@ projektreflexion mirror flag
             fortschritt === 0 ? "0" : "1"
           );
           punkt.dataset.fortschritt = fortschritt;
-          punkt.dataset.prototypKategorie = kategorie.name;
+          punkt.dataset.kategorie = kategorie.name;
           fortschrittsring.className = "core-fortschrittsring";
           fortschrittsring.setAttribute("aria-hidden", "true");
         }
-        punkt.style.setProperty("--knoten-farbe", knoten.farbe);
+        punkt.style.setProperty(
+          "--knoten-farbe",
+          knoten.typ === "core"
+            ? coreKategorien[knoten.coreIndex].farbe
+            : knoten.farbe
+        );
         if (icon) {
           const symbol = document.createElement("span");
           punkt.style.setProperty("--core-farbe", knoten.farbe);
@@ -3835,13 +3878,20 @@ projektreflexion mirror flag
               : knoten.titel
           );
         });
-        legendenSichtbarkeitAnwenden();
         tooltip.classList.remove("sichtbar");
       }
 
       fortschrittsDarstellungAktualisieren();
       fortschrittsPrototyp.addEventListener("click", () => {
         fortschrittPrototypAktiv = !fortschrittPrototypAktiv;
+        try {
+          localStorage.setItem(
+            FORTSCHRITT_SICHTBAR_SCHLÜSSEL,
+            String(fortschrittPrototypAktiv)
+          );
+        } catch {
+          // Die Auswahl bleibt für die laufende Sitzung im Speicher der Seite.
+        }
         fortschrittsDarstellungAktualisieren();
       });
 
@@ -3995,17 +4045,25 @@ projektreflexion mirror flag
         return kante.themen.some(themaId => aktiveThemenIds.has(themaId));
       }
 
+      function linienDarstellungAktualisieren() {
+        const fokusAktiv = Boolean(aktivesThema);
+        const fokusKanten = fokusAktiv
+          ? kanten.filter(kantePasstZumFokus)
+          : [];
+        const basisKanten = fokusAktiv
+          ? kanten.filter(kante => !kantePasstZumFokus(kante))
+          : kanten;
+        basisPfad.setAttribute("d", pfadErstellen(basisKanten));
+        fokusPfad.setAttribute("d", pfadErstellen(fokusKanten));
+      }
+
       function graphElementeAktualisieren(knotenIndizes = null) {
         const zuAktualisieren = knotenIndizes || knotenElemente.keys();
         for (const index of zuAktualisieren) {
           knotenElemente[index].style.left = `${positionen[index].x}px`;
           knotenElemente[index].style.top = `${positionen[index].y}px`;
         }
-        basisPfad.setAttribute("d", pfadErstellen(kanten));
-        fokusPfad.setAttribute(
-          "d",
-          aktivesThema ? pfadErstellen(kanten.filter(kantePasstZumFokus)) : ""
-        );
+        linienDarstellungAktualisieren();
         radialMenüPositionieren();
       }
 
@@ -4302,10 +4360,7 @@ projektreflexion mirror flag
           punkt.classList.toggle("abgeblendet", Boolean(aktivesThema && !passt));
         });
         linienEbene.classList.toggle("fokus-aktiv", Boolean(aktivesThema));
-        fokusPfad.setAttribute(
-          "d",
-          aktivesThema ? pfadErstellen(kanten.filter(kantePasstZumFokus)) : ""
-        );
+        linienDarstellungAktualisieren();
       }
 
       if (false) {
@@ -4392,8 +4447,8 @@ projektreflexion mirror flag
           `var(--core-icon-${icon.cssId})`
         );
         punkt.style.setProperty(
-          "--prototyp-kategoriefarbe",
-          beispielKategorien[index].farbe
+          "--core-kategoriefarbe",
+          coreKategorien[index].farbe
         );
         punkt.style.setProperty("--core-größe", `${CORE_GRÖSSE}px`);
         punkt.style.setProperty(
@@ -4408,7 +4463,7 @@ projektreflexion mirror flag
         punkt.style.top = `${positionen[index].y}px`;
         punkt.dataset.index = index;
         punkt.dataset.fortschritt = beispielFortschritte[index];
-        punkt.dataset.prototypKategorie = beispielKategorien[index].name;
+        punkt.dataset.kategorie = coreKategorien[index].name;
         punkt.dataset.themen = zuordnungen.join(" ");
         punkt.dataset.themencluster = clusterId;
         punkt.dataset.themenclusterTitel = clusterTitel;

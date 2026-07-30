@@ -1,7 +1,7 @@
 {
   "schema_version": "3.0.0",
   "dataset_id": "de-fachinformatiker-lern-vault",
-  "updated_at": "2026-07-29",
+  "updated_at": "2026-07-30",
   "language": "de",
   "data_role": "Normalisierter Quellenkatalog",
   "reference_contract": "source_refs in Core-Ausprägungen müssen über source_id auf genau eine Quelle verweisen.",
@@ -11,9 +11,9 @@
       "publisher": "Kultusministerkonferenz",
       "title": "Rahmenlehrplan für die Ausbildungsberufe Fachinformatiker/Fachinformatikerin und IT-System-Elektroniker/IT-System-Elektronikerin",
       "date": "2020-02-28",
-      "url": "https://www.kmk.org/service/servicebereich-berufliche-schulen/downloadbereich-rahmenlehrplaene?tx_fedownloads_single%5Baction%5D=forceDownload&tx_fedownloads_single%5Bcontroller%5D=Downloads&tx_fedownloads_single%5Bdownload%5D=45009&type=150",
+      "url": "https://www.kmk.org/fileadmin/Dateien/pdf/Bildung/BeruflicheBildung/rlp/Fachinformatiker_19-12-13_EL.pdf",
       "authority": "offiziell",
-      "relevance": "Verbindliche Lernfeldnummern und -titel sowie Zielformulierung und Inhalte von Lernfeld 1."
+      "relevance": "Primärquelle für Lernfeldnummern, Titel, Ausbildungsjahre, Zeitrichtwerte, vollständige Zielformulierungen und die Entsprechungsliste zum Ausbildungsrahmenplan für LF1 bis LF12 der vier Fachrichtungen."
     },
     {
       "id": "FIAusbV-HTML",
@@ -22,7 +22,7 @@
       "date": "2020-02-28",
       "url": "https://www.gesetze-im-internet.de/fiausbv/BJNR025000020.html",
       "authority": "offiziell",
-      "relevance": "Ausbildungsprofil und gemeinsame berufsprofilgebende Fertigkeiten, Kenntnisse und Fähigkeiten."
+      "relevance": "Verbindlicher Ausbildungsrahmenplan mit fachrichtungsübergreifenden und fachrichtungsspezifischen Berufsbildpositionen; zur Plausibilisierung der KMK-Zuordnung verwendet."
     },
     {
       "id": "BIBB-UMSETZUNGSHILFE",

@@ -1,8 +1,10 @@
 # Thors Core
 
-Thors Core ist ein lokaler Lern-Vault für Lernfeld 1. Die Startseite zeigt den
-Folder Tree und den navigierbaren Core-Graphen. Das Doom Scroll Quiz ist aktuell
-ein bewusst fachfreier UI-Dummy.
+Thors Core ist ein lokaler Lern-Vault für alle Fachinformatiker-Lernfelder des
+KMK-Rahmenlehrplans. Die Startseite zeigt den Folder Tree und den navigierbaren
+Core-Graphen für die gemeinsamen Lernfelder 1 bis 9 sowie für die Lernfelder 10
+bis 12 der vier Fachrichtungen. Das Doom Scroll Quiz ist aktuell ein bewusst
+fachfreier UI-Dummy.
 
 ## Lokal ansehen
 
@@ -33,9 +35,26 @@ funktioniert deshalb lokal und unter GitHub Pages.
   Einordnungen und Quellenbelege
 - `Core-Ausprägungen.json`: LF-Kontext, Tiefengrad und Quellenbezüge
 - `Quellen.json`: normalisierter Quellenkatalog
+- `Core-Änderungsinventar.json`: maschinenlesbare Liste der seit dem
+  Ausgangsstand neu angelegten Core-Identitäten und ihrer Positionen in der
+  Lernfeldhierarchie
+- `Quellen-Mapping.md`: Primärquellen, Ableitungsregeln und Begründung der
+  Lernfeldzuordnung
 
 Alle Cores werden im Vault gleichwertig dargestellt. Das aktive Datenmodell
 kennt keine Trennung in Kern- und Ergänzungs-Cores.
+
+Der vollständige Stand umfasst 21 Lernfeldvarianten, 84 Kompetenzbereiche,
+175 Themencluster, 375 Themen, 723 globale Core-Identitäten und 856
+Core-Ausprägungen. Lernfelder des ersten Ausbildungsjahres sind als
+`Grundlage`, des zweiten als `Vertiefung` und die fachrichtungsspezifischen
+Lernfelder des dritten Ausbildungsjahres als `Spezialisierung` eingeordnet.
+
+Die fachliche Grundlage ist der offizielle KMK-Rahmenlehrplan einschließlich
+seiner Entsprechungsliste zum Ausbildungsrahmenplan. Die atomaren Core-Titel und
+Definitionen sind redaktionelle Ausarbeitungen der verbindlichen
+Zielformulierungen; sie werden nicht als wörtliche KMK-Formulierungen
+ausgegeben.
 
 Der Ordner `Archiv/` bleibt zur Nachvollziehbarkeit im Projekt, wird aber vom
 Pages-Workflow ausdrücklich nicht in die öffentliche Website übernommen.

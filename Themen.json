@@ -1,17 +1,18 @@
 {
   "schema_version": "3.0.0",
   "dataset_id": "de-fachinformatiker-lern-vault",
-  "updated_at": "2026-07-29",
+  "updated_at": "2026-07-30",
   "language": "de",
   "data_role": "Globale Themencluster und Themen mit expliziten Elternreferenzen",
-  "normalization_note": "Die stabilen IDs bleiben beim Ausbau weiterer Lernfelder erhalten. kompetenz_ref und themencluster_ref bilden die derzeitige LF1-Einordnung ab.",
+  "normalization_note": "Stabile IDs bilden Lernfeld, Kompetenz, Themencluster und Thema ab. Fachlich wiederkehrende Core-Identitäten dürfen in mehreren Lernfeldern kontextuell ausgeprägt werden.",
   "extension_validation": {
     "rule_id": "THEMA-EIGENSTAENDIGKEIT-1",
-    "description": "Ein neues Thema darf weder denselben normalisierten fachlichen Begriff wie ein Core tragen noch ausschließlich bereits in anderen Themen verwendete Cores neu zusammenstellen.",
+    "description": "Ein Thema bündelt mehrere fachlich zusammengehörige, atomare Cores. Sein Titel darf keinem Core-Titel entsprechen; globale Core-Identitäten dürfen in mehreren Lernfeldern bewusst wiederverwendet werden.",
     "title_normalization": "Unicode NFKD, diakritische Zeichen entfernen, Kleinschreibung, anschließend alle nicht alphanumerischen Zeichen entfernen.",
     "machine_checks": [
       "Der normalisierte Thementitel ist ungleich short_title und title jedes Cores.",
-      "Jedes Thema besitzt mindestens eine Core-Ausprägung, deren Core im aktiven Datenbestand nicht zugleich einem anderen Thema zugeordnet ist."
+      "Jedes Thema besitzt mindestens eine auflösbare Core-Ausprägung.",
+      "Jede Core-Ausprägung verweist konsistent auf Lernfeld, Kompetenz, Themencluster und Thema."
     ],
     "semantic_review_required": "Teilgleichheiten, Synonyme und fachlich ähnliche Formulierungen müssen vor Aufnahme manuell geprüft werden; unklare Treffer dürfen nicht automatisch gelöscht, umbenannt oder freigegeben werden."
   },
@@ -105,6 +106,966 @@
       "kompetenz_ref": "LF1-K03",
       "title": "Sicherheit im Arbeitsalltag",
       "sort_order": 5
+    },
+    {
+      "id": "LF2-K01-TC01",
+      "kompetenz_ref": "LF2-K01",
+      "title": "Anforderungen an den Arbeitsplatz",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K01-TC02",
+      "kompetenz_ref": "LF2-K01",
+      "title": "Normgerechter Gerätebetrieb",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K02-TC01",
+      "kompetenz_ref": "LF2-K02",
+      "title": "Technischer Produktvergleich",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K02-TC02",
+      "kompetenz_ref": "LF2-K02",
+      "title": "Nachhaltiger Arbeitsplatz",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K03-TC01",
+      "kompetenz_ref": "LF2-K03",
+      "title": "Lieferanten und Angebote",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K03-TC02",
+      "kompetenz_ref": "LF2-K03",
+      "title": "Vertrag und Wareneingang",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K04-TC01",
+      "kompetenz_ref": "LF2-K04",
+      "title": "Technische Bereitstellung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K04-TC02",
+      "kompetenz_ref": "LF2-K04",
+      "title": "Übergabe und Verbesserung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K01-TC01",
+      "kompetenz_ref": "LF3-K01",
+      "title": "Anforderungen an die Clientintegration",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K01-TC02",
+      "kompetenz_ref": "LF3-K01",
+      "title": "Bestehende Infrastruktur erfassen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K02-TC01",
+      "kompetenz_ref": "LF3-K02",
+      "title": "Adressierung und Netzzugang",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K02-TC02",
+      "kompetenz_ref": "LF3-K02",
+      "title": "Anbindungskonzept",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K03-TC01",
+      "kompetenz_ref": "LF3-K03",
+      "title": "Namensauflösung und Dienstezugriff",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K03-TC02",
+      "kompetenz_ref": "LF3-K03",
+      "title": "Sichere Clientanbindung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K04-TC01",
+      "kompetenz_ref": "LF3-K04",
+      "title": "Netzwerkdiagnose",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K04-TC02",
+      "kompetenz_ref": "LF3-K04",
+      "title": "Prüfergebnis und Verbesserung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K01-TC01",
+      "kompetenz_ref": "LF4-K01",
+      "title": "Grundlagen der Informationssicherheit",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K01-TC02",
+      "kompetenz_ref": "LF4-K01",
+      "title": "Schutzobjekte bestimmen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K02-TC01",
+      "kompetenz_ref": "LF4-K02",
+      "title": "Schadenspotenzial bewerten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K02-TC02",
+      "kompetenz_ref": "LF4-K02",
+      "title": "Bedrohungen priorisieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K03-TC01",
+      "kompetenz_ref": "LF4-K03",
+      "title": "Analyseverfahren anwenden",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K03-TC02",
+      "kompetenz_ref": "LF4-K03",
+      "title": "Ergebnisse festhalten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K04-TC01",
+      "kompetenz_ref": "LF4-K04",
+      "title": "Sicherheitsmaßnahmen ableiten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K04-TC02",
+      "kompetenz_ref": "LF4-K04",
+      "title": "Wirksamkeit und Verantwortung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K01-TC01",
+      "kompetenz_ref": "LF5-K01",
+      "title": "Daten als Informationsabbild",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K01-TC02",
+      "kompetenz_ref": "LF5-K01",
+      "title": "Formate und Speicherung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K02-TC01",
+      "kompetenz_ref": "LF5-K02",
+      "title": "Daten strukturieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K02-TC02",
+      "kompetenz_ref": "LF5-K02",
+      "title": "Softwareänderung vorbereiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K03-TC01",
+      "kompetenz_ref": "LF5-K03",
+      "title": "Datenoperationen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K03-TC02",
+      "kompetenz_ref": "LF5-K03",
+      "title": "Wartbare Umsetzung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K04-TC01",
+      "kompetenz_ref": "LF5-K04",
+      "title": "Funktionsnachweis",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K04-TC02",
+      "kompetenz_ref": "LF5-K04",
+      "title": "Eignung und Prozess",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K01-TC01",
+      "kompetenz_ref": "LF6-K01",
+      "title": "Servicekontakt",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K01-TC02",
+      "kompetenz_ref": "LF6-K01",
+      "title": "Servicevereinbarungen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K02-TC01",
+      "kompetenz_ref": "LF6-K02",
+      "title": "Störung und Anfrage unterscheiden",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K02-TC02",
+      "kompetenz_ref": "LF6-K02",
+      "title": "Diagnose strukturieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K03-TC01",
+      "kompetenz_ref": "LF6-K03",
+      "title": "Fehlerbehebung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K03-TC02",
+      "kompetenz_ref": "LF6-K03",
+      "title": "Servicekommunikation",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K04-TC01",
+      "kompetenz_ref": "LF6-K04",
+      "title": "Fallabschluss",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K04-TC02",
+      "kompetenz_ref": "LF6-K04",
+      "title": "Kontinuierliche Verbesserung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K01-TC01",
+      "kompetenz_ref": "LF7-K01",
+      "title": "Systemverständnis",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K01-TC02",
+      "kompetenz_ref": "LF7-K01",
+      "title": "Flüsse im Gesamtsystem",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K02-TC01",
+      "kompetenz_ref": "LF7-K02",
+      "title": "Sensorik und Aktorik",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K02-TC02",
+      "kompetenz_ref": "LF7-K02",
+      "title": "Komponentenauswahl",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K03-TC01",
+      "kompetenz_ref": "LF7-K03",
+      "title": "Hardware anbinden",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K03-TC02",
+      "kompetenz_ref": "LF7-K03",
+      "title": "Software integrieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K04-TC01",
+      "kompetenz_ref": "LF7-K04",
+      "title": "Messen und validieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K04-TC02",
+      "kompetenz_ref": "LF7-K04",
+      "title": "Sicherheit und Optimierung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K01-TC01",
+      "kompetenz_ref": "LF8-K01",
+      "title": "Quelleninventar",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K01-TC02",
+      "kompetenz_ref": "LF8-K01",
+      "title": "Eignung und Recht",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K02-TC01",
+      "kompetenz_ref": "LF8-K02",
+      "title": "Datenintegration",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K02-TC02",
+      "kompetenz_ref": "LF8-K02",
+      "title": "Sichere Bereitstellung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K03-TC01",
+      "kompetenz_ref": "LF8-K03",
+      "title": "Verarbeitung umsetzen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K03-TC02",
+      "kompetenz_ref": "LF8-K03",
+      "title": "Arbeitsteilige Entwicklung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K04-TC01",
+      "kompetenz_ref": "LF8-K04",
+      "title": "Übergabefähiges Datenprodukt",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K04-TC02",
+      "kompetenz_ref": "LF8-K04",
+      "title": "Qualität bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K01-TC01",
+      "kompetenz_ref": "LF9-K01",
+      "title": "Anforderungsaufnahme",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K01-TC02",
+      "kompetenz_ref": "LF9-K01",
+      "title": "Netzwerkdienste",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K02-TC01",
+      "kompetenz_ref": "LF9-K02",
+      "title": "Netzstruktur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K02-TC02",
+      "kompetenz_ref": "LF9-K02",
+      "title": "Ressourcen und Zukunftsfähigkeit",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K03-TC01",
+      "kompetenz_ref": "LF9-K03",
+      "title": "Netzwerkkomponenten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K03-TC02",
+      "kompetenz_ref": "LF9-K03",
+      "title": "Dienstbetrieb",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K04-TC01",
+      "kompetenz_ref": "LF9-K04",
+      "title": "Sicherheitsbewertung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K04-TC02",
+      "kompetenz_ref": "LF9-K04",
+      "title": "Abnahme und Weiterentwicklung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K01-TC01",
+      "kompetenz_ref": "LF10a-K01",
+      "title": "Prozesse verstehen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K01-TC02",
+      "kompetenz_ref": "LF10a-K01",
+      "title": "Digitalisierungspotenzial",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K02-TC01",
+      "kompetenz_ref": "LF10a-K02",
+      "title": "Nutzerzentrierte Gestaltung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K02-TC02",
+      "kompetenz_ref": "LF10a-K02",
+      "title": "Geräteübergreifende Oberfläche",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K03-TC01",
+      "kompetenz_ref": "LF10a-K03",
+      "title": "Frontend-Struktur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K03-TC02",
+      "kompetenz_ref": "LF10a-K03",
+      "title": "Sichere und zugängliche Oberfläche",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K04-TC01",
+      "kompetenz_ref": "LF10a-K04",
+      "title": "Qualität der Benutzung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K04-TC02",
+      "kompetenz_ref": "LF10a-K04",
+      "title": "Wirtschaftliche Bewertung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K01-TC01",
+      "kompetenz_ref": "LF11a-K01",
+      "title": "Fachliches Modell",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K01-TC02",
+      "kompetenz_ref": "LF11a-K01",
+      "title": "Datenstrukturen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K02-TC01",
+      "kompetenz_ref": "LF11a-K02",
+      "title": "Komponentenschnitt",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K02-TC02",
+      "kompetenz_ref": "LF11a-K02",
+      "title": "Modelle und Iteration",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K03-TC01",
+      "kompetenz_ref": "LF11a-K03",
+      "title": "Saubere Implementierung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K03-TC02",
+      "kompetenz_ref": "LF11a-K03",
+      "title": "Datenzugriff",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K04-TC01",
+      "kompetenz_ref": "LF11a-K04",
+      "title": "Automatisierte Prüfungen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K04-TC02",
+      "kompetenz_ref": "LF11a-K04",
+      "title": "Qualität steuern",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K01-TC01",
+      "kompetenz_ref": "LF10b-K01",
+      "title": "Dienste und Plattformen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K01-TC02",
+      "kompetenz_ref": "LF10b-K01",
+      "title": "Auswahlkriterien",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K02-TC01",
+      "kompetenz_ref": "LF10b-K02",
+      "title": "Konfigurationsplanung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K02-TC02",
+      "kompetenz_ref": "LF10b-K02",
+      "title": "Datensicherung und Überwachung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K03-TC01",
+      "kompetenz_ref": "LF10b-K03",
+      "title": "Sicherer Dienstbetrieb",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K03-TC02",
+      "kompetenz_ref": "LF10b-K03",
+      "title": "Betriebsüberwachung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K04-TC01",
+      "kompetenz_ref": "LF10b-K04",
+      "title": "Automatisierte Administration",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K04-TC02",
+      "kompetenz_ref": "LF10b-K04",
+      "title": "Automatisierung prüfen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K01-TC01",
+      "kompetenz_ref": "LF11b-K01",
+      "title": "System- und Schutzkontext",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K01-TC02",
+      "kompetenz_ref": "LF11b-K01",
+      "title": "Risiken benennen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K02-TC01",
+      "kompetenz_ref": "LF11b-K02",
+      "title": "Risikobehandlung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K02-TC02",
+      "kompetenz_ref": "LF11b-K02",
+      "title": "Mehrschichtiger Schutz",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K03-TC01",
+      "kompetenz_ref": "LF11b-K03",
+      "title": "Technische Kontrollen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K03-TC02",
+      "kompetenz_ref": "LF11b-K03",
+      "title": "Organisatorische Kontrollen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K04-TC01",
+      "kompetenz_ref": "LF11b-K04",
+      "title": "Sicherheitsprüfung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K04-TC02",
+      "kompetenz_ref": "LF11b-K04",
+      "title": "Bericht und Restunsicherheit",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K01-TC01",
+      "kompetenz_ref": "LF10c-K01",
+      "title": "Problemarten des maschinellen Lernens",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K01-TC02",
+      "kompetenz_ref": "LF10c-K01",
+      "title": "Eignungsentscheidung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K02-TC01",
+      "kompetenz_ref": "LF10c-K02",
+      "title": "Lerndaten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K02-TC02",
+      "kompetenz_ref": "LF10c-K02",
+      "title": "Verantwortungsvolle Datennutzung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K03-TC01",
+      "kompetenz_ref": "LF10c-K03",
+      "title": "Werkzeugauswahl",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K03-TC02",
+      "kompetenz_ref": "LF10c-K03",
+      "title": "Daten technisch vorbereiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K04-TC01",
+      "kompetenz_ref": "LF10c-K04",
+      "title": "Modellgüte",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K04-TC02",
+      "kompetenz_ref": "LF10c-K04",
+      "title": "Betrieb und Wirkung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K01-TC01",
+      "kompetenz_ref": "LF11c-K01",
+      "title": "Prozessdaten verstehen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K01-TC02",
+      "kompetenz_ref": "LF11c-K01",
+      "title": "Informationsfluss ableiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K02-TC01",
+      "kompetenz_ref": "LF11c-K02",
+      "title": "Lösungsarchitektur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K02-TC02",
+      "kompetenz_ref": "LF11c-K02",
+      "title": "Varianten bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K03-TC01",
+      "kompetenz_ref": "LF11c-K03",
+      "title": "Prozesslösung realisieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K03-TC02",
+      "kompetenz_ref": "LF11c-K03",
+      "title": "Lösung dokumentieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K04-TC01",
+      "kompetenz_ref": "LF11c-K04",
+      "title": "Veränderung begleiten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K04-TC02",
+      "kompetenz_ref": "LF11c-K04",
+      "title": "Wirkung messen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K01-TC01",
+      "kompetenz_ref": "LF10d-K01",
+      "title": "Auftragskontext",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K01-TC02",
+      "kompetenz_ref": "LF10d-K01",
+      "title": "Mensch-Maschine-KI-Interaktion",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K02-TC01",
+      "kompetenz_ref": "LF10d-K02",
+      "title": "Architektur des Gesamtsystems",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K02-TC02",
+      "kompetenz_ref": "LF10d-K02",
+      "title": "Sicherheit und Verlässlichkeit",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K03-TC01",
+      "kompetenz_ref": "LF10d-K03",
+      "title": "Geräteintegration",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K03-TC02",
+      "kompetenz_ref": "LF10d-K03",
+      "title": "Datenübertragung und Visualisierung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K04-TC01",
+      "kompetenz_ref": "LF10d-K04",
+      "title": "Systemtest",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K04-TC02",
+      "kompetenz_ref": "LF10d-K04",
+      "title": "Übergabe und Verantwortung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K01-TC01",
+      "kompetenz_ref": "LF12a-K01",
+      "title": "Auftrag und Beteiligte",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K01-TC02",
+      "kompetenz_ref": "LF12a-K01",
+      "title": "Ziele und Abnahme",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K02-TC01",
+      "kompetenz_ref": "LF12a-K02",
+      "title": "Projektstruktur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K02-TC02",
+      "kompetenz_ref": "LF12a-K02",
+      "title": "Ressourcen und Kosten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K03-TC01",
+      "kompetenz_ref": "LF12a-K03",
+      "title": "Lösungsentscheidung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K03-TC02",
+      "kompetenz_ref": "LF12a-K03",
+      "title": "Vereinbarung und Realisierung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K04-TC01",
+      "kompetenz_ref": "LF12a-K04",
+      "title": "Einführung und Übergabe",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K04-TC02",
+      "kompetenz_ref": "LF12a-K04",
+      "title": "Ergebnis und Vorgehen bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K01-TC01",
+      "kompetenz_ref": "LF12b-K01",
+      "title": "Auftrag und Beteiligte",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K01-TC02",
+      "kompetenz_ref": "LF12b-K01",
+      "title": "Ziele und Abnahme",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K02-TC01",
+      "kompetenz_ref": "LF12b-K02",
+      "title": "Projektstruktur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K02-TC02",
+      "kompetenz_ref": "LF12b-K02",
+      "title": "Ressourcen und Kosten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K03-TC01",
+      "kompetenz_ref": "LF12b-K03",
+      "title": "Lösungsentscheidung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K03-TC02",
+      "kompetenz_ref": "LF12b-K03",
+      "title": "Vereinbarung und Realisierung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K04-TC01",
+      "kompetenz_ref": "LF12b-K04",
+      "title": "Einführung und Übergabe",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K04-TC02",
+      "kompetenz_ref": "LF12b-K04",
+      "title": "Ergebnis und Vorgehen bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K01-TC01",
+      "kompetenz_ref": "LF12c-K01",
+      "title": "Auftrag und Beteiligte",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K01-TC02",
+      "kompetenz_ref": "LF12c-K01",
+      "title": "Ziele und Abnahme",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K02-TC01",
+      "kompetenz_ref": "LF12c-K02",
+      "title": "Projektstruktur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K02-TC02",
+      "kompetenz_ref": "LF12c-K02",
+      "title": "Ressourcen und Kosten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K03-TC01",
+      "kompetenz_ref": "LF12c-K03",
+      "title": "Lösungsentscheidung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K03-TC02",
+      "kompetenz_ref": "LF12c-K03",
+      "title": "Vereinbarung und Realisierung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K04-TC01",
+      "kompetenz_ref": "LF12c-K04",
+      "title": "Einführung und Übergabe",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K04-TC02",
+      "kompetenz_ref": "LF12c-K04",
+      "title": "Ergebnis und Vorgehen bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K01-TC01",
+      "kompetenz_ref": "LF12d-K01",
+      "title": "Auftrag und Beteiligte",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K01-TC02",
+      "kompetenz_ref": "LF12d-K01",
+      "title": "Ziele und Abnahme",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K02-TC01",
+      "kompetenz_ref": "LF12d-K02",
+      "title": "Projektstruktur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K02-TC02",
+      "kompetenz_ref": "LF12d-K02",
+      "title": "Ressourcen und Kosten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K03-TC01",
+      "kompetenz_ref": "LF12d-K03",
+      "title": "Lösungsentscheidung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K03-TC02",
+      "kompetenz_ref": "LF12d-K03",
+      "title": "Vereinbarung und Realisierung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K04-TC01",
+      "kompetenz_ref": "LF12d-K04",
+      "title": "Einführung und Übergabe",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K04-TC02",
+      "kompetenz_ref": "LF12d-K04",
+      "title": "Ergebnis und Vorgehen bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K01-TC01",
+      "kompetenz_ref": "LF11d-K01",
+      "title": "System- und Schutzkontext",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K01-TC02",
+      "kompetenz_ref": "LF11d-K01",
+      "title": "Risiken benennen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K02-TC01",
+      "kompetenz_ref": "LF11d-K02",
+      "title": "Risikobehandlung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K02-TC02",
+      "kompetenz_ref": "LF11d-K02",
+      "title": "Mehrschichtiger Schutz",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K03-TC01",
+      "kompetenz_ref": "LF11d-K03",
+      "title": "Technische Kontrollen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K03-TC02",
+      "kompetenz_ref": "LF11d-K03",
+      "title": "Organisatorische Kontrollen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K04-TC01",
+      "kompetenz_ref": "LF11d-K04",
+      "title": "Sicherheitsprüfung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K04-TC02",
+      "kompetenz_ref": "LF11d-K04",
+      "title": "Bericht und Restunsicherheit",
+      "sort_order": 2
     }
   ],
   "themen": [
@@ -436,6 +1397,1926 @@
       "id": "LF1-K03-TC05-T02",
       "themencluster_ref": "LF1-K03-TC05",
       "title": "Jugendarbeitsschutz",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K01-TC01-T01",
+      "themencluster_ref": "LF2-K01-TC01",
+      "title": "Nutzungsszenario und Bedarf",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K01-TC01-T02",
+      "themencluster_ref": "LF2-K01-TC01",
+      "title": "Kriterien für die Produktauswahl",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K01-TC02-T01",
+      "themencluster_ref": "LF2-K01-TC02",
+      "title": "Produktkennzeichnung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K01-TC02-T02",
+      "themencluster_ref": "LF2-K01-TC02",
+      "title": "Elektrische Sicherheit",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K02-TC01-T01",
+      "themencluster_ref": "LF2-K02-TC01",
+      "title": "Herstellerinformationen auswerten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K02-TC01-T02",
+      "themencluster_ref": "LF2-K02-TC01",
+      "title": "Bewertung mehrerer Kriterien",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K02-TC02-T01",
+      "themencluster_ref": "LF2-K02-TC02",
+      "title": "Ergonomische Gestaltung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K02-TC02-T02",
+      "themencluster_ref": "LF2-K02-TC02",
+      "title": "Energie und Kreislaufwirtschaft",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K03-TC01-T01",
+      "themencluster_ref": "LF2-K03-TC01",
+      "title": "Bezugsquellen bewerten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K03-TC01-T02",
+      "themencluster_ref": "LF2-K03-TC01",
+      "title": "Lieferantenauswahl",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K03-TC02-T01",
+      "themencluster_ref": "LF2-K03-TC02",
+      "title": "Kundenangebot kalkulieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K03-TC02-T02",
+      "themencluster_ref": "LF2-K03-TC02",
+      "title": "Beschaffung abschließen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K04-TC01-T01",
+      "themencluster_ref": "LF2-K04-TC01",
+      "title": "Komponenten zusammenführen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K04-TC01-T02",
+      "themencluster_ref": "LF2-K04-TC01",
+      "title": "Betriebsbereite Konfiguration",
+      "sort_order": 2
+    },
+    {
+      "id": "LF2-K04-TC02-T01",
+      "themencluster_ref": "LF2-K04-TC02",
+      "title": "Nachvollziehbare Übergabe",
+      "sort_order": 1
+    },
+    {
+      "id": "LF2-K04-TC02-T02",
+      "themencluster_ref": "LF2-K04-TC02",
+      "title": "Auftrag auswerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K01-TC01-T01",
+      "themencluster_ref": "LF3-K01-TC01",
+      "title": "Kundengespräch strukturieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K01-TC01-T02",
+      "themencluster_ref": "LF3-K01-TC01",
+      "title": "Clientvoraussetzungen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K01-TC02-T01",
+      "themencluster_ref": "LF3-K01-TC02",
+      "title": "Netzwerkpläne lesen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K01-TC02-T02",
+      "themencluster_ref": "LF3-K01-TC02",
+      "title": "Netzwerkstandards zuordnen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K02-TC01-T01",
+      "themencluster_ref": "LF3-K02-TC01",
+      "title": "IP-Konfiguration",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K02-TC01-T02",
+      "themencluster_ref": "LF3-K02-TC01",
+      "title": "Automatische Netzwerkkonfiguration",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K02-TC02-T01",
+      "themencluster_ref": "LF3-K02-TC02",
+      "title": "Übertragungsmedien auswählen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K02-TC02-T02",
+      "themencluster_ref": "LF3-K02-TC02",
+      "title": "Ressourcen abwägen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K03-TC01-T01",
+      "themencluster_ref": "LF3-K03-TC01",
+      "title": "Hostnamen auflösen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K03-TC01-T02",
+      "themencluster_ref": "LF3-K03-TC01",
+      "title": "Netzwerkressourcen verwenden",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K03-TC02-T01",
+      "themencluster_ref": "LF3-K03-TC02",
+      "title": "Zugriff authentisieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K03-TC02-T02",
+      "themencluster_ref": "LF3-K03-TC02",
+      "title": "Client absichern",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K04-TC01-T01",
+      "themencluster_ref": "LF3-K04-TC01",
+      "title": "Erreichbarkeit prüfen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K04-TC01-T02",
+      "themencluster_ref": "LF3-K04-TC01",
+      "title": "Konfiguration untersuchen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF3-K04-TC02-T01",
+      "themencluster_ref": "LF3-K04-TC02",
+      "title": "Integration dokumentieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF3-K04-TC02-T02",
+      "themencluster_ref": "LF3-K04-TC02",
+      "title": "Lösung reflektieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K01-TC01-T01",
+      "themencluster_ref": "LF4-K01-TC01",
+      "title": "Schutzziele verstehen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K01-TC01-T02",
+      "themencluster_ref": "LF4-K01-TC01",
+      "title": "Sicherheitsvorgaben einordnen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K01-TC02-T01",
+      "themencluster_ref": "LF4-K01-TC02",
+      "title": "Informationswerte erfassen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K01-TC02-T02",
+      "themencluster_ref": "LF4-K01-TC02",
+      "title": "Arbeitsbereich abgrenzen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K02-TC01-T01",
+      "themencluster_ref": "LF4-K02-TC01",
+      "title": "Schadensszenarien",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K02-TC01-T02",
+      "themencluster_ref": "LF4-K02-TC01",
+      "title": "Schutzbedarf klassifizieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K02-TC02-T01",
+      "themencluster_ref": "LF4-K02-TC02",
+      "title": "Gefährdungen erfassen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K02-TC02-T02",
+      "themencluster_ref": "LF4-K02-TC02",
+      "title": "Bedeutung gewichten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K03-TC01-T01",
+      "themencluster_ref": "LF4-K03-TC01",
+      "title": "Schutzobjekte bewerten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K03-TC01-T02",
+      "themencluster_ref": "LF4-K03-TC01",
+      "title": "Abhängigkeiten berücksichtigen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K03-TC02-T01",
+      "themencluster_ref": "LF4-K03-TC02",
+      "title": "Analysebelege",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K03-TC02-T02",
+      "themencluster_ref": "LF4-K03-TC02",
+      "title": "Nachvollziehbarkeit sichern",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K04-TC01-T01",
+      "themencluster_ref": "LF4-K04-TC01",
+      "title": "Abweichungen erkennen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K04-TC01-T02",
+      "themencluster_ref": "LF4-K04-TC01",
+      "title": "Maßnahmen priorisieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF4-K04-TC02-T01",
+      "themencluster_ref": "LF4-K04-TC02",
+      "title": "Maßnahmen umsetzen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF4-K04-TC02-T02",
+      "themencluster_ref": "LF4-K04-TC02",
+      "title": "Sicherheitsprozess verbessern",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K01-TC01-T01",
+      "themencluster_ref": "LF5-K01-TC01",
+      "title": "Struktur und Bedeutung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K01-TC01-T02",
+      "themencluster_ref": "LF5-K01-TC01",
+      "title": "Datenherkunft und Qualität",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K01-TC02-T01",
+      "themencluster_ref": "LF5-K01-TC02",
+      "title": "Datenformate",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K01-TC02-T02",
+      "themencluster_ref": "LF5-K01-TC02",
+      "title": "Persistente Datenhaltung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K02-TC01-T01",
+      "themencluster_ref": "LF5-K02-TC01",
+      "title": "Modellierung von Objekten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K02-TC01-T02",
+      "themencluster_ref": "LF5-K02-TC01",
+      "title": "Beziehungen abbilden",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K02-TC02-T01",
+      "themencluster_ref": "LF5-K02-TC02",
+      "title": "Änderungsumfang",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K02-TC02-T02",
+      "themencluster_ref": "LF5-K02-TC02",
+      "title": "Testentwurf",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K03-TC01-T01",
+      "themencluster_ref": "LF5-K03-TC01",
+      "title": "Datensätze verwalten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K03-TC01-T02",
+      "themencluster_ref": "LF5-K03-TC01",
+      "title": "Daten abfragen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K03-TC02-T01",
+      "themencluster_ref": "LF5-K03-TC02",
+      "title": "Programmstruktur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K03-TC02-T02",
+      "themencluster_ref": "LF5-K03-TC02",
+      "title": "Software beschreiben",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K04-TC01-T01",
+      "themencluster_ref": "LF5-K04-TC01",
+      "title": "Testergebnisse",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K04-TC01-T02",
+      "themencluster_ref": "LF5-K04-TC01",
+      "title": "Fehler bearbeiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF5-K04-TC02-T01",
+      "themencluster_ref": "LF5-K04-TC02",
+      "title": "Anforderungserfüllung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF5-K04-TC02-T02",
+      "themencluster_ref": "LF5-K04-TC02",
+      "title": "Entwicklung auswerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K01-TC01-T01",
+      "themencluster_ref": "LF6-K01-TC01",
+      "title": "Anfragekanäle",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K01-TC01-T02",
+      "themencluster_ref": "LF6-K01-TC01",
+      "title": "Serviceanfrage erfassen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K01-TC02-T01",
+      "themencluster_ref": "LF6-K01-TC02",
+      "title": "Leistungsrahmen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K01-TC02-T02",
+      "themencluster_ref": "LF6-K01-TC02",
+      "title": "Zeitvorgaben",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K02-TC01-T01",
+      "themencluster_ref": "LF6-K02-TC01",
+      "title": "Servicetypen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K02-TC01-T02",
+      "themencluster_ref": "LF6-K02-TC01",
+      "title": "Auswirkung bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K02-TC02-T01",
+      "themencluster_ref": "LF6-K02-TC02",
+      "title": "Fragen und Symptome",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K02-TC02-T02",
+      "themencluster_ref": "LF6-K02-TC02",
+      "title": "Supportzuständigkeit",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K03-TC01-T01",
+      "themencluster_ref": "LF6-K03-TC01",
+      "title": "Diagnosehypothesen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K03-TC01-T02",
+      "themencluster_ref": "LF6-K03-TC01",
+      "title": "Wiederherstellung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K03-TC02-T01",
+      "themencluster_ref": "LF6-K03-TC02",
+      "title": "Status transparent machen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K03-TC02-T02",
+      "themencluster_ref": "LF6-K03-TC02",
+      "title": "Schwierige Gespräche",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K04-TC01-T01",
+      "themencluster_ref": "LF6-K04-TC01",
+      "title": "Lösung dokumentieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K04-TC01-T02",
+      "themencluster_ref": "LF6-K04-TC01",
+      "title": "Rückmeldung einholen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF6-K04-TC02-T01",
+      "themencluster_ref": "LF6-K04-TC02",
+      "title": "Servicekennzahlen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF6-K04-TC02-T02",
+      "themencluster_ref": "LF6-K04-TC02",
+      "title": "Wissen sichern",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K01-TC01-T01",
+      "themencluster_ref": "LF7-K01-TC01",
+      "title": "CPS-Struktur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K01-TC01-T02",
+      "themencluster_ref": "LF7-K01-TC01",
+      "title": "Auftrag zur Erweiterung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K01-TC02-T01",
+      "themencluster_ref": "LF7-K01-TC02",
+      "title": "Information und Steuerung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K01-TC02-T02",
+      "themencluster_ref": "LF7-K01-TC02",
+      "title": "Physische Ressourcen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K02-TC01-T01",
+      "themencluster_ref": "LF7-K02-TC01",
+      "title": "Physische Größen erfassen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K02-TC01-T02",
+      "themencluster_ref": "LF7-K02-TC01",
+      "title": "Physisch wirken",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K02-TC02-T01",
+      "themencluster_ref": "LF7-K02-TC02",
+      "title": "Versorgung und Signale",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K02-TC02-T02",
+      "themencluster_ref": "LF7-K02-TC02",
+      "title": "Softwarebausteine und Protokolle",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K03-TC01-T01",
+      "themencluster_ref": "LF7-K03-TC01",
+      "title": "Elektrische Verbindung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K03-TC01-T02",
+      "themencluster_ref": "LF7-K03-TC01",
+      "title": "Buskommunikation",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K03-TC02-T01",
+      "themencluster_ref": "LF7-K03-TC02",
+      "title": "Geräte ansprechen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K03-TC02-T02",
+      "themencluster_ref": "LF7-K03-TC02",
+      "title": "Inbetriebnahme",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K04-TC01-T01",
+      "themencluster_ref": "LF7-K04-TC01",
+      "title": "Betriebswerte",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K04-TC01-T02",
+      "themencluster_ref": "LF7-K04-TC01",
+      "title": "Energiebedarf",
+      "sort_order": 2
+    },
+    {
+      "id": "LF7-K04-TC02-T01",
+      "themencluster_ref": "LF7-K04-TC02",
+      "title": "Sicherer Betrieb",
+      "sort_order": 1
+    },
+    {
+      "id": "LF7-K04-TC02-T02",
+      "themencluster_ref": "LF7-K04-TC02",
+      "title": "Systemverbesserung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K01-TC01-T01",
+      "themencluster_ref": "LF8-K01-TC01",
+      "title": "Datenquellentypen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K01-TC01-T02",
+      "themencluster_ref": "LF8-K01-TC01",
+      "title": "Zugriffswege",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K01-TC02-T01",
+      "themencluster_ref": "LF8-K01-TC02",
+      "title": "Quelleneignung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K01-TC02-T02",
+      "themencluster_ref": "LF8-K01-TC02",
+      "title": "Zulässige Datennutzung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K02-TC01-T01",
+      "themencluster_ref": "LF8-K02-TC01",
+      "title": "Schemaabgleich",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K02-TC01-T02",
+      "themencluster_ref": "LF8-K02-TC01",
+      "title": "Transformationsprozess",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K02-TC02-T01",
+      "themencluster_ref": "LF8-K02-TC02",
+      "title": "Schnittstellenschutz",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K02-TC02-T02",
+      "themencluster_ref": "LF8-K02-TC02",
+      "title": "Zugriff steuern",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K03-TC01-T01",
+      "themencluster_ref": "LF8-K03-TC01",
+      "title": "Daten abrufen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K03-TC01-T02",
+      "themencluster_ref": "LF8-K03-TC01",
+      "title": "Daten transformieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K03-TC02-T01",
+      "themencluster_ref": "LF8-K03-TC02",
+      "title": "Versionsverwaltung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K03-TC02-T02",
+      "themencluster_ref": "LF8-K03-TC02",
+      "title": "Integrationsablauf",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K04-TC01-T01",
+      "themencluster_ref": "LF8-K04-TC01",
+      "title": "Nutzung erklären",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K04-TC01-T02",
+      "themencluster_ref": "LF8-K04-TC01",
+      "title": "Betrieb ermöglichen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF8-K04-TC02-T01",
+      "themencluster_ref": "LF8-K04-TC02",
+      "title": "Werkzeugeignung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF8-K04-TC02-T02",
+      "themencluster_ref": "LF8-K04-TC02",
+      "title": "Dokumentationsprüfung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K01-TC01-T01",
+      "themencluster_ref": "LF9-K01-TC01",
+      "title": "Kommunikationsbedarf",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K01-TC01-T02",
+      "themencluster_ref": "LF9-K01-TC01",
+      "title": "Qualitätsanforderungen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K01-TC02-T01",
+      "themencluster_ref": "LF9-K01-TC02",
+      "title": "Basisdienste",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K01-TC02-T02",
+      "themencluster_ref": "LF9-K01-TC02",
+      "title": "Anwendungsdienste",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K02-TC01-T01",
+      "themencluster_ref": "LF9-K02-TC01",
+      "title": "Segmentierung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K02-TC01-T02",
+      "themencluster_ref": "LF9-K02-TC01",
+      "title": "Wege zwischen Netzen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K02-TC02-T01",
+      "themencluster_ref": "LF9-K02-TC02",
+      "title": "Bereitstellungsmodelle",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K02-TC02-T02",
+      "themencluster_ref": "LF9-K02-TC02",
+      "title": "Kapazität planen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K03-TC01-T01",
+      "themencluster_ref": "LF9-K03-TC01",
+      "title": "Switching",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K03-TC01-T02",
+      "themencluster_ref": "LF9-K03-TC01",
+      "title": "Routing und Zugang",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K03-TC02-T01",
+      "themencluster_ref": "LF9-K03-TC02",
+      "title": "Dienste installieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K03-TC02-T02",
+      "themencluster_ref": "LF9-K03-TC02",
+      "title": "Betrieb prüfen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K04-TC01-T01",
+      "themencluster_ref": "LF9-K04-TC01",
+      "title": "Netzwerkzugriff schützen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K04-TC01-T02",
+      "themencluster_ref": "LF9-K04-TC01",
+      "title": "Datenverkehr schützen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF9-K04-TC02-T01",
+      "themencluster_ref": "LF9-K04-TC02",
+      "title": "Anforderungen nachweisen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF9-K04-TC02-T02",
+      "themencluster_ref": "LF9-K04-TC02",
+      "title": "Zukunftsfähigkeit",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K01-TC01-T01",
+      "themencluster_ref": "LF10a-K01-TC01",
+      "title": "Abläufe erfassen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K01-TC01-T02",
+      "themencluster_ref": "LF10a-K01-TC01",
+      "title": "Prozesse modellieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K01-TC02-T01",
+      "themencluster_ref": "LF10a-K01-TC02",
+      "title": "Schwachstellen erkennen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K01-TC02-T02",
+      "themencluster_ref": "LF10a-K01-TC02",
+      "title": "Soll-Ablauf entwerfen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K02-TC01-T01",
+      "themencluster_ref": "LF10a-K02-TC01",
+      "title": "Nutzungskontext",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K02-TC01-T02",
+      "themencluster_ref": "LF10a-K02-TC01",
+      "title": "Interaktionsentwurf",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K02-TC02-T01",
+      "themencluster_ref": "LF10a-K02-TC02",
+      "title": "Responsive Darstellung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K02-TC02-T02",
+      "themencluster_ref": "LF10a-K02-TC02",
+      "title": "Agile Produktarbeit",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K03-TC01-T01",
+      "themencluster_ref": "LF10a-K03-TC01",
+      "title": "Benutzereingaben",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K03-TC01-T02",
+      "themencluster_ref": "LF10a-K03-TC01",
+      "title": "Komponenten und Zustand",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K03-TC02-T01",
+      "themencluster_ref": "LF10a-K03-TC02",
+      "title": "Datenschutz in der Oberfläche",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K03-TC02-T02",
+      "themencluster_ref": "LF10a-K03-TC02",
+      "title": "Barrierefreiheit",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K04-TC01-T01",
+      "themencluster_ref": "LF10a-K04-TC01",
+      "title": "Usability prüfen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K04-TC01-T02",
+      "themencluster_ref": "LF10a-K04-TC01",
+      "title": "Funktion prüfen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10a-K04-TC02-T01",
+      "themencluster_ref": "LF10a-K04-TC02",
+      "title": "Prozesskosten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10a-K04-TC02-T02",
+      "themencluster_ref": "LF10a-K04-TC02",
+      "title": "Investition bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K01-TC01-T01",
+      "themencluster_ref": "LF11a-K01-TC01",
+      "title": "Informationsobjekte strukturieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K01-TC01-T02",
+      "themencluster_ref": "LF11a-K01-TC01",
+      "title": "Fachregeln",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K01-TC02-T01",
+      "themencluster_ref": "LF11a-K01-TC02",
+      "title": "Sammlungen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K01-TC02-T02",
+      "themencluster_ref": "LF11a-K01-TC02",
+      "title": "Abstrakte Datentypen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K02-TC01-T01",
+      "themencluster_ref": "LF11a-K02-TC01",
+      "title": "Verantwortlichkeiten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K02-TC01-T02",
+      "themencluster_ref": "LF11a-K02-TC01",
+      "title": "Abhängigkeiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K02-TC02-T01",
+      "themencluster_ref": "LF11a-K02-TC02",
+      "title": "Software visualisieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K02-TC02-T02",
+      "themencluster_ref": "LF11a-K02-TC02",
+      "title": "Iterativ entwickeln",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K03-TC01-T01",
+      "themencluster_ref": "LF11a-K03-TC01",
+      "title": "Objektorientierte Bausteine",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K03-TC01-T02",
+      "themencluster_ref": "LF11a-K03-TC01",
+      "title": "Fehler kontrollieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K03-TC02-T01",
+      "themencluster_ref": "LF11a-K03-TC02",
+      "title": "Persistenz kapseln",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K03-TC02-T02",
+      "themencluster_ref": "LF11a-K03-TC02",
+      "title": "Schnittstellen dokumentieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K04-TC01-T01",
+      "themencluster_ref": "LF11a-K04-TC01",
+      "title": "Komponenten isoliert testen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K04-TC01-T02",
+      "themencluster_ref": "LF11a-K04-TC01",
+      "title": "Zusammenspiel prüfen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11a-K04-TC02-T01",
+      "themencluster_ref": "LF11a-K04-TC02",
+      "title": "Prüfdeckung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11a-K04-TC02-T02",
+      "themencluster_ref": "LF11a-K04-TC02",
+      "title": "Überarbeitung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K01-TC01-T01",
+      "themencluster_ref": "LF10b-K01-TC01",
+      "title": "Serverrollen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K01-TC01-T02",
+      "themencluster_ref": "LF10b-K01-TC01",
+      "title": "Plattformmodelle",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K01-TC02-T01",
+      "themencluster_ref": "LF10b-K01-TC02",
+      "title": "Betriebsqualität",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K01-TC02-T02",
+      "themencluster_ref": "LF10b-K01-TC02",
+      "title": "Kosten und Lizenz",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K02-TC01-T01",
+      "themencluster_ref": "LF10b-K02-TC01",
+      "title": "Konfiguration als Sollzustand",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K02-TC01-T02",
+      "themencluster_ref": "LF10b-K02-TC01",
+      "title": "Aktualisierung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K02-TC02-T01",
+      "themencluster_ref": "LF10b-K02-TC02",
+      "title": "Backup-Konzept",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K02-TC02-T02",
+      "themencluster_ref": "LF10b-K02-TC02",
+      "title": "Monitoring-Konzept",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K03-TC01-T01",
+      "themencluster_ref": "LF10b-K03-TC01",
+      "title": "Dienstkonto",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K03-TC01-T02",
+      "themencluster_ref": "LF10b-K03-TC01",
+      "title": "Systemhärtung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K03-TC02-T01",
+      "themencluster_ref": "LF10b-K03-TC02",
+      "title": "Zustände beobachten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K03-TC02-T02",
+      "themencluster_ref": "LF10b-K03-TC02",
+      "title": "Störungen vorbeugen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K04-TC01-T01",
+      "themencluster_ref": "LF10b-K04-TC01",
+      "title": "Skripting",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K04-TC01-T02",
+      "themencluster_ref": "LF10b-K04-TC01",
+      "title": "Infrastructure as Code",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10b-K04-TC02-T01",
+      "themencluster_ref": "LF10b-K04-TC02",
+      "title": "Sicher testen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10b-K04-TC02-T02",
+      "themencluster_ref": "LF10b-K04-TC02",
+      "title": "Nutzen bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K01-TC01-T01",
+      "themencluster_ref": "LF11b-K01-TC01",
+      "title": "Vernetztes System abgrenzen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K01-TC01-T02",
+      "themencluster_ref": "LF11b-K01-TC01",
+      "title": "Schutzziele konkretisieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K01-TC02-T01",
+      "themencluster_ref": "LF11b-K01-TC02",
+      "title": "Angriff und Schwachstelle",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K01-TC02-T02",
+      "themencluster_ref": "LF11b-K01-TC02",
+      "title": "Risiko bestimmen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K02-TC01-T01",
+      "themencluster_ref": "LF11b-K02-TC01",
+      "title": "Behandlungsoptionen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K02-TC01-T02",
+      "themencluster_ref": "LF11b-K02-TC01",
+      "title": "Restrisiko",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K02-TC02-T01",
+      "themencluster_ref": "LF11b-K02-TC02",
+      "title": "Netzwerkarchitektur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K02-TC02-T02",
+      "themencluster_ref": "LF11b-K02-TC02",
+      "title": "Identitäten schützen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K03-TC01-T01",
+      "themencluster_ref": "LF11b-K03-TC01",
+      "title": "Netzwerkverkehr kontrollieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K03-TC01-T02",
+      "themencluster_ref": "LF11b-K03-TC01",
+      "title": "Systeme absichern",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K03-TC02-T01",
+      "themencluster_ref": "LF11b-K03-TC02",
+      "title": "Verantwortung und Reaktion",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K03-TC02-T02",
+      "themencluster_ref": "LF11b-K03-TC02",
+      "title": "Menschen einbeziehen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K04-TC01-T01",
+      "themencluster_ref": "LF11b-K04-TC01",
+      "title": "Schwachstellen prüfen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K04-TC01-T02",
+      "themencluster_ref": "LF11b-K04-TC01",
+      "title": "Ergebnisse bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11b-K04-TC02-T01",
+      "themencluster_ref": "LF11b-K04-TC02",
+      "title": "Kunden informieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11b-K04-TC02-T02",
+      "themencluster_ref": "LF11b-K04-TC02",
+      "title": "Restunsicherheit einordnen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K01-TC01-T01",
+      "themencluster_ref": "LF10c-K01-TC01",
+      "title": "Überwachtes Lernen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K01-TC01-T02",
+      "themencluster_ref": "LF10c-K01-TC01",
+      "title": "Unüberwachtes Lernen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K01-TC02-T01",
+      "themencluster_ref": "LF10c-K01-TC02",
+      "title": "Problem und Zielgröße",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K01-TC02-T02",
+      "themencluster_ref": "LF10c-K01-TC02",
+      "title": "Wirtschaftlicher Nutzen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K02-TC01-T01",
+      "themencluster_ref": "LF10c-K02-TC01",
+      "title": "Merkmale und Beispiele",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K02-TC01-T02",
+      "themencluster_ref": "LF10c-K02-TC01",
+      "title": "Datensätze aufteilen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K02-TC02-T01",
+      "themencluster_ref": "LF10c-K02-TC02",
+      "title": "Repräsentativität",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K02-TC02-T02",
+      "themencluster_ref": "LF10c-K02-TC02",
+      "title": "Recht und Ethik",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K03-TC01-T01",
+      "themencluster_ref": "LF10c-K03-TC01",
+      "title": "Entwicklungsumgebung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K03-TC01-T02",
+      "themencluster_ref": "LF10c-K03-TC01",
+      "title": "Modellpipeline",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K03-TC02-T01",
+      "themencluster_ref": "LF10c-K03-TC02",
+      "title": "Datenimport",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K03-TC02-T02",
+      "themencluster_ref": "LF10c-K03-TC02",
+      "title": "Merkmale vorbereiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K04-TC01-T01",
+      "themencluster_ref": "LF10c-K04-TC01",
+      "title": "Klassifikationsmetriken",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K04-TC01-T02",
+      "themencluster_ref": "LF10c-K04-TC01",
+      "title": "Generalisierung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10c-K04-TC02-T01",
+      "themencluster_ref": "LF10c-K04-TC02",
+      "title": "Modell überwachen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10c-K04-TC02-T02",
+      "themencluster_ref": "LF10c-K04-TC02",
+      "title": "Entscheidungen verantworten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K01-TC01-T01",
+      "themencluster_ref": "LF11c-K01-TC01",
+      "title": "Ereignisdaten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K01-TC01-T02",
+      "themencluster_ref": "LF11c-K01-TC01",
+      "title": "Prozessleistung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K01-TC02-T01",
+      "themencluster_ref": "LF11c-K01-TC02",
+      "title": "Daten im Prozess",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K01-TC02-T02",
+      "themencluster_ref": "LF11c-K01-TC02",
+      "title": "Auswertung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K02-TC01-T01",
+      "themencluster_ref": "LF11c-K02-TC01",
+      "title": "Systemgrenzen festlegen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K02-TC01-T02",
+      "themencluster_ref": "LF11c-K02-TC01",
+      "title": "Integrationsmuster",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K02-TC02-T01",
+      "themencluster_ref": "LF11c-K02-TC02",
+      "title": "Nutzen und Aufwand",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K02-TC02-T02",
+      "themencluster_ref": "LF11c-K02-TC02",
+      "title": "Entscheidung absichern",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K03-TC01-T01",
+      "themencluster_ref": "LF11c-K03-TC01",
+      "title": "Workflow-Steuerung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K03-TC01-T02",
+      "themencluster_ref": "LF11c-K03-TC01",
+      "title": "Systeme integrieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K03-TC02-T01",
+      "themencluster_ref": "LF11c-K03-TC02",
+      "title": "Prozessdarstellung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K03-TC02-T02",
+      "themencluster_ref": "LF11c-K03-TC02",
+      "title": "Betriebliche Nutzung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K04-TC01-T01",
+      "themencluster_ref": "LF11c-K04-TC01",
+      "title": "Betroffene einbinden",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K04-TC01-T02",
+      "themencluster_ref": "LF11c-K04-TC01",
+      "title": "Einführung unterstützen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11c-K04-TC02-T01",
+      "themencluster_ref": "LF11c-K04-TC02",
+      "title": "Ökonomische Wirkung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11c-K04-TC02-T02",
+      "themencluster_ref": "LF11c-K04-TC02",
+      "title": "Ökologische Wirkung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K01-TC01-T01",
+      "themencluster_ref": "LF10d-K01-TC01",
+      "title": "Funktionaler Bedarf",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K01-TC01-T02",
+      "themencluster_ref": "LF10d-K01-TC01",
+      "title": "Qualitätsanforderungen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K01-TC02-T01",
+      "themencluster_ref": "LF10d-K01-TC02",
+      "title": "Bedienung und Rückmeldung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K01-TC02-T02",
+      "themencluster_ref": "LF10d-K01-TC02",
+      "title": "KI-gestützte Funktion",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K02-TC01-T01",
+      "themencluster_ref": "LF10d-K02-TC01",
+      "title": "Komponenten strukturieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K02-TC01-T02",
+      "themencluster_ref": "LF10d-K02-TC01",
+      "title": "Kommunikationsarchitektur",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K02-TC02-T01",
+      "themencluster_ref": "LF10d-K02-TC02",
+      "title": "Zonierung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K02-TC02-T02",
+      "themencluster_ref": "LF10d-K02-TC02",
+      "title": "Fehlertoleranz",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K03-TC01-T01",
+      "themencluster_ref": "LF10d-K03-TC01",
+      "title": "Sensorwerte verarbeiten",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K03-TC01-T02",
+      "themencluster_ref": "LF10d-K03-TC01",
+      "title": "Aktoren sicher steuern",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K03-TC02-T01",
+      "themencluster_ref": "LF10d-K03-TC02",
+      "title": "Schnittstellen programmieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K03-TC02-T02",
+      "themencluster_ref": "LF10d-K03-TC02",
+      "title": "Zustände visualisieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K04-TC01-T01",
+      "themencluster_ref": "LF10d-K04-TC01",
+      "title": "Funktion im Verbund",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K04-TC01-T02",
+      "themencluster_ref": "LF10d-K04-TC01",
+      "title": "Störfälle",
+      "sort_order": 2
+    },
+    {
+      "id": "LF10d-K04-TC02-T01",
+      "themencluster_ref": "LF10d-K04-TC02",
+      "title": "Bedienung und Wartung",
+      "sort_order": 1
+    },
+    {
+      "id": "LF10d-K04-TC02-T02",
+      "themencluster_ref": "LF10d-K04-TC02",
+      "title": "Ethische Einordnung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K01-TC01-T01",
+      "themencluster_ref": "LF12a-K01-TC01",
+      "title": "Projektauftrag verstehen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K01-TC01-T02",
+      "themencluster_ref": "LF12a-K01-TC01",
+      "title": "Bedarf analysieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K01-TC02-T01",
+      "themencluster_ref": "LF12a-K01-TC02",
+      "title": "Ergebnisse festlegen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K01-TC02-T02",
+      "themencluster_ref": "LF12a-K01-TC02",
+      "title": "Einführung vorbereiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K02-TC01-T01",
+      "themencluster_ref": "LF12a-K02-TC01",
+      "title": "Arbeit gliedern",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K02-TC01-T02",
+      "themencluster_ref": "LF12a-K02-TC01",
+      "title": "Ablauf planen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K02-TC02-T01",
+      "themencluster_ref": "LF12a-K02-TC02",
+      "title": "Kapazitäten planen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K02-TC02-T02",
+      "themencluster_ref": "LF12a-K02-TC02",
+      "title": "Aufwand kalkulieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K03-TC01-T01",
+      "themencluster_ref": "LF12a-K03-TC01",
+      "title": "Varianten entwickeln",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K03-TC01-T02",
+      "themencluster_ref": "LF12a-K03-TC01",
+      "title": "Schutzanforderungen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K03-TC02-T01",
+      "themencluster_ref": "LF12a-K03-TC02",
+      "title": "Leistung vereinbaren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K03-TC02-T02",
+      "themencluster_ref": "LF12a-K03-TC02",
+      "title": "Qualitätsgesichert umsetzen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K04-TC01-T01",
+      "themencluster_ref": "LF12a-K04-TC01",
+      "title": "Ergebnis vermitteln",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K04-TC01-T02",
+      "themencluster_ref": "LF12a-K04-TC01",
+      "title": "Produkt übergeben",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12a-K04-TC02-T01",
+      "themencluster_ref": "LF12a-K04-TC02",
+      "title": "Erfolg messen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12a-K04-TC02-T02",
+      "themencluster_ref": "LF12a-K04-TC02",
+      "title": "Rückblick und Verbesserung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K01-TC01-T01",
+      "themencluster_ref": "LF12b-K01-TC01",
+      "title": "Projektauftrag verstehen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K01-TC01-T02",
+      "themencluster_ref": "LF12b-K01-TC01",
+      "title": "Bedarf analysieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K01-TC02-T01",
+      "themencluster_ref": "LF12b-K01-TC02",
+      "title": "Ergebnisse festlegen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K01-TC02-T02",
+      "themencluster_ref": "LF12b-K01-TC02",
+      "title": "Einführung vorbereiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K02-TC01-T01",
+      "themencluster_ref": "LF12b-K02-TC01",
+      "title": "Arbeit gliedern",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K02-TC01-T02",
+      "themencluster_ref": "LF12b-K02-TC01",
+      "title": "Ablauf planen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K02-TC02-T01",
+      "themencluster_ref": "LF12b-K02-TC02",
+      "title": "Kapazitäten planen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K02-TC02-T02",
+      "themencluster_ref": "LF12b-K02-TC02",
+      "title": "Aufwand kalkulieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K03-TC01-T01",
+      "themencluster_ref": "LF12b-K03-TC01",
+      "title": "Varianten entwickeln",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K03-TC01-T02",
+      "themencluster_ref": "LF12b-K03-TC01",
+      "title": "Schutzanforderungen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K03-TC02-T01",
+      "themencluster_ref": "LF12b-K03-TC02",
+      "title": "Leistung vereinbaren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K03-TC02-T02",
+      "themencluster_ref": "LF12b-K03-TC02",
+      "title": "Qualitätsgesichert umsetzen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K04-TC01-T01",
+      "themencluster_ref": "LF12b-K04-TC01",
+      "title": "Ergebnis vermitteln",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K04-TC01-T02",
+      "themencluster_ref": "LF12b-K04-TC01",
+      "title": "Produkt übergeben",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12b-K04-TC02-T01",
+      "themencluster_ref": "LF12b-K04-TC02",
+      "title": "Erfolg messen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12b-K04-TC02-T02",
+      "themencluster_ref": "LF12b-K04-TC02",
+      "title": "Rückblick und Verbesserung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K01-TC01-T01",
+      "themencluster_ref": "LF12c-K01-TC01",
+      "title": "Projektauftrag verstehen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K01-TC01-T02",
+      "themencluster_ref": "LF12c-K01-TC01",
+      "title": "Bedarf analysieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K01-TC02-T01",
+      "themencluster_ref": "LF12c-K01-TC02",
+      "title": "Ergebnisse festlegen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K01-TC02-T02",
+      "themencluster_ref": "LF12c-K01-TC02",
+      "title": "Einführung vorbereiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K02-TC01-T01",
+      "themencluster_ref": "LF12c-K02-TC01",
+      "title": "Arbeit gliedern",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K02-TC01-T02",
+      "themencluster_ref": "LF12c-K02-TC01",
+      "title": "Ablauf planen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K02-TC02-T01",
+      "themencluster_ref": "LF12c-K02-TC02",
+      "title": "Kapazitäten planen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K02-TC02-T02",
+      "themencluster_ref": "LF12c-K02-TC02",
+      "title": "Aufwand kalkulieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K03-TC01-T01",
+      "themencluster_ref": "LF12c-K03-TC01",
+      "title": "Varianten entwickeln",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K03-TC01-T02",
+      "themencluster_ref": "LF12c-K03-TC01",
+      "title": "Schutzanforderungen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K03-TC02-T01",
+      "themencluster_ref": "LF12c-K03-TC02",
+      "title": "Leistung vereinbaren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K03-TC02-T02",
+      "themencluster_ref": "LF12c-K03-TC02",
+      "title": "Qualitätsgesichert umsetzen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K04-TC01-T01",
+      "themencluster_ref": "LF12c-K04-TC01",
+      "title": "Ergebnis vermitteln",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K04-TC01-T02",
+      "themencluster_ref": "LF12c-K04-TC01",
+      "title": "Produkt übergeben",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12c-K04-TC02-T01",
+      "themencluster_ref": "LF12c-K04-TC02",
+      "title": "Erfolg messen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12c-K04-TC02-T02",
+      "themencluster_ref": "LF12c-K04-TC02",
+      "title": "Rückblick und Verbesserung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K01-TC01-T01",
+      "themencluster_ref": "LF12d-K01-TC01",
+      "title": "Projektauftrag verstehen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K01-TC01-T02",
+      "themencluster_ref": "LF12d-K01-TC01",
+      "title": "Bedarf analysieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K01-TC02-T01",
+      "themencluster_ref": "LF12d-K01-TC02",
+      "title": "Ergebnisse festlegen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K01-TC02-T02",
+      "themencluster_ref": "LF12d-K01-TC02",
+      "title": "Einführung vorbereiten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K02-TC01-T01",
+      "themencluster_ref": "LF12d-K02-TC01",
+      "title": "Arbeit gliedern",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K02-TC01-T02",
+      "themencluster_ref": "LF12d-K02-TC01",
+      "title": "Ablauf planen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K02-TC02-T01",
+      "themencluster_ref": "LF12d-K02-TC02",
+      "title": "Kapazitäten planen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K02-TC02-T02",
+      "themencluster_ref": "LF12d-K02-TC02",
+      "title": "Aufwand kalkulieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K03-TC01-T01",
+      "themencluster_ref": "LF12d-K03-TC01",
+      "title": "Varianten entwickeln",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K03-TC01-T02",
+      "themencluster_ref": "LF12d-K03-TC01",
+      "title": "Schutzanforderungen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K03-TC02-T01",
+      "themencluster_ref": "LF12d-K03-TC02",
+      "title": "Leistung vereinbaren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K03-TC02-T02",
+      "themencluster_ref": "LF12d-K03-TC02",
+      "title": "Qualitätsgesichert umsetzen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K04-TC01-T01",
+      "themencluster_ref": "LF12d-K04-TC01",
+      "title": "Ergebnis vermitteln",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K04-TC01-T02",
+      "themencluster_ref": "LF12d-K04-TC01",
+      "title": "Produkt übergeben",
+      "sort_order": 2
+    },
+    {
+      "id": "LF12d-K04-TC02-T01",
+      "themencluster_ref": "LF12d-K04-TC02",
+      "title": "Erfolg messen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF12d-K04-TC02-T02",
+      "themencluster_ref": "LF12d-K04-TC02",
+      "title": "Rückblick und Verbesserung",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K01-TC01-T01",
+      "themencluster_ref": "LF11d-K01-TC01",
+      "title": "Vernetztes System abgrenzen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K01-TC01-T02",
+      "themencluster_ref": "LF11d-K01-TC01",
+      "title": "Schutzziele konkretisieren",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K01-TC02-T01",
+      "themencluster_ref": "LF11d-K01-TC02",
+      "title": "Angriff und Schwachstelle",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K01-TC02-T02",
+      "themencluster_ref": "LF11d-K01-TC02",
+      "title": "Risiko bestimmen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K02-TC01-T01",
+      "themencluster_ref": "LF11d-K02-TC01",
+      "title": "Behandlungsoptionen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K02-TC01-T02",
+      "themencluster_ref": "LF11d-K02-TC01",
+      "title": "Restrisiko",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K02-TC02-T01",
+      "themencluster_ref": "LF11d-K02-TC02",
+      "title": "Netzwerkarchitektur",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K02-TC02-T02",
+      "themencluster_ref": "LF11d-K02-TC02",
+      "title": "Identitäten schützen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K03-TC01-T01",
+      "themencluster_ref": "LF11d-K03-TC01",
+      "title": "Netzwerkverkehr kontrollieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K03-TC01-T02",
+      "themencluster_ref": "LF11d-K03-TC01",
+      "title": "Systeme absichern",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K03-TC02-T01",
+      "themencluster_ref": "LF11d-K03-TC02",
+      "title": "Verantwortung und Reaktion",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K03-TC02-T02",
+      "themencluster_ref": "LF11d-K03-TC02",
+      "title": "Menschen einbeziehen",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K04-TC01-T01",
+      "themencluster_ref": "LF11d-K04-TC01",
+      "title": "Schwachstellen prüfen",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K04-TC01-T02",
+      "themencluster_ref": "LF11d-K04-TC01",
+      "title": "Ergebnisse bewerten",
+      "sort_order": 2
+    },
+    {
+      "id": "LF11d-K04-TC02-T01",
+      "themencluster_ref": "LF11d-K04-TC02",
+      "title": "Kunden informieren",
+      "sort_order": 1
+    },
+    {
+      "id": "LF11d-K04-TC02-T02",
+      "themencluster_ref": "LF11d-K04-TC02",
+      "title": "Restunsicherheit einordnen",
       "sort_order": 2
     }
   ]

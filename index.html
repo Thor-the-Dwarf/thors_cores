@@ -816,6 +816,15 @@
       opacity: 1;
     }
 
+    .core-raster.lernfeld-radialfokus .vault-knoten.abgeblendet {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .core-raster.lernfeld-radialfokus .themen-linie-basis {
+      opacity: 0;
+    }
+
     .knoten-beschriftung {
       position: relative;
       z-index: 2;
@@ -3625,6 +3634,11 @@ projektreflexion mirror flag
       }
 
       const elternIndex = new Map(kanten.map(kante => [kante.b, kante.a]));
+      const kinderNachEltern = new Map();
+      kanten.forEach(kante => {
+        if (!kinderNachEltern.has(kante.a)) kinderNachEltern.set(kante.a, []);
+        kinderNachEltern.get(kante.a).push(kante.b);
+      });
       const wurzelZentren = [];
       const weltRand = 760;
 
@@ -3665,6 +3679,7 @@ projektreflexion mirror flag
         core: { min: 48, max: 165 }
       };
       const positionen = new Array(graphKnoten.length);
+      let globalePositionen = null;
       let nächsterWurzelIndex = 0;
       graphKnoten.forEach((knoten, graphIndex) => {
         let ankerX;
@@ -4116,12 +4131,139 @@ projektreflexion mirror flag
         if (automatischEinpassen) einpassen();
       }
 
+      function globalePositionenSichern() {
+        if (globalePositionen) return;
+        globalePositionen = positionen.map(punkt => ({
+          x: punkt.x,
+          y: punkt.y,
+          ankerX: punkt.ankerX,
+          ankerY: punkt.ankerY
+        }));
+      }
+
+      function globalePositionenWiederherstellen() {
+        if (!globalePositionen) return;
+        positionen.forEach((punkt, index) => {
+          Object.assign(punkt, globalePositionen[index], { vx: 0, vy: 0 });
+        });
+      }
+
+      function lernfeldRadialAnordnen(fokusId, themaIds) {
+        globalePositionenSichern();
+        globalePositionenWiederherstellen();
+        const themenMenge = new Set(themaIds);
+        const ausgewählteIndizes = graphKnoten
+          .map((knoten, index) => knoten.themen.some(id => themenMenge.has(id))
+            ? index
+            : -1)
+          .filter(index => index >= 0);
+        const lernfeldIndex = graphKnoten.findIndex(knoten =>
+          knoten.id === fokusId && knoten.typ === "lernfeld"
+        );
+        if (lernfeldIndex < 0) return ausgewählteIndizes;
+
+        const mitteX = WELT_BREITE / 2;
+        const mitteY = WELT_HÖHE / 2;
+        const themenIndizes = ausgewählteIndizes.filter(
+          index => graphKnoten[index].typ === "thema"
+        );
+        const themenRing = Math.max(740, themenIndizes.length * 29);
+        const startWinkel = -Math.PI / 2;
+        const themaWinkel = new Map();
+
+        function punktSetzen(index, x, y) {
+          Object.assign(positionen[index], {
+            x,
+            y,
+            ankerX: x,
+            ankerY: y,
+            vx: 0,
+            vy: 0
+          });
+        }
+
+        punktSetzen(lernfeldIndex, mitteX, mitteY);
+        themenIndizes.forEach((index, reihenfolge) => {
+          const winkel = startWinkel
+            + reihenfolge / Math.max(1, themenIndizes.length) * Math.PI * 2;
+          themaWinkel.set(index, winkel);
+          punktSetzen(
+            index,
+            mitteX + Math.cos(winkel) * themenRing,
+            mitteY + Math.sin(winkel) * themenRing
+          );
+        });
+
+        const nachkommenThemen = new Map();
+        function themenUnterhalb(index) {
+          if (nachkommenThemen.has(index)) return nachkommenThemen.get(index);
+          const treffer = graphKnoten[index].typ === "thema"
+            ? [index]
+            : (kinderNachEltern.get(index) || []).flatMap(themenUnterhalb);
+          nachkommenThemen.set(index, treffer);
+          return treffer;
+        }
+
+        [
+          ["kompetenz", themenRing * 0.34],
+          ["themencluster", themenRing * 0.65]
+        ].forEach(([typ, radius]) => {
+          ausgewählteIndizes
+            .filter(index => graphKnoten[index].typ === typ)
+            .forEach(index => {
+              const winkelVektoren = themenUnterhalb(index)
+                .map(themaIndex => themaWinkel.get(themaIndex))
+                .filter(winkel => winkel !== undefined);
+              const xVektor = winkelVektoren.reduce(
+                (summe, winkel) => summe + Math.cos(winkel),
+                0
+              );
+              const yVektor = winkelVektoren.reduce(
+                (summe, winkel) => summe + Math.sin(winkel),
+                0
+              );
+              const winkel = Math.atan2(yVektor, xVektor);
+              punktSetzen(
+                index,
+                mitteX + Math.cos(winkel) * radius,
+                mitteY + Math.sin(winkel) * radius
+              );
+            });
+        });
+
+        themenIndizes.forEach(themaIndex => {
+          const coreIndizes = (kinderNachEltern.get(themaIndex) || [])
+            .filter(index => graphKnoten[index].typ === "core");
+          const start = themaWinkel.get(themaIndex)
+            + deterministischerWert(`${graphKnoten[themaIndex].id}:core-ring`)
+              * Math.PI * 2;
+          coreIndizes.forEach((coreIndex, reihenfolge) => {
+            const bogenWinkel = start
+              + reihenfolge / Math.max(1, coreIndizes.length) * Math.PI * 2;
+            const radius = 82 + (reihenfolge % 2) * 8;
+            punktSetzen(
+              coreIndex,
+              positionen[themaIndex].x + Math.cos(bogenWinkel) * radius,
+              positionen[themaIndex].y + Math.sin(bogenWinkel) * radius
+            );
+          });
+        });
+
+        graphElementeAktualisieren(ausgewählteIndizes);
+        return ausgewählteIndizes;
+      }
+
       function bereichFokussieren(fokusId, themaIds, auslöser) {
         if (quizAuswahlAktiv) return;
         coreMenüSchließen();
         const zurücksetzen = aktivesThema === fokusId;
+        if (aktivesThema) globalePositionenWiederherstellen();
         aktivesThema = zurücksetzen ? null : fokusId;
         aktiveThemenIds = new Set(zurücksetzen ? [] : themaIds);
+        raster.classList.toggle(
+          "lernfeld-radialfokus",
+          !zurücksetzen && fokusId.startsWith("lernfeld:")
+        );
         document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
           schaltfläche.setAttribute(
             "aria-pressed",
@@ -4129,16 +4271,27 @@ projektreflexion mirror flag
           );
         });
         fokusDarstellungAktualisieren();
+        if (!zurücksetzen && fokusId.startsWith("lernfeld:")) {
+          const radialIndizes = lernfeldRadialAnordnen(fokusId, themaIds);
+          einpassen(radialIndizes);
+        } else {
+          graphElementeAktualisieren();
+          einpassen();
+        }
       }
 
       function bereichsfokusZurücksetzen() {
         if (!aktivesThema) return;
         aktivesThema = null;
         aktiveThemenIds = new Set();
+        raster.classList.remove("lernfeld-radialfokus");
+        globalePositionenWiederherstellen();
         document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
           schaltfläche.setAttribute("aria-pressed", "false");
         });
         fokusDarstellungAktualisieren();
+        graphElementeAktualisieren();
+        einpassen();
       }
 
       function fokusDarstellungAktualisieren() {
@@ -4654,25 +4807,28 @@ projektreflexion mirror flag
         radialMenüPositionieren();
       }
 
-      function graphGrenzenBerechnen() {
-        return positionen.reduce((grenzen, punkt, index) => {
+      function graphGrenzenBerechnen(knotenIndizes = null) {
+        const punkte = knotenIndizes || positionen.keys();
+        const grenzen = {
+          links: Infinity,
+          rechts: -Infinity,
+          oben: Infinity,
+          unten: -Infinity
+        };
+        for (const index of punkte) {
+          const punkt = positionen[index];
           const radius = punkt.radius + 24;
           grenzen.links = Math.min(grenzen.links, punkt.x - radius);
           grenzen.rechts = Math.max(grenzen.rechts, punkt.x + radius);
           grenzen.oben = Math.min(grenzen.oben, punkt.y - radius);
           grenzen.unten = Math.max(grenzen.unten, punkt.y + radius);
-          return grenzen;
-        }, {
-          links: Infinity,
-          rechts: -Infinity,
-          oben: Infinity,
-          unten: -Infinity
-        });
+        }
+        return grenzen;
       }
 
-      function einpassen() {
+      function einpassen(knotenIndizes = null) {
         const rand = 36;
-        const graphGrenzen = graphGrenzenBerechnen();
+        const graphGrenzen = graphGrenzenBerechnen(knotenIndizes);
         const graphBreite = Math.max(1, graphGrenzen.rechts - graphGrenzen.links);
         const graphHöhe = Math.max(1, graphGrenzen.unten - graphGrenzen.oben);
         zoom = Math.max(0.035, Math.min(

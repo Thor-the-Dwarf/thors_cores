@@ -2398,30 +2398,192 @@ gefaehrliche_arbeiten warning work
 erstuntersuchung medical one
 nachuntersuchung medical loop
 `.trim().split("\n").map(zeile => {
-        const [id, basis, detail] = zeile.trim().split(/\s+/);
-        return [`core.${id}`, { basis, detail }];
+        const [id, hauptmotiv, aussage] = zeile.trim().split(/\s+/);
+        return [`core.${id}`, { hauptmotiv, aussage }];
       }));
 
+      const iconKompositionsFamilien = {
+        schutz: new Set([
+          "shield", "lock", "openlock", "helmet", "warning", "medical", "cross"
+        ]),
+        dokument: new Set([
+          "document", "contract", "book", "clipboard", "register", "screen"
+        ]),
+        messwert: new Set([
+          "coin", "chart", "percent", "clock", "timer", "calendar"
+        ]),
+        struktur: new Set([
+          "tree", "hierarchy", "grid", "building", "factory", "store", "home"
+        ]),
+        rolle: new Set([
+          "person", "group", "hand", "handshake", "youth", "access"
+        ]),
+        prozess: new Set([
+          "arrows", "cycle", "loop", "path", "stairs", "chain", "compare", "split"
+        ]),
+        kern: new Set([
+          "target", "heart", "diamond", "star", "compass", "eye", "mirror"
+        ])
+      };
+
+      function iconHash(text) {
+        return [...text].reduce(
+          (wert, zeichen) => ((wert * 33) ^ zeichen.charCodeAt(0)) >>> 0,
+          5381
+        );
+      }
+
+      function iconFamilieBestimmen(spezifikation) {
+        return Object.entries(iconKompositionsFamilien)
+          .find(([, motive]) => motive.has(spezifikation.hauptmotiv))?.[0] || "handlung";
+      }
+
+      function iconKompositionBestimmen(coreId, spezifikation) {
+        const varianten = {
+          schutz: ["eingeschlossen", "wache", "schranke"],
+          dokument: ["siegel", "randnotiz", "aufgeschlagen"],
+          messwert: ["kennzahl", "anstieg", "messpunkt"],
+          struktur: ["verankert", "knoten", "ebenen"],
+          rolle: ["gegenueber", "gemeinsam", "uebergabe"],
+          prozess: ["fluss", "kreislauf", "etappen"],
+          kern: ["fokus", "orientierung", "reflexion"],
+          handlung: ["verzahnt", "diagonal", "impuls"]
+        };
+        const familie = iconFamilieBestimmen(spezifikation);
+        const auswahl = varianten[familie];
+        return {
+          familie,
+          variante: auswahl[iconHash(coreId) % auswahl.length]
+        };
+      }
+
       function coreIconMaskeErstellen(coreId, spezifikation) {
-        const basis = iconTeile[spezifikation.basis];
-        const detail = iconTeile[spezifikation.detail];
-        if (!basis || !detail) {
+        const hauptmotiv = iconTeile[spezifikation.hauptmotiv];
+        const aussage = iconTeile[spezifikation.aussage];
+        if (!hauptmotiv || !aussage) {
           throw new Error(`Unbekannter Icon-Baustein für ${coreId}`);
         }
+        const komposition = iconKompositionBestimmen(coreId, spezifikation);
+        const spiegeln = iconHash(`${coreId}:spiegeln`) % 2 === 0;
+        const gruppe = (inhalt, transform) =>
+          `<g fill="none" stroke="black" stroke-width="2.05"
+            stroke-linecap="round" stroke-linejoin="round"
+            transform="${transform}">${inhalt}</g>`;
+        const pfeil = (d) =>
+          `<path d="${d}" fill="none" stroke="black" stroke-width="1.65"
+            stroke-linecap="round" stroke-linejoin="round"/>`;
+        const kompositionen = {
+          eingeschlossen: () =>
+            `${gruppe(hauptmotiv, "translate(1 1) scale(.92)")}
+             ${gruppe(aussage, "translate(7.1 7.1) scale(.41)")}`,
+          wache: () =>
+            `${gruppe(hauptmotiv, "translate(5.5 2.5) scale(.68)")}
+             ${gruppe(aussage, "translate(1 12.2) scale(.45)")}
+             ${pfeil("M5 17h5m-2-2 2 2-2 2")}`,
+          schranke: () =>
+            `${gruppe(hauptmotiv, "translate(1.5 5.5) scale(.58)")}
+             ${gruppe(aussage, "translate(10.5 5.5) scale(.58)")}
+             ${pfeil("M11.8 4v16")}`,
+          siegel: () =>
+            `${gruppe(hauptmotiv, "translate(1 1) scale(.9)")}
+             ${gruppe(aussage, "translate(10.8 10.8) scale(.42)")}
+             <circle cx="17.2" cy="17.2" r="5.1" fill="none"
+               stroke="black" stroke-width="1.25"/>`,
+          randnotiz: () =>
+            `${gruppe(hauptmotiv, "translate(1.5 1.5) scale(.72)")}
+             ${gruppe(aussage, "translate(13 3.5) scale(.38)")}
+             ${pfeil("M15 14v6m-2-2 2 2 2-2")}`,
+          aufgeschlagen: () =>
+            `${gruppe(hauptmotiv, "translate(1 4.5) scale(.66)")}
+             ${gruppe(aussage, "translate(10.5 4.5) scale(.66)")}
+             ${pfeil("M12 5v15")}`,
+          kennzahl: () =>
+            `${gruppe(hauptmotiv, "translate(1 1) scale(.9)")}
+             ${gruppe(aussage, "translate(8.3 8.3) scale(.34)")}`,
+          anstieg: () =>
+            `${gruppe(hauptmotiv, "translate(1.2 8.5) scale(.55)")}
+             ${gruppe(aussage, "translate(10.2 1) scale(.55)")}
+             ${pfeil("M6 18l12-12m-4 0h4v4")}`,
+          messpunkt: () =>
+            `${gruppe(hauptmotiv, "translate(5 1) scale(.64)")}
+             ${gruppe(aussage, "translate(5 11) scale(.45)")}
+             ${pfeil("M4 20h16M7 17v3m5-5v5m5-8v8")}`,
+          verankert: () =>
+            `${gruppe(hauptmotiv, "translate(1 1) scale(.9)")}
+             ${gruppe(aussage, "translate(7.8 8.5) scale(.35)")}
+             ${pfeil("M4 21h16")}`,
+          knoten: () =>
+            `${gruppe(hauptmotiv, "translate(1 5.3) scale(.58)")}
+             ${gruppe(aussage, "translate(10.8 5.3) scale(.58)")}
+             ${pfeil("M10 12h4m-2-2 2 2-2 2")}`,
+          ebenen: () =>
+            `${gruppe(hauptmotiv, "translate(5 0) scale(.58)")}
+             ${gruppe(aussage, "translate(5 11) scale(.5)")}
+             ${pfeil("M12 10v4m-2-2 2 2 2-2")}`,
+          gegenueber: () =>
+            `${gruppe(hauptmotiv, "translate(0 5) scale(.6)")}
+             ${gruppe(aussage, spiegeln
+               ? "translate(24 5) scale(-.6 .6)"
+               : "translate(10 5) scale(.6)")}
+             ${pfeil("M9.5 12h5")}`,
+          gemeinsam: () =>
+            `${gruppe(hauptmotiv, "translate(1 1) scale(.7)")}
+             ${gruppe(aussage, "translate(8 8) scale(.62)")}
+             ${pfeil("M5 20c4-3 10-3 14 0")}`,
+          uebergabe: () =>
+            `${gruppe(hauptmotiv, "translate(0 8) scale(.55)")}
+             ${gruppe(aussage, "translate(11 1) scale(.55)")}
+             ${pfeil("M7 17c4 0 5-7 10-7m-3-2 3 2-2 3")}`,
+          fluss: () =>
+            `${gruppe(hauptmotiv, "translate(0 5) scale(.58)")}
+             ${gruppe(aussage, "translate(11 5) scale(.58)")}
+             ${pfeil("M9 12h6m-2-2 2 2-2 2")}`,
+          kreislauf: () =>
+            `${gruppe(hauptmotiv, "translate(5 0) scale(.58)")}
+             ${gruppe(aussage, "translate(5 11) scale(.58)")}
+             ${pfeil("M4 12a8 8 0 0114-5m1-2-1 2-2-1M20 12a8 8 0 01-14 5m-1 2 1-2 2 1")}`,
+          etappen: () =>
+            `${gruppe(hauptmotiv, "translate(0 10) scale(.5)")}
+             ${gruppe(aussage, "translate(12 0) scale(.5)")}
+             ${pfeil("M5 18h5v-6h5V6h4m-2-2 2 2-2 2")}`,
+          fokus: () =>
+            `${gruppe(hauptmotiv, "translate(1 1) scale(.9)")}
+             ${gruppe(aussage, "translate(8.5 8.5) scale(.3)")}
+             <circle cx="12" cy="12" r="2.4" fill="none"
+               stroke="black" stroke-width="1.15"/>`,
+          orientierung: () =>
+            `${gruppe(hauptmotiv, "translate(4.5 4.5) scale(.62)")}
+             ${gruppe(aussage, "translate(1 1) scale(.9)")}
+             ${pfeil("M12 2v3m0 14v3M2 12h3m14 0h3")}`,
+          reflexion: () =>
+            `${gruppe(hauptmotiv, "translate(0 4.5) scale(.62)")}
+             ${gruppe(aussage, "translate(10 4.5) scale(.62)")}
+             ${pfeil("M12 3v18")}`,
+          verzahnt: () =>
+            `${gruppe(hauptmotiv, "translate(0 1.5) scale(.72)")}
+             ${gruppe(aussage, "translate(7 7.5) scale(.68)")}`,
+          diagonal: () =>
+            `${gruppe(hauptmotiv, spiegeln
+              ? "translate(10 0) scale(.58)"
+              : "translate(0 10) scale(.58)")}
+             ${gruppe(aussage, spiegeln
+              ? "translate(0 10) scale(.58)"
+              : "translate(10 0) scale(.58)")}
+             ${pfeil(spiegeln ? "M6 18L18 6" : "M6 6l12 12")}`,
+          impuls: () =>
+            `${gruppe(hauptmotiv, "translate(1 5) scale(.62)")}
+             ${gruppe(aussage, "translate(11 1) scale(.5)")}
+             ${pfeil("M4 20c5-1 7-5 9-9m-2 1 2-1 1 2")}`
+        };
+        const zeichnung = kompositionen[komposition.variante]();
         const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <g fill="none" stroke="black" stroke-width="2.1"
-            stroke-linecap="round" stroke-linejoin="round"
-            transform="translate(.7 .7) scale(.78)">${basis}</g>
-          <circle cx="18.5" cy="18.5" r="4.4"
-            fill="none" stroke="black" stroke-width="1.35"/>
-          <g fill="none" stroke="black" stroke-width="2.2"
-            stroke-linecap="round" stroke-linejoin="round"
-            transform="translate(14.8 14.8) scale(.31)">${detail}</g>
+          ${zeichnung}
         </svg>`;
         return {
           cssId: coreId.replace(/[^a-z0-9_-]/gi, "-"),
           maske: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`,
-          ...spezifikation
+          ...spezifikation,
+          komposition: `${komposition.familie}:${komposition.variante}`
         };
       }
 
@@ -2538,10 +2700,11 @@ nachuntersuchung medical loop
         punkt.dataset.themencluster = clusterId;
         punkt.dataset.themenclusterTitel = clusterTitel;
         punkt.dataset.coreId = coreId;
-        punkt.dataset.iconBasis = icon.basis;
-        punkt.dataset.iconDetail = icon.detail;
+        punkt.dataset.iconHauptmotiv = icon.hauptmotiv;
+        punkt.dataset.iconAussage = icon.aussage;
+        punkt.dataset.iconKomposition = icon.komposition;
         punkt.dataset.iconKontext = `${themaTitel}: ${coreInhalt}`;
-        punkt.dataset.iconStil = "Semantische Linienmaske";
+        punkt.dataset.iconStil = "Individuelles semantisches Piktogramm";
         punkt.setAttribute("aria-label", coreBeschriftung(index));
         fortschrittsring.className = "core-fortschrittsring";
         fortschrittsring.setAttribute("aria-hidden", "true");

@@ -1164,10 +1164,19 @@
       summary::after { transition: none; }
     }
   </style>
+  <link rel="stylesheet" href="app-navigation.css">
 </head>
 <body>
   <div class="top-app-bar" role="banner">
     <p class="top-app-bar__text">Wiederholung ist die Mutter des Lernens</p>
+    <button id="settings-umschalten" class="top-app-bar__settings" type="button"
+            aria-controls="settings-drawer" aria-expanded="false"
+            aria-label="Einstellungen öffnen">
+      <svg class="settings-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.86 2.86-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.55v-.09A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.86-2.86.06-.06A1.7 1.7 0 0 0 4.1 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H2.3V9.55h.1A1.7 1.7 0 0 0 4.1 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06L6.56 3.7l.06.06A1.7 1.7 0 0 0 8.5 4.1a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V2.3h4.05v.1A1.7 1.7 0 0 0 15 4.1a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.86 2.86-.06.06A1.7 1.7 0 0 0 19.4 8.5a1.7 1.7 0 0 0 .6 1 1.7 1.7 0 0 0 1.1.4h.1v4.05h-.1A1.7 1.7 0 0 0 19.4 15Z"></path>
+      </svg>
+    </button>
   </div>
   <main class="app">
     <nav id="folder-tree-drawer" class="navigation" aria-label="Lernfeld-Navigation">
@@ -1234,8 +1243,8 @@
       <a class="entdeckungsaktion" href="erd.html">ERD / Datenmodell anzeigen</a>
     </aside>
   </main>
-  <footer class="bottom-app-bar" aria-label="App-Navigation">
-    <div class="bottom-app-bar__seite">
+  <footer class="bottom-app-bar bottom-app-bar--mit-menü" aria-label="App-Navigation">
+    <div class="bottom-app-bar__menübereich">
       <button id="folder-tree-umschalten" class="bottom-app-bar__menü" type="button"
               aria-controls="folder-tree-drawer" aria-expanded="true"
               aria-label="Folder Tree schließen">
@@ -1245,10 +1254,16 @@
           <span></span>
         </span>
       </button>
-      <span class="bottom-app-bar__platzhalter" aria-hidden="true"></span>
     </div>
-    <span class="bottom-app-bar__text" aria-hidden="true"></span>
-    <div class="bottom-app-bar__seite bottom-app-bar__seite--rechts">
+    <nav class="bottom-app-bar__navigation" aria-label="Seitennavigation">
+      <span class="bottom-app-bar__aktion" aria-current="page" aria-label="Vault">
+        <svg class="vault-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="6" cy="12" r="2.4"></circle>
+          <circle cx="17.5" cy="6.5" r="2.4"></circle>
+          <circle cx="17.5" cy="17.5" r="2.4"></circle>
+          <path d="m8.2 10.9 7.1-3.4M8.2 13.1l7.1 3.4"></path>
+        </svg>
+      </span>
       <a class="bottom-app-bar__aktion" href="artefakte.html"
          aria-label="Artefakte öffnen">
         <svg class="artefakte-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -1269,15 +1284,7 @@
           <path d="M7 20h10"></path>
         </svg>
       </button>
-      <button id="settings-umschalten" class="bottom-app-bar__aktion" type="button"
-              aria-controls="settings-drawer" aria-expanded="false"
-              aria-label="Einstellungen öffnen">
-        <svg class="settings-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.86 2.86-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.55v-.09A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.86-2.86.06-.06A1.7 1.7 0 0 0 4.1 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H2.3V9.55h.1A1.7 1.7 0 0 0 4.1 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06L6.56 3.7l.06.06A1.7 1.7 0 0 0 8.5 4.1a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V2.3h4.05v.1A1.7 1.7 0 0 0 15 4.1a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.86 2.86-.06.06A1.7 1.7 0 0 0 19.4 8.5a1.7 1.7 0 0 0 .6 1 1.7 1.7 0 0 0 1.1.4h.1v4.05h-.1A1.7 1.7 0 0 0 19.4 15Z"></path>
-        </svg>
-      </button>
-    </div>
+    </nav>
   </footer>
   <div id="vault-tooltip" class="vault-tooltip" role="tooltip"></div>
 
@@ -1336,20 +1343,31 @@
         folderTreeSichtbarSetzen(app.classList.contains("navigation-geschlossen"));
       });
 
-      function settingsDrawerSichtbarSetzen(sichtbar) {
+      function settingsDrawerSichtbarSetzen(sichtbar, layoutAnpassen = true) {
         app.classList.toggle("settings-offen", sichtbar);
         settingsUmschalten.setAttribute("aria-expanded", String(sichtbar));
         settingsUmschalten.setAttribute(
           "aria-label",
           sichtbar ? "Einstellungen schließen" : "Einstellungen öffnen"
         );
-        requestAnimationFrame(() => einpassen());
+        if (layoutAnpassen) {
+          requestAnimationFrame(() => einpassen());
+        }
       }
 
       settingsUmschalten.addEventListener("click", () => {
         if (quizAuswahlAktiv) return;
         settingsDrawerSichtbarSetzen(!app.classList.contains("settings-offen"));
       });
+
+      function einstellungenAusAdresseÖffnen(layoutAnpassen = true) {
+        if (window.location.hash === "#einstellungen") {
+          settingsDrawerSichtbarSetzen(true, layoutAnpassen);
+        }
+      }
+
+      window.addEventListener("hashchange", () => einstellungenAusAdresseÖffnen());
+      einstellungenAusAdresseÖffnen(false);
 
       const FACHRICHTUNG_SCHLÜSSEL = "thors-core.fachrichtung.v1";
       const GÜLTIGE_FACHRICHTUNGEN = new Set([

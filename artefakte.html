@@ -15,6 +15,7 @@
       --flamme: #ff9f43;
       --top-app-bar-höhe: calc(52px + env(safe-area-inset-top, 0px));
       --seiten-navigation-höhe: 60px;
+      --app-bar-höhe: calc(62px + env(safe-area-inset-bottom, 0px));
     }
 
     * {
@@ -88,10 +89,29 @@
       outline: none;
     }
 
+    .fachrichtungsstatus {
+      position: fixed;
+      z-index: 2;
+      top: calc(var(--top-app-bar-höhe) + 8px);
+      right: max(16px, env(safe-area-inset-right, 0px));
+      min-height: 44px;
+      margin: 0;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(70, 215, 255, 0.32);
+      border-radius: 999px;
+      color: rgba(226, 242, 250, 0.88);
+      background: rgba(10, 14, 23, 0.88);
+      font-size: 0.75rem;
+      font-weight: 800;
+      backdrop-filter: blur(12px);
+    }
+
     .artefakte-raster {
       width: 100%;
-      height: calc(100vh - var(--top-app-bar-höhe) - var(--seiten-navigation-höhe));
-      height: calc(100dvh - var(--top-app-bar-höhe) - var(--seiten-navigation-höhe));
+      height: calc(100vh - var(--top-app-bar-höhe) - var(--seiten-navigation-höhe) - var(--app-bar-höhe));
+      height: calc(100dvh - var(--top-app-bar-höhe) - var(--seiten-navigation-höhe) - var(--app-bar-höhe));
       margin-top: calc(var(--top-app-bar-höhe) + var(--seiten-navigation-höhe));
       min-height: 0;
       display: grid;
@@ -186,11 +206,6 @@
 
     .artefakt-baum li {
       min-height: 34px;
-      padding: 7px 9px;
-      display: grid;
-      grid-template-columns: 1.35rem minmax(0, 1fr);
-      align-items: center;
-      gap: 7px;
       border-radius: 9px;
       color: rgba(232, 237, 247, 0.86);
       font-size: 0.74rem;
@@ -207,6 +222,23 @@
       color: #fff;
       background: rgba(70, 215, 255, 0.08);
       transform: translateX(2px);
+    }
+
+    .artefakt-eintrag__link {
+      min-height: 34px;
+      padding: 7px 9px;
+      display: grid;
+      grid-template-columns: 1.35rem minmax(0, 1fr);
+      align-items: center;
+      gap: 7px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .artefakt-eintrag__link:focus-visible {
+      border-radius: 9px;
+      outline: 2px solid rgba(70, 215, 255, 0.82);
+      outline-offset: -2px;
     }
 
     .artefakt-eintrag__symbol {
@@ -288,12 +320,21 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="app-navigation.css">
 </head>
 <body>
   <div class="top-app-bar" role="banner">
     <p class="top-app-bar__text">Wiederholung ist die Mutter des Lernens</p>
+    <a class="top-app-bar__settings" href="index.html#einstellungen"
+       aria-label="Einstellungen öffnen">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.86 2.86-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.55v-.09A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.86-2.86.06-.06A1.7 1.7 0 0 0 4.1 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H2.3V9.55h.1A1.7 1.7 0 0 0 4.1 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06L6.56 3.7l.06.06A1.7 1.7 0 0 0 8.5 4.1a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V2.3h4.05v.1A1.7 1.7 0 0 0 15 4.1a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.86 2.86-.06.06A1.7 1.7 0 0 0 19.4 8.5a1.7 1.7 0 0 0 .6 1 1.7 1.7 0 0 0 1.1.4h.1v4.05h-.1A1.7 1.7 0 0 0 19.4 15Z"></path>
+      </svg>
+    </a>
   </div>
   <a class="zurück" href="index.html">← Vault</a>
+  <p id="fachrichtungsstatus" class="fachrichtungsstatus"></p>
   <main class="artefakte-raster" aria-label="Artefakte">
     <section class="artefakt-bereich">
       <h2 class="artefakt-titel">Analyse-Tools</h2>
@@ -328,6 +369,30 @@
       </div>
     </section>
   </main>
+  <footer class="bottom-app-bar" aria-label="App-Navigation">
+    <nav class="bottom-app-bar__navigation" aria-label="Seitennavigation">
+      <a class="bottom-app-bar__aktion" href="index.html" aria-label="Vault öffnen">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="6" cy="12" r="2.4"></circle>
+          <circle cx="17.5" cy="6.5" r="2.4"></circle>
+          <circle cx="17.5" cy="17.5" r="2.4"></circle>
+          <path d="m8.2 10.9 7.1-3.4M8.2 13.1l7.1 3.4"></path>
+        </svg>
+      </a>
+      <span class="bottom-app-bar__aktion" aria-current="page" aria-label="Artefakte">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="7" width="18" height="13" rx="2"></rect>
+          <path d="M8 7V5h8v2M3 12h18M10 12v2h4v-2"></path>
+        </svg>
+      </span>
+      <a class="bottom-app-bar__aktion" href="doom-scroll-quiz.html"
+         aria-label="Doom Scroll Quiz öffnen">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 4h10M9 8h6M12 7v10m-3.5-3.5L12 17l3.5-3.5M7 20h10"></path>
+        </svg>
+      </a>
+    </nav>
+  </footer>
   <script>
     (() => {
       "use strict";
@@ -596,6 +661,53 @@
         }
       };
 
+      const FACHRICHTUNG_SCHLÜSSEL = "thors-core.fachrichtung.v1";
+      const FACHRICHTUNGSNAMEN = {
+        "anwendungsentwicklung": "Anwendungsentwicklung",
+        "systemintegration": "Systemintegration",
+        "daten-prozessanalyse": "Daten- und Prozessanalyse",
+        "digitale-vernetzung": "Digitale Vernetzung"
+      };
+      // Der reale Vorlagenbestand nutzt FIAE/FISI/FIDP/FIDV. 4E und 4SI
+      // bleiben als ausdrücklich geforderte Alias-Kürzel zusätzlich lesbar.
+      const FACHRICHTUNGS_KENNUNGEN = {
+        "anwendungsentwicklung": ["FIAE", "4E"],
+        "systemintegration": ["FISI", "4SI"],
+        "daten-prozessanalyse": ["FIDP"],
+        "digitale-vernetzung": ["FIDV"]
+      };
+      const DOKUMENTFORMEN = {
+        "bpmn": "BPMN-Prozessmodell",
+        "css": "Stylesheet",
+        "csv": "CSV-Datei",
+        "docx": "Textdokument",
+        "drawio": "Diagrammdatei",
+        "html": "HTML-Dokument",
+        "ini": "Konfigurationsdatei",
+        "json": "JSON-Datei",
+        "md": "Markdown-Dokument",
+        "puml": "PlantUML-Diagramm",
+        "py": "Python-Datei",
+        "sql": "SQL-Datei",
+        "txt": "Textdatei",
+        "xlsx": "Arbeitsmappe"
+      };
+      let gewählteFachrichtung = "";
+
+      try {
+        const gespeichert = localStorage.getItem(FACHRICHTUNG_SCHLÜSSEL);
+        if (gespeichert in FACHRICHTUNGSNAMEN) {
+          gewählteFachrichtung = gespeichert;
+        }
+      } catch {
+        gewählteFachrichtung = "";
+      }
+
+      document.body.dataset.fachrichtung = gewählteFachrichtung || "nicht-ausgewählt";
+      document.querySelector("#fachrichtungsstatus").textContent = gewählteFachrichtung
+        ? `Fachrichtung: ${FACHRICHTUNGSNAMEN[gewählteFachrichtung]}`
+        : "Fachrichtung: nicht ausgewählt";
+
       document.querySelectorAll("[data-baum]").forEach(container => {
         const ordner = baumDaten[container.dataset.baum];
         const liste = document.createElement("ul");
@@ -604,15 +716,19 @@
             dateiname,
             prüfungsrelevant: relevanz === "Prüfungsrelevante"
           })))
-          .sort((links, rechts) => sichtbarerName(links.dateiname)
-            .localeCompare(sichtbarerName(rechts.dateiname), "de"));
+          .sort((links, rechts) => zweckAusDateiname(links.dateiname)
+            .localeCompare(zweckAusDateiname(rechts.dateiname), "de"));
 
-        dateien.forEach(({ dateiname, prüfungsrelevant }) => {
+        dateien
+          .filter(({ dateiname }) => dateiPasstZurFachrichtung(dateiname))
+          .forEach(({ dateiname, prüfungsrelevant }) => {
           const eintrag = document.createElement("li");
+          const link = document.createElement("a");
           const symbol = document.createElement("span");
           const name = document.createElement("span");
           eintrag.className = "artefakt-eintrag";
           eintrag.dataset.prüfungsrelevant = String(prüfungsrelevant);
+          eintrag.dataset.fachrichtungen = dateiFachrichtungen(dateiname).join(",");
           if (prüfungsrelevant) {
             eintrag.classList.add("artefakt-eintrag--prüfungsrelevant");
             symbol.setAttribute("role", "img");
@@ -621,18 +737,75 @@
             symbol.setAttribute("aria-hidden", "true");
           }
           symbol.className = "artefakt-eintrag__symbol";
+          link.className = "artefakt-eintrag__link";
           name.className = "artefakt-eintrag__name";
           name.textContent = sichtbarerName(dateiname);
-          eintrag.append(symbol, name);
+          link.href = detailUrl(dateiname, container.dataset.baum, prüfungsrelevant);
+          link.setAttribute("aria-label", `${sichtbarerName(dateiname)} ansehen`);
+          link.append(symbol, name);
+          eintrag.append(link);
           liste.append(eintrag);
         });
         container.append(liste);
       });
 
+      function detailUrl(dateiname, bereich, prüfungsrelevant) {
+        const parameter = new URLSearchParams({
+          datei: dateiname,
+          bereich,
+          relevant: String(prüfungsrelevant)
+        });
+        return `artefakt-ansicht.html?${parameter}`;
+      }
+
       function sichtbarerName(dateiname) {
-        return dateiname
+        const endung = dateiname.match(/\.([^.]+)$/)?.[1].toLowerCase() || "";
+        const form = DOKUMENTFORMEN[endung] || "Datei";
+        return `${form} · ${zweckAusDateiname(dateiname)}`;
+      }
+
+      function zweckAusDateiname(dateiname) {
+        const rohTitel = dateiname
           .replace(/^_+/, "")
-          .replace(/\.[^.]+$/, "");
+          .replace(/\.[^.]+$/, "")
+          .replace(/_/g, " ");
+        return dokumentzweck(rohTitel);
+      }
+
+      function dokumentzweck(rohTitel) {
+        const testfall = rohTitel.match(/^Testfall (.+)$/i);
+        if (testfall) {
+          return `Testfallbeschreibung – ${testfall[1]}`;
+        }
+        if (/^FIAE test /i.test(rohTitel)) {
+          return rohTitel.replace(/^FIAE test /i, "FIAE Test – ");
+        }
+        if (/^beispiel import$/i.test(rohTitel)) {
+          return "Beispieldaten für den Import";
+        }
+        if (/^beispiel export$/i.test(rohTitel)) {
+          return "Beispieldaten für den Export";
+        }
+        if (/^demo daten$/i.test(rohTitel)) {
+          return "Demodaten";
+        }
+        if (/^pytest$/i.test(rohTitel)) {
+          return "Pytest-Konfiguration";
+        }
+        return rohTitel;
+      }
+
+      function dateiFachrichtungen(dateiname) {
+        const kennungen = dateiname.toUpperCase().split(/[^A-Z0-9]+/).filter(Boolean);
+        return Object.entries(FACHRICHTUNGS_KENNUNGEN)
+          .filter(([, kürzel]) => kürzel.some(eintrag => kennungen.includes(eintrag)))
+          .map(([fachrichtung]) => fachrichtung);
+      }
+
+      function dateiPasstZurFachrichtung(dateiname) {
+        const fachrichtungen = dateiFachrichtungen(dateiname);
+        return fachrichtungen.length === 0
+          || (gewählteFachrichtung && fachrichtungen.includes(gewählteFachrichtung));
       }
     })();
   </script>

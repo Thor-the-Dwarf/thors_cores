@@ -896,11 +896,6 @@
       line-height: 1.4;
     }
 
-    .lernfeld-katalog summary {
-      align-items: flex-start;
-      color: #bfc9da;
-    }
-
     .lernfeld-katalog__hinweis {
       margin: 2px 12px 10px;
       padding: 0 10px 8px;
@@ -1400,7 +1395,10 @@
       function baumZusammenfassung(text, kategorieKnoten) {
         const summary = document.createElement("summary");
         summary.textContent = text;
-        summary.style.setProperty("--ordnerfarbe", farbeMischen(gemittelteGewichte(kategorieKnoten)));
+        const gewichte = gemittelteGewichte(kategorieKnoten);
+        if (Object.keys(gewichte).length) {
+          summary.style.setProperty("--ordnerfarbe", farbeMischen(gewichte));
+        }
         return summary;
       }
 
@@ -1464,13 +1462,12 @@
           .forEach(lernfeld => {
             const eintrag = document.createElement("li");
             const details = document.createElement("details");
-            const zusammenfassung = document.createElement("summary");
+            const zusammenfassung = baumZusammenfassung(
+              `Lernfeld ${lernfeld.number} · ${lernfeld.title}`,
+              lernfeld
+            );
             const hinweis = document.createElement("p");
             eintrag.className = "lernfeld lernfeld-katalog";
-            zusammenfassung.dataset.nichtAuswaehlbar = "true";
-            zusammenfassung.textContent =
-              `Lernfeld ${lernfeld.number} · ${lernfeld.title}`;
-            zusammenfassung.style.setProperty("--ordnerfarbe", "#8ca4d5");
             hinweis.className = "lernfeld-katalog__hinweis";
             hinweis.textContent = "Für dieses Lernfeld sind noch keine Cores hinterlegt.";
             baumDetailsInitialisieren(
@@ -1491,6 +1488,8 @@
             "Wähle in den Einstellungen eine Fachrichtung, um die Lernfelder 10–12 anzuzeigen.";
           baum.append(leerstand);
         }
+
+        baumInteraktionenEinrichten();
       }
 
       function baumRendern(datensatz) {
@@ -1593,10 +1592,11 @@
       }
 
       function baumInteraktionenEinrichten() {
-        document.querySelectorAll("summary:not([data-nicht-auswaehlbar])")
+        document.querySelectorAll("summary:not([data-baum-interaktionen])")
           .forEach(baumeintrag => {
           const bezeichnung = baumeintrag.textContent.trim();
           const checkbox = document.createElement("input");
+          baumeintrag.dataset.baumInteraktionen = "initialisiert";
           checkbox.type = "checkbox";
           checkbox.className = "baum-checkbox";
           checkbox.disabled = true;
@@ -1624,10 +1624,12 @@
           }
         });
 
-        document.querySelectorAll(".thema").forEach(baumeintrag => {
+        document.querySelectorAll(".thema:not([data-baum-interaktionen])")
+          .forEach(baumeintrag => {
           const bezeichnung = baumeintrag.textContent.trim();
           const checkbox = document.createElement("input");
           const fokus = document.createElement("button");
+          baumeintrag.dataset.baumInteraktionen = "initialisiert";
           checkbox.type = "checkbox";
           checkbox.className = "baum-checkbox";
           checkbox.disabled = true;
@@ -1644,7 +1646,7 @@
           ));
           baumeintrag.textContent = "";
           baumeintrag.append(checkbox, fokus);
-        });
+          });
       }
 
       function themenCheckboxen() {

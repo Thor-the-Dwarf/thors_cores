@@ -333,8 +333,6 @@
       </svg>
     </a>
   </div>
-  <a class="zurück" href="index.html">← Vault</a>
-  <p id="fachrichtungsstatus" class="fachrichtungsstatus"></p>
   <main class="artefakte-raster" aria-label="Artefakte">
     <section class="artefakt-bereich">
       <h2 class="artefakt-titel">Analyse-Tools</h2>
@@ -711,9 +709,6 @@
       }
 
       document.body.dataset.fachrichtung = gewählteFachrichtung || "nicht-ausgewählt";
-      document.querySelector("#fachrichtungsstatus").textContent = gewählteFachrichtung
-        ? `Fachrichtung: ${FACHRICHTUNGSNAMEN[gewählteFachrichtung]}`
-        : "Fachrichtung: nicht ausgewählt";
 
       document.querySelectorAll("[data-baum]").forEach(container => {
         const ordner = baumDaten[container.dataset.baum];

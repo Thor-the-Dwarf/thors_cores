@@ -885,6 +885,11 @@
       display: none;
     }
 
+    .core-raster:not(.detailansicht) .core-symbol,
+    .core-raster:not(.detailansicht) .knoten-beschriftung {
+      display: none;
+    }
+
     .core-karte:hover,
     .core-karte:focus-visible {
       z-index: 15;
@@ -3709,9 +3714,11 @@ projektreflexion mirror flag
           )
         );
       });
-      coreIconMasken.forEach(icon => {
-        raster.style.setProperty(`--core-icon-${icon.cssId}`, icon.maske);
-      });
+      const coreIconStil = document.createElement("style");
+      coreIconStil.textContent = `#core-raster{${[...coreIconMasken.values()]
+        .map(icon => `--core-icon-${icon.cssId}:${icon.maske}`)
+        .join(";")}}`;
+      document.head.append(coreIconStil);
 
       const basisPfad = linienEbene.querySelector(".themen-linie-basis");
       const fokusPfad = linienEbene.querySelector(".themen-linie-fokus");
@@ -3966,11 +3973,12 @@ projektreflexion mirror flag
         return kante.themen.some(themaId => aktiveThemenIds.has(themaId));
       }
 
-      function graphElementeAktualisieren() {
-        knotenElemente.forEach((punkt, index) => {
-          punkt.style.left = `${positionen[index].x}px`;
-          punkt.style.top = `${positionen[index].y}px`;
-        });
+      function graphElementeAktualisieren(knotenIndizes = null) {
+        const zuAktualisieren = knotenIndizes || knotenElemente.keys();
+        for (const index of zuAktualisieren) {
+          knotenElemente[index].style.left = `${positionen[index].x}px`;
+          knotenElemente[index].style.top = `${positionen[index].y}px`;
+        }
         basisPfad.setAttribute("d", pfadErstellen(kanten));
         fokusPfad.setAttribute(
           "d",
@@ -4068,36 +4076,20 @@ projektreflexion mirror flag
         });
       }
 
-      let simulationsLauf = 0;
-
-      function simulationStarten({ automatischEinpassen = false, schritte = 72 } = {}) {
-        const eigenerLauf = ++simulationsLauf;
-        let iteration = 0;
-        raster.dataset.simulation = "läuft";
-        function frame() {
-          if (eigenerLauf !== simulationsLauf) return;
-          for (let schritt = 0; schritt < 3; schritt += 1) {
-            const alpha = Math.max(0.08, 1 - iteration / schritte);
-            simulationsSchritt(alpha);
-            iteration += 1;
-          }
-          graphElementeAktualisieren();
-          if (automatischEinpassen && iteration % 30 === 0) einpassen();
-          const bewegung = positionen.reduce(
-            (summe, punkt) => summe + Math.hypot(punkt.vx, punkt.vy),
-            0
-          ) / positionen.length;
-          if (iteration < schritte && (iteration < 42 || bewegung > 0.04)) {
-            requestAnimationFrame(frame);
-          } else {
-            raster.dataset.simulation = "gesetzt";
-            if (automatischEinpassen) einpassen();
-          }
+      function layoutVorberechnen({ automatischEinpassen = false, schritte = 18 } = {}) {
+        raster.dataset.simulation = "wird-vorberechnet";
+        for (let iteration = 0; iteration < schritte; iteration += 1) {
+          const alpha = Math.max(0.16, 1 - iteration / schritte);
+          simulationsSchritt(alpha);
         }
-        requestAnimationFrame(frame);
+        positionen.forEach(punkt => {
+          punkt.vx = 0;
+          punkt.vy = 0;
+        });
+        graphElementeAktualisieren();
+        raster.dataset.simulation = "gesetzt";
+        if (automatischEinpassen) einpassen();
       }
-
-      graphElementeAktualisieren();
 
       function bereichFokussieren(fokusId, themaIds, auslöser) {
         if (quizAuswahlAktiv) return;
@@ -4627,12 +4619,13 @@ projektreflexion mirror flag
       let hintergrundStartPunkt = null;
       let hintergrundBewegt = false;
       let gezogenerKnoten = null;
-      let dragSimulationsLauf = 0;
+      let dragDarstellungsFrame = null;
       const vaultZeiger = new Map();
       let vaultPinch = null;
 
       function transformationAnwenden() {
         raster.style.transform = `translate(${verschiebungX}px, ${verschiebungY}px) scale(${zoom})`;
+        raster.classList.toggle("detailansicht", zoom >= 0.16);
         radialMenüPositionieren();
       }
 
@@ -4698,23 +4691,14 @@ projektreflexion mirror flag
         punkt.y = gezogenerKnoten.zielY;
       }
 
-      function dragSimulationStarten(pointerId) {
-        const eigenerLauf = ++dragSimulationsLauf;
-        simulationsLauf += 1;
-        raster.dataset.simulation = "läuft";
-
-        function frame() {
-          if (eigenerLauf !== dragSimulationsLauf ||
-              !gezogenerKnoten?.aktiv ||
-              gezogenerKnoten.pointerId !== pointerId) return;
-          gezogenenKnotenPositionAnwenden();
-          simulationsSchritt(0.38);
-          simulationsSchritt(0.38);
-          graphElementeAktualisieren();
-          requestAnimationFrame(frame);
-        }
-
-        requestAnimationFrame(frame);
+      function dragDarstellungAnfordern() {
+        gezogenenKnotenPositionAnwenden();
+        if (dragDarstellungsFrame !== null) return;
+        const index = gezogenerKnoten.index;
+        dragDarstellungsFrame = requestAnimationFrame(() => {
+          dragDarstellungsFrame = null;
+          graphElementeAktualisieren([index]);
+        });
       }
 
       function zoomSetzen(neuerZoom, fokusX, fokusY) {
@@ -4794,12 +4778,12 @@ projektreflexion mirror flag
             gezogenerKnoten.aktiv = true;
             gezogenerKnoten.element.classList.add("wird-gezogen");
             positionen[gezogenerKnoten.index].fixiert = true;
-            dragSimulationStarten(ereignis.pointerId);
           }
           if (gezogenerKnoten.aktiv) {
             gezogenerKnoten.zielX = gezogenerKnoten.ursprungX + dx;
             gezogenerKnoten.zielY = gezogenerKnoten.ursprungY + dy;
             gezogenerKnoten.element.dataset.fixiert = "true";
+            dragDarstellungAnfordern();
           }
           return;
         }
@@ -4835,17 +4819,20 @@ projektreflexion mirror flag
             (!ereignis || ereignis.pointerId === gezogenerKnoten.pointerId)) {
           const { index, element, aktiv } = gezogenerKnoten;
           gezogenenKnotenPositionAnwenden();
-          dragSimulationsLauf += 1;
+          if (dragDarstellungsFrame !== null) {
+            cancelAnimationFrame(dragDarstellungsFrame);
+            dragDarstellungsFrame = null;
+          }
           element.classList.remove("wird-gezogen");
           gezogenerKnoten = null;
           if (aktiv) {
             unterdrückterCoreKlick = index;
-            graphElementeAktualisieren();
-            window.setTimeout(() => {
-              positionen[index].fixiert = false;
-              element.dataset.fixiert = "false";
-              simulationStarten({ schritte: 90 });
-            }, 220);
+            const punkt = positionen[index];
+            punkt.ankerX = punkt.x;
+            punkt.ankerY = punkt.y;
+            punkt.fixiert = false;
+            element.dataset.fixiert = "false";
+            graphElementeAktualisieren([index]);
           }
           return;
         }
@@ -4870,7 +4857,7 @@ projektreflexion mirror flag
         einpassen();
       });
       einpassen();
-      simulationStarten({ automatischEinpassen: true, schritte: 120 });
+      layoutVorberechnen({ automatischEinpassen: true, schritte: 18 });
 
     })();
   </script>

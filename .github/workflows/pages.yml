@@ -29,6 +29,8 @@ jobs:
           test -f index.html
           test -f doom-scroll-quiz.html
           test -f artefakte.html
+          test -f artefakt-ansicht.html
+          test -f community.html
           test -f lernwelt.html
           test -f Lernfelder.json
           test -f Themen.json
@@ -40,6 +42,8 @@ jobs:
           cp \
             index.html \
             artefakte.html \
+            artefakt-ansicht.html \
+            community.html \
             doom-scroll-quiz.html \
             lernwelt.html \
             app-navigation.css \

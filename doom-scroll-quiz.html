@@ -80,35 +80,8 @@
 
     .quiz-kopf {
       display: grid;
-      grid-template-columns: auto minmax(220px, 760px) auto;
+      grid-template-columns: 1fr;
       align-items: center;
-      gap: 16px;
-    }
-
-    .zurück,
-    .kopf-status {
-      min-height: 42px;
-      border: 1px solid rgba(180, 205, 239, 0.28);
-      border-radius: 999px;
-      color: rgba(246, 247, 251, 0.84);
-      background: rgba(18, 27, 43, 0.76);
-      font-weight: 900;
-    }
-
-    .zurück {
-      padding: 0 18px;
-      cursor: pointer;
-    }
-
-    .zurück:hover,
-    .zurück:focus-visible {
-      border-color: rgba(70, 215, 255, 0.65);
-      outline: none;
-    }
-
-    .kopf-status {
-      padding: 10px 20px;
-      text-align: center;
     }
 
     .dummy-chip {
@@ -366,9 +339,7 @@
 
     @media (max-width: 720px) {
       .quiz-app { padding: 10px 12px; }
-      .quiz-kopf { grid-template-columns: auto 1fr; }
-      .dummy-chip { display: none; }
-      .kopf-status { font-size: 0.78rem; }
+      .dummy-chip { font-size: 0.68rem; }
       .quiz-karte { padding: 22px 10px; }
       .quiz-fuß { grid-template-columns: 1fr; }
       .fortschritt { justify-self: center; }
@@ -396,8 +367,6 @@
   </div>
   <div class="quiz-app">
     <header class="quiz-kopf">
-      <button id="zurück" class="zurück" type="button" aria-label="Zurück zum Lern-Vault">← Vault</button>
-      <div class="kopf-status">Doom Scroll Quiz</div>
       <div class="dummy-chip">UI-Dummy · keine Fachinhalte</div>
     </header>
 
@@ -538,11 +507,6 @@
         const leerstand = karten[aktiv].querySelector(".leerstand");
         leerstand.textContent = "Noch keine fachliche Auswertung hinterlegt.";
       });
-      document.querySelector("#zurück").addEventListener("click", () => {
-        if (history.length > 1) history.back();
-        else location.href = "index.html";
-      });
-
       feed.addEventListener("pointerdown", ereignis => {
         if (!ereignis.isPrimary || ereignis.button !== 0) return;
         if (ereignis.target.closest("button, input, label, select, textarea")) return;
@@ -626,5 +590,6 @@
       karteAnzeigen(0, { fokus: true, animiert: false });
     })();
   </script>
+  <script src="app-page-navigation.js"></script>
 </body>
 </html>

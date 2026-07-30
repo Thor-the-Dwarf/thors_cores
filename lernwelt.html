@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spiel- und Lernwelt · Thors Core</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --hintergrund: #080d18;
+      --fläche: #101a2b;
+      --linie: rgba(183, 195, 220, 0.2);
+      --text: #f5f7fb;
+      --leise: #9dacc2;
+      --cyan: #46d7ff;
+      --violett: #9c66ef;
+      --top-app-bar-höhe: calc(52px + env(safe-area-inset-top, 0px));
+      --app-bar-höhe: calc(62px + env(safe-area-inset-bottom, 0px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      color: var(--text);
+      background:
+        radial-gradient(circle at 45% 15%, rgba(70, 215, 255, 0.08), transparent 34rem),
+        var(--hintergrund);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .top-app-bar {
+      position: fixed;
+      z-index: 100;
+      inset: 0 0 auto;
+      min-height: var(--top-app-bar-höhe);
+      padding: calc(8px + env(safe-area-inset-top, 0px)) 64px 8px 16px;
+      display: grid;
+      place-items: center;
+      border-bottom: 1px solid var(--linie);
+      background: rgba(10, 14, 23, 0.96);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(14px);
+    }
+
+    .top-app-bar__text {
+      margin: 0;
+      font-size: clamp(0.78rem, 2.4vw, 0.92rem);
+      font-weight: 850;
+      text-align: center;
+    }
+
+    main {
+      height: 100vh;
+      height: 100dvh;
+      padding: calc(var(--top-app-bar-höhe) + 14px) 14px
+        calc(var(--app-bar-höhe) + 14px);
+    }
+
+    .lernwelt {
+      width: min(1400px, 100%);
+      height: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .lernwelt__kopf {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .lernwelt__titel {
+      min-width: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.15rem, 3vw, 1.8rem);
+      line-height: 1.1;
+    }
+
+    .lernwelt__untertitel,
+    .status {
+      margin: 5px 0 0;
+      color: var(--leise);
+      font-size: 0.78rem;
+      line-height: 1.4;
+    }
+
+    .status {
+      min-width: min(360px, 42vw);
+      margin: 0;
+      padding: 9px 13px;
+      border: 1px solid rgba(70, 215, 255, 0.22);
+      border-radius: 12px;
+      color: #c9f4ff;
+      background: rgba(70, 215, 255, 0.07);
+      text-align: center;
+    }
+
+    .welt-layout {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+      transition: grid-template-columns 220ms ease;
+    }
+
+    .welt-layout.is-split {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .welt-panel,
+    .platzhalter-panel {
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      border: 1px solid var(--linie);
+      border-radius: 18px;
+      background: rgba(16, 26, 43, 0.84);
+      box-shadow: 0 20px 54px rgba(0, 0, 0, 0.34);
+    }
+
+    .welt-panel {
+      position: relative;
+      display: grid;
+    }
+
+    #spielwelt {
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      display: block;
+      background: #101c28;
+      outline: none;
+    }
+
+    #spielwelt:focus-visible {
+      box-shadow: inset 0 0 0 3px rgba(70, 215, 255, 0.68);
+    }
+
+    .steuerung {
+      position: absolute;
+      z-index: 2;
+      left: 12px;
+      bottom: 12px;
+      padding: 8px 10px;
+      border: 1px solid rgba(183, 195, 220, 0.22);
+      border-radius: 10px;
+      color: rgba(245, 247, 251, 0.9);
+      background: rgba(7, 12, 21, 0.82);
+      font-size: 0.7rem;
+      font-weight: 750;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+    }
+
+    .interaktionsknopf {
+      position: absolute;
+      z-index: 3;
+      right: 12px;
+      bottom: 12px;
+      min-height: 42px;
+      padding: 0 15px;
+      border: 1px solid rgba(70, 215, 255, 0.5);
+      border-radius: 11px;
+      color: #e8fbff;
+      background: rgba(18, 88, 111, 0.82);
+      font: inherit;
+      font-size: 0.76rem;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .interaktionsknopf:disabled {
+      border-color: var(--linie);
+      color: var(--leise);
+      background: rgba(11, 18, 31, 0.78);
+      cursor: not-allowed;
+    }
+
+    .platzhalter-panel {
+      display: none;
+      place-items: center;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.025), transparent),
+        #0d1421;
+    }
+
+    .welt-layout.is-split .platzhalter-panel {
+      display: grid;
+    }
+
+    .platzhalter-panel__inhalt {
+      color: rgba(183, 195, 220, 0.42);
+      text-align: center;
+    }
+
+    .platzhalter-panel__symbol {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+      border: 1px dashed rgba(183, 195, 220, 0.28);
+      border-radius: 13px;
+    }
+
+    .platzhalter-panel__inhalt p {
+      margin: 0;
+      font-size: 0.75rem;
+      font-weight: 750;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 700px) {
+      main {
+        padding-right: 8px;
+        padding-left: 8px;
+      }
+
+      .lernwelt__kopf {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .status {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .welt-layout.is-split {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 6px;
+      }
+
+      .steuerung {
+        display: none;
+      }
+
+      .interaktionsknopf {
+        right: 8px;
+        bottom: 8px;
+        min-height: 38px;
+        padding: 0 11px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="app-navigation.css">
+</head>
+<body>
+  <header class="top-app-bar">
+    <p class="top-app-bar__text">Wiederholung ist die Mutter des Lernens</p>
+    <a class="top-app-bar__settings" href="index.html#einstellungen"
+       aria-label="Einstellungen öffnen">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.86 2.86-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.55v-.09A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.86-2.86.06-.06A1.7 1.7 0 0 0 4.1 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H2.3V9.55h.1A1.7 1.7 0 0 0 4.1 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06L6.56 3.7l.06.06A1.7 1.7 0 0 0 8.5 4.1a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V2.3h4.05v.1A1.7 1.7 0 0 0 15 4.1a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.86 2.86-.06-.06A1.7 1.7 0 0 0 19.4 8.5a1.7 1.7 0 0 0 .6 1 1.7 1.7 0 0 0 1.1.4h.1v4.05h-.1A1.7 1.7 0 0 0 19.4 15Z"></path>
+      </svg>
+    </a>
+  </header>
+  <main>
+    <section class="lernwelt" aria-labelledby="lernwelt-titel">
+      <header class="lernwelt__kopf">
+        <div class="lernwelt__titel">
+          <h1 id="lernwelt-titel">2D-Spiel- und Lernwelt</h1>
+          <p class="lernwelt__untertitel">Sicherer Prototyp für Raum, Bewegung und Interaktion</p>
+        </div>
+        <p id="status" class="status" role="status" aria-live="polite">
+          Laufe zum leuchtenden Gegenstand und drücke E.
+        </p>
+      </header>
+      <div id="welt-layout" class="welt-layout">
+        <section class="welt-panel" aria-label="Spielwelt">
+          <canvas id="spielwelt" width="960" height="600" tabindex="0"
+                  aria-label="2D-Spielwelt. Bewegung mit WASD oder Pfeiltasten, Interaktion mit E.">
+          </canvas>
+          <span class="steuerung">WASD / Pfeile · E interagieren · Esc schließen</span>
+          <button id="interagieren" class="interaktionsknopf" type="button" disabled>
+            Interagieren
+          </button>
+        </section>
+        <aside class="platzhalter-panel" aria-label="Leeres Platzhalter-Panel">
+          <div class="platzhalter-panel__inhalt">
+            <div class="platzhalter-panel__symbol" aria-hidden="true"></div>
+            <p>Neutrales Platzhalter-Panel</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer class="bottom-app-bar" aria-label="App-Navigation">
+    <nav class="bottom-app-bar__navigation" aria-label="Seitennavigation">
+      <a class="bottom-app-bar__aktion" href="index.html" aria-label="Vault öffnen">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="6" cy="12" r="2.4"></circle>
+          <circle cx="17.5" cy="6.5" r="2.4"></circle>
+          <circle cx="17.5" cy="17.5" r="2.4"></circle>
+          <path d="m8.2 10.9 7.1-3.4M8.2 13.1l7.1 3.4"></path>
+        </svg>
+      </a>
+      <a class="bottom-app-bar__aktion" href="artefakte.html" aria-label="Artefakte öffnen">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="7" width="18" height="13" rx="2"></rect>
+          <path d="M8 7V5h8v2M3 12h18M10 12v2h4v-2"></path>
+        </svg>
+      </a>
+      <a class="bottom-app-bar__aktion" href="doom-scroll-quiz.html"
+         aria-label="Doom Scroll Quiz öffnen">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 4h10M9 8h6M12 7v10m-3.5-3.5L12 17l3.5-3.5M7 20h10"></path>
+        </svg>
+      </a>
+      <span class="bottom-app-bar__aktion" aria-current="page"
+            aria-label="Spiel- und Lernwelt">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8 7h8a5 5 0 0 1 4.7 6.7l-1 2.9a2.2 2.2 0 0 1-3.7.8L14.7 16H9.3L8 17.4a2.2 2.2 0 0 1-3.7-.8l-1-2.9A5 5 0 0 1 8 7Z"></path>
+          <path d="M7 12h4M9 10v4M16.5 11.5h.01M18.5 13.5h.01"></path>
+        </svg>
+      </span>
+    </nav>
+  </footer>
+  <script>
+    (() => {
+      "use strict";
+
+      const canvas = document.querySelector("#spielwelt");
+      const kontext = canvas.getContext("2d");
+      const status = document.querySelector("#status");
+      const layout = document.querySelector("#welt-layout");
+      const interaktionsknopf = document.querySelector("#interagieren");
+      const tasten = new Set();
+      const spieler = { x: 120, y: 300, radius: 18, richtung: 0 };
+      const hindernisse = [
+        { x: 345, y: 125, breite: 175, höhe: 82, name: "Arbeitstisch" },
+        { x: 565, y: 385, breite: 225, höhe: 88, name: "Regal" },
+        { x: 705, y: 115, breite: 85, höhe: 150, name: "Schrank" }
+      ];
+      const gegenstände = [
+        { x: 220, y: 300, radius: 25, reichweite: 112, name: "Lernterminal", farbe: "#46d7ff", symbol: "T" },
+        { x: 610, y: 285, radius: 24, reichweite: 105, name: "Archivkiste", farbe: "#9c66ef", symbol: "A" },
+        { x: 845, y: 485, radius: 23, reichweite: 102, name: "Werkzeugkoffer", farbe: "#ffb45e", symbol: "W" },
+        { x: 490, y: 515, radius: 22, reichweite: 100, name: "Infostation", farbe: "#62d995", symbol: "I" }
+      ];
+      let letzterZeitpunkt = performance.now();
+      let nächsterGegenstand = null;
+      let splitScreenAktiv = false;
+      let aktiveInteraktion = "";
+
+      canvas.addEventListener("pointerdown", () => canvas.focus());
+      interaktionsknopf.addEventListener("click", interagieren);
+      window.addEventListener("keydown", ereignis => {
+        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " ", "e", "E", "Escape"]
+          .includes(ereignis.key)) {
+          ereignis.preventDefault();
+        }
+        if (ereignis.key === "e" || ereignis.key === "E" || ereignis.key === " ") {
+          if (!ereignis.repeat) interagieren();
+          return;
+        }
+        if (ereignis.key === "Escape") {
+          splitScreenSchließen();
+          return;
+        }
+        tasten.add(ereignis.key.toLowerCase());
+      });
+      window.addEventListener("keyup", ereignis => {
+        tasten.delete(ereignis.key.toLowerCase());
+      });
+      window.addEventListener("blur", () => tasten.clear());
+
+      function interagieren() {
+        if (!nächsterGegenstand) {
+          status.textContent = "Kein Gegenstand in Interaktionsreichweite.";
+          return;
+        }
+        splitScreenAktiv = true;
+        aktiveInteraktion = nächsterGegenstand.name;
+        layout.classList.add("is-split");
+        status.textContent = `${aktiveInteraktion} geöffnet · Esc schließt die Ansicht.`;
+        canvas.focus();
+      }
+
+      function splitScreenSchließen() {
+        if (!splitScreenAktiv) return;
+        splitScreenAktiv = false;
+        aktiveInteraktion = "";
+        layout.classList.remove("is-split");
+        status.textContent = nächsterGegenstand
+          ? `E drücken: ${nächsterGegenstand.name}`
+          : "Laufe zum leuchtenden Gegenstand und drücke E.";
+      }
+
+      function aktualisieren(zeitpunkt) {
+        const delta = Math.min((zeitpunkt - letzterZeitpunkt) / 1000, 0.04);
+        letzterZeitpunkt = zeitpunkt;
+        bewegen(delta);
+        interaktionsbereichAktualisieren();
+        canvas.dataset.spielerX = String(Math.round(spieler.x));
+        canvas.dataset.spielerY = String(Math.round(spieler.y));
+        canvas.dataset.splitScreen = String(splitScreenAktiv);
+        zeichnen();
+        requestAnimationFrame(aktualisieren);
+      }
+
+      function bewegen(delta) {
+        let xRichtung = 0;
+        let yRichtung = 0;
+        if (tasten.has("a") || tasten.has("arrowleft")) xRichtung -= 1;
+        if (tasten.has("d") || tasten.has("arrowright")) xRichtung += 1;
+        if (tasten.has("w") || tasten.has("arrowup")) yRichtung -= 1;
+        if (tasten.has("s") || tasten.has("arrowdown")) yRichtung += 1;
+        if (!xRichtung && !yRichtung) return;
+        const länge = Math.hypot(xRichtung, yRichtung);
+        xRichtung /= länge;
+        yRichtung /= länge;
+        spieler.richtung = Math.atan2(yRichtung, xRichtung);
+        const schritt = 205 * delta;
+        const nächstesX = spieler.x + xRichtung * schritt;
+        const nächstesY = spieler.y + yRichtung * schritt;
+        if (positionIstFrei(nächstesX, spieler.y)) spieler.x = nächstesX;
+        if (positionIstFrei(spieler.x, nächstesY)) spieler.y = nächstesY;
+      }
+
+      function positionIstFrei(x, y) {
+        const r = spieler.radius;
+        if (x - r < 34 || x + r > canvas.width - 34
+          || y - r < 34 || y + r > canvas.height - 34) {
+          return false;
+        }
+        const kollidiertMitRechteck = hindernisse.some(hindernis =>
+          x + r > hindernis.x && x - r < hindernis.x + hindernis.breite
+          && y + r > hindernis.y && y - r < hindernis.y + hindernis.höhe
+        );
+        const kollidiertMitGegenstand = gegenstände.some(gegenstand =>
+          Math.hypot(x - gegenstand.x, y - gegenstand.y)
+            < r + gegenstand.radius + 3
+        );
+        return !kollidiertMitRechteck && !kollidiertMitGegenstand;
+      }
+
+      function interaktionsbereichAktualisieren() {
+        nächsterGegenstand = gegenstände
+          .map(gegenstand => ({
+            ...gegenstand,
+            abstand: Math.hypot(spieler.x - gegenstand.x, spieler.y - gegenstand.y)
+          }))
+          .filter(gegenstand => gegenstand.abstand <= gegenstand.reichweite)
+          .sort((a, b) => a.abstand - b.abstand)[0] || null;
+        interaktionsknopf.disabled = !nächsterGegenstand;
+        interaktionsknopf.textContent = nächsterGegenstand
+          ? `${nächsterGegenstand.name} öffnen`
+          : "Interagieren";
+        if (!splitScreenAktiv) {
+          status.textContent = nächsterGegenstand
+            ? `E drücken: ${nächsterGegenstand.name}`
+            : "Laufe zum leuchtenden Gegenstand und drücke E.";
+        }
+      }
+
+      function zeichnen() {
+        kontext.clearRect(0, 0, canvas.width, canvas.height);
+        bodenZeichnen();
+        hindernisse.forEach(hindernisZeichnen);
+        gegenstände.forEach(gegenstandZeichnen);
+        spielerZeichnen();
+      }
+
+      function bodenZeichnen() {
+        kontext.fillStyle = "#10202b";
+        kontext.fillRect(0, 0, canvas.width, canvas.height);
+        kontext.strokeStyle = "rgba(120, 157, 174, 0.12)";
+        kontext.lineWidth = 1;
+        for (let x = 0; x <= canvas.width; x += 48) {
+          kontext.beginPath();
+          kontext.moveTo(x, 0);
+          kontext.lineTo(x, canvas.height);
+          kontext.stroke();
+        }
+        for (let y = 0; y <= canvas.height; y += 48) {
+          kontext.beginPath();
+          kontext.moveTo(0, y);
+          kontext.lineTo(canvas.width, y);
+          kontext.stroke();
+        }
+        kontext.strokeStyle = "#34485b";
+        kontext.lineWidth = 22;
+        kontext.strokeRect(22, 22, canvas.width - 44, canvas.height - 44);
+        kontext.strokeStyle = "#7390a1";
+        kontext.lineWidth = 2;
+        kontext.strokeRect(33, 33, canvas.width - 66, canvas.height - 66);
+      }
+
+      function hindernisZeichnen(hindernis) {
+        kontext.fillStyle = "#29384a";
+        kontext.strokeStyle = "#577087";
+        kontext.lineWidth = 3;
+        kontext.beginPath();
+        kontext.roundRect(
+          hindernis.x,
+          hindernis.y,
+          hindernis.breite,
+          hindernis.höhe,
+          9
+        );
+        kontext.fill();
+        kontext.stroke();
+        kontext.fillStyle = "#aab8c8";
+        kontext.font = "700 15px system-ui";
+        kontext.textAlign = "center";
+        kontext.fillText(
+          hindernis.name,
+          hindernis.x + hindernis.breite / 2,
+          hindernis.y + hindernis.höhe / 2 + 5
+        );
+      }
+
+      function gegenstandZeichnen(gegenstand) {
+        const istNah = nächsterGegenstand?.name === gegenstand.name;
+        kontext.save();
+        kontext.strokeStyle = istNah ? gegenstand.farbe : `${gegenstand.farbe}66`;
+        kontext.lineWidth = istNah ? 3 : 2;
+        kontext.setLineDash([8, 8]);
+        kontext.beginPath();
+        kontext.arc(gegenstand.x, gegenstand.y, gegenstand.reichweite, 0, Math.PI * 2);
+        kontext.stroke();
+        kontext.setLineDash([]);
+        kontext.shadowColor = gegenstand.farbe;
+        kontext.shadowBlur = istNah ? 24 : 11;
+        kontext.fillStyle = gegenstand.farbe;
+        kontext.beginPath();
+        kontext.roundRect(
+          gegenstand.x - gegenstand.radius,
+          gegenstand.y - gegenstand.radius,
+          gegenstand.radius * 2,
+          gegenstand.radius * 2,
+          8
+        );
+        kontext.fill();
+        kontext.shadowBlur = 0;
+        kontext.fillStyle = "#081019";
+        kontext.font = "900 20px system-ui";
+        kontext.textAlign = "center";
+        kontext.fillText(gegenstand.symbol, gegenstand.x, gegenstand.y + 7);
+        kontext.fillStyle = "#eef6fb";
+        kontext.font = "750 14px system-ui";
+        kontext.fillText(
+          gegenstand.name,
+          gegenstand.x,
+          gegenstand.y + gegenstand.radius + 23
+        );
+        kontext.restore();
+      }
+
+      function spielerZeichnen() {
+        kontext.save();
+        kontext.translate(spieler.x, spieler.y);
+        kontext.fillStyle = "#f5f7fb";
+        kontext.strokeStyle = "#46d7ff";
+        kontext.lineWidth = 4;
+        kontext.shadowColor = "#46d7ff";
+        kontext.shadowBlur = 14;
+        kontext.beginPath();
+        kontext.arc(0, 0, spieler.radius, 0, Math.PI * 2);
+        kontext.fill();
+        kontext.stroke();
+        kontext.rotate(spieler.richtung);
+        kontext.fillStyle = "#0f5e78";
+        kontext.beginPath();
+        kontext.moveTo(8, 0);
+        kontext.lineTo(-4, -6);
+        kontext.lineTo(-4, 6);
+        kontext.closePath();
+        kontext.fill();
+        kontext.restore();
+      }
+
+      canvas.focus();
+      requestAnimationFrame(aktualisieren);
+    })();
+  </script>
+</body>
+</html>

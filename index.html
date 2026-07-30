@@ -3606,8 +3606,7 @@ projektreflexion mirror flag
         lernfeld: { startX: 360, endeX: 1160, maximaleReihen: 8 },
         kompetenz: { startX: 1320, endeX: 2460, maximaleReihen: 14 },
         themencluster: { startX: 2600, endeX: 4020, maximaleReihen: 22 },
-        thema: { startX: 4140, endeX: 6120, maximaleReihen: 28 },
-        core: { startX: 6040, endeX: 8840, maximaleReihen: 32 }
+        thema: { startX: 4140, endeX: 6120, maximaleReihen: 28 }
       };
       const indicesNachTyp = new Map(
         Object.keys(knotenGrößen).map(typ => [typ, []])
@@ -3618,6 +3617,27 @@ projektreflexion mirror flag
 
       const positionen = new Array(graphKnoten.length);
       indicesNachTyp.forEach((indizes, typ) => {
+        if (typ === "core") {
+          indizes.forEach((graphIndex, typIndex) => {
+            const winkel = typIndex * 2.3999632297;
+            const radius = 56 * Math.sqrt(typIndex + 1);
+            const ankerX = WELT_BREITE / 2
+              + Math.cos(winkel) * radius * 2.1;
+            const ankerY = WELT_HÖHE / 2
+              + Math.sin(winkel) * radius * 1.55;
+            positionen[graphIndex] = {
+              x: ankerX,
+              y: ankerY,
+              ankerX,
+              ankerY,
+              radius: knotenGrößen[typ].radius,
+              vx: 0,
+              vy: 0,
+              fixiert: false
+            };
+          });
+          return;
+        }
         const layout = layoutBereiche[typ];
         const reihen = Math.min(layout.maximaleReihen, indizes.length);
         const spalten = Math.ceil(indizes.length / reihen);

@@ -12,6 +12,7 @@
       --text: #f6f7fb;
       --linie: rgba(183, 195, 220, 0.2);
       --cyan: #46d7ff;
+      --flamme: #ff9f43;
       --top-app-bar-höhe: calc(52px + env(safe-area-inset-top, 0px));
       --seiten-navigation-höhe: 60px;
     }
@@ -102,7 +103,7 @@
     .artefakt-bereich {
       min-width: 0;
       min-height: 0;
-      padding: 0;
+      padding: 10px;
       display: grid;
       grid-template-rows: auto minmax(0, 1fr);
       place-items: stretch;
@@ -111,36 +112,42 @@
       border-right-width: 1px;
       border-bottom-width: 1px;
       background:
-        radial-gradient(circle at 50% 38%, rgba(70, 215, 255, 0.06), transparent 65%),
+        radial-gradient(circle at 50% 20%, rgba(70, 215, 255, 0.08), transparent 58%),
         rgba(17, 27, 43, 0.78);
     }
 
     .artefakt-bereich:nth-child(2),
     .artefakt-bereich:nth-child(5) {
       background:
-        radial-gradient(circle at 50% 38%, rgba(156, 102, 239, 0.09), transparent 65%),
+        radial-gradient(circle at 50% 20%, rgba(156, 102, 239, 0.11), transparent 58%),
         rgba(20, 25, 43, 0.82);
     }
 
     .artefakt-bereich:nth-child(3),
     .artefakt-bereich:nth-child(4) {
       background:
-        radial-gradient(circle at 50% 38%, rgba(37, 99, 235, 0.09), transparent 65%),
+        radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.11), transparent 58%),
         rgba(14, 25, 43, 0.82);
     }
 
     .artefakt-titel {
       margin: 0;
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--linie);
-      font-size: clamp(1.05rem, 2.3vw, 1.75rem);
+      padding: 12px 14px 11px;
+      border: 1px solid rgba(183, 195, 220, 0.16);
+      border-bottom: 0;
+      border-radius: 14px 14px 0 0;
+      color: rgba(248, 250, 255, 0.96);
+      background: rgba(7, 12, 25, 0.58);
+      font-size: clamp(1rem, 2vw, 1.45rem);
       font-weight: 850;
       line-height: 1.2;
       text-align: center;
+      letter-spacing: 0.01em;
     }
 
     .artefakt-bereich--geteilt {
-      padding: 0;
+      padding: 10px;
+      gap: 10px;
       grid-template-columns: minmax(0, 1fr);
       grid-template-rows: repeat(2, minmax(0, 1fr));
       place-items: stretch;
@@ -152,81 +159,85 @@
       display: grid;
       grid-template-rows: auto minmax(0, 1fr);
       overflow: hidden;
+      border-radius: 14px;
     }
 
     .artefakt-unterbereich + .artefakt-unterbereich {
-      border-top: 1px solid var(--linie);
       background: rgba(156, 102, 239, 0.06);
     }
 
     .artefakt-baum {
       min-height: 0;
-      padding: 10px 12px 18px;
+      padding: 8px 10px 14px;
       overflow-y: auto;
       overscroll-behavior: contain;
+      border: 1px solid rgba(183, 195, 220, 0.16);
+      border-radius: 0 0 14px 14px;
+      background: rgba(5, 10, 21, 0.38);
       scrollbar-width: thin;
       scrollbar-color: rgba(126, 53, 216, 0.72) transparent;
     }
 
-    .artefakt-baum details {
-      margin: 4px 0;
-    }
-
-    .artefakt-baum summary {
-      padding: 7px 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 9px;
-      color: rgba(246, 247, 251, 0.9);
-      background: rgba(255, 255, 255, 0.035);
-      font-size: 0.8rem;
-      font-weight: 800;
-      cursor: pointer;
-      list-style: none;
-    }
-
-    .artefakt-baum summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .artefakt-baum summary::before {
-      content: "›";
-      color: var(--cyan);
-      font-size: 1rem;
-      transform: rotate(0deg);
-      transition: transform 120ms ease;
-    }
-
-    .artefakt-baum details[open] > summary::before {
-      transform: rotate(90deg);
-    }
-
     .artefakt-baum ul {
-      margin: 2px 0 6px 11px;
-      padding: 0 0 0 12px;
-      border-left: 1px solid rgba(183, 195, 220, 0.16);
+      margin: 0;
+      padding: 0;
       list-style: none;
     }
 
     .artefakt-baum li {
-      position: relative;
-      padding: 5px 4px 5px 13px;
-      color: rgba(226, 232, 242, 0.78);
-      font-size: 0.72rem;
-      line-height: 1.3;
+      min-height: 34px;
+      padding: 7px 9px;
+      display: grid;
+      grid-template-columns: 1.35rem minmax(0, 1fr);
+      align-items: center;
+      gap: 7px;
+      border-radius: 9px;
+      color: rgba(232, 237, 247, 0.86);
+      font-size: 0.74rem;
+      line-height: 1.25;
       overflow-wrap: anywhere;
+      transition: color 120ms ease, background 120ms ease, transform 120ms ease;
     }
 
-    .artefakt-baum li::before {
+    .artefakt-baum li:nth-child(even) {
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .artefakt-baum li:hover {
+      color: #fff;
+      background: rgba(70, 215, 255, 0.08);
+      transform: translateX(2px);
+    }
+
+    .artefakt-eintrag__symbol {
+      display: grid;
+      place-items: center;
+      width: 1.35rem;
+      height: 1.35rem;
+      color: rgba(70, 215, 255, 0.7);
+      font-size: 0.72rem;
+      line-height: 1;
+    }
+
+    .artefakt-eintrag__symbol::before {
       content: "";
-      position: absolute;
-      top: 0.9em;
-      left: 0;
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background: rgba(70, 215, 255, 0.68);
+      background: currentColor;
+    }
+
+    .artefakt-eintrag--prüfungsrelevant .artefakt-eintrag__symbol {
+      color: var(--flamme);
+      font-size: 1rem;
+      filter: drop-shadow(0 0 6px rgba(255, 159, 67, 0.38));
+    }
+
+    .artefakt-eintrag--prüfungsrelevant .artefakt-eintrag__symbol::before {
+      content: "🔥";
+      width: auto;
+      height: auto;
+      background: none;
     }
 
     @media (max-width: 700px) {
@@ -236,11 +247,12 @@
       }
 
       .artefakt-bereich {
-        padding: 0;
+        padding: 6px;
       }
 
       .artefakt-bereich--geteilt {
-        padding: 0;
+        padding: 6px;
+        gap: 6px;
         grid-template-columns: minmax(0, 1fr);
         grid-template-rows: repeat(2, minmax(0, 1fr));
       }
@@ -250,7 +262,6 @@
       }
 
       .artefakt-unterbereich + .artefakt-unterbereich {
-        border-top: 1px solid var(--linie);
         border-left: 0;
       }
 
@@ -260,22 +271,20 @@
       }
 
       .artefakt-baum {
-        padding: 6px 7px 12px;
-      }
-
-      .artefakt-baum summary {
-        padding: 6px;
-        font-size: 0.7rem;
-      }
-
-      .artefakt-baum ul {
-        margin-left: 7px;
-        padding-left: 8px;
+        padding: 5px 6px 10px;
       }
 
       .artefakt-baum li {
-        padding: 4px 2px 4px 10px;
+        min-height: 30px;
+        padding: 5px 6px;
+        grid-template-columns: 1.15rem minmax(0, 1fr);
+        gap: 5px;
         font-size: 0.64rem;
+      }
+
+      .artefakt-eintrag__symbol {
+        width: 1.15rem;
+        height: 1.15rem;
       }
     }
   </style>
@@ -589,21 +598,42 @@
 
       document.querySelectorAll("[data-baum]").forEach(container => {
         const ordner = baumDaten[container.dataset.baum];
-        Object.entries(ordner).forEach(([ordnername, dateien]) => {
-          const details = document.createElement("details");
-          const summary = document.createElement("summary");
-          const liste = document.createElement("ul");
-          details.open = true;
-          summary.textContent = ordnername;
-          dateien.forEach(dateiname => {
-            const eintrag = document.createElement("li");
-            eintrag.textContent = dateiname;
-            liste.append(eintrag);
-          });
-          details.append(summary, liste);
-          container.append(details);
+        const liste = document.createElement("ul");
+        const dateien = Object.entries(ordner)
+          .flatMap(([relevanz, einträge]) => einträge.map(dateiname => ({
+            dateiname,
+            prüfungsrelevant: relevanz === "Prüfungsrelevante"
+          })))
+          .sort((links, rechts) => sichtbarerName(links.dateiname)
+            .localeCompare(sichtbarerName(rechts.dateiname), "de"));
+
+        dateien.forEach(({ dateiname, prüfungsrelevant }) => {
+          const eintrag = document.createElement("li");
+          const symbol = document.createElement("span");
+          const name = document.createElement("span");
+          eintrag.className = "artefakt-eintrag";
+          eintrag.dataset.prüfungsrelevant = String(prüfungsrelevant);
+          if (prüfungsrelevant) {
+            eintrag.classList.add("artefakt-eintrag--prüfungsrelevant");
+            symbol.setAttribute("role", "img");
+            symbol.setAttribute("aria-label", "Prüfungsrelevant");
+          } else {
+            symbol.setAttribute("aria-hidden", "true");
+          }
+          symbol.className = "artefakt-eintrag__symbol";
+          name.className = "artefakt-eintrag__name";
+          name.textContent = sichtbarerName(dateiname);
+          eintrag.append(symbol, name);
+          liste.append(eintrag);
         });
+        container.append(liste);
       });
+
+      function sichtbarerName(dateiname) {
+        return dateiname
+          .replace(/^_+/, "")
+          .replace(/\.[^.]+$/, "");
+      }
     })();
   </script>
 </body>

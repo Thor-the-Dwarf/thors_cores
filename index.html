@@ -2121,7 +2121,9 @@
         const parameter = new URLSearchParams();
         ausgewählteThemen.forEach(themaId => parameter.append("thema", themaId));
         quizAuswahlmodusBeenden();
-        location.href = `doom-scroll-quiz.html?${parameter}`;
+        const ziel = `doom-scroll-quiz.html?${parameter}`;
+        if (window.thorsCoreNavigieren) window.thorsCoreNavigieren(ziel);
+        else location.href = ziel;
       });
 
       document.addEventListener("pointerdown", ereignis => {
@@ -4140,7 +4142,11 @@ projektreflexion mirror flag
           const aktionsname = aktion.dataset.aktion;
           if (aktionsname === "Doom Scroll Quiz") {
             coreMenüSchließen();
-            location.href = "doom-scroll-quiz.html";
+            if (window.thorsCoreNavigieren) {
+              window.thorsCoreNavigieren("doom-scroll-quiz.html");
+            } else {
+              location.href = "doom-scroll-quiz.html";
+            }
             return;
           }
           if (aktionsname === "Community") {
@@ -4614,5 +4620,6 @@ projektreflexion mirror flag
 
     })();
   </script>
+  <script src="app-page-navigation.js"></script>
 </body>
 </html>

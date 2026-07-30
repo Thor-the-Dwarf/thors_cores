@@ -260,81 +260,402 @@
         padding: 0 11px;
       }
     }
+
+    .spieloberfläche {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      padding: 0;
+      overflow: hidden;
+      background: #101c28;
+    }
+
+    #spielwelt {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      touch-action: none;
+    }
+
+    .nur-screenreader {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .drawer-werkzeuge {
+      position: fixed;
+      z-index: 120;
+      top: max(12px, env(safe-area-inset-top, 0px));
+      right: max(12px, env(safe-area-inset-right, 0px));
+      display: flex;
+      gap: 8px;
+    }
+
+    .drawer-knopf,
+    .drawer-schließen {
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid rgba(183, 195, 220, 0.3);
+      color: #e8eef8;
+      background: rgba(8, 13, 24, 0.88);
+      font: inherit;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+    }
+
+    .drawer-knopf {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+    }
+
+    .drawer-knopf svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .drawer-knopf:hover,
+    .drawer-knopf:focus-visible,
+    .drawer-knopf[aria-expanded="true"],
+    .drawer-schließen:hover,
+    .drawer-schließen:focus-visible {
+      border-color: rgba(70, 215, 255, 0.72);
+      color: #ffffff;
+      background: rgba(20, 52, 70, 0.94);
+      outline: none;
+    }
+
+    .auswahl-drawer {
+      position: fixed;
+      z-index: 110;
+      top: 0;
+      right: 0;
+      width: min(360px, 86vw);
+      height: 100vh;
+      height: 100dvh;
+      padding: max(74px, calc(62px + env(safe-area-inset-top, 0px)))
+        max(20px, env(safe-area-inset-right, 0px))
+        max(24px, env(safe-area-inset-bottom, 0px))
+        20px;
+      border-left: 1px solid rgba(183, 195, 220, 0.25);
+      color: var(--text);
+      background: rgba(8, 13, 24, 0.96);
+      box-shadow: -24px 0 64px rgba(0, 0, 0, 0.42);
+      transform: translateX(102%);
+      transition: transform 180ms ease;
+      overflow-y: auto;
+      pointer-events: none;
+      backdrop-filter: blur(18px);
+    }
+
+    .auswahl-drawer.offen {
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .drawer-kopf {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .drawer-kopf h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .drawer-schließen {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .auswahl-drawer label {
+      display: block;
+      margin-bottom: 8px;
+      color: #cdd7e7;
+      font-size: 0.78rem;
+      font-weight: 750;
+    }
+
+    .auswahl-drawer select,
+    .drawer-aktion {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid rgba(183, 195, 220, 0.24);
+      border-radius: 10px;
+      color: #eef4fc;
+      background: #111c2d;
+      font: inherit;
+      font-size: 0.82rem;
+    }
+
+    .auswahl-drawer select {
+      padding: 0 12px;
+    }
+
+    .drawer-aktion {
+      display: flex;
+      align-items: center;
+      padding: 0 13px;
+      text-decoration: none;
+    }
+
+    .auswahl-drawer select:focus-visible,
+    .drawer-aktion:focus-visible {
+      border-color: rgba(70, 215, 255, 0.72);
+      outline: 2px solid rgba(70, 215, 255, 0.28);
+      outline-offset: 2px;
+    }
+
+    .interaktionsknopf {
+      position: fixed;
+      right: max(12px, env(safe-area-inset-right, 0px));
+      bottom: max(82px, calc(70px + env(safe-area-inset-bottom, 0px)));
+    }
+
+    .steuerung {
+      position: fixed;
+      left: max(12px, env(safe-area-inset-left, 0px));
+      bottom: max(82px, calc(70px + env(safe-area-inset-bottom, 0px)));
+    }
+
+    .seiten-indikator {
+      position: fixed;
+      z-index: 100;
+      left: 50%;
+      bottom: max(10px, env(safe-area-inset-bottom, 0px));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      max-width: calc(100vw - 20px);
+      padding: 6px;
+      border: 1px solid rgba(183, 195, 220, 0.24);
+      border-radius: 999px;
+      background: rgba(8, 13, 24, 0.86);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+      transform: translateX(-50%);
+      backdrop-filter: blur(14px);
+    }
+
+    .indikator-eintrag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      gap: 0;
+      overflow: hidden;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: #aebbd0;
+      background: rgba(255, 255, 255, 0.035);
+      font-size: 0.76rem;
+      font-weight: 780;
+      text-decoration: none;
+      white-space: nowrap;
+      transition:
+        width 180ms ease,
+        color 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
+    }
+
+    .indikator-eintrag svg {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .indikator-eintrag span {
+      width: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: width 180ms ease, opacity 150ms ease;
+    }
+
+    .indikator-eintrag.aktiv {
+      width: 118px;
+      gap: 8px;
+      border-color: rgba(70, 215, 255, 0.54);
+      color: #e8fbff;
+      background: rgba(18, 88, 111, 0.76);
+    }
+
+    .indikator-eintrag.aktiv span {
+      width: auto;
+      opacity: 1;
+    }
+
+    .indikator-eintrag:hover,
+    .indikator-eintrag:focus-visible {
+      border-color: rgba(70, 215, 255, 0.46);
+      color: #ffffff;
+      outline: none;
+    }
+
+    @media (max-width: 700px) {
+      .drawer-werkzeuge {
+        top: max(8px, env(safe-area-inset-top, 0px));
+        right: max(8px, env(safe-area-inset-right, 0px));
+      }
+
+      .drawer-knopf {
+        width: 40px;
+        height: 40px;
+      }
+
+      .auswahl-drawer {
+        width: min(320px, 82vw);
+        padding-top: max(66px, calc(56px + env(safe-area-inset-top, 0px)));
+      }
+
+      .seiten-indikator {
+        gap: 5px;
+        padding: 5px;
+      }
+
+      .indikator-eintrag {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+      }
+
+      .indikator-eintrag.aktiv {
+        width: 104px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .auswahl-drawer,
+      .indikator-eintrag,
+      .indikator-eintrag span {
+        transition: none;
+      }
+    }
   </style>
   <link rel="stylesheet" href="app-navigation.css">
 </head>
 <body>
-  <header class="top-app-bar">
-    <p class="top-app-bar__text">Wiederholung ist die Mutter des Lernens</p>
-    <a class="top-app-bar__settings" href="index.html#einstellungen"
-       aria-label="Einstellungen öffnen">
+  <main class="spieloberfläche">
+    <canvas id="spielwelt" width="960" height="600" tabindex="0"
+            aria-label="2D-Spielwelt. Bewegung mit WASD oder Pfeiltasten, Interaktion mit E.">
+    </canvas>
+    <span class="steuerung">WASD / Pfeile · E interagieren · Esc schließen</span>
+    <button id="interagieren" class="interaktionsknopf" type="button" hidden>
+      Interagieren
+    </button>
+    <p id="status" class="nur-screenreader" role="status" aria-live="polite">
+      Laufe zu einem Hardwaregerät und drücke E.
+    </p>
+  </main>
+
+  <div class="drawer-werkzeuge" aria-label="Ansichten">
+    <button id="einstellungen-umschalten" class="drawer-knopf" type="button"
+            aria-controls="einstellungen-drawer" aria-expanded="false"
+            aria-label="Einstellungen öffnen" title="Einstellungen">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="3"></circle>
         <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.86 2.86-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.55v-.09A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.86-2.86.06-.06A1.7 1.7 0 0 0 4.1 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H2.3V9.55h.1A1.7 1.7 0 0 0 4.1 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06L6.56 3.7l.06.06A1.7 1.7 0 0 0 8.5 4.1a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V2.3h4.05v.1A1.7 1.7 0 0 0 15 4.1a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.86 2.86-.06-.06A1.7 1.7 0 0 0 19.4 8.5a1.7 1.7 0 0 0 .6 1 1.7 1.7 0 0 0 1.1.4h.1v4.05h-.1A1.7 1.7 0 0 0 19.4 15Z"></path>
       </svg>
+    </button>
+    <button id="admin-umschalten" class="drawer-knopf" type="button"
+            aria-controls="admin-drawer" aria-expanded="false"
+            aria-label="Admin" title="Admin">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"></path>
+      </svg>
+    </button>
+  </div>
+
+  <aside id="einstellungen-drawer" class="auswahl-drawer"
+         aria-labelledby="einstellungen-titel" aria-hidden="true">
+    <div class="drawer-kopf">
+      <h2 id="einstellungen-titel">Einstellungen</h2>
+      <button class="drawer-schließen" type="button" data-drawer-schließen
+              aria-label="Einstellungen schließen">×</button>
+    </div>
+    <label for="fachrichtung-auswahl">Fachrichtung</label>
+    <select id="fachrichtung-auswahl">
+      <option value="">Fachrichtung auswählen</option>
+      <option value="anwendungsentwicklung">Anwendungsentwicklung</option>
+      <option value="systemintegration">Systemintegration</option>
+      <option value="daten-prozessanalyse">Daten- und Prozessanalyse</option>
+      <option value="digitale-vernetzung">Digitale Vernetzung</option>
+    </select>
+  </aside>
+
+  <aside id="admin-drawer" class="auswahl-drawer"
+         aria-labelledby="admin-titel" aria-hidden="true">
+    <div class="drawer-kopf">
+      <h2 id="admin-titel">Admin</h2>
+      <button class="drawer-schließen" type="button" data-drawer-schließen
+              aria-label="Admin schließen">×</button>
+    </div>
+    <a class="drawer-aktion" href="erd.html">ERD / Datenbankschema</a>
+  </aside>
+
+  <nav class="seiten-indikator" aria-label="Seitennavigation">
+    <a class="indikator-eintrag" href="index.html" aria-label="Vault öffnen">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="6" cy="12" r="2.4"></circle>
+        <circle cx="17.5" cy="6.5" r="2.4"></circle>
+        <circle cx="17.5" cy="17.5" r="2.4"></circle>
+        <path d="m8.2 10.9 7.1-3.4M8.2 13.1l7.1 3.4"></path>
+      </svg>
+      <span>Vault</span>
     </a>
-  </header>
-  <main>
-    <section class="lernwelt" aria-labelledby="lernwelt-titel">
-      <header class="lernwelt__kopf">
-        <div class="lernwelt__titel">
-          <h1 id="lernwelt-titel">2D-Spiel- und Lernwelt</h1>
-          <p class="lernwelt__untertitel">Sicherer Prototyp für Raum, Bewegung und Interaktion</p>
-        </div>
-        <p id="status" class="status" role="status" aria-live="polite">
-          Laufe zum leuchtenden Gegenstand und drücke E.
-        </p>
-      </header>
-      <div id="welt-layout" class="welt-layout">
-        <section class="welt-panel" aria-label="Spielwelt">
-          <canvas id="spielwelt" width="960" height="600" tabindex="0"
-                  aria-label="2D-Spielwelt. Bewegung mit WASD oder Pfeiltasten, Interaktion mit E.">
-          </canvas>
-          <span class="steuerung">WASD / Pfeile · E interagieren · Esc schließen</span>
-          <button id="interagieren" class="interaktionsknopf" type="button" disabled>
-            Interagieren
-          </button>
-        </section>
-        <aside class="platzhalter-panel" aria-label="Leeres Platzhalter-Panel">
-          <div class="platzhalter-panel__inhalt">
-            <div class="platzhalter-panel__symbol" aria-hidden="true"></div>
-            <p>Neutrales Platzhalter-Panel</p>
-          </div>
-        </aside>
-      </div>
-    </section>
-  </main>
-  <footer class="bottom-app-bar" aria-label="App-Navigation">
-    <nav class="bottom-app-bar__navigation" aria-label="Seitennavigation">
-      <a class="bottom-app-bar__aktion" href="index.html" aria-label="Vault öffnen">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="6" cy="12" r="2.4"></circle>
-          <circle cx="17.5" cy="6.5" r="2.4"></circle>
-          <circle cx="17.5" cy="17.5" r="2.4"></circle>
-          <path d="m8.2 10.9 7.1-3.4M8.2 13.1l7.1 3.4"></path>
-        </svg>
-      </a>
-      <a class="bottom-app-bar__aktion" href="artefakte.html" aria-label="Artefakte öffnen">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="3" y="7" width="18" height="13" rx="2"></rect>
-          <path d="M8 7V5h8v2M3 12h18M10 12v2h4v-2"></path>
-        </svg>
-      </a>
-      <a class="bottom-app-bar__aktion" href="doom-scroll-quiz.html"
-         aria-label="Doom Scroll Quiz öffnen">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M7 4h10M9 8h6M12 7v10m-3.5-3.5L12 17l3.5-3.5M7 20h10"></path>
-        </svg>
-      </a>
-      <span class="bottom-app-bar__aktion" aria-current="page"
-            aria-label="Spiel- und Lernwelt">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M8 7h8a5 5 0 0 1 4.7 6.7l-1 2.9a2.2 2.2 0 0 1-3.7.8L14.7 16H9.3L8 17.4a2.2 2.2 0 0 1-3.7-.8l-1-2.9A5 5 0 0 1 8 7Z"></path>
-          <path d="M7 12h4M9 10v4M16.5 11.5h.01M18.5 13.5h.01"></path>
-        </svg>
-      </span>
-    </nav>
-  </footer>
+    <a class="indikator-eintrag" href="artefakte.html" aria-label="Artefakte öffnen">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="7" width="18" height="13" rx="2"></rect>
+        <path d="M8 7V5h8v2M3 12h18M10 12v2h4v-2"></path>
+      </svg>
+      <span>Artefakte</span>
+    </a>
+    <a class="indikator-eintrag" href="doom-scroll-quiz.html"
+       aria-label="Doom Scroll Quiz öffnen">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 4h10M9 8h6M12 7v10m-3.5-3.5L12 17l3.5-3.5M7 20h10"></path>
+      </svg>
+      <span>Quiz</span>
+    </a>
+    <span class="indikator-eintrag aktiv" aria-current="page"
+          aria-label="Lernwelt">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8 7h8a5 5 0 0 1 4.7 6.7l-1 2.9a2.2 2.2 0 0 1-3.7.8L14.7 16H9.3L8 17.4a2.2 2.2 0 0 1-3.7-.8l-1-2.9A5 5 0 0 1 8 7Z"></path>
+        <path d="M7 12h4M9 10v4M16.5 11.5h.01M18.5 13.5h.01"></path>
+      </svg>
+      <span>Lernwelt</span>
+    </span>
+  </nav>
   <script>
     (() => {
       "use strict";
@@ -342,27 +663,107 @@
       const canvas = document.querySelector("#spielwelt");
       const kontext = canvas.getContext("2d");
       const status = document.querySelector("#status");
-      const layout = document.querySelector("#welt-layout");
       const interaktionsknopf = document.querySelector("#interagieren");
+      const einstellungenUmschalten = document.querySelector("#einstellungen-umschalten");
+      const adminUmschalten = document.querySelector("#admin-umschalten");
+      const einstellungenDrawer = document.querySelector("#einstellungen-drawer");
+      const adminDrawer = document.querySelector("#admin-drawer");
+      const fachrichtungAuswahl = document.querySelector("#fachrichtung-auswahl");
+      const WELT_BREITE = 960;
+      const WELT_HÖHE = 600;
       const tasten = new Set();
       const spieler = { x: 120, y: 300, radius: 18, richtung: 0 };
       const hindernisse = [
-        { x: 345, y: 125, breite: 175, höhe: 82, name: "Arbeitstisch" },
-        { x: 565, y: 385, breite: 225, höhe: 88, name: "Regal" },
-        { x: 705, y: 115, breite: 85, höhe: 150, name: "Schrank" }
+        { x: 330, y: 90, breite: 185, höhe: 74, typ: "arbeitstisch" },
+        { x: 390, y: 440, breite: 210, höhe: 72, typ: "servicetisch" },
+        { x: 710, y: 80, breite: 92, höhe: 132, typ: "ersatzteilregal" }
       ];
       const gegenstände = [
-        { x: 220, y: 300, radius: 25, reichweite: 112, name: "Lernterminal", farbe: "#46d7ff", symbol: "T" },
-        { x: 610, y: 285, radius: 24, reichweite: 105, name: "Archivkiste", farbe: "#9c66ef", symbol: "A" },
-        { x: 845, y: 485, radius: 23, reichweite: 102, name: "Werkzeugkoffer", farbe: "#ffb45e", symbol: "W" },
-        { x: 490, y: 515, radius: 22, reichweite: 100, name: "Infostation", farbe: "#62d995", symbol: "I" }
+        {
+          x: 235, y: 275, radius: 47, reichweite: 128,
+          name: "Desktop-Computer", typ: "computer", farbe: "#46d7ff"
+        },
+        {
+          x: 610, y: 255, radius: 55, reichweite: 138,
+          name: "Server-Rack", typ: "server", farbe: "#9c66ef"
+        },
+        {
+          x: 790, y: 445, radius: 48, reichweite: 128,
+          name: "Router", typ: "router", farbe: "#62d995"
+        }
       ];
       let letzterZeitpunkt = performance.now();
       let nächsterGegenstand = null;
-      let splitScreenAktiv = false;
       let aktiveInteraktion = "";
 
-      canvas.addEventListener("pointerdown", () => canvas.focus());
+      function drawerSchließen() {
+        [einstellungenDrawer, adminDrawer].forEach(drawer => {
+          drawer.classList.remove("offen");
+          drawer.setAttribute("aria-hidden", "true");
+        });
+        einstellungenUmschalten.setAttribute("aria-expanded", "false");
+        adminUmschalten.setAttribute("aria-expanded", "false");
+        document.body.dataset.offenerDrawer = "";
+      }
+
+      function drawerUmschalten(drawer, auslöser) {
+        const wirdGeöffnet = !drawer.classList.contains("offen");
+        drawerSchließen();
+        if (!wirdGeöffnet) {
+          canvas.focus();
+          return;
+        }
+        drawer.classList.add("offen");
+        drawer.setAttribute("aria-hidden", "false");
+        auslöser.setAttribute("aria-expanded", "true");
+        document.body.dataset.offenerDrawer = drawer.id;
+        drawer.querySelector("select, a, button")?.focus();
+      }
+
+      einstellungenUmschalten.addEventListener("click", () => {
+        drawerUmschalten(einstellungenDrawer, einstellungenUmschalten);
+      });
+      adminUmschalten.addEventListener("click", () => {
+        drawerUmschalten(adminDrawer, adminUmschalten);
+      });
+      document.querySelectorAll("[data-drawer-schließen]").forEach(knopf => {
+        knopf.addEventListener("click", () => {
+          drawerSchließen();
+          canvas.focus();
+        });
+      });
+
+      const FACHRICHTUNG_SCHLÜSSEL = "thors-core.fachrichtung.v1";
+      const GÜLTIGE_FACHRICHTUNGEN = new Set([
+        "anwendungsentwicklung",
+        "systemintegration",
+        "daten-prozessanalyse",
+        "digitale-vernetzung"
+      ]);
+      try {
+        const gespeichert = localStorage.getItem(FACHRICHTUNG_SCHLÜSSEL);
+        fachrichtungAuswahl.value = GÜLTIGE_FACHRICHTUNGEN.has(gespeichert)
+          ? gespeichert
+          : "";
+      } catch {
+        fachrichtungAuswahl.value = "";
+      }
+      fachrichtungAuswahl.addEventListener("change", () => {
+        try {
+          if (GÜLTIGE_FACHRICHTUNGEN.has(fachrichtungAuswahl.value)) {
+            localStorage.setItem(FACHRICHTUNG_SCHLÜSSEL, fachrichtungAuswahl.value);
+          } else {
+            localStorage.removeItem(FACHRICHTUNG_SCHLÜSSEL);
+          }
+        } catch {
+          // Die Auswahl bleibt für die aktuelle Sitzung aktiv.
+        }
+      });
+
+      canvas.addEventListener("pointerdown", () => {
+        drawerSchließen();
+        canvas.focus();
+      });
       interaktionsknopf.addEventListener("click", interagieren);
       window.addEventListener("keydown", ereignis => {
         if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " ", "e", "E", "Escape"]
@@ -374,7 +775,12 @@
           return;
         }
         if (ereignis.key === "Escape") {
-          splitScreenSchließen();
+          if (document.body.dataset.offenerDrawer) {
+            drawerSchließen();
+            canvas.focus();
+          } else {
+            interaktionSchließen();
+          }
           return;
         }
         tasten.add(ereignis.key.toLowerCase());
@@ -386,24 +792,20 @@
 
       function interagieren() {
         if (!nächsterGegenstand) {
-          status.textContent = "Kein Gegenstand in Interaktionsreichweite.";
+          status.textContent = "Kein Hardwaregerät in Interaktionsreichweite.";
           return;
         }
-        splitScreenAktiv = true;
         aktiveInteraktion = nächsterGegenstand.name;
-        layout.classList.add("is-split");
-        status.textContent = `${aktiveInteraktion} geöffnet · Esc schließt die Ansicht.`;
+        status.textContent = `${aktiveInteraktion} ausgewählt · Esc hebt die Auswahl auf.`;
         canvas.focus();
       }
 
-      function splitScreenSchließen() {
-        if (!splitScreenAktiv) return;
-        splitScreenAktiv = false;
+      function interaktionSchließen() {
+        if (!aktiveInteraktion) return;
         aktiveInteraktion = "";
-        layout.classList.remove("is-split");
         status.textContent = nächsterGegenstand
           ? `E drücken: ${nächsterGegenstand.name}`
-          : "Laufe zum leuchtenden Gegenstand und drücke E.";
+          : "Laufe zu einem Hardwaregerät und drücke E.";
       }
 
       function aktualisieren(zeitpunkt) {
@@ -413,7 +815,7 @@
         interaktionsbereichAktualisieren();
         canvas.dataset.spielerX = String(Math.round(spieler.x));
         canvas.dataset.spielerY = String(Math.round(spieler.y));
-        canvas.dataset.splitScreen = String(splitScreenAktiv);
+        canvas.dataset.aktiveInteraktion = aktiveInteraktion;
         zeichnen();
         requestAnimationFrame(aktualisieren);
       }
@@ -439,8 +841,8 @@
 
       function positionIstFrei(x, y) {
         const r = spieler.radius;
-        if (x - r < 34 || x + r > canvas.width - 34
-          || y - r < 34 || y + r > canvas.height - 34) {
+        if (x - r < 34 || x + r > WELT_BREITE - 34
+          || y - r < 34 || y + r > WELT_HÖHE - 34) {
           return false;
         }
         const kollidiertMitRechteck = hindernisse.some(hindernis =>
@@ -463,18 +865,47 @@
           .filter(gegenstand => gegenstand.abstand <= gegenstand.reichweite)
           .sort((a, b) => a.abstand - b.abstand)[0] || null;
         interaktionsknopf.disabled = !nächsterGegenstand;
+        interaktionsknopf.hidden = !nächsterGegenstand;
         interaktionsknopf.textContent = nächsterGegenstand
-          ? `${nächsterGegenstand.name} öffnen`
+          ? `${nächsterGegenstand.name} auswählen`
           : "Interagieren";
-        if (!splitScreenAktiv) {
+        if (!aktiveInteraktion) {
           status.textContent = nächsterGegenstand
             ? `E drücken: ${nächsterGegenstand.name}`
-            : "Laufe zum leuchtenden Gegenstand und drücke E.";
+            : "Laufe zu einem Hardwaregerät und drücke E.";
         }
       }
 
       function zeichnen() {
+        const rechteck = canvas.getBoundingClientRect();
+        const pixelverhältnis = Math.min(window.devicePixelRatio || 1, 2);
+        const pixelBreite = Math.max(1, Math.round(rechteck.width * pixelverhältnis));
+        const pixelHöhe = Math.max(1, Math.round(rechteck.height * pixelverhältnis));
+        if (canvas.width !== pixelBreite || canvas.height !== pixelHöhe) {
+          canvas.width = pixelBreite;
+          canvas.height = pixelHöhe;
+        }
+        const skalierung = Math.min(
+          rechteck.width / WELT_BREITE,
+          rechteck.height / WELT_HÖHE
+        );
+        const versatzX = (rechteck.width - WELT_BREITE * skalierung) / 2;
+        const versatzY = (rechteck.height - WELT_HÖHE * skalierung) / 2;
+        canvas.dataset.skalierung = skalierung.toFixed(4);
+        canvas.dataset.versatzX = versatzX.toFixed(1);
+        canvas.dataset.versatzY = versatzY.toFixed(1);
+        kontext.setTransform(1, 0, 0, 1, 0, 0);
         kontext.clearRect(0, 0, canvas.width, canvas.height);
+        kontext.fillStyle = "#07111a";
+        kontext.fillRect(0, 0, canvas.width, canvas.height);
+        kontext.setTransform(
+          pixelverhältnis * skalierung,
+          0,
+          0,
+          pixelverhältnis * skalierung,
+          pixelverhältnis * versatzX,
+          pixelverhältnis * versatzY
+        );
         bodenZeichnen();
         hindernisse.forEach(hindernisZeichnen);
         gegenstände.forEach(gegenstandZeichnen);
@@ -483,88 +914,192 @@
 
       function bodenZeichnen() {
         kontext.fillStyle = "#10202b";
-        kontext.fillRect(0, 0, canvas.width, canvas.height);
+        kontext.fillRect(0, 0, WELT_BREITE, WELT_HÖHE);
         kontext.strokeStyle = "rgba(120, 157, 174, 0.12)";
         kontext.lineWidth = 1;
-        for (let x = 0; x <= canvas.width; x += 48) {
+        for (let x = 0; x <= WELT_BREITE; x += 48) {
           kontext.beginPath();
           kontext.moveTo(x, 0);
-          kontext.lineTo(x, canvas.height);
+          kontext.lineTo(x, WELT_HÖHE);
           kontext.stroke();
         }
-        for (let y = 0; y <= canvas.height; y += 48) {
+        for (let y = 0; y <= WELT_HÖHE; y += 48) {
           kontext.beginPath();
           kontext.moveTo(0, y);
-          kontext.lineTo(canvas.width, y);
+          kontext.lineTo(WELT_BREITE, y);
           kontext.stroke();
         }
         kontext.strokeStyle = "#34485b";
         kontext.lineWidth = 22;
-        kontext.strokeRect(22, 22, canvas.width - 44, canvas.height - 44);
+        kontext.strokeRect(22, 22, WELT_BREITE - 44, WELT_HÖHE - 44);
         kontext.strokeStyle = "#7390a1";
         kontext.lineWidth = 2;
-        kontext.strokeRect(33, 33, canvas.width - 66, canvas.height - 66);
+        kontext.strokeRect(33, 33, WELT_BREITE - 66, WELT_HÖHE - 66);
       }
 
       function hindernisZeichnen(hindernis) {
-        kontext.fillStyle = "#29384a";
-        kontext.strokeStyle = "#577087";
-        kontext.lineWidth = 3;
-        kontext.beginPath();
-        kontext.roundRect(
-          hindernis.x,
-          hindernis.y,
-          hindernis.breite,
-          hindernis.höhe,
-          9
-        );
-        kontext.fill();
-        kontext.stroke();
-        kontext.fillStyle = "#aab8c8";
-        kontext.font = "700 15px system-ui";
-        kontext.textAlign = "center";
-        kontext.fillText(
-          hindernis.name,
-          hindernis.x + hindernis.breite / 2,
-          hindernis.y + hindernis.höhe / 2 + 5
-        );
+        kontext.save();
+        if (hindernis.typ.includes("tisch")) {
+          kontext.fillStyle = "#725238";
+          kontext.strokeStyle = "#b18a61";
+          kontext.lineWidth = 3;
+          kontext.beginPath();
+          kontext.roundRect(hindernis.x, hindernis.y, hindernis.breite, hindernis.höhe, 8);
+          kontext.fill();
+          kontext.stroke();
+          kontext.fillStyle = "#3f2d21";
+          kontext.fillRect(hindernis.x + 13, hindernis.y + hindernis.höhe, 12, 18);
+          kontext.fillRect(
+            hindernis.x + hindernis.breite - 25,
+            hindernis.y + hindernis.höhe,
+            12,
+            18
+          );
+        } else {
+          kontext.fillStyle = "#303e4d";
+          kontext.strokeStyle = "#6b8293";
+          kontext.lineWidth = 3;
+          kontext.beginPath();
+          kontext.roundRect(hindernis.x, hindernis.y, hindernis.breite, hindernis.höhe, 7);
+          kontext.fill();
+          kontext.stroke();
+          kontext.strokeStyle = "#8297a6";
+          kontext.lineWidth = 2;
+          for (let y = hindernis.y + 14; y < hindernis.y + hindernis.höhe; y += 18) {
+            kontext.beginPath();
+            kontext.moveTo(hindernis.x + 8, y);
+            kontext.lineTo(hindernis.x + hindernis.breite - 8, y);
+            kontext.stroke();
+          }
+        }
+        kontext.restore();
       }
 
       function gegenstandZeichnen(gegenstand) {
         const istNah = nächsterGegenstand?.name === gegenstand.name;
+        const istAktiv = aktiveInteraktion?.name === gegenstand.name;
         kontext.save();
-        kontext.strokeStyle = istNah ? gegenstand.farbe : `${gegenstand.farbe}66`;
-        kontext.lineWidth = istNah ? 3 : 2;
+        kontext.strokeStyle = istNah || istAktiv ? gegenstand.farbe : `${gegenstand.farbe}55`;
+        kontext.lineWidth = istNah || istAktiv ? 3 : 2;
         kontext.setLineDash([8, 8]);
         kontext.beginPath();
         kontext.arc(gegenstand.x, gegenstand.y, gegenstand.reichweite, 0, Math.PI * 2);
         kontext.stroke();
         kontext.setLineDash([]);
         kontext.shadowColor = gegenstand.farbe;
-        kontext.shadowBlur = istNah ? 24 : 11;
-        kontext.fillStyle = gegenstand.farbe;
-        kontext.beginPath();
-        kontext.roundRect(
-          gegenstand.x - gegenstand.radius,
-          gegenstand.y - gegenstand.radius,
-          gegenstand.radius * 2,
-          gegenstand.radius * 2,
-          8
-        );
-        kontext.fill();
+        kontext.shadowBlur = istNah || istAktiv ? 22 : 7;
+        if (gegenstand.name === "Desktop-Computer") computerZeichnen(gegenstand);
+        if (gegenstand.name === "Server-Rack") serverRackZeichnen(gegenstand);
+        if (gegenstand.name === "Router") routerZeichnen(gegenstand);
         kontext.shadowBlur = 0;
-        kontext.fillStyle = "#081019";
-        kontext.font = "900 20px system-ui";
-        kontext.textAlign = "center";
-        kontext.fillText(gegenstand.symbol, gegenstand.x, gegenstand.y + 7);
         kontext.fillStyle = "#eef6fb";
         kontext.font = "750 14px system-ui";
         kontext.fillText(
           gegenstand.name,
           gegenstand.x,
-          gegenstand.y + gegenstand.radius + 23
+          gegenstand.y + gegenstand.radius + 27
         );
         kontext.restore();
+      }
+
+      function computerZeichnen(gegenstand) {
+        const x = gegenstand.x;
+        const y = gegenstand.y;
+        kontext.textAlign = "center";
+        kontext.fillStyle = "#111922";
+        kontext.strokeStyle = "#87d7ef";
+        kontext.lineWidth = 3;
+        kontext.beginPath();
+        kontext.roundRect(x - 46, y - 42, 66, 44, 4);
+        kontext.fill();
+        kontext.stroke();
+        kontext.fillStyle = "#163b4b";
+        kontext.fillRect(x - 40, y - 36, 54, 32);
+        kontext.fillStyle = "#87d7ef";
+        kontext.fillRect(x - 16, y + 3, 6, 12);
+        kontext.fillRect(x - 30, y + 14, 34, 5);
+        kontext.fillStyle = "#252f39";
+        kontext.strokeStyle = "#788a98";
+        kontext.beginPath();
+        kontext.roundRect(x + 27, y - 35, 25, 55, 4);
+        kontext.fill();
+        kontext.stroke();
+        kontext.fillStyle = "#71f59a";
+        kontext.beginPath();
+        kontext.arc(x + 44, y - 26, 2.5, 0, Math.PI * 2);
+        kontext.fill();
+        kontext.fillStyle = "#455866";
+        kontext.beginPath();
+        kontext.roundRect(x - 43, y + 25, 61, 11, 3);
+        kontext.fill();
+        kontext.fillStyle = "#788a98";
+        for (let i = 0; i < 7; i += 1) {
+          kontext.fillRect(x - 38 + i * 8, y + 28, 5, 2);
+        }
+        kontext.beginPath();
+        kontext.ellipse(x + 35, y + 30, 8, 6, 0, 0, Math.PI * 2);
+        kontext.fill();
+      }
+
+      function serverRackZeichnen(gegenstand) {
+        const x = gegenstand.x;
+        const y = gegenstand.y;
+        kontext.textAlign = "center";
+        kontext.fillStyle = "#1a222b";
+        kontext.strokeStyle = "#aab8c8";
+        kontext.lineWidth = 3;
+        kontext.beginPath();
+        kontext.roundRect(x - 39, y - 55, 78, 110, 6);
+        kontext.fill();
+        kontext.stroke();
+        for (let i = 0; i < 5; i += 1) {
+          const einheitY = y - 46 + i * 20;
+          kontext.fillStyle = i % 2 ? "#303a44" : "#27313a";
+          kontext.strokeStyle = "#657482";
+          kontext.lineWidth = 1;
+          kontext.beginPath();
+          kontext.roundRect(x - 31, einheitY, 62, 15, 2);
+          kontext.fill();
+          kontext.stroke();
+          kontext.fillStyle = i === 3 ? "#ffbe4a" : "#67f08d";
+          kontext.beginPath();
+          kontext.arc(x + 21, einheitY + 7.5, 2.3, 0, Math.PI * 2);
+          kontext.fill();
+          kontext.fillStyle = "#10161c";
+          for (let p = 0; p < 4; p += 1) {
+            kontext.fillRect(x - 24 + p * 8, einheitY + 5, 5, 4);
+          }
+        }
+      }
+
+      function routerZeichnen(gegenstand) {
+        const x = gegenstand.x;
+        const y = gegenstand.y;
+        kontext.textAlign = "center";
+        kontext.strokeStyle = "#b989ff";
+        kontext.lineWidth = 3;
+        kontext.beginPath();
+        kontext.moveTo(x - 31, y - 15);
+        kontext.lineTo(x - 43, y - 48);
+        kontext.moveTo(x + 31, y - 15);
+        kontext.lineTo(x + 43, y - 48);
+        kontext.stroke();
+        kontext.fillStyle = "#252c39";
+        kontext.strokeStyle = "#9da8b7";
+        kontext.beginPath();
+        kontext.roundRect(x - 47, y - 18, 94, 42, 8);
+        kontext.fill();
+        kontext.stroke();
+        kontext.fillStyle = "#0c1218";
+        for (let i = 0; i < 5; i += 1) {
+          kontext.fillRect(x - 34 + i * 14, y + 7, 9, 7);
+        }
+        kontext.fillStyle = "#67f08d";
+        for (let i = 0; i < 4; i += 1) {
+          kontext.beginPath();
+          kontext.arc(x - 22 + i * 15, y - 7, 2.6, 0, Math.PI * 2);
+          kontext.fill();
+        }
       }
 
       function spielerZeichnen() {
@@ -594,5 +1129,6 @@
       requestAnimationFrame(aktualisieren);
     })();
   </script>
+  <script src="app-page-navigation.js"></script>
 </body>
 </html>

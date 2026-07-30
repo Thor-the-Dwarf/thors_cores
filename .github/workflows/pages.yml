@@ -28,6 +28,8 @@ jobs:
           set -euo pipefail
           test -f index.html
           test -f doom-scroll-quiz.html
+          test -f artefakte.html
+          test -f lernwelt.html
           test -f Lernfelder.json
           test -f Themen.json
           test -f Cores.json
@@ -37,7 +39,11 @@ jobs:
           mkdir -p _site
           cp \
             index.html \
+            artefakte.html \
             doom-scroll-quiz.html \
+            lernwelt.html \
+            app-navigation.css \
+            app-page-navigation.js \
             Lernfelder.json \
             Themen.json \
             Cores.json \

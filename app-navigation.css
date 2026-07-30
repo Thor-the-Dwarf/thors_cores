@@ -57,6 +57,10 @@
   gap: 7px;
 }
 
+.bottom-app-bar__navigation {
+  max-width: calc(100vw - 20px);
+}
+
 .bottom-app-bar__aktion,
 .bottom-app-bar__menü {
   display: grid;
@@ -73,6 +77,42 @@
   text-decoration: none;
 }
 
+.bottom-app-bar__navigation .bottom-app-bar__aktion {
+  display: inline-flex;
+  gap: 0;
+  width: 42px;
+  min-width: 42px;
+  overflow: hidden;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    width 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.app-nav-label {
+  width: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 0.76rem;
+  font-weight: 780;
+  transition: width 180ms ease, opacity 150ms ease;
+}
+
+.bottom-app-bar__navigation .bottom-app-bar__aktion[aria-current="page"] {
+  width: 116px;
+  gap: 8px;
+}
+
+.bottom-app-bar__navigation
+  .bottom-app-bar__aktion[aria-current="page"]
+  .app-nav-label {
+  width: auto;
+  opacity: 1;
+}
+
 .bottom-app-bar__aktion:hover,
 .bottom-app-bar__aktion:focus-visible,
 .bottom-app-bar__menü:hover,
@@ -87,6 +127,37 @@
   color: #a7ecff;
   background: rgba(70, 215, 255, 0.13);
   cursor: default;
+}
+
+body.app-seite-austritt {
+  transition: transform 190ms cubic-bezier(0.22, 0.74, 0.26, 1);
+  will-change: transform;
+}
+
+body.app-seite-austritt--links {
+  transform: translate3d(-100vw, 0, 0);
+}
+
+body.app-seite-austritt--rechts {
+  transform: translate3d(100vw, 0, 0);
+}
+
+body.app-seite-eintritt {
+  transition: none;
+  will-change: transform;
+}
+
+body.app-seite-eintritt--von-rechts {
+  transform: translate3d(100vw, 0, 0);
+}
+
+body.app-seite-eintritt--von-links {
+  transform: translate3d(-100vw, 0, 0);
+}
+
+body.app-seite-eintritt.app-seite-eintritt--aktiv {
+  transform: translate3d(0, 0, 0);
+  transition: transform 190ms cubic-bezier(0.22, 0.74, 0.26, 1);
 }
 
 .bottom-app-bar svg,
@@ -115,9 +186,27 @@
 }
 
 @media (max-width: 520px) {
-  .bottom-app-bar__aktion,
+  .bottom-app-bar__navigation .bottom-app-bar__aktion,
   .bottom-app-bar__menü {
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+  }
+
+  .bottom-app-bar__navigation {
+    gap: 5px;
+  }
+
+  .bottom-app-bar__navigation .bottom-app-bar__aktion[aria-current="page"] {
+    width: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bottom-app-bar__navigation .bottom-app-bar__aktion,
+  .app-nav-label,
+  body.app-seite-austritt,
+  body.app-seite-eintritt.app-seite-eintritt--aktiv {
+    transition: none;
   }
 }

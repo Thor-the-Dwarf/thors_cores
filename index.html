@@ -3616,6 +3616,11 @@ projektreflexion mirror flag
           hash ^= schlüssel.charCodeAt(index);
           hash = Math.imul(hash, 16777619);
         }
+        hash ^= hash >>> 16;
+        hash = Math.imul(hash, 2246822507);
+        hash ^= hash >>> 13;
+        hash = Math.imul(hash, 3266489909);
+        hash ^= hash >>> 16;
         return (hash >>> 0) / 4294967296;
       }
 
@@ -3654,10 +3659,10 @@ projektreflexion mirror flag
       });
 
       const organischeAbstände = {
-        kompetenz: { min: 420, max: 760 },
-        themencluster: { min: 270, max: 520 },
-        thema: { min: 170, max: 350 },
-        core: { min: 92, max: 235 }
+        kompetenz: { min: 380, max: 700 },
+        themencluster: { min: 240, max: 470 },
+        thema: { min: 125, max: 300 },
+        core: { min: 48, max: 165 }
       };
       const positionen = new Array(graphKnoten.length);
       let nächsterWurzelIndex = 0;
@@ -3674,8 +3679,10 @@ projektreflexion mirror flag
           const abstand = organischeAbstände[knoten.typ];
           const winkel = deterministischerWert(`${knoten.id}:winkel`)
             * Math.PI * 2;
-          const radius = abstand.min + Math.sqrt(
-            deterministischerWert(`${knoten.id}:radius`)
+          const radiusZufall = deterministischerWert(`${knoten.id}:radius`);
+          const radius = abstand.min + Math.pow(
+            radiusZufall,
+            knoten.typ === "core" ? 1.7 : 1.15
           ) * (abstand.max - abstand.min);
           ankerX = elternPosition.ankerX + Math.cos(winkel) * radius;
           ankerY = elternPosition.ankerY + Math.sin(winkel) * radius;
@@ -4045,8 +4052,20 @@ projektreflexion mirror flag
             pb.ankerX - pa.ankerX,
             pb.ankerY - pa.ankerY
           );
-          const sollDistanz = Math.max(180, ankerDistanz * 0.88);
-          const kraft = (distanz - sollDistanz) * 0.0045 * alpha;
+          const kindTyp = graphKnoten[kante.b].typ;
+          const minimaleFederlänge = {
+            kompetenz: 320,
+            themencluster: 190,
+            thema: 105,
+            core: 58
+          }[kindTyp];
+          const federFaktor = kindTyp === "core" ? 0.72 : 0.84;
+          const sollDistanz = Math.max(
+            minimaleFederlänge,
+            ankerDistanz * federFaktor
+          );
+          const federkraft = kindTyp === "core" ? 0.010 : 0.0055;
+          const kraft = (distanz - sollDistanz) * federkraft * alpha;
           const fx = dx / distanz * kraft;
           const fy = dy / distanz * kraft;
           if (!pa.fixiert) {
@@ -4059,10 +4078,16 @@ projektreflexion mirror flag
           }
         });
 
-        positionen.forEach(punkt => {
+        positionen.forEach((punkt, index) => {
           if (punkt.fixiert) return;
-          punkt.vx += (punkt.ankerX - punkt.x) * 0.009 * alpha;
-          punkt.vy += (punkt.ankerY - punkt.y) * 0.0045 * alpha;
+          const knotenTyp = graphKnoten[index].typ;
+          const ankerkraft = knotenTyp === "core"
+            ? 0.0007
+            : knotenTyp === "thema"
+              ? 0.0018
+              : 0.0032;
+          punkt.vx += (punkt.ankerX - punkt.x) * ankerkraft * alpha;
+          punkt.vy += (punkt.ankerY - punkt.y) * ankerkraft * alpha;
           punkt.vx *= 0.76;
           punkt.vy *= 0.76;
           punkt.x = Math.max(
@@ -4076,7 +4101,7 @@ projektreflexion mirror flag
         });
       }
 
-      function layoutVorberechnen({ automatischEinpassen = false, schritte = 18 } = {}) {
+      function layoutVorberechnen({ automatischEinpassen = false, schritte = 26 } = {}) {
         raster.dataset.simulation = "wird-vorberechnet";
         for (let iteration = 0; iteration < schritte; iteration += 1) {
           const alpha = Math.max(0.16, 1 - iteration / schritte);
@@ -4857,7 +4882,7 @@ projektreflexion mirror flag
         einpassen();
       });
       einpassen();
-      layoutVorberechnen({ automatischEinpassen: true, schritte: 18 });
+      layoutVorberechnen({ automatischEinpassen: true, schritte: 26 });
 
     })();
   </script>

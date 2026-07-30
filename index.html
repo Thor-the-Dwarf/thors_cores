@@ -513,18 +513,21 @@
       grid-column: 1;
     }
 
-    .app.settings-offen {
+    .app.settings-offen,
+    .app.admin-offen {
       grid-template-columns:
         minmax(370px, 440px)
         minmax(0, 1fr)
         minmax(260px, 320px);
     }
 
-    .app.navigation-geschlossen.settings-offen {
+    .app.navigation-geschlossen.settings-offen,
+    .app.navigation-geschlossen.admin-offen {
       grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
     }
 
-    .app.navigation-geschlossen.settings-offen .settings-drawer {
+    .app.navigation-geschlossen.settings-offen .settings-drawer,
+    .app.navigation-geschlossen.admin-offen .admin-drawer {
       grid-column: 2;
     }
 
@@ -650,6 +653,7 @@
 
     .core-raster.fortschritt-prototyp .core-karte {
       --aktive-core-farbe: var(--prototyp-kategoriefarbe);
+      --knoten-farbe: var(--prototyp-kategoriefarbe);
     }
 
     .core-fortschrittsring {
@@ -737,12 +741,6 @@
 
     .core-karte h2 {
       display: none;
-    }
-
-    #fortschritts-prototyp,
-    #legende-umschalten,
-    .fortschrittslegende {
-      display: none !important;
     }
 
     .vault-knoten {
@@ -1026,7 +1024,8 @@
       color: #f3f6fb;
     }
 
-    .settings-drawer {
+    .settings-drawer,
+    .admin-drawer {
       position: relative;
       z-index: 12;
       display: none;
@@ -1045,15 +1044,47 @@
       touch-action: pan-x pan-y pinch-zoom;
     }
 
-    .app.settings-offen .settings-drawer {
+    .app.settings-offen .settings-drawer,
+    .app.admin-offen .admin-drawer {
       display: flex;
     }
 
-    .settings-drawer h2 {
+    .drawer-kopf {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .settings-drawer h2,
+    .admin-drawer h2 {
       margin: 0;
       color: #eef2f9;
       font-size: 0.9rem;
       font-weight: 800;
+    }
+
+    .drawer-schließen {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      border: 1px solid rgba(183, 195, 220, 0.2);
+      border-radius: 9px;
+      color: #eef2f9;
+      background: rgba(255, 255, 255, 0.035);
+      font: inherit;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .drawer-schließen:hover,
+    .drawer-schließen:focus-visible {
+      border-color: rgba(130, 166, 255, 0.58);
+      background: rgba(130, 166, 255, 0.14);
+      outline: none;
     }
 
     .fachrichtungs-einstellung {
@@ -1119,7 +1150,8 @@
       line-height: 1.45;
     }
 
-    .settings-drawer .entdeckungsaktion {
+    .settings-drawer .entdeckungsaktion,
+    .admin-drawer .entdeckungsaktion {
       width: 100%;
       min-height: 42px;
       display: flex;
@@ -1128,7 +1160,15 @@
       text-decoration: none;
     }
 
-    .app.quiz-auswahlmodus .settings-drawer {
+    .admin-hinweis {
+      margin: 0;
+      color: var(--gedimmt);
+      font-size: 0.72rem;
+      line-height: 1.5;
+    }
+
+    .app.quiz-auswahlmodus .settings-drawer,
+    .app.quiz-auswahlmodus .admin-drawer {
       display: none;
     }
 
@@ -1236,6 +1276,10 @@
       stroke-linejoin: round;
     }
 
+    .top-app-bar__settings.top-app-bar__settings--admin {
+      right: calc(max(10px, env(safe-area-inset-right, 0px)) + 46px);
+    }
+
     .app.quiz-auswahlmodus + .bottom-app-bar {
       opacity: 0;
       visibility: hidden;
@@ -1307,7 +1351,8 @@
         grid-template-columns: 1fr;
       }
 
-      .settings-drawer {
+      .settings-drawer,
+      .admin-drawer {
         position: fixed;
         z-index: 18;
         top: calc(var(--top-app-bar-höhe) + 12px);
@@ -1368,9 +1413,19 @@
 <body>
   <div class="top-app-bar" role="banner">
     <p class="top-app-bar__text">Wiederholung ist die Mutter des Lernens</p>
+    <button id="admin-umschalten"
+            class="top-app-bar__settings top-app-bar__settings--admin"
+            type="button" aria-controls="admin-drawer" aria-expanded="false"
+            aria-label="Admin öffnen" title="Admin">
+      <svg class="settings-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2.8 19 5.6v5.7c0 4.4-2.7 8.2-7 9.9-4.3-1.7-7-5.5-7-9.9V5.6L12 2.8Z"></path>
+        <circle cx="12" cy="10.5" r="2.2"></circle>
+        <path d="M12 12.7v3.2"></path>
+      </svg>
+    </button>
     <button id="settings-umschalten" class="top-app-bar__settings" type="button"
             aria-controls="settings-drawer" aria-expanded="false"
-            aria-label="Einstellungen öffnen">
+            aria-label="Einstellungen öffnen" title="Einstellungen">
       <svg class="settings-icon" viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="3"></circle>
         <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.86 2.86-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.55v-.09A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.86-2.86.06-.06A1.7 1.7 0 0 0 4.1 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H2.3V9.55h.1A1.7 1.7 0 0 0 4.1 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06L6.56 3.7l.06.06A1.7 1.7 0 0 0 8.5 4.1a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V2.3h4.05v.1A1.7 1.7 0 0 0 15 4.1a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.86 2.86-.06.06A1.7 1.7 0 0 0 19.4 8.5a1.7 1.7 0 0 0 .6 1 1.7 1.7 0 0 0 1.1.4h.1v4.05h-.1A1.7 1.7 0 0 0 19.4 15Z"></path>
@@ -1421,8 +1476,13 @@
       </div>
     </section>
 
-    <aside id="settings-drawer" class="settings-drawer" aria-label="Einstellungen">
-      <h2>Einstellungen</h2>
+    <aside id="settings-drawer" class="settings-drawer" aria-label="Einstellungen"
+           aria-hidden="true">
+      <div class="drawer-kopf">
+        <h2>Einstellungen</h2>
+        <button class="drawer-schließen" type="button"
+                aria-label="Einstellungen schließen">×</button>
+      </div>
       <div class="fachrichtungs-einstellung">
         <label for="fachrichtung-auswahl">Fachrichtung</label>
         <select id="fachrichtung-auswahl" aria-describedby="fachrichtungs-hinweis">
@@ -1438,10 +1498,20 @@
       </div>
       <button id="fortschritts-prototyp" class="entdeckungsaktion" type="button"
               aria-controls="core-raster fortschrittslegende"
-              aria-pressed="true">Fortschritte anzeigen</button>
+              aria-pressed="true">Fortschritte ausblenden</button>
       <button id="legende-umschalten" class="entdeckungsaktion" type="button"
               aria-controls="fortschrittslegende"
               aria-pressed="true">Legende anzeigen</button>
+    </aside>
+
+    <aside id="admin-drawer" class="admin-drawer" aria-label="Admin"
+           aria-hidden="true">
+      <div class="drawer-kopf">
+        <h2>Admin</h2>
+        <button class="drawer-schließen" type="button"
+                aria-label="Admin schließen">×</button>
+      </div>
+      <p class="admin-hinweis">Werkzeuge zur Pflege und Kontrolle des Lern-Vaults.</p>
       <a class="entdeckungsaktion" href="erd.html">ERD / Datenmodell anzeigen</a>
     </aside>
   </main>
@@ -1518,6 +1588,9 @@
       const app = document.querySelector(".app");
       const folderTreeUmschalten = document.querySelector("#folder-tree-umschalten");
       const settingsUmschalten = document.querySelector("#settings-umschalten");
+      const adminUmschalten = document.querySelector("#admin-umschalten");
+      const settingsDrawer = document.querySelector("#settings-drawer");
+      const adminDrawer = document.querySelector("#admin-drawer");
       const fachrichtungAuswahl = document.querySelector("#fachrichtung-auswahl");
       const quizAuswahlhinweis = document.querySelector("#quiz-auswahlhinweis");
       const quizAuswahlaktionen = document.querySelector("#quiz-auswahlaktionen");
@@ -1532,7 +1605,7 @@
       let aktiveThemenIds = new Set();
       let aktiverCoreIndex = null;
       let unterdrückterCoreKlick = null;
-      let fortschrittPrototypAktiv = false;
+      let fortschrittPrototypAktiv = true;
       let legendeEingeblendet = false;
       let quizAuswahlAktiv = false;
       let quizAußenPointerId = null;
@@ -1574,6 +1647,8 @@
         const sichtbar = fortschrittPrototypAktiv && legendeEingeblendet;
         fortschrittslegende.hidden = !sichtbar;
         legendeUmschalten.setAttribute("aria-pressed", String(legendeEingeblendet));
+        legendeUmschalten.textContent =
+          legendeEingeblendet ? "Legende ausblenden" : "Legende anzeigen";
         app.classList.toggle("legende-sichtbar", sichtbar);
         if (sichtbar) requestAnimationFrame(legendenPositionAktualisieren);
       }
@@ -1596,21 +1671,53 @@
         folderTreeSichtbarSetzen(app.classList.contains("navigation-geschlossen"));
       });
 
-      function settingsDrawerSichtbarSetzen(sichtbar, layoutAnpassen = true) {
-        app.classList.toggle("settings-offen", sichtbar);
-        settingsUmschalten.setAttribute("aria-expanded", String(sichtbar));
+      function drawerSichtbarSetzen(offenerDrawer = null, layoutAnpassen = true) {
+        const einstellungenSichtbar = offenerDrawer === "einstellungen";
+        const adminSichtbar = offenerDrawer === "admin";
+        app.classList.toggle("settings-offen", einstellungenSichtbar);
+        app.classList.toggle("admin-offen", adminSichtbar);
+        settingsUmschalten.setAttribute("aria-expanded", String(einstellungenSichtbar));
+        adminUmschalten.setAttribute("aria-expanded", String(adminSichtbar));
         settingsUmschalten.setAttribute(
           "aria-label",
-          sichtbar ? "Einstellungen schließen" : "Einstellungen öffnen"
+          einstellungenSichtbar ? "Einstellungen schließen" : "Einstellungen öffnen"
         );
+        adminUmschalten.setAttribute(
+          "aria-label",
+          adminSichtbar ? "Admin schließen" : "Admin öffnen"
+        );
+        settingsDrawer.setAttribute("aria-hidden", String(!einstellungenSichtbar));
+        adminDrawer.setAttribute("aria-hidden", String(!adminSichtbar));
         if (layoutAnpassen) {
           requestAnimationFrame(() => einpassen());
         }
       }
 
+      function settingsDrawerSichtbarSetzen(sichtbar, layoutAnpassen = true) {
+        drawerSichtbarSetzen(sichtbar ? "einstellungen" : null, layoutAnpassen);
+      }
+
       settingsUmschalten.addEventListener("click", () => {
         if (quizAuswahlAktiv) return;
         settingsDrawerSichtbarSetzen(!app.classList.contains("settings-offen"));
+      });
+
+      adminUmschalten.addEventListener("click", () => {
+        if (quizAuswahlAktiv) return;
+        drawerSichtbarSetzen(
+          app.classList.contains("admin-offen") ? null : "admin"
+        );
+      });
+
+      document.querySelectorAll(".drawer-schließen").forEach(knopf => {
+        knopf.addEventListener("click", () => drawerSichtbarSetzen());
+      });
+
+      document.addEventListener("keydown", ereignis => {
+        if (ereignis.key !== "Escape") return;
+        if (!app.classList.contains("settings-offen")
+          && !app.classList.contains("admin-offen")) return;
+        drawerSichtbarSetzen();
       });
 
       function einstellungenAusAdresseÖffnen(layoutAnpassen = true) {
@@ -3554,9 +3661,29 @@ projektreflexion mirror flag
       graphKnoten.forEach((knoten, index) => {
         const punkt = document.createElement("button");
         const beschriftung = document.createElement("span");
+        const fortschrittsring = knoten.typ === "core"
+          ? document.createElement("span")
+          : null;
         punkt.type = "button";
         punkt.className = `vault-knoten knoten-${knoten.typ}`;
-        if (knoten.typ === "core") punkt.classList.add("core-karte");
+        if (knoten.typ === "core") {
+          const fortschritt = beispielFortschritte[knoten.coreIndex];
+          const kategorie = beispielKategorien[knoten.coreIndex];
+          punkt.classList.add("core-karte");
+          punkt.style.setProperty("--prototyp-kategoriefarbe", kategorie.farbe);
+          punkt.style.setProperty(
+            "--core-fortschrittswinkel",
+            `${fortschritt * 3.6}deg`
+          );
+          punkt.style.setProperty(
+            "--core-fortschrittsring-sichtbar",
+            fortschritt === 0 ? "0" : "1"
+          );
+          punkt.dataset.fortschritt = fortschritt;
+          punkt.dataset.prototypKategorie = kategorie.name;
+          fortschrittsring.className = "core-fortschrittsring";
+          fortschrittsring.setAttribute("aria-hidden", "true");
+        }
         punkt.style.setProperty("--knoten-farbe", knoten.farbe);
         punkt.style.left = `${positionen[index].x}px`;
         punkt.style.top = `${positionen[index].y}px`;
@@ -3567,19 +3694,53 @@ projektreflexion mirror flag
         punkt.setAttribute(
           "aria-label",
           knoten.typ === "core"
-            ? knoten.titel
+            ? `${knoten.titel}, ${beispielFortschritte[knoten.coreIndex]} %`
             : `${knoten.typ === "themencluster" ? "Themencluster" : knoten.typ}: ${knoten.titel}`
         );
         beschriftung.className = "knoten-beschriftung";
         beschriftung.textContent = knoten.titel;
+        if (fortschrittsring) punkt.append(fortschrittsring);
         punkt.append(beschriftung);
         raster.append(punkt);
         knotenElemente.push(punkt);
       });
 
       function coreTooltipText(graphIndex) {
-        return graphKnoten[graphIndex].titel;
+        const knoten = graphKnoten[graphIndex];
+        return fortschrittPrototypAktiv
+          ? `${knoten.titel}\n${beispielFortschritte[knoten.coreIndex]} %`
+          : knoten.titel;
       }
+
+      function fortschrittsDarstellungAktualisieren() {
+        raster.classList.toggle("fortschritt-prototyp", fortschrittPrototypAktiv);
+        fortschrittsPrototyp.setAttribute(
+          "aria-pressed",
+          String(fortschrittPrototypAktiv)
+        );
+        fortschrittsPrototyp.textContent =
+          fortschrittPrototypAktiv
+            ? "Fortschritte ausblenden"
+            : "Fortschritte anzeigen";
+        knotenElemente.forEach((punkt, graphIndex) => {
+          const knoten = graphKnoten[graphIndex];
+          if (knoten.typ !== "core") return;
+          punkt.setAttribute(
+            "aria-label",
+            fortschrittPrototypAktiv
+              ? `${knoten.titel}, ${beispielFortschritte[knoten.coreIndex]} %`
+              : knoten.titel
+          );
+        });
+        legendenSichtbarkeitAnwenden();
+        tooltip.classList.remove("sichtbar");
+      }
+
+      fortschrittsDarstellungAktualisieren();
+      fortschrittsPrototyp.addEventListener("click", () => {
+        fortschrittPrototypAktiv = !fortschrittPrototypAktiv;
+        fortschrittsDarstellungAktualisieren();
+      });
 
       raster.addEventListener("pointerover", ereignis => {
         const punkt = ereignis.target.closest(".core-karte");
@@ -4031,6 +4192,10 @@ projektreflexion mirror flag
           "aria-pressed",
           String(fortschrittPrototypAktiv)
         );
+        fortschrittsPrototyp.textContent =
+          fortschrittPrototypAktiv
+            ? "Fortschritte ausblenden"
+            : "Fortschritte anzeigen";
         legendenSichtbarkeitAnwenden();
         knotenElemente.forEach((punkt, index) => {
           punkt.setAttribute("aria-label", coreBeschriftung(index));

@@ -578,6 +578,35 @@
       line-height: 1.35;
     }
 
+    .anforderungs-verhaltensdetails {
+      min-width: 0;
+      margin: 4px 0 2px;
+      padding: 7px 8px;
+      border: 1px solid rgba(183, 195, 220, 0.2);
+      border-radius: 5px;
+      background: rgba(13, 21, 34, 0.42);
+      color: #c8d5e5;
+      font-size: 0.92em;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .anforderungs-verhaltensdetails strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #e8eef8;
+      font-weight: 760;
+    }
+
+    .anforderungs-verhaltensdetails ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+
+    .anforderungs-verhaltensdetails li + li {
+      margin-top: 3px;
+    }
+
     .anforderungs-prüfkriterium {
       margin-top: 2px;
       padding: 5px 7px;
@@ -1832,6 +1861,17 @@
                 <span class="anforderungs-kurztext">
                   Bei jeder Auswahl im Vault ändert sich ausschließlich die Hervorhebung der passenden Elemente.
                 </span>
+                <div class="anforderungs-verhaltensdetails">
+                  <strong>Erwartetes Verhalten:</strong>
+                  <ul>
+                    <li>Auswahlen von Lernfeld, Kompetenz, Cluster oder Thema ändern ausschließlich den Hervorhebungszustand.</li>
+                    <li>Die vorhandenen Knotenkoordinaten bleiben unverändert.</li>
+                    <li>Es startet weder eine radiale Neuordnung noch eine Physik- oder Layoutsimulation.</li>
+                    <li>Die dargestellte Elementmenge bleibt vollständig; die Auswahl filtert keine Elemente heraus.</li>
+                    <li>Der aktuelle Pan- und Zoomzustand wird nicht zurückgesetzt.</li>
+                    <li>Der bestehende Layout- und Simulationszustand bleibt insgesamt erhalten.</li>
+                  </ul>
+                </div>
                 <span class="anforderungs-prüfkriterium">
                   <strong>Prüfkriterium:</strong>
                   Nach Lernfeld-, Kompetenz-, Cluster- oder Themenauswahl bleiben dieselbe Elementanordnung, Physik/Simulation sowie der aktuelle Pan- und Zoomzustand erhalten; nur die Hervorhebung wechselt.

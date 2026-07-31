@@ -886,7 +886,7 @@
       display: none;
     }
 
-    .core-raster:not(.detailansicht) .knoten-beschriftung {
+    .core-raster .knoten-beschriftung {
       display: none;
     }
 
@@ -3895,9 +3895,9 @@ projektreflexion mirror flag
         knotenElemente.push(punkt);
       });
 
-      function coreTooltipText(graphIndex) {
+      function knotenTooltipText(graphIndex) {
         const knoten = graphKnoten[graphIndex];
-        return fortschrittPrototypAktiv
+        return knoten.typ === "core" && fortschrittPrototypAktiv
           ? `${knoten.titel}\n${beispielFortschritte[knoten.coreIndex]} %`
           : knoten.titel;
       }
@@ -3940,20 +3940,20 @@ projektreflexion mirror flag
       });
 
       raster.addEventListener("pointerover", ereignis => {
-        const punkt = ereignis.target.closest(".core-karte");
+        const punkt = ereignis.target.closest(".vault-knoten");
         if (!punkt || punkt.contains(ereignis.relatedTarget)) return;
-        tooltip.textContent = coreTooltipText(Number(punkt.dataset.index));
+        tooltip.textContent = knotenTooltipText(Number(punkt.dataset.index));
         tooltip.classList.add("sichtbar");
         tooltip.style.left = `${ereignis.clientX}px`;
         tooltip.style.top = `${ereignis.clientY + 16}px`;
       });
       raster.addEventListener("pointermove", ereignis => {
-        if (!ereignis.target.closest(".core-karte")) return;
+        if (!ereignis.target.closest(".vault-knoten")) return;
         tooltip.style.left = `${ereignis.clientX}px`;
         tooltip.style.top = `${ereignis.clientY + 16}px`;
       });
       raster.addEventListener("pointerout", ereignis => {
-        const punkt = ereignis.target.closest(".core-karte");
+        const punkt = ereignis.target.closest(".vault-knoten");
         if (punkt &&
             !punkt.contains(ereignis.relatedTarget) &&
             !tooltip.contains(ereignis.relatedTarget)) {
@@ -3964,16 +3964,16 @@ projektreflexion mirror flag
         tooltip.classList.remove("sichtbar");
       });
       raster.addEventListener("focusin", ereignis => {
-        const punkt = ereignis.target.closest(".core-karte");
+        const punkt = ereignis.target.closest(".vault-knoten");
         if (!punkt) return;
         const rechteck = punkt.getBoundingClientRect();
-        tooltip.textContent = coreTooltipText(Number(punkt.dataset.index));
+        tooltip.textContent = knotenTooltipText(Number(punkt.dataset.index));
         tooltip.style.left = `${rechteck.left + rechteck.width / 2}px`;
         tooltip.style.top = `${rechteck.bottom + 12}px`;
         tooltip.classList.add("sichtbar");
       });
       raster.addEventListener("focusout", ereignis => {
-        if (ereignis.target.closest(".core-karte")) tooltip.classList.remove("sichtbar");
+        if (ereignis.target.closest(".vault-knoten")) tooltip.classList.remove("sichtbar");
       });
       raster.addEventListener("click", ereignis => {
         const punkt = ereignis.target.closest(".core-karte");

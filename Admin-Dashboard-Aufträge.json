@@ -89,6 +89,22 @@
       "titel": "Implementierungsplan pro To Do",
       "status": "backlog",
       "beschreibung": "Jede To-Do-Aufgabe soll künftig zusätzlich zu Titel und Status einen verständlichen, schrittweisen Implementierungsplan enthalten. Der Plan muss für den Nutzer klar lesbar und für einen ausführenden Agenten unmittelbar handlungsfähig sein: mit Ziel, konkreten Arbeitsschritten, Prüfung und Abnahme sowie klaren Grenzen. In der To-Do-Ansicht soll er aufklappbar lesbar sein, ohne die flache Übersicht zu überladen. Bestehende Aufgaben erhalten schrittweise solche Pläne."
+    },
+    {
+      "id": "vault-titel-als-hovertexte",
+      "kennung": "T-013",
+      "kommunikationsnummer": 5,
+      "titel": "Alle Vault-Titel als Hover-Texte anzeigen",
+      "status": "done",
+      "arbeitszeitpunkt": "2026-08-01T00:43:31+02:00",
+      "abschlusszeitpunkt": "2026-08-01T00:46:49+02:00",
+      "beschreibung": "Die Titel aller Vault-Knotentypen werden nicht dauerhaft im Knoten gezeigt, sondern beim Überfahren sowie beim Tastaturfokus als Tooltip eingeblendet.",
+      "abschlussbericht": "Die dauerhaft sichtbaren Titel wurden für Lernfelder, Kompetenzbereiche, Themencluster, Themen und Cores ausgeblendet. Das vorhandene Vault-Tooltip zeigt den jeweiligen Titel beim Überfahren und beim Tastaturfokus; bei Cores bleibt der optional sichtbare Fortschrittswert erhalten. Der aktive Checkout wurde lokal im Browser mit allen fünf Knotentypen und ohne Konsolenfehler geprüft.",
+      "status_nachweis": {
+        "integriert_im_aktiven_checkout": true,
+        "browser_bestaetigt": true,
+        "browser_pruefung": "Alle 1.511 Vault-Knoten ohne feste Beschriftung; korrekte Tooltips für Lernfeld, Kompetenzbereich, Themencluster, Thema und Core; keine Konsolenfehler"
+      }
     }
   ]
 }

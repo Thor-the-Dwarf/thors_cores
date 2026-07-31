@@ -544,6 +544,11 @@
       font-size: 0.9em;
     }
 
+    .anforderungs-datei > summary::after {
+      content: "▤";
+      color: #b7c3dc;
+    }
+
     .anforderungs-ordner > summary:focus-visible,
     .anforderungs-eintrag > summary:focus-visible {
       outline: 2px solid #7edcf5;
@@ -1833,108 +1838,209 @@
     </section>
     <section class="dashboard-fläche" data-anforderungsart="gemeinsam">
       <span class="kachel-label">Anforderungen</span>
-      <div class="anforderungs-baum" aria-label="Anforderungen nach Bereich">
+      <div class="anforderungs-baum" aria-label="Anforderungen im Repository-Baum">
         <details class="anforderungs-ordner" open>
-          <summary>GUI</summary>
+          <summary>Thors_Cores_v03/</summary>
           <div class="anforderungs-ordner-inhalt">
-            <details class="anforderungs-eintrag">
-              <summary>App Bars bleiben dauerhaft sichtbar</summary>
-              <div class="anforderungs-inhalt">
-                <span class="anforderungs-titel">App Bars bleiben dauerhaft sichtbar</span>
-                <span class="anforderungs-kurztext">
-                  Die obere und untere App Bar bleiben auf jeder Seite beim Scrollen sichtbar.
-                </span>
-                <span class="anforderungs-prüfkriterium">
-                  <strong>Prüfkriterium:</strong>
-                  Nur der Inhalt zwischen den App Bars bewegt sich beim Scrollen.
-                </span>
-                <span class="anforderungs-metadaten">
-                  <span>Funktional</span>
-                  <span>Must have</span>
-                </span>
+            <details class="anforderungs-ordner anforderungs-datei">
+              <summary>index.html</summary>
+              <div class="anforderungs-ordner-inhalt">
+                <details class="anforderungs-eintrag">
+                  <summary>Vault-Auswahl bewahrt Ansicht und Layout</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Vault-Auswahl bewahrt Ansicht und Layout</span>
+                    <span class="anforderungs-kurztext">Bei jeder Auswahl im Vault ändert sich ausschließlich die Hervorhebung der passenden Elemente.</span>
+                    <div class="anforderungs-verhaltensdetails">
+                      <strong>Erwartetes Verhalten:</strong>
+                      <ul>
+                        <li>Auswahlen von Lernfeld, Kompetenz, Cluster oder Thema ändern ausschließlich den Hervorhebungszustand.</li>
+                        <li>Die vorhandenen Knotenkoordinaten bleiben unverändert.</li>
+                        <li>Es startet weder eine radiale Neuordnung noch eine Physik- oder Layoutsimulation.</li>
+                        <li>Die dargestellte Elementmenge bleibt vollständig; die Auswahl filtert keine Elemente heraus.</li>
+                        <li>Der aktuelle Pan- und Zoomzustand wird nicht zurückgesetzt.</li>
+                        <li>Der bestehende Layout- und Simulationszustand bleibt insgesamt erhalten.</li>
+                      </ul>
+                    </div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Nach Lernfeld-, Kompetenz-, Cluster- oder Themenauswahl bleiben dieselbe Elementanordnung, Physik/Simulation sowie der aktuelle Pan- und Zoomzustand erhalten; nur die Hervorhebung wechselt.</span>
+                    <span class="anforderungs-metadaten"><span>Funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
+                <details class="anforderungs-eintrag">
+                  <summary>Vault bleibt eine Pan-/Zoom-Ansicht ohne Core-Drag</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Vault bleibt eine Pan-/Zoom-Ansicht ohne Core-Drag</span>
+                    <span class="anforderungs-kurztext">Nutzende bewegen die Ansicht, nicht einzelne Cores.</span>
+                    <div class="anforderungs-verhaltensdetails"><strong>Erwartetes Verhalten:</strong><ul><li>Pan und Zoom bleiben nutzbar.</li><li>Cores lassen sich nicht per Drag verschieben.</li></ul></div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Ziehen auf der Arbeitsfläche verschiebt die Ansicht; ein Core behält seine Position.</span>
+                    <span class="anforderungs-metadaten"><span>Funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
+                <details class="anforderungs-eintrag">
+                  <summary>Legende, Fortschritt und Raster bleiben unabhängig</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Legende, Fortschritt und Raster bleiben unabhängig</span>
+                    <span class="anforderungs-kurztext">Jede Darstellungsoption wird separat gesteuert.</span>
+                    <div class="anforderungs-verhaltensdetails"><strong>Erwartetes Verhalten:</strong><ul><li>Jeder Schalter verändert nur seine eigene Anzeige.</li><li>Die drei Zustände bleiben unabhängig gespeichert.</li></ul></div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Alle acht Schalterkombinationen zeigen jeweils die gewählten Zustände.</span>
+                    <span class="anforderungs-metadaten"><span>Funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
+                <details class="anforderungs-eintrag">
+                  <summary>Fünf JSON-Datenquellen und Fallback bleiben synchron</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Fünf JSON-Datenquellen und Fallback bleiben synchron</span>
+                    <span class="anforderungs-kurztext">Der eingebettete Fallback entspricht den produktiven JSON-Dateien.</span>
+                    <div class="anforderungs-verhaltensdetails">
+                      <strong>Betroffene Dateien:</strong>
+                      <ul><li>Lernfelder.json, Themen.json, Cores.json, Core-Ausprägungen.json und Quellen.json.</li><li>Der in index.html eingebettete Fallback enthält denselben Datenstand.</li></ul>
+                    </div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Ein strukturierter Vergleich meldet für alle fünf Dateien keine Abweichung zum Fallback.</span>
+                    <span class="anforderungs-metadaten"><span>Nicht funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
               </div>
             </details>
-            <details class="anforderungs-eintrag">
-              <summary>Vault-Auswahl bewahrt Ansicht und Layout</summary>
-              <div class="anforderungs-inhalt">
-                <span class="anforderungs-titel">Vault-Auswahl bewahrt Ansicht und Layout</span>
-                <span class="anforderungs-kurztext">
-                  Bei jeder Auswahl im Vault ändert sich ausschließlich die Hervorhebung der passenden Elemente.
-                </span>
-                <div class="anforderungs-verhaltensdetails">
-                  <strong>Erwartetes Verhalten:</strong>
-                  <ul>
-                    <li>Auswahlen von Lernfeld, Kompetenz, Cluster oder Thema ändern ausschließlich den Hervorhebungszustand.</li>
-                    <li>Die vorhandenen Knotenkoordinaten bleiben unverändert.</li>
-                    <li>Es startet weder eine radiale Neuordnung noch eine Physik- oder Layoutsimulation.</li>
-                    <li>Die dargestellte Elementmenge bleibt vollständig; die Auswahl filtert keine Elemente heraus.</li>
-                    <li>Der aktuelle Pan- und Zoomzustand wird nicht zurückgesetzt.</li>
-                    <li>Der bestehende Layout- und Simulationszustand bleibt insgesamt erhalten.</li>
-                  </ul>
-                </div>
-                <span class="anforderungs-prüfkriterium">
-                  <strong>Prüfkriterium:</strong>
-                  Nach Lernfeld-, Kompetenz-, Cluster- oder Themenauswahl bleiben dieselbe Elementanordnung, Physik/Simulation sowie der aktuelle Pan- und Zoomzustand erhalten; nur die Hervorhebung wechselt.
-                </span>
-                <span class="anforderungs-metadaten">
-                  <span>Funktional</span>
-                  <span>Must have</span>
-                </span>
+
+            <details class="anforderungs-ordner anforderungs-datei">
+              <summary>app-navigation.css</summary>
+              <div class="anforderungs-ordner-inhalt">
+                <details class="anforderungs-eintrag">
+                  <summary>App Bars bleiben dauerhaft sichtbar</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">App Bars bleiben dauerhaft sichtbar</span>
+                    <span class="anforderungs-kurztext">Die obere und untere App Bar bleiben auf jeder Seite beim Scrollen sichtbar.</span>
+                    <div class="anforderungs-verhaltensdetails"><strong>Erwartetes Verhalten:</strong><ul><li>Die Navigation bleibt mittig zentriert.</li><li>Die Bars verschieben sich beim Scrollen nicht.</li><li>Betroffen: app-navigation.css, app-page-navigation.js, index.html, artefakte.html und lernwelt.html.</li></ul></div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Nur der Inhalt zwischen den App Bars bewegt sich beim Scrollen.</span>
+                    <span class="anforderungs-metadaten"><span>Funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
               </div>
             </details>
-          </div>
-        </details>
-        <details class="anforderungs-ordner" open>
-          <summary>Backend</summary>
-          <div class="anforderungs-ordner-inhalt">
-            <details class="anforderungs-eintrag">
-              <summary>Pseudo-Anforderung F2</summary>
-              <div class="anforderungs-inhalt">
-                <span class="anforderungs-titel">Pseudo-Anforderung F2</span>
-                <span class="anforderungs-kurztext">Platzhalter für eine funktionale Backend-Anforderung.</span>
-                <span class="anforderungs-prüfkriterium">
-                  <strong>Prüfkriterium:</strong>
-                  Die beschriebene Backend-Funktion lässt sich nachvollziehbar ausführen.
-                </span>
-                <span class="anforderungs-metadaten">
-                  <span>Funktional</span>
-                  <span>Should have</span>
-                </span>
+
+            <details class="anforderungs-ordner anforderungs-datei">
+              <summary>artefakte.html</summary>
+              <div class="anforderungs-ordner-inhalt">
+                <details class="anforderungs-eintrag">
+                  <summary>Artefakte zeigen konkrete Materialien</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Artefakte zeigen konkrete Materialien</span>
+                    <span class="anforderungs-kurztext">Einträge benennen echte Dokumente und Anschauungsmaterialien.</span>
+                    <div class="anforderungs-verhaltensdetails"><strong>Erwartetes Verhalten:</strong><ul><li>Keine Aktivitäten oder erfundenen Materialien.</li><li>Relevanz wird ausschließlich mit 🔥 markiert.</li></ul></div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Jeder sichtbare Eintrag verweist auf ein konkretes Material; weitere Relevanztexte fehlen.</span>
+                    <span class="anforderungs-metadaten"><span>Funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
+                <details class="anforderungs-eintrag">
+                  <summary>Sichtbare Labels bleiben fachlich und sauber</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Sichtbare Labels bleiben fachlich und sauber</span>
+                    <span class="anforderungs-kurztext">Technische Dateidetails bleiben aus der Oberfläche heraus.</span>
+                    <div class="anforderungs-verhaltensdetails"><strong>Erwartetes Verhalten:</strong><ul><li>Keine Dateiendungen oder führenden technischen Präfixe.</li><li>Fachliche Kennungen wie FIAE und FISI bleiben erhalten.</li></ul></div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Alle sichtbaren Materialnamen sind ohne Endung und technisches Startpräfix lesbar.</span>
+                    <span class="anforderungs-metadaten"><span>Nicht funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
               </div>
             </details>
-          </div>
-        </details>
-        <details class="anforderungs-ordner" open>
-          <summary>Datenbank</summary>
-          <div class="anforderungs-ordner-inhalt">
-            <details class="anforderungs-eintrag">
-              <summary>Pseudo-Anforderung NF1</summary>
-              <div class="anforderungs-inhalt">
-                <span class="anforderungs-titel">Pseudo-Anforderung NF1</span>
-                <span class="anforderungs-kurztext">Platzhalter für eine nicht funktionale Datenbank-Anforderung.</span>
-                <span class="anforderungs-prüfkriterium">
-                  <strong>Prüfkriterium:</strong>
-                  Die festgelegte Qualitätsanforderung an die Datenbank ist messbar erfüllt.
-                </span>
-                <span class="anforderungs-metadaten">
-                  <span>Nicht funktional</span>
-                  <span>Could have</span>
-                </span>
+
+            <details class="anforderungs-ordner anforderungs-datei">
+              <summary>lernwelt.html</summary>
+              <div class="anforderungs-ordner-inhalt">
+                <details class="anforderungs-eintrag">
+                  <summary>Lernwelt bleibt eigener erreichbarer Bereich</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Lernwelt bleibt eigener erreichbarer Bereich</span>
+                    <span class="anforderungs-kurztext">Die Lernwelt ist über die App-Navigation erreichbar und visuell Teil der App.</span>
+                    <div class="anforderungs-verhaltensdetails"><strong>Erwartetes Verhalten:</strong><ul><li>Eigener Navigationseintrag und eigene Ansicht.</li><li>Obere und untere App Bar entsprechen der passenden Vault-Optik.</li></ul></div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Der Lernwelt-Link öffnet die Ansicht; Bars und aktive Navigation bleiben sichtbar.</span>
+                    <span class="anforderungs-metadaten"><span>Funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
               </div>
             </details>
-            <details class="anforderungs-eintrag">
-              <summary>Pseudo-Anforderung NF2</summary>
-              <div class="anforderungs-inhalt">
-                <span class="anforderungs-titel">Pseudo-Anforderung NF2</span>
-                <span class="anforderungs-kurztext">Weiterer Platzhalter für eine nicht funktionale Datenbank-Anforderung.</span>
-                <span class="anforderungs-prüfkriterium">
-                  <strong>Prüfkriterium:</strong>
-                  Die festgelegte Qualitätsanforderung an die Datenbank ist überprüfbar dokumentiert.
-                </span>
-                <span class="anforderungs-metadaten">
-                  <span>Nicht funktional</span>
-                  <span>Won’t have</span>
-                </span>
+
+            <details class="anforderungs-ordner anforderungs-datei">
+              <summary>Cores.json</summary>
+              <div class="anforderungs-ordner-inhalt">
+                <details class="anforderungs-eintrag">
+                  <summary>Cores bleiben gleichwertig und statuslos</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Cores bleiben gleichwertig und statuslos</span>
+                    <span class="anforderungs-kurztext">Kein Core erhält einen fachlichen Rang oder Bearbeitungsstatus.</span>
+                    <div class="anforderungs-verhaltensdetails"><strong>Betroffene Dateien:</strong><ul><li>Cores.json, Core-Ausprägungen.json und index.html.</li><li>Keine Kern-/Ergänzungslogik und kein Statusfeld.</li></ul></div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Daten und Darstellung enthalten keine Core-Hierarchie oder Core-Statuslogik.</span>
+                    <span class="anforderungs-metadaten"><span>Nicht funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
+              </div>
+            </details>
+
+            <details class="anforderungs-ordner anforderungs-datei">
+              <summary>Admin-Dashboard-Aufträge.json</summary>
+              <div class="anforderungs-ordner-inhalt">
+                <details class="anforderungs-eintrag">
+                  <summary>Dashboard-Status und Nachweise bleiben wahrheitsgemäß</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Dashboard-Status und Nachweise bleiben wahrheitsgemäß</span>
+                    <span class="anforderungs-kurztext">Status und Belege zeigen nur tatsächlich erreichte Arbeitsstände.</span>
+                    <div class="anforderungs-verhaltensdetails"><strong>Erwartetes Verhalten:</strong><ul><li>Offene Aufgaben haben keine Nachweise.</li><li>Erledigte Aufgaben besitzen nachvollziehbare Nachweise.</li></ul></div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> To Do und Backlog zeigen keinen Nachweis; Done-Aufgaben mit Nachweisordner öffnen ihre Belege.</span>
+                    <span class="anforderungs-metadaten"><span>Nicht funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
+                <details class="anforderungs-eintrag">
+                  <summary>Backlog bleibt als noch nicht aktuelle Arbeit erkennbar</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Backlog bleibt als noch nicht aktuelle Arbeit erkennbar</span>
+                    <span class="anforderungs-kurztext">Zukünftige Aufgaben werden nicht vorzeitig als aktuell oder erledigt ausgegeben.</span>
+                    <div class="anforderungs-verhaltensdetails"><strong>Erwartetes Verhalten:</strong><ul><li>Backlog-Aufgaben bleiben Backlog, bis sie bewusst nach To Do verschoben werden.</li><li>Der Dateistatus bleibt unverändert; lokale Übergänge werden separat gespeichert.</li></ul></div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Ohne Nutzeraktion erscheinen die JSON-Backlog-Aufgaben ausschließlich im Backlog.</span>
+                    <span class="anforderungs-metadaten"><span>Funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
+              </div>
+            </details>
+
+            <details class="anforderungs-ordner anforderungs-datei">
+              <summary>admin-dashboard.html</summary>
+              <div class="anforderungs-ordner-inhalt">
+                <details class="anforderungs-eintrag">
+                  <summary>Backlog wechselt per Drag-and-drop lokal nach To Do</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Backlog wechselt per Drag-and-drop lokal nach To Do</span>
+                    <span class="anforderungs-kurztext">Ein bewusster Drop verschiebt genau eine Aufgabe.</span>
+                    <div class="anforderungs-verhaltensdetails"><strong>Erwartetes Verhalten:</strong><ul><li>Die Aufgabe verschwindet aus dem Backlog und erscheint einmal in To Do.</li><li>Der Zustand bleibt nach Neuladen lokal erhalten.</li></ul></div>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Nach Drop und Reload existiert die Aufgabe genau einmal in To Do und nicht mehr im Backlog.</span>
+                    <span class="anforderungs-metadaten"><span>Funktional</span><span>Must have</span></span>
+                  </div>
+                </details>
+                <details class="anforderungs-eintrag">
+                  <summary>Pseudo-Anforderung F2</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Pseudo-Anforderung F2</span>
+                    <span class="anforderungs-kurztext">Platzhalter für eine funktionale Backend-Anforderung.</span>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Die beschriebene Backend-Funktion lässt sich nachvollziehbar ausführen.</span>
+                    <span class="anforderungs-metadaten"><span>Funktional</span><span>Should have</span></span>
+                  </div>
+                </details>
+                <details class="anforderungs-eintrag">
+                  <summary>Pseudo-Anforderung NF1</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Pseudo-Anforderung NF1</span>
+                    <span class="anforderungs-kurztext">Platzhalter für eine nicht funktionale Datenbank-Anforderung.</span>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Die festgelegte Qualitätsanforderung an die Datenbank ist messbar erfüllt.</span>
+                    <span class="anforderungs-metadaten"><span>Nicht funktional</span><span>Could have</span></span>
+                  </div>
+                </details>
+                <details class="anforderungs-eintrag">
+                  <summary>Pseudo-Anforderung NF2</summary>
+                  <div class="anforderungs-inhalt">
+                    <span class="anforderungs-titel">Pseudo-Anforderung NF2</span>
+                    <span class="anforderungs-kurztext">Weiterer Platzhalter für eine nicht funktionale Datenbank-Anforderung.</span>
+                    <span class="anforderungs-prüfkriterium"><strong>Prüfkriterium:</strong> Die festgelegte Qualitätsanforderung an die Datenbank ist überprüfbar dokumentiert.</span>
+                    <span class="anforderungs-metadaten"><span>Nicht funktional</span><span>Won’t have</span></span>
+                  </div>
+                </details>
               </div>
             </details>
           </div>

@@ -613,7 +613,7 @@
       border-radius: 50%;
       background: transparent;
       cursor: help;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(var(--core-symbol-skala, 1));
       isolation: isolate;
       --aktive-core-farbe: var(--core-kategoriefarbe, var(--core-farbe));
       transition: transform 140ms ease, opacity 180ms ease;
@@ -886,7 +886,6 @@
       display: none;
     }
 
-    .core-raster:not(.detailansicht) .core-symbol,
     .core-raster:not(.detailansicht) .knoten-beschriftung {
       display: none;
     }
@@ -1167,6 +1166,43 @@
       color: var(--gedimmt);
       font-size: 0.72rem;
       line-height: 1.5;
+    }
+
+    .admin-dashboard-aktion {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border: 1px solid rgba(70, 215, 255, 0.34);
+      border-radius: 11px;
+      color: #dff8ff;
+      background: rgba(70, 215, 255, 0.09);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 760;
+      text-decoration: none;
+    }
+
+    .admin-dashboard-aktion svg {
+      width: 23px;
+      height: 23px;
+      flex: 0 0 auto;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .admin-dashboard-aktion:hover,
+    .admin-dashboard-aktion:focus-visible {
+      border-color: rgba(70, 215, 255, 0.72);
+      color: #ffffff;
+      background: rgba(70, 215, 255, 0.16);
+      outline: 2px solid rgba(70, 215, 255, 0.24);
+      outline-offset: 2px;
     }
 
     .app.quiz-auswahlmodus .settings-drawer,
@@ -1518,6 +1554,15 @@
       </div>
       <p class="admin-hinweis">Werkzeuge zur Pflege und Kontrolle des Lern-Vaults.</p>
       <a class="entdeckungsaktion" href="erd.html">ERD / Datenmodell anzeigen</a>
+      <a class="admin-dashboard-aktion" href="admin-dashboard.html"
+         aria-label="Admin-Dashboard öffnen" title="Admin-Dashboard">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="4" width="5" height="16" rx="1.5"></rect>
+          <rect x="10" y="4" width="5" height="10" rx="1.5"></rect>
+          <rect x="17" y="4" width="4" height="13" rx="1.5"></rect>
+        </svg>
+        <span>Admin-Dashboard</span>
+      </a>
     </aside>
   </main>
   <footer class="bottom-app-bar bottom-app-bar--mit-menü" aria-label="App-Navigation">
@@ -4306,13 +4351,9 @@ projektreflexion mirror flag
         if (quizAuswahlAktiv) return;
         coreMenüSchließen();
         const zurücksetzen = aktivesThema === fokusId;
-        if (aktivesThema) globalePositionenWiederherstellen();
         aktivesThema = zurücksetzen ? null : fokusId;
         aktiveThemenIds = new Set(zurücksetzen ? [] : themaIds);
-        raster.classList.toggle(
-          "lernfeld-radialfokus",
-          !zurücksetzen && fokusId.startsWith("lernfeld:")
-        );
+        raster.classList.remove("lernfeld-radialfokus");
         document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
           schaltfläche.setAttribute(
             "aria-pressed",
@@ -4320,13 +4361,6 @@ projektreflexion mirror flag
           );
         });
         fokusDarstellungAktualisieren();
-        if (!zurücksetzen && fokusId.startsWith("lernfeld:")) {
-          const radialIndizes = lernfeldRadialAnordnen(fokusId, themaIds);
-          einpassen(radialIndizes);
-        } else {
-          graphElementeAktualisieren();
-          einpassen();
-        }
       }
 
       function bereichsfokusZurücksetzen() {
@@ -4334,13 +4368,10 @@ projektreflexion mirror flag
         aktivesThema = null;
         aktiveThemenIds = new Set();
         raster.classList.remove("lernfeld-radialfokus");
-        globalePositionenWiederherstellen();
         document.querySelectorAll(".thema-fokus, .lernfeld-zeile").forEach(schaltfläche => {
           schaltfläche.setAttribute("aria-pressed", "false");
         });
         fokusDarstellungAktualisieren();
-        graphElementeAktualisieren();
-        einpassen();
       }
 
       function fokusDarstellungAktualisieren() {
@@ -4847,6 +4878,10 @@ projektreflexion mirror flag
 
       function transformationAnwenden() {
         raster.style.transform = `translate(${verschiebungX}px, ${verschiebungY}px) scale(${zoom})`;
+        raster.style.setProperty(
+          "--core-symbol-skala",
+          Math.max(1, Math.min(2.4, 0.34 / zoom)).toFixed(3)
+        );
         raster.classList.toggle("detailansicht", zoom >= 0.16);
         radialMenüPositionieren();
       }

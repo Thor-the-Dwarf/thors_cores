@@ -420,6 +420,44 @@
       text-decoration: none;
     }
 
+    .admin-dashboard-aktion {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 12px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border: 1px solid rgba(70, 215, 255, 0.34);
+      border-radius: 11px;
+      color: #dff8ff;
+      background: rgba(70, 215, 255, 0.09);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 760;
+      text-decoration: none;
+    }
+
+    .admin-dashboard-aktion svg {
+      width: 23px;
+      height: 23px;
+      flex: 0 0 auto;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .admin-dashboard-aktion:hover,
+    .admin-dashboard-aktion:focus-visible {
+      border-color: rgba(70, 215, 255, 0.72);
+      color: #ffffff;
+      background: rgba(70, 215, 255, 0.16);
+      outline: 2px solid rgba(70, 215, 255, 0.24);
+      outline-offset: 2px;
+    }
+
     .auswahl-drawer select:focus-visible,
     .drawer-aktion:focus-visible {
       border-color: rgba(70, 215, 255, 0.72);
@@ -614,8 +652,17 @@
       <h2 id="admin-titel">Admin</h2>
       <button class="drawer-schließen" type="button" data-drawer-schließen
               aria-label="Admin schließen">×</button>
-    </div>
+      </div>
     <a class="drawer-aktion" href="erd.html">ERD / Datenbankschema</a>
+    <a class="admin-dashboard-aktion" href="admin-dashboard.html"
+       aria-label="Admin-Dashboard öffnen" title="Admin-Dashboard">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="4" width="5" height="16" rx="1.5"></rect>
+        <rect x="10" y="4" width="5" height="10" rx="1.5"></rect>
+        <rect x="17" y="4" width="4" height="13" rx="1.5"></rect>
+      </svg>
+      <span>Admin-Dashboard</span>
+    </a>
   </aside>
 
   <footer class="bottom-app-bar" aria-label="App-Navigation">

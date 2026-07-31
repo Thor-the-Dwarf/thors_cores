@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-07-31",
+  "auftraege": [
+    {
+      "id": "admin-dashboard-wall-bereinigen",
+      "kennung": "T-001",
+      "titel": "Dashboard-Wall auf ausschließlich verlangte Kacheln bereinigen",
+      "status": "done",
+      "beschreibung": "Die Wall zeigt flächenfüllend und lückenlos ausschließlich die fünf verlangten Kacheln."
+    },
+    {
+      "id": "sichtbare-core-icons",
+      "kennung": "T-002",
+      "titel": "Sichtbare individuelle Core-Icons im Vault herstellen",
+      "status": "done",
+      "beschreibung": "Die individuellen Core-Icons sind im Vault sichtbar."
+    },
+    {
+      "id": "radiales-statisches-vault-layout",
+      "kennung": "T-003",
+      "titel": "Radiales, statisches Vault-Layout mit Grid-Schalter",
+      "status": "done",
+      "beschreibung": "Das statische radiale Vault-Layout einschließlich Grid-Schalter ist umgesetzt."
+    },
+    {
+      "id": "vault-darstellung-angleichen",
+      "kennung": "T-004",
+      "titel": "Unabhängige Fortschritts-/Legenden-/Raster-Schalter und 1px-Linien",
+      "status": "done",
+      "beschreibung": "Die drei Schalter arbeiten unabhängig; die Linien sind auf 1px vereinheitlicht."
+    },
+    {
+      "id": "dashboard-auftragsuebersicht-umsetzen",
+      "kennung": "T-005",
+      "titel": "JSON-Auftragsübersicht in der aktiven Seite korrekt und sichtbar verbinden",
+      "status": "done",
+      "beschreibung": "Die JSON-Aufträge sind sichtbar verbunden und aktualisieren betroffene Statuskacheln ohne Seitenreload."
+    },
+    {
+      "id": "speicherregression-beheben",
+      "kennung": "T-006",
+      "titel": "Vault-Speicherregression beseitigt",
+      "status": "done",
+      "beschreibung": "Die Speicherregression im Vault ist behoben und geprüft.",
+      "abschlussbericht": "Ursache waren sehr viele einzelne, schwere Icon-Grafiken, die in jedem Browsertab eigenen Speicher belegten. Die Icons wurden auf ein gemeinsames SVG-Sprite mit leichten Verweisen umgestellt. Wiederholtes Laden und Lernfeldwechsel führten in der Prüfung nicht mehr zu weiterem Speicherwachstum. Die Anordnung des Vaults blieb unverändert. Die Umsetzung ist im aktiven Checkout integriert und der aufgeklappte Abschlussbericht wurde im Browser sichtbar bestätigt.",
+      "status_nachweis": {
+        "integriert_im_aktiven_checkout": true,
+        "browser_bestaetigt": true,
+        "browser_pruefung": "Done-Element und aufgeklappter Abschlussbericht sichtbar"
+      }
+    },
+    {
+      "id": "moscow-matrix-dummy",
+      "kennung": "T-007",
+      "titel": "MoSCoW-Darstellung als Matrix-Dummy umbauen",
+      "status": "done",
+      "beschreibung": "Beide Anforderungskacheln zeigten die browsergeprüfte kompakte M/S/C/W-Matrix mit neutralen Dummy-Zeilen."
+    },
+    {
+      "id": "todo-doing-zusammenfuehren",
+      "kennung": "T-009",
+      "kommunikationsnummer": 1,
+      "titel": "To Do und Doing zusammenführen; Play-Icon bei laufender Arbeit",
+      "status": "done",
+      "arbeitszeitpunkt": "2026-07-31T01:55:47+02:00",
+      "nachweisordner": "2026-07-31_01-55-47__to-do-und-doing-zusammenfuehren-play-icon-bei-laufender-arbeit",
+      "abschlusszeitpunkt": "2026-07-31T01:58:28+02:00",
+      "beschreibung": "To Do und Doing sind in einer gemeinsamen Aufgabenfläche zusammengeführt; laufende Arbeit ist dort über ein Play-Icon direkt neben der Überschrift erkennbar.",
+      "abschlussbericht": "Die getrennten Statusflächen wurden zu einer gemeinsamen Aufgabenfläche „To Do“ zusammengeführt. Laufende Aufgaben stehen am Anfang dieser Liste und tragen direkt zwischen Nummer und Titel ein zugängliches Play-Icon mit der Bezeichnung „In Bearbeitung“. Offene Aufgaben folgen nummerisch, die Done-Fläche bleibt eigenständig. Desktop- und Mobilansicht, Startzeiten, Auftragsnummern, Nachweise und Browserkonsole wurden geprüft.",
+      "status_nachweis": {
+        "integriert_im_aktiven_checkout": true,
+        "browser_bestaetigt": true,
+        "browser_pruefung": "Eine To-Do-Fläche, keine Doing-Fläche, Play-Icon an laufenden Titeln, responsive Vier-Flächen-Anordnung und keine Konsolenfehler"
+      }
+    },
+    {
+      "id": "agent-aus-todo-aufgabe-starten",
+      "kennung": "T-011",
+      "kommunikationsnummer": 3,
+      "titel": "Agent aus To-Do-Aufgabe starten",
+      "status": "todo",
+      "beschreibung": "Jede To-Do-Aufgabe soll später einen Start-Button erhalten. Dieser soll einen eigenen Codex-Agenten starten bzw. ihm eine Nachricht geben, zuerst die bearbeitbaren Agenten-Regeln im Dashboard zu lesen, danach seine zugewiesene To-Do-Aufgabe zu lesen und anschließend loszulegen. Dafür ist eine sichere Dashboard-zu-Codex-Startverbindung erforderlich."
+    },
+    {
+      "id": "implementierungsplan-pro-todo",
+      "kennung": "T-012",
+      "kommunikationsnummer": 4,
+      "titel": "Implementierungsplan pro To Do",
+      "status": "todo",
+      "beschreibung": "Jede To-Do-Aufgabe soll künftig zusätzlich zu Titel und Status einen verständlichen, schrittweisen Implementierungsplan enthalten. Der Plan muss für den Nutzer klar lesbar und für einen ausführenden Agenten unmittelbar handlungsfähig sein: mit Ziel, konkreten Arbeitsschritten, Prüfung und Abnahme sowie klaren Grenzen. In der To-Do-Ansicht soll er aufklappbar lesbar sein, ohne die flache Übersicht zu überladen. Bestehende Aufgaben erhalten schrittweise solche Pläne."
+    }
+  ]
+}

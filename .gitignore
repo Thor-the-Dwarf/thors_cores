@@ -18,8 +18,10 @@ Thumbs.db
 .http-server/
 node_modules/
 
+# Lokale, aufgabenbezogene Nachweise (Screenshots und Notizen)
+_erledigteToDos/
+
 # Lokale Geheimnisse dürfen nie veröffentlicht werden
 .env
 .env.*
 !.env.example
-

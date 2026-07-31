@@ -1,0 +1,1828 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Admin-Dashboard-Platzhalter für Thors Core">
+  <title>Admin-Dashboard · Thors Core</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --linie: rgba(183, 195, 220, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      background: #0d1522;
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    }
+
+    .dashboard-wall {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .dashboard-fläche {
+      min-width: 0;
+      min-height: 0;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      border-right: 1px solid var(--linie);
+      border-bottom: 1px solid var(--linie);
+      background: #151f2f;
+      color: #d6e1ef;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(183, 195, 220, 0.28) transparent;
+    }
+
+    .kachel-label {
+      display: block;
+      margin: 0 0 14px;
+      font-size: clamp(0.72rem, 1.35vw, 0.9rem);
+      font-weight: 760;
+      line-height: 1.35;
+    }
+
+    .todo-kopfzeile {
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .todo-kopfzeile .kachel-label {
+      margin: 0;
+    }
+
+    .todo-hinzufügen,
+    .todo-formular button {
+      border: 1px solid rgba(126, 220, 245, 0.42);
+      border-radius: 5px;
+      background: rgba(126, 220, 245, 0.08);
+      color: #9ce8fb;
+      font: inherit;
+      font-size: clamp(0.58rem, 0.78vw, 0.68rem);
+      font-weight: 720;
+      cursor: pointer;
+    }
+
+    .todo-hinzufügen {
+      padding: 4px 8px;
+      white-space: nowrap;
+    }
+
+    .todo-hinzufügen:hover,
+    .todo-formular button:hover {
+      background: rgba(126, 220, 245, 0.15);
+    }
+
+    .todo-hinzufügen:focus-visible,
+    .todo-formular button:focus-visible,
+    .todo-formular input:focus-visible,
+    .todo-formular textarea:focus-visible {
+      outline: 2px solid #7edcf5;
+      outline-offset: 2px;
+    }
+
+    .todo-formular {
+      margin: 0 0 14px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) auto;
+      align-items: end;
+      gap: 8px;
+      border: 1px solid var(--linie);
+      border-radius: 7px;
+      background: rgba(13, 21, 34, 0.42);
+    }
+
+    .todo-formular[hidden] {
+      display: none;
+    }
+
+    .todo-formular label {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+      color: #b9c7d9;
+      font-size: clamp(0.58rem, 0.78vw, 0.68rem);
+      font-weight: 680;
+    }
+
+    .todo-formular input,
+    .todo-formular textarea {
+      width: 100%;
+      min-width: 0;
+      height: 30px;
+      padding: 5px 7px;
+      resize: none;
+      border: 1px solid rgba(183, 195, 220, 0.28);
+      border-radius: 4px;
+      background: #0d1522;
+      color: #e8eef8;
+      font: inherit;
+      font-size: clamp(0.6rem, 0.82vw, 0.7rem);
+    }
+
+    .todo-formular-aktionen {
+      display: flex;
+      gap: 6px;
+    }
+
+    .todo-formular button {
+      min-height: 30px;
+      padding: 4px 8px;
+    }
+
+    .todo-formular .todo-abbrechen {
+      border-color: rgba(183, 195, 220, 0.28);
+      background: transparent;
+      color: #b9c7d9;
+    }
+
+    .todo-rückmeldung {
+      grid-column: 1 / -1;
+      min-height: 1.2em;
+      margin: 0;
+      color: #9ce8fb;
+      font-size: clamp(0.58rem, 0.78vw, 0.68rem);
+      line-height: 1.35;
+    }
+
+    .auftragsliste {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 13px;
+      list-style: none;
+    }
+
+    .auftrag {
+      min-width: 0;
+    }
+
+    .auftrag strong {
+      display: block;
+      min-width: 0;
+      flex: 1 1 auto;
+      color: #e8eef8;
+      font-size: clamp(0.66rem, 1vw, 0.78rem);
+      font-weight: 720;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .auftrag-titelzeile {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .auftrag-nummer {
+      display: inline-block;
+      flex: 0 0 auto;
+      color: #7edcf5;
+      font-size: clamp(0.58rem, 0.78vw, 0.68rem);
+      font-weight: 780;
+      line-height: 1.45;
+    }
+
+    .laufend-marker {
+      width: 16px;
+      height: 16px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      color: #7edcf5;
+    }
+
+    .laufend-marker svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .auftrag-detail .auftrag-nummer {
+      margin-right: 6px;
+    }
+
+    .prioritätsmarker {
+      width: 16px;
+      height: 16px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    .prioritätsmarker svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .prioritätsmarker--dringend {
+      color: #fb7185;
+    }
+
+    .prioritätsmarker--wichtig {
+      color: #facc15;
+    }
+
+    .auftrag-detail summary {
+      color: #e8eef8;
+      font-size: clamp(0.66rem, 1vw, 0.78rem);
+      font-weight: 720;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+      cursor: pointer;
+    }
+
+    .auftrag-detail summary:focus-visible {
+      outline: 1px solid #7edcf5;
+      outline-offset: 2px;
+    }
+
+    .auftrag-detail[open] summary {
+      margin-bottom: 4px;
+    }
+
+    .auftrag p {
+      margin: 4px 0 0;
+      color: #93a4ba;
+      font-size: clamp(0.6rem, 0.82vw, 0.7rem);
+      font-weight: 480;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .auftrag-startzeit {
+      display: block;
+      margin-top: 5px;
+      color: #a8bacf;
+      font-size: clamp(0.58rem, 0.78vw, 0.68rem);
+      font-weight: 620;
+      line-height: 1.35;
+    }
+
+    .auftrag-nachweise {
+      width: fit-content;
+      margin-top: 7px;
+      padding: 3px 7px;
+      border: 1px solid rgba(126, 220, 245, 0.42);
+      border-radius: 5px;
+      background: rgba(126, 220, 245, 0.08);
+      color: #9ce8fb;
+      font: inherit;
+      font-size: clamp(0.58rem, 0.78vw, 0.68rem);
+      font-weight: 720;
+      cursor: pointer;
+    }
+
+    .auftrag-nachweise:hover {
+      background: rgba(126, 220, 245, 0.15);
+    }
+
+    .auftrag-nachweise:focus-visible {
+      outline: 2px solid #7edcf5;
+      outline-offset: 2px;
+    }
+
+    .nachweis-dialog {
+      width: min(920px, calc(100vw - 32px));
+      max-height: calc(100dvh - 32px);
+      padding: 0;
+      border: 1px solid rgba(126, 220, 245, 0.42);
+      border-radius: 12px;
+      background: #111b2a;
+      color: #d6e1ef;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    }
+
+    .nachweis-dialog::backdrop {
+      background: rgba(4, 9, 16, 0.78);
+      backdrop-filter: blur(3px);
+    }
+
+    .nachweis-dialog-kopf {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      border-bottom: 1px solid var(--linie);
+      background: #111b2a;
+    }
+
+    .nachweis-dialog-titel {
+      margin: 0;
+      color: #f0f6ff;
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .nachweis-dialog-schließen,
+    .nachweis-zurück {
+      padding: 5px 9px;
+      border: 1px solid rgba(183, 195, 220, 0.35);
+      border-radius: 6px;
+      background: #19263a;
+      color: #d6e1ef;
+      font: inherit;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .nachweis-dialog-schließen:focus-visible,
+    .nachweis-zurück:focus-visible,
+    .nachweis-abbildung:focus-visible {
+      outline: 2px solid #7edcf5;
+      outline-offset: 2px;
+    }
+
+    .nachweis-dialog-inhalt {
+      min-height: 180px;
+      padding: 16px;
+      overflow: auto;
+    }
+
+    .nachweis-status {
+      margin: 0;
+      color: #a8bacf;
+      font-size: 0.85rem;
+    }
+
+    .nachweis-galerie {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+
+    .nachweis-abbildung {
+      min-width: 0;
+      padding: 0;
+      border: 1px solid var(--linie);
+      border-radius: 8px;
+      background: #0d1522;
+      color: inherit;
+      overflow: hidden;
+      text-align: left;
+      cursor: zoom-in;
+    }
+
+    .nachweis-abbildung img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      display: block;
+      object-fit: cover;
+      background: #0a111c;
+    }
+
+    .nachweis-abbildung span {
+      display: block;
+      padding: 8px 10px;
+      color: #d8e2ef;
+      font-size: 0.74rem;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .nachweis-lightbox[hidden],
+    .nachweis-galerie[hidden],
+    .nachweis-status[hidden] {
+      display: none;
+    }
+
+    .nachweis-lightbox {
+      display: grid;
+      gap: 12px;
+    }
+
+    .nachweis-lightbox img {
+      width: 100%;
+      max-height: calc(100dvh - 170px);
+      object-fit: contain;
+      border-radius: 8px;
+      background: #080d15;
+    }
+
+    .nachweis-lightbox-zeile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nachweis-lightbox-beschriftung {
+      margin: 0;
+      color: #c8d5e5;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .anforderungs-baum {
+      min-width: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .anforderungs-ordner,
+    .anforderungs-eintrag {
+      min-width: 0;
+      border: 1px solid var(--linie);
+      border-radius: 6px;
+      background: rgba(13, 21, 34, 0.3);
+    }
+
+    .anforderungs-ordner > summary,
+    .anforderungs-eintrag > summary {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      list-style: none;
+      overflow-wrap: anywhere;
+    }
+
+    .anforderungs-ordner > summary {
+      padding: 8px 10px;
+      color: #e8eef8;
+      font-size: clamp(0.66rem, 1vw, 0.78rem);
+      font-weight: 760;
+    }
+
+    .anforderungs-eintrag > summary {
+      padding: 7px 8px;
+      color: #d8e2ef;
+      font-size: clamp(0.62rem, 0.84vw, 0.72rem);
+      font-weight: 680;
+    }
+
+    .anforderungs-ordner > summary::-webkit-details-marker,
+    .anforderungs-eintrag > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .anforderungs-ordner > summary::before,
+    .anforderungs-eintrag > summary::before {
+      content: "›";
+      flex: 0 0 auto;
+      color: #7edcf5;
+      font-size: 1.15em;
+      line-height: 1;
+      transform-origin: center;
+      transition: transform 120ms ease;
+    }
+
+    .anforderungs-ordner[open] > summary::before,
+    .anforderungs-eintrag[open] > summary::before {
+      transform: rotate(90deg);
+    }
+
+    .anforderungs-ordner > summary::after {
+      content: "▰";
+      order: -1;
+      flex: 0 0 auto;
+      color: #7edcf5;
+      font-size: 0.9em;
+    }
+
+    .anforderungs-ordner > summary:focus-visible,
+    .anforderungs-eintrag > summary:focus-visible {
+      outline: 2px solid #7edcf5;
+      outline-offset: -2px;
+      border-radius: 5px;
+    }
+
+    .anforderungs-ordner-inhalt {
+      min-width: 0;
+      padding: 0 8px 8px 23px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .anforderungs-inhalt {
+      min-width: 0;
+      padding: 0 8px 9px 25px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .anforderungs-titel {
+      color: #e8eef8;
+      font-weight: 760;
+      line-height: 1.3;
+    }
+
+    .anforderungs-kurztext {
+      color: #b9c7d9;
+      font-size: 0.94em;
+      font-weight: 460;
+      line-height: 1.35;
+    }
+
+    .anforderungs-prüfkriterium {
+      margin-top: 2px;
+      padding: 5px 7px;
+      border-left: 3px solid #7edcf5;
+      border-radius: 0 4px 4px 0;
+      background: rgba(126, 220, 245, 0.08);
+      color: #d8e2ef;
+      font-size: 0.9em;
+      font-weight: 520;
+      line-height: 1.35;
+    }
+
+    .anforderungs-prüfkriterium strong {
+      color: #9ce8fb;
+      font-weight: 760;
+    }
+
+    .anforderungs-metadaten {
+      margin-top: 3px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .anforderungs-metadaten span {
+      max-width: 100%;
+      padding: 3px 6px;
+      border: 1px solid rgba(126, 220, 245, 0.28);
+      border-radius: 999px;
+      background: rgba(126, 220, 245, 0.07);
+      color: #9ce8fb;
+      font-size: 0.88em;
+      font-weight: 680;
+      overflow-wrap: anywhere;
+    }
+
+    .agentenregeln-editor {
+      width: 100%;
+      min-height: 84px;
+      flex: 1 1 42%;
+      padding: 10px 12px;
+      resize: none;
+      border: 1px solid var(--linie);
+      border-radius: 6px;
+      background: rgba(13, 21, 34, 0.48);
+      color: #d8e2ef;
+      font: inherit;
+      font-size: clamp(0.62rem, 0.84vw, 0.72rem);
+      line-height: 1.5;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(183, 195, 220, 0.28) transparent;
+    }
+
+    .agentenregeln-editor:focus-visible {
+      outline: 1px solid #7edcf5;
+      outline-offset: 2px;
+    }
+
+    .agentenzyklus {
+      min-height: 120px;
+      flex: 1 1 58%;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .agentenzyklus-kopfzeile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .agentenzyklus-titel {
+      margin: 0 0 8px;
+      color: #d6e1ef;
+      font-size: clamp(0.66rem, 0.95vw, 0.78rem);
+      font-weight: 760;
+      line-height: 1.35;
+    }
+
+    .agentenzyklus-zurück,
+    .agentenzyklus-auswahl {
+      border: 1px solid rgba(126, 220, 245, 0.34);
+      border-radius: 4px;
+      background: rgba(13, 21, 34, 0.48);
+      color: #9be8fb;
+      font: inherit;
+      font-size: 0.6rem;
+      font-weight: 680;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .agentenzyklus-zurück {
+      display: none;
+      margin: 0 0 8px;
+      padding: 5px 7px;
+      white-space: nowrap;
+    }
+
+    .agentenzyklus-auswahl {
+      flex: 0 0 auto;
+      padding: 4px 5px;
+    }
+
+    .agentenzyklus-zurück:hover,
+    .agentenzyklus-auswahl:hover {
+      background: rgba(126, 220, 245, 0.12);
+    }
+
+    .agentenzyklus-zurück:focus-visible,
+    .agentenzyklus-auswahl:focus-visible {
+      outline: 1px solid #7edcf5;
+      outline-offset: 2px;
+    }
+
+    .agentenzyklus-liste {
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      list-style: none;
+    }
+
+    .agentenzyklus-stufe {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--linie);
+      border-radius: 6px;
+      background: rgba(13, 21, 34, 0.38);
+    }
+
+    .agentenzyklus-stufe:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -7px;
+      z-index: 1;
+      color: #7edcf5;
+      font-size: 0.74rem;
+      line-height: 1;
+      transform: translate(50%, -50%);
+    }
+
+    .agentenzyklus-stufenkopf {
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .agentenzyklus-label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #d8e2ef;
+      font-size: clamp(0.58rem, 0.78vw, 0.68rem);
+      font-weight: 720;
+      line-height: 1.3;
+    }
+
+    .agentenzyklus-nummer {
+      width: 17px;
+      height: 17px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(126, 220, 245, 0.48);
+      border-radius: 50%;
+      color: #7edcf5;
+      font-size: 0.56rem;
+      line-height: 1;
+    }
+
+    .agentenzyklus-text {
+      width: 100%;
+      min-height: 56px;
+      flex: 1 1 auto;
+      padding: 6px;
+      resize: none;
+      border: 0;
+      border-radius: 4px;
+      background: rgba(13, 21, 34, 0.34);
+      color: #aebed1;
+      font: inherit;
+      font-size: clamp(0.56rem, 0.72vw, 0.64rem);
+      line-height: 1.4;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(183, 195, 220, 0.28) transparent;
+    }
+
+    .agentenzyklus-text:focus-visible {
+      outline: 1px solid #7edcf5;
+      outline-offset: 1px;
+    }
+
+    [data-agentenregeln][data-agentenzyklus-ausgewählt] {
+      overflow: hidden;
+    }
+
+    [data-agentenregeln][data-agentenzyklus-ausgewählt] > .kachel-label,
+    [data-agentenregeln][data-agentenzyklus-ausgewählt] > .agentenregeln-editor {
+      display: none;
+    }
+
+    [data-agentenregeln][data-agentenzyklus-ausgewählt] .agentenzyklus {
+      min-height: 0;
+      flex: 1 1 auto;
+      margin-top: 0;
+    }
+
+    [data-agentenregeln][data-agentenzyklus-ausgewählt] .agentenzyklus-zurück {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    [data-agentenregeln][data-agentenzyklus-ausgewählt] .agentenzyklus-liste {
+      min-height: 0;
+      flex: 1 1 auto;
+      grid-template-columns: 1fr;
+    }
+
+    [data-agentenregeln][data-agentenzyklus-ausgewählt]
+      .agentenzyklus-stufe:not([data-agentenzyklus-ausgewählt]) {
+      display: none;
+    }
+
+    [data-agentenregeln][data-agentenzyklus-ausgewählt]
+      .agentenzyklus-stufe[data-agentenzyklus-ausgewählt] {
+      min-height: 0;
+      padding: 12px;
+    }
+
+    [data-agentenregeln][data-agentenzyklus-ausgewählt]
+      .agentenzyklus-stufe[data-agentenzyklus-ausgewählt]::after,
+    [data-agentenregeln][data-agentenzyklus-ausgewählt] .agentenzyklus-auswahl {
+      display: none;
+    }
+
+    [data-agentenregeln][data-agentenzyklus-ausgewählt]
+      .agentenzyklus-stufe[data-agentenzyklus-ausgewählt]
+      .agentenzyklus-label {
+      font-size: clamp(0.68rem, 1vw, 0.8rem);
+    }
+
+    [data-agentenregeln][data-agentenzyklus-ausgewählt] .agentenzyklus-text {
+      min-height: 0;
+      padding: 12px;
+      font-size: clamp(0.66rem, 0.9vw, 0.76rem);
+      line-height: 1.55;
+    }
+
+    .nur-visuell-versteckt {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    [data-status="aufgaben"] {
+      grid-column: span 4;
+    }
+
+    [data-status="done"] {
+      grid-column: span 2;
+      border-right: 0;
+    }
+
+    [data-anforderungsart],
+    [data-agentenregeln] {
+      grid-column: span 3;
+      border-bottom: 0;
+    }
+
+    [data-agentenregeln] {
+      border-right: 0;
+    }
+
+    @media (max-width: 620px) {
+      .dashboard-wall {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, minmax(0, 1fr));
+      }
+
+      .dashboard-fläche,
+      [data-status],
+      [data-anforderungsart],
+      [data-agentenregeln] {
+        grid-column: span 1;
+        border-right: 0;
+        border-bottom: 1px solid var(--linie);
+      }
+
+      [data-agentenregeln] {
+        border-bottom: 0;
+      }
+
+      .dashboard-fläche {
+        padding: 10px 12px;
+      }
+
+      .kachel-label {
+        margin-bottom: 8px;
+      }
+
+      .todo-kopfzeile {
+        margin-bottom: 8px;
+      }
+
+      .todo-formular {
+        grid-template-columns: 1fr;
+      }
+
+      .todo-rückmeldung {
+        grid-column: 1;
+      }
+
+      .auftragsliste {
+        gap: 9px;
+      }
+
+      .nachweis-dialog {
+        width: calc(100vw - 16px);
+        max-height: calc(100dvh - 16px);
+      }
+
+      .nachweis-dialog-kopf,
+      .nachweis-dialog-inhalt {
+        padding: 10px;
+      }
+
+      .nachweis-galerie {
+        grid-template-columns: 1fr;
+      }
+
+      .anforderungs-ordner-inhalt {
+        padding-left: 14px;
+      }
+
+      .agentenregeln-editor {
+        min-height: 72px;
+        padding: 6px 8px;
+      }
+
+      .agentenzyklus {
+        min-height: 0;
+      }
+
+      .agentenzyklus-liste {
+        grid-template-columns: 1fr;
+      }
+
+      .agentenzyklus-stufe:not(:last-child)::after {
+        top: auto;
+        right: 50%;
+        bottom: -7px;
+        content: "↓";
+        transform: translate(50%, 50%);
+      }
+
+      [data-agentenregeln][data-agentenzyklus-ausgewählt]
+        .agentenzyklus-stufe[data-agentenzyklus-ausgewählt] {
+        padding: 8px;
+      }
+
+      [data-agentenregeln][data-agentenzyklus-ausgewählt] .agentenzyklus-text {
+        padding: 8px;
+      }
+    }
+  </style>
+  <script defer>
+    const filter = [
+      {
+        element: "[data-status='aufgaben']",
+        passt: auftrag =>
+          auftrag.status === "todo" || auftrag.status === "doing"
+      },
+      {
+        element: "[data-status='done']",
+        passt: auftrag => auftrag.status === "done"
+      }
+    ];
+    const aktualisierungsIntervall = 1500;
+    const agentenregelnSpeicherschlüssel = "thors-core-admin-agentenregeln";
+    const agentenzyklusSpeicherschlüssel = "thors-core-admin-agentenzyklus";
+    const benutzerToDosSpeicherschlüssel = "thors-core-admin-benutzer-todos";
+    const bisherigeAgentenzyklusStandardtexte = {
+      start:
+        "Agentenregeln lesen, das To Do eindeutig zuordnen und Ziel sowie Grenzen prüfen.",
+      ausführung:
+        "Das To Do fokussiert umsetzen und Fortschritt sowie wichtige Entscheidungen nachvollziehbar halten.",
+      abschluss:
+        "Ergebnis prüfen, Abschluss oder Übergabe dokumentieren und erst danach die Unterhaltung beenden."
+    };
+    const bisherigerNachweisordner =
+      ["task", "evidence"].join("-") + "/";
+    const bisherigerProjektNachweisordner =
+      ["_project", "history"].join("_") + "/";
+    const aktuelleAgentenzyklusStandardtexte = {
+      start:
+        "Agentenregeln und das To Do lesen. Den tatsächlichen Startzeitpunkt mit Sekunden festhalten und unter _erledigteToDos/ den Ordner YYYY-MM-DD_HH-mm-ss__<titel-slug> anlegen. Der Zeitstempel bleibt Archiv-ID; nur den technischen Titel-Slug dateisicher normalisieren, zum Beispiel zusammenfuehren. Kommunikationsbezeichnung und To Do in task-note.txt notieren, evidence.json anlegen sowie bei relevantem Vorherzustand 00-ausgangszustand.png speichern und im Bildindex eintragen.",
+      ausführung:
+        "Das To Do fokussiert umsetzen. Wichtige Entscheidungen in task-note.txt ergänzen, Arbeits- sowie Ergebnisscreenshots im selben lokalen Aufgabenordner speichern und jeden sichtbaren Nachweis mit Dateiname und Beschriftung in evidence.json aufnehmen.",
+      abschluss:
+        "Ergebnis prüfen, mindestens einen Ergebnisscreenshot speichern, ihn in evidence.json eintragen und Abschluss oder Übergabe in task-note.txt dokumentieren. Erst danach übergeben oder die Unterhaltung beenden; der lokale Ordner bleibt erhalten."
+    };
+    const deutschesDatumMitUhrzeit = new Intl.DateTimeFormat("de-DE", {
+      dateStyle: "short",
+      timeStyle: "short"
+    });
+    const listenSignaturen = new Map();
+    let aktualisierungsTimer = 0;
+    let aktualisierungBeendet = false;
+    let nachweisDialogAuslöser = null;
+    let geladeneDateiAufträge = [];
+
+    document.documentElement.dataset.dashboardInstanz =
+      `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+    function auftragDarstellen(auftrag) {
+      const eintrag = document.createElement("li");
+      eintrag.className = "auftrag";
+      eintrag.dataset.auftragskennung = auftrag.kennung;
+      if (auftrag.lokal === true) {
+        eintrag.dataset.auftragsquelle = "lokal";
+      }
+
+      if (auftrag.arbeitszeitpunkt) {
+        eintrag.dataset.arbeitszeitpunkt = auftrag.arbeitszeitpunkt;
+      }
+
+      if (auftrag.abschlussbericht) {
+        const details = document.createElement("details");
+        details.className = "auftrag-detail";
+
+        const zusammenfassung = document.createElement("summary");
+        const zusammenfassungTitel = document.createElement("span");
+        zusammenfassungTitel.textContent = auftrag.titel;
+        const nummer = auftragsNummerDarstellen(auftrag);
+        if (nummer) zusammenfassung.append(nummer);
+        zusammenfassung.append(zusammenfassungTitel);
+
+        const bericht = document.createElement("p");
+        bericht.className = "abschlussbericht";
+        bericht.textContent = auftrag.abschlussbericht;
+
+        details.append(zusammenfassung, bericht);
+        eintrag.append(details);
+        arbeitszeitpunktErgänzen(eintrag, auftrag);
+        nachweisKnopfErgänzen(eintrag, auftrag);
+        return eintrag;
+      }
+
+      const titelzeile = document.createElement("div");
+      titelzeile.className = "auftrag-titelzeile";
+
+      const titel = document.createElement("strong");
+      titel.textContent = auftrag.titel;
+      const nummer = auftragsNummerDarstellen(auftrag);
+      if (nummer) titelzeile.append(nummer);
+      if (auftrag.status === "doing") {
+        titelzeile.append(laufendMarker());
+      }
+      titelzeile.append(titel);
+
+      if (auftrag.dringend) {
+        titelzeile.append(prioritätsMarker("dringend"));
+      }
+      if (auftrag.wichtig) {
+        titelzeile.append(prioritätsMarker("wichtig"));
+      }
+
+      const beschreibung = document.createElement("p");
+      beschreibung.textContent = auftrag.beschreibung;
+
+      eintrag.append(titelzeile, beschreibung);
+      arbeitszeitpunktErgänzen(eintrag, auftrag);
+      nachweisKnopfErgänzen(eintrag, auftrag);
+      return eintrag;
+    }
+
+    function nachweisKnopfErgänzen(eintrag, auftrag) {
+      if (auftrag.status !== "done") return;
+
+      const knopf = document.createElement("button");
+      knopf.className = "auftrag-nachweise";
+      knopf.type = "button";
+      knopf.textContent = "Nachweise";
+      knopf.setAttribute(
+        "aria-label",
+        `Nachweise zu ${auftrag.titel} anzeigen`
+      );
+      knopf.addEventListener("click", () => {
+        nachweisDialogAuslöser = knopf;
+        nachweiseÖffnen(auftrag);
+      });
+      eintrag.append(knopf);
+    }
+
+    function titelSlugErzeugen(titel) {
+      return String(titel || "")
+        .toLocaleLowerCase("de-DE")
+        .replaceAll("ä", "ae")
+        .replaceAll("ö", "oe")
+        .replaceAll("ü", "ue")
+        .replaceAll("ß", "ss")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function nachweisordnerErmitteln(auftrag) {
+      if (
+        typeof auftrag.nachweisordner === "string" &&
+        /^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{2}-[0-9]{2}-[0-9]{2}__[a-z0-9-]+$/
+          .test(auftrag.nachweisordner)
+      ) {
+        return auftrag.nachweisordner;
+      }
+
+      const start = new Date(auftrag.arbeitszeitpunkt);
+      const slug = titelSlugErzeugen(auftrag.titel);
+      if (Number.isNaN(start.getTime()) || !slug) return null;
+
+      const zweistellig = wert => String(wert).padStart(2, "0");
+      const zeitstempel = [
+        start.getFullYear(),
+        zweistellig(start.getMonth() + 1),
+        zweistellig(start.getDate())
+      ].join("-") + "_" + [
+        zweistellig(start.getHours()),
+        zweistellig(start.getMinutes()),
+        zweistellig(start.getSeconds())
+      ].join("-");
+      return `${zeitstempel}__${slug}`;
+    }
+
+    function nachweisBildIstGültig(bild) {
+      return (
+        bild &&
+        typeof bild.datei === "string" &&
+        typeof bild.label === "string" &&
+        /^[^/\\]+[.](?:avif|gif|jpe?g|png|webp)$/i.test(bild.datei)
+      );
+    }
+
+    function nachweisÜbersichtAnzeigen() {
+      const galerie = document.querySelector(".nachweis-galerie");
+      const lightbox = document.querySelector(".nachweis-lightbox");
+      galerie.hidden = false;
+      lightbox.hidden = true;
+    }
+
+    async function nachweiseÖffnen(auftrag) {
+      const dialog = document.querySelector(".nachweis-dialog");
+      const titel = document.querySelector(".nachweis-dialog-titel");
+      const status = document.querySelector(".nachweis-status");
+      const galerie = document.querySelector(".nachweis-galerie");
+      const lightbox = document.querySelector(".nachweis-lightbox");
+      titel.textContent = `Nachweise · ${auftrag.titel}`;
+      status.textContent = "Nachweise werden geladen …";
+      status.hidden = false;
+      galerie.hidden = true;
+      galerie.replaceChildren();
+      lightbox.hidden = true;
+      if (!dialog.open) dialog.showModal();
+
+      const ordner = nachweisordnerErmitteln(auftrag);
+      if (!ordner) {
+        status.textContent = "Noch keine Nachweise";
+        return;
+      }
+
+      try {
+        const indexAdresse = new URL(
+          `_erledigteToDos/${encodeURIComponent(ordner)}/evidence.json`,
+          location.href
+        );
+        indexAdresse.searchParams.set("_aktualisiert", String(Date.now()));
+        const antwort = await fetch(indexAdresse, { cache: "no-store" });
+        if (!antwort.ok) throw new Error("Nachweisindex nicht erreichbar");
+        const index = await antwort.json();
+        if (index.auftrag !== auftrag.kennung) {
+          throw new Error("Nachweisindex gehört zu einer anderen Aufgabe");
+        }
+        const bilder = Array.isArray(index.bilder)
+          ? index.bilder.filter(nachweisBildIstGültig)
+          : [];
+        if (!bilder.length) throw new Error("Nachweisindex ist leer");
+
+        bilder.forEach(bild => {
+          const bildAdresse = new URL(
+            `_erledigteToDos/${encodeURIComponent(ordner)}/${encodeURIComponent(bild.datei)}`,
+            location.href
+          );
+          const knopf = document.createElement("button");
+          knopf.className = "nachweis-abbildung";
+          knopf.type = "button";
+          knopf.setAttribute("aria-label", `${bild.label} vergrößern`);
+
+          const vorschau = document.createElement("img");
+          vorschau.src = bildAdresse.href;
+          vorschau.alt = bild.label;
+          vorschau.loading = "lazy";
+
+          const beschriftung = document.createElement("span");
+          beschriftung.textContent = bild.label;
+          knopf.append(vorschau, beschriftung);
+          knopf.addEventListener("click", () => {
+            const großbild = lightbox.querySelector("img");
+            const großbildText =
+              lightbox.querySelector(".nachweis-lightbox-beschriftung");
+            großbild.src = bildAdresse.href;
+            großbild.alt = bild.label;
+            großbildText.textContent = bild.label;
+            galerie.hidden = true;
+            lightbox.hidden = false;
+            lightbox.querySelector(".nachweis-zurück").focus();
+          });
+          galerie.append(knopf);
+        });
+
+        status.hidden = true;
+        galerie.hidden = false;
+      } catch {
+        status.textContent = "Noch keine Nachweise";
+      }
+    }
+
+    function nachweisDialogInitialisieren() {
+      const dialog = document.querySelector(".nachweis-dialog");
+      const zurückknopf = dialog.querySelector(".nachweis-zurück");
+      zurückknopf.addEventListener("click", () => {
+        nachweisÜbersichtAnzeigen();
+        dialog.querySelector(".nachweis-abbildung")?.focus();
+      });
+      dialog.addEventListener("close", () => {
+        nachweisDialogAuslöser?.focus();
+        nachweisDialogAuslöser = null;
+      });
+    }
+
+    function arbeitszeitpunktErgänzen(eintrag, auftrag) {
+      if (auftrag.status !== "doing" || !auftrag.arbeitszeitpunkt) return;
+
+      const zeitpunkt = new Date(auftrag.arbeitszeitpunkt);
+      if (Number.isNaN(zeitpunkt.getTime())) return;
+
+      const startzeit = document.createElement("time");
+      startzeit.className = "auftrag-startzeit";
+      startzeit.dateTime = auftrag.arbeitszeitpunkt;
+      startzeit.textContent =
+        `Start: ${deutschesDatumMitUhrzeit.format(zeitpunkt)}`;
+      eintrag.append(startzeit);
+    }
+
+    function auftragsNummerDarstellen(auftrag) {
+      const statusbezeichnungen = {
+        todo: "To Do",
+        doing: "To Do"
+      };
+      const statusbezeichnung = statusbezeichnungen[auftrag.status];
+      const nummer = Number(auftrag.kommunikationsnummer);
+      if (!statusbezeichnung || !Number.isInteger(nummer) || nummer < 1) {
+        return null;
+      }
+
+      const element = document.createElement("span");
+      element.className = "auftrag-nummer";
+      element.textContent = `${statusbezeichnung} ${nummer}`;
+      return element;
+    }
+
+    function nachArbeitszeitpunktAbsteigend(a, b) {
+      const zeitpunktA = Date.parse(a.arbeitszeitpunkt);
+      const zeitpunktB = Date.parse(b.arbeitszeitpunkt);
+      const wertA = Number.isFinite(zeitpunktA) ? zeitpunktA : 0;
+      const wertB = Number.isFinite(zeitpunktB) ? zeitpunktB : 0;
+      return wertB - wertA;
+    }
+
+    function aufgabenSortieren(a, b) {
+      if (a.status !== b.status) {
+        return a.status === "doing" ? -1 : 1;
+      }
+      if (a.status === "doing") {
+        return nachArbeitszeitpunktAbsteigend(a, b);
+      }
+      return Number(a.kommunikationsnummer || 0) -
+        Number(b.kommunikationsnummer || 0);
+    }
+
+    function laufendMarker() {
+      const marker = document.createElement("span");
+      marker.className = "laufend-marker";
+      marker.setAttribute("role", "img");
+      marker.setAttribute("aria-label", "In Bearbeitung");
+      marker.title = "In Bearbeitung";
+      marker.innerHTML =
+        `<svg viewBox="0 0 24 24" aria-hidden="true">
+           <path d="M8 5.5v13l10-6.5Z"></path>
+         </svg>`;
+      return marker;
+    }
+
+    function prioritätsMarker(typ) {
+      const marker = document.createElement("span");
+      marker.className = `prioritätsmarker prioritätsmarker--${typ}`;
+      marker.setAttribute("role", "img");
+      marker.setAttribute("aria-label", typ === "dringend" ? "Dringend" : "Wichtig");
+      marker.title = typ === "dringend" ? "Dringend" : "Wichtig";
+      marker.innerHTML = typ === "dringend"
+        ? `<svg viewBox="0 0 24 24" aria-hidden="true">
+             <circle cx="12" cy="12" r="8"></circle>
+             <path d="M12 7v5l3 2"></path>
+           </svg>`
+        : `<svg viewBox="0 0 24 24" aria-hidden="true">
+             <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9Z"></path>
+           </svg>`;
+      return marker;
+    }
+
+    function listenAktualisieren(aufträge) {
+      filter.forEach(({ element, passt }) => {
+        const gefilterteAufträge = aufträge.filter(passt);
+        if (element === "[data-status='aufgaben']") {
+          gefilterteAufträge.sort(aufgabenSortieren);
+        }
+        const signatur = JSON.stringify(gefilterteAufträge);
+        if (listenSignaturen.get(element) === signatur) return;
+
+        const liste = document.querySelector(`${element} .auftragsliste`);
+        const einträge = gefilterteAufträge.map(auftragDarstellen);
+        liste.replaceChildren(...einträge);
+        liste.dataset.renderRevision =
+          String(Number(liste.dataset.renderRevision || 0) + 1);
+        listenSignaturen.set(element, signatur);
+      });
+    }
+
+    function benutzerToDosLaden() {
+      try {
+        const gespeicherteToDos = JSON.parse(
+          localStorage.getItem(benutzerToDosSpeicherschlüssel)
+        );
+        if (!Array.isArray(gespeicherteToDos)) return [];
+
+        return gespeicherteToDos.filter(auftrag =>
+          auftrag &&
+          auftrag.lokal === true &&
+          auftrag.status === "todo" &&
+          typeof auftrag.id === "string" &&
+          typeof auftrag.kennung === "string" &&
+          typeof auftrag.titel === "string" &&
+          auftrag.titel.trim().length > 0 &&
+          Number.isInteger(auftrag.kommunikationsnummer)
+        );
+      } catch {
+        return [];
+      }
+    }
+
+    function alleAufträgeDarstellen() {
+      listenSignaturen.clear();
+      listenAktualisieren([
+        ...geladeneDateiAufträge,
+        ...benutzerToDosLaden()
+      ]);
+    }
+
+    function nächsteToDoNummer(benutzerToDos) {
+      const nummern = [...geladeneDateiAufträge, ...benutzerToDos]
+        .map(auftrag => Number(auftrag.kommunikationsnummer))
+        .filter(nummer => Number.isInteger(nummer) && nummer > 0);
+      return nummern.length ? Math.max(...nummern) + 1 : 1;
+    }
+
+    function todoFormularInitialisieren() {
+      const öffnenKnopf = document.querySelector(".todo-hinzufügen");
+      const formular = document.querySelector(".todo-formular");
+      const titelEingabe = formular.querySelector("#todo-titel");
+      const beschreibungEingabe =
+        formular.querySelector("#todo-beschreibung");
+      const abbrechenKnopf = formular.querySelector(".todo-abbrechen");
+      const rückmeldung = formular.querySelector(".todo-rückmeldung");
+
+      function formularSchließen() {
+        formular.hidden = true;
+        öffnenKnopf.setAttribute("aria-expanded", "false");
+        formular.reset();
+        rückmeldung.textContent = "";
+        öffnenKnopf.focus();
+      }
+
+      öffnenKnopf.addEventListener("click", () => {
+        const wirdGeöffnet = formular.hidden;
+        formular.hidden = !wirdGeöffnet;
+        öffnenKnopf.setAttribute("aria-expanded", String(wirdGeöffnet));
+        rückmeldung.textContent = "";
+        if (wirdGeöffnet) titelEingabe.focus();
+      });
+
+      abbrechenKnopf.addEventListener("click", formularSchließen);
+
+      formular.addEventListener("submit", ereignis => {
+        ereignis.preventDefault();
+        const titel = titelEingabe.value.trim();
+        const beschreibung = beschreibungEingabe.value.trim();
+        if (!titel) {
+          rückmeldung.textContent = "Bitte gib einen Titel ein.";
+          titelEingabe.focus();
+          return;
+        }
+
+        const benutzerToDos = benutzerToDosLaden();
+        const nummer = nächsteToDoNummer(benutzerToDos);
+        const eindeutigerTeil =
+          globalThis.crypto?.randomUUID?.() ||
+          `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        benutzerToDos.push({
+          id: `lokales-todo-${eindeutigerTeil}`,
+          kennung: `L-${eindeutigerTeil}`,
+          kommunikationsnummer: nummer,
+          titel,
+          status: "todo",
+          beschreibung,
+          lokal: true,
+          erstellt_am: new Date().toISOString()
+        });
+
+        localStorage.setItem(
+          benutzerToDosSpeicherschlüssel,
+          JSON.stringify(benutzerToDos)
+        );
+        alleAufträgeDarstellen();
+        formular.reset();
+        rückmeldung.textContent = `To Do ${nummer} wurde erstellt.`;
+        titelEingabe.focus();
+      });
+    }
+
+    function agentenregelnInitialisieren() {
+      const editor = document.querySelector(".agentenregeln-editor");
+      const gespeicherteRegeln = localStorage.getItem(agentenregelnSpeicherschlüssel);
+
+      if (gespeicherteRegeln !== null) {
+        editor.value = gespeicherteRegeln;
+      }
+
+      editor.addEventListener("input", () => {
+        localStorage.setItem(agentenregelnSpeicherschlüssel, editor.value);
+      });
+
+      agentenzyklusInitialisieren();
+      nachweisDialogInitialisieren();
+      todoFormularInitialisieren();
+    }
+
+    function agentenzyklusInitialisieren() {
+      const karte = document.querySelector("[data-agentenregeln]");
+      const editoren = Array.from(
+        document.querySelectorAll(
+          ".agentenzyklus-text[data-agentenzyklus-stufe]"
+        )
+      );
+      const stufen = Array.from(
+        document.querySelectorAll(".agentenzyklus-stufe")
+      );
+      const auswahlknöpfe = Array.from(
+        document.querySelectorAll("[data-agentenzyklus-auswahl]")
+      );
+      const zurückknopf = document.querySelector(".agentenzyklus-zurück");
+      let gespeicherteTexte = {};
+      let zuletztAusgewählteStufe = null;
+
+      try {
+        gespeicherteTexte = JSON.parse(
+          localStorage.getItem(agentenzyklusSpeicherschlüssel)
+        ) || {};
+      } catch {
+        gespeicherteTexte = {};
+      }
+
+      let standardtexteMigriert = false;
+      Object.keys(aktuelleAgentenzyklusStandardtexte).forEach(stufe => {
+        if (
+          gespeicherteTexte[stufe] ===
+            bisherigeAgentenzyklusStandardtexte[stufe] ||
+          (
+            stufe === "start" &&
+            typeof gespeicherteTexte[stufe] === "string" &&
+            (
+              gespeicherteTexte[stufe].includes(bisherigerNachweisordner) ||
+              gespeicherteTexte[stufe].includes(bisherigerProjektNachweisordner)
+            )
+          )
+        ) {
+          gespeicherteTexte[stufe] =
+            aktuelleAgentenzyklusStandardtexte[stufe];
+          standardtexteMigriert = true;
+        }
+      });
+      if (standardtexteMigriert) {
+        localStorage.setItem(
+          agentenzyklusSpeicherschlüssel,
+          JSON.stringify(gespeicherteTexte)
+        );
+      }
+
+      editoren.forEach(editor => {
+        const stufe = editor.dataset.agentenzyklusStufe;
+        if (typeof gespeicherteTexte[stufe] === "string") {
+          editor.value = gespeicherteTexte[stufe];
+        }
+
+        editor.addEventListener("input", () => {
+          const aktuelleTexte = Object.fromEntries(
+            editoren.map(eintrag => [
+              eintrag.dataset.agentenzyklusStufe,
+              eintrag.value
+            ])
+          );
+          localStorage.setItem(
+            agentenzyklusSpeicherschlüssel,
+            JSON.stringify(aktuelleTexte)
+          );
+        });
+      });
+
+      function übersichtAnzeigen() {
+        delete karte.dataset.agentenzyklusAusgewählt;
+        stufen.forEach(stufe => {
+          delete stufe.dataset.agentenzyklusAusgewählt;
+        });
+        auswahlknöpfe.forEach(knopf => {
+          knopf.setAttribute("aria-expanded", "false");
+        });
+        zuletztAusgewählteStufe?.focus();
+      }
+
+      auswahlknöpfe.forEach(knopf => {
+        knopf.addEventListener("click", () => {
+          const stufe = knopf.dataset.agentenzyklusAuswahl;
+          zuletztAusgewählteStufe = knopf;
+          karte.dataset.agentenzyklusAusgewählt = stufe;
+          stufen.forEach(element => {
+            if (element.dataset.agentenzyklusStufe === stufe) {
+              element.dataset.agentenzyklusAusgewählt = "";
+            } else {
+              delete element.dataset.agentenzyklusAusgewählt;
+            }
+          });
+          auswahlknöpfe.forEach(element => {
+            element.setAttribute(
+              "aria-expanded",
+              String(element === knopf)
+            );
+          });
+          zurückknopf.focus();
+        });
+      });
+
+      zurückknopf.addEventListener("click", übersichtAnzeigen);
+    }
+
+    async function aktualisierungszyklus() {
+      try {
+        const adresse = new URL("Admin-Dashboard-Aufträge.json", location.href);
+        adresse.searchParams.set("_aktualisiert", String(Date.now()));
+        const antwort = await fetch(adresse, {
+        cache: "no-store"
+        });
+        if (!antwort.ok) {
+          throw new Error(`Auftragsquelle konnte nicht geladen werden: ${antwort.status}`);
+        }
+
+        const daten = await antwort.json();
+        geladeneDateiAufträge = Array.isArray(daten.auftraege)
+          ? daten.auftraege
+          : [];
+        listenAktualisieren([
+          ...geladeneDateiAufträge,
+          ...benutzerToDosLaden()
+        ]);
+        document.documentElement.dataset.auftragsquelle = "bereit";
+      } catch {
+        document.documentElement.dataset.auftragsquelle = "fehler";
+      } finally {
+        if (!aktualisierungBeendet) {
+          aktualisierungsTimer = window.setTimeout(
+            aktualisierungszyklus,
+            aktualisierungsIntervall
+          );
+        }
+      }
+    }
+
+    window.addEventListener("pagehide", () => {
+      aktualisierungBeendet = true;
+      window.clearTimeout(aktualisierungsTimer);
+    }, { once: true });
+
+    window.addEventListener(
+      "DOMContentLoaded",
+      agentenregelnInitialisieren,
+      { once: true }
+    );
+    aktualisierungszyklus();
+  </script>
+</head>
+<body>
+  <main class="dashboard-wall" aria-label="Dashboard-Flächenraster">
+    <section class="dashboard-fläche" data-status="aufgaben">
+      <div class="todo-kopfzeile">
+        <span class="kachel-label">To Do</span>
+        <button
+          class="todo-hinzufügen"
+          type="button"
+          aria-controls="todo-formular"
+          aria-expanded="false"
+        >+ Neues To-do</button>
+      </div>
+      <form class="todo-formular" id="todo-formular" hidden>
+        <label for="todo-titel">
+          Titel
+          <input
+            id="todo-titel"
+            name="titel"
+            type="text"
+            maxlength="120"
+            autocomplete="off"
+            required
+          >
+        </label>
+        <label for="todo-beschreibung">
+          Beschreibung (optional)
+          <textarea
+            id="todo-beschreibung"
+            name="beschreibung"
+            maxlength="500"
+          ></textarea>
+        </label>
+        <div class="todo-formular-aktionen">
+          <button type="submit">Speichern</button>
+          <button class="todo-abbrechen" type="button">Abbrechen</button>
+        </div>
+        <p class="todo-rückmeldung" role="status" aria-live="polite"></p>
+      </form>
+      <ul class="auftragsliste"></ul>
+    </section>
+    <section class="dashboard-fläche" data-status="done">
+      <span class="kachel-label">Done</span>
+      <ul class="auftragsliste"></ul>
+    </section>
+    <section class="dashboard-fläche" data-anforderungsart="gemeinsam">
+      <span class="kachel-label">Anforderungen</span>
+      <div class="anforderungs-baum" aria-label="Anforderungen nach Bereich">
+        <details class="anforderungs-ordner" open>
+          <summary>GUI</summary>
+          <div class="anforderungs-ordner-inhalt">
+            <details class="anforderungs-eintrag">
+              <summary>App Bars bleiben dauerhaft sichtbar</summary>
+              <div class="anforderungs-inhalt">
+                <span class="anforderungs-titel">App Bars bleiben dauerhaft sichtbar</span>
+                <span class="anforderungs-kurztext">
+                  Die obere und untere App Bar bleiben auf jeder Seite beim Scrollen sichtbar.
+                </span>
+                <span class="anforderungs-prüfkriterium">
+                  <strong>Prüfkriterium:</strong>
+                  Nur der Inhalt zwischen den App Bars bewegt sich beim Scrollen.
+                </span>
+                <span class="anforderungs-metadaten">
+                  <span>Funktional</span>
+                  <span>Must have</span>
+                </span>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="anforderungs-ordner" open>
+          <summary>Backend</summary>
+          <div class="anforderungs-ordner-inhalt">
+            <details class="anforderungs-eintrag">
+              <summary>Pseudo-Anforderung F2</summary>
+              <div class="anforderungs-inhalt">
+                <span class="anforderungs-titel">Pseudo-Anforderung F2</span>
+                <span class="anforderungs-kurztext">Platzhalter für eine funktionale Backend-Anforderung.</span>
+                <span class="anforderungs-prüfkriterium">
+                  <strong>Prüfkriterium:</strong>
+                  Die beschriebene Backend-Funktion lässt sich nachvollziehbar ausführen.
+                </span>
+                <span class="anforderungs-metadaten">
+                  <span>Funktional</span>
+                  <span>Should have</span>
+                </span>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="anforderungs-ordner" open>
+          <summary>Datenbank</summary>
+          <div class="anforderungs-ordner-inhalt">
+            <details class="anforderungs-eintrag">
+              <summary>Pseudo-Anforderung NF1</summary>
+              <div class="anforderungs-inhalt">
+                <span class="anforderungs-titel">Pseudo-Anforderung NF1</span>
+                <span class="anforderungs-kurztext">Platzhalter für eine nicht funktionale Datenbank-Anforderung.</span>
+                <span class="anforderungs-prüfkriterium">
+                  <strong>Prüfkriterium:</strong>
+                  Die festgelegte Qualitätsanforderung an die Datenbank ist messbar erfüllt.
+                </span>
+                <span class="anforderungs-metadaten">
+                  <span>Nicht funktional</span>
+                  <span>Could have</span>
+                </span>
+              </div>
+            </details>
+            <details class="anforderungs-eintrag">
+              <summary>Pseudo-Anforderung NF2</summary>
+              <div class="anforderungs-inhalt">
+                <span class="anforderungs-titel">Pseudo-Anforderung NF2</span>
+                <span class="anforderungs-kurztext">Weiterer Platzhalter für eine nicht funktionale Datenbank-Anforderung.</span>
+                <span class="anforderungs-prüfkriterium">
+                  <strong>Prüfkriterium:</strong>
+                  Die festgelegte Qualitätsanforderung an die Datenbank ist überprüfbar dokumentiert.
+                </span>
+                <span class="anforderungs-metadaten">
+                  <span>Nicht funktional</span>
+                  <span>Won’t have</span>
+                </span>
+              </div>
+            </details>
+          </div>
+        </details>
+      </div>
+    </section>
+    <section class="dashboard-fläche" data-agentenregeln>
+      <label class="kachel-label" for="agentenregeln-editor">Agentenregeln</label>
+      <textarea
+        class="agentenregeln-editor"
+        id="agentenregeln-editor"
+        spellcheck="true"
+      >- Sichtbare deutsche Texte verwenden echte Umlaute und ß.
+- Arbeitsdateien, Hilfsskripte, Vorschauen, Protokolle und andere agenteneigene Materialien gehören in den passenden Ordner unter z-Agents-Area.
+- Ein neuer dauerhafter Arbeitsordner unter z-Agents-Area darf nur mit dem von Thor vergebenen Agentennamen angelegt werden.
+- GIF-Arbeiten gehören nach z-Agents-Area/GIFs.
+- HTML-Arbeitsblätter, interaktive Prüfungen und Auswertungsmaterial gehören nach z-Agents-Area/HTMLArbeitsblatt-Ersteller.
+- Klassenbuch-Arbeiten gehören nach z-Agents-Area/Klassenbucheinträge.
+- Nutzerseitige Ergebnisse bleiben im erwarteten Ziel- oder Quellordner.
+- Verschobenes Altmaterial behält seinen ursprünglichen Pfadkontext.
+- Hilfsskripte, Vorschauen, temporäre Dateien, Caches und Diagnosen werden nicht in Kursordnern verteilt.
+- Bei Aufräumarbeiten wird der gesamte relevante Bereich inventarisiert, sicher klassifiziert, dokumentiert und abschließend geprüft.
+- Verschobenes HTML-Prüfungsmaterial behält seinen Pfad unter z-Agents-Area/HTMLArbeitsblatt-Ersteller/_moved_from_workspace/.
+- Der eigene Agentenordner wird nach 08:00 Uhr kurz geprüft und aufgeräumt.
+- _erledigteToDos/ ist der lokale, von Agenten angelegte Nachweisbereich für task-note.txt sowie Ausgangs-, Arbeits- und Ergebnisscreenshots.
+- Ist der Zielordner oder Agentenordner nicht eindeutig, wird vor dem Erstellen oder Verschieben nachgefragt.</textarea>
+      <section class="agentenzyklus" aria-labelledby="agentenzyklus-titel">
+        <div class="agentenzyklus-kopfzeile">
+          <h2 class="agentenzyklus-titel" id="agentenzyklus-titel">How to do a to do</h2>
+          <button class="agentenzyklus-zurück" type="button">
+            ← Übersicht
+          </button>
+        </div>
+        <ol class="agentenzyklus-liste">
+          <li class="agentenzyklus-stufe" data-agentenzyklus-stufe="start">
+            <div class="agentenzyklus-stufenkopf">
+              <label class="agentenzyklus-label" for="agentenzyklus-start">
+                <span class="agentenzyklus-nummer" aria-hidden="true">1</span>
+                Frisch starten
+              </label>
+              <button
+                class="agentenzyklus-auswahl"
+                type="button"
+                data-agentenzyklus-auswahl="start"
+                aria-controls="agentenzyklus-start"
+                aria-expanded="false"
+              >
+                Fokus
+                <span class="nur-visuell-versteckt">auf Frisch starten setzen</span>
+              </button>
+            </div>
+            <textarea
+              class="agentenzyklus-text"
+              id="agentenzyklus-start"
+              data-agentenzyklus-stufe="start"
+              spellcheck="true"
+            >Agentenregeln und das To Do lesen. Den tatsächlichen Startzeitpunkt mit Sekunden festhalten und unter _erledigteToDos/ den Ordner YYYY-MM-DD_HH-mm-ss__&lt;titel-slug&gt; anlegen. Der Zeitstempel bleibt Archiv-ID; nur den technischen Titel-Slug dateisicher normalisieren, zum Beispiel zusammenfuehren. Kommunikationsbezeichnung und To Do in task-note.txt notieren, evidence.json anlegen sowie bei relevantem Vorherzustand 00-ausgangszustand.png speichern und im Bildindex eintragen.</textarea>
+          </li>
+          <li class="agentenzyklus-stufe" data-agentenzyklus-stufe="ausführung">
+            <div class="agentenzyklus-stufenkopf">
+              <label class="agentenzyklus-label" for="agentenzyklus-ausführung">
+                <span class="agentenzyklus-nummer" aria-hidden="true">2</span>
+                Aufgabe ausführen
+              </label>
+              <button
+                class="agentenzyklus-auswahl"
+                type="button"
+                data-agentenzyklus-auswahl="ausführung"
+                aria-controls="agentenzyklus-ausführung"
+                aria-expanded="false"
+              >
+                Fokus
+                <span class="nur-visuell-versteckt">auf Aufgabe ausführen setzen</span>
+              </button>
+            </div>
+            <textarea
+              class="agentenzyklus-text"
+              id="agentenzyklus-ausführung"
+              data-agentenzyklus-stufe="ausführung"
+              spellcheck="true"
+            >Das To Do fokussiert umsetzen. Wichtige Entscheidungen in task-note.txt ergänzen, Arbeits- sowie Ergebnisscreenshots im selben lokalen Aufgabenordner speichern und jeden sichtbaren Nachweis mit Dateiname und Beschriftung in evidence.json aufnehmen.</textarea>
+          </li>
+          <li class="agentenzyklus-stufe" data-agentenzyklus-stufe="abschluss">
+            <div class="agentenzyklus-stufenkopf">
+              <label class="agentenzyklus-label" for="agentenzyklus-abschluss">
+                <span class="agentenzyklus-nummer" aria-hidden="true">3</span>
+                Abschließen &amp; übergeben
+              </label>
+              <button
+                class="agentenzyklus-auswahl"
+                type="button"
+                data-agentenzyklus-auswahl="abschluss"
+                aria-controls="agentenzyklus-abschluss"
+                aria-expanded="false"
+              >
+                Fokus
+                <span class="nur-visuell-versteckt">auf Abschließen und übergeben setzen</span>
+              </button>
+            </div>
+            <textarea
+              class="agentenzyklus-text"
+              id="agentenzyklus-abschluss"
+              data-agentenzyklus-stufe="abschluss"
+              spellcheck="true"
+            >Ergebnis prüfen, mindestens einen Ergebnisscreenshot speichern, ihn in evidence.json eintragen und Abschluss oder Übergabe in task-note.txt dokumentieren. Erst danach übergeben oder die Unterhaltung beenden; der lokale Ordner bleibt erhalten.</textarea>
+          </li>
+        </ol>
+      </section>
+    </section>
+  </main>
+  <dialog class="nachweis-dialog" aria-labelledby="nachweis-dialog-titel">
+    <header class="nachweis-dialog-kopf">
+      <h2 class="nachweis-dialog-titel" id="nachweis-dialog-titel">Nachweise</h2>
+      <form method="dialog">
+        <button class="nachweis-dialog-schließen" type="submit">Schließen</button>
+      </form>
+    </header>
+    <div class="nachweis-dialog-inhalt">
+      <p class="nachweis-status" role="status">Noch keine Nachweise</p>
+      <div class="nachweis-galerie" aria-label="Nachweisbilder" hidden></div>
+      <div class="nachweis-lightbox" hidden>
+        <div class="nachweis-lightbox-zeile">
+          <button class="nachweis-zurück" type="button">← Galerie</button>
+          <p class="nachweis-lightbox-beschriftung"></p>
+        </div>
+        <img src="" alt="">
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>

@@ -79,7 +79,7 @@
       "kennung": "T-011",
       "kommunikationsnummer": 3,
       "titel": "Agent aus To-Do-Aufgabe starten",
-      "status": "todo",
+      "status": "backlog",
       "beschreibung": "Jede To-Do-Aufgabe soll später einen Start-Button erhalten. Dieser soll einen eigenen Codex-Agenten starten bzw. ihm eine Nachricht geben, zuerst die bearbeitbaren Agenten-Regeln im Dashboard zu lesen, danach seine zugewiesene To-Do-Aufgabe zu lesen und anschließend loszulegen. Dafür ist eine sichere Dashboard-zu-Codex-Startverbindung erforderlich."
     },
     {
@@ -87,7 +87,7 @@
       "kennung": "T-012",
       "kommunikationsnummer": 4,
       "titel": "Implementierungsplan pro To Do",
-      "status": "todo",
+      "status": "backlog",
       "beschreibung": "Jede To-Do-Aufgabe soll künftig zusätzlich zu Titel und Status einen verständlichen, schrittweisen Implementierungsplan enthalten. Der Plan muss für den Nutzer klar lesbar und für einen ausführenden Agenten unmittelbar handlungsfähig sein: mit Ziel, konkreten Arbeitsschritten, Prüfung und Abnahme sowie klaren Grenzen. In der To-Do-Ansicht soll er aufklappbar lesbar sein, ohne die flache Übersicht zu überladen. Bestehende Aufgaben erhalten schrittweise solche Pläne."
     }
   ]

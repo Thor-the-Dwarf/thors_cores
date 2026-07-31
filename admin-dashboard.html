@@ -184,6 +184,33 @@
       min-width: 0;
     }
 
+    .auftrag[data-ziehbar] {
+      padding: 7px;
+      margin: -7px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      transition:
+        border-color 140ms ease,
+        background 140ms ease,
+        opacity 140ms ease;
+    }
+
+    .auftrag[data-ziehbar]:hover {
+      border-color: rgba(126, 220, 245, 0.28);
+      background: rgba(126, 220, 245, 0.06);
+    }
+
+    .auftrag[data-ziehbar]:active {
+      cursor: grabbing;
+    }
+
+    .auftrag[data-wird-gezogen] {
+      opacity: 0.42;
+    }
+
     .auftrag strong {
       display: block;
       min-width: 0;
@@ -823,13 +850,38 @@
       border: 0;
     }
 
-    [data-status="aufgaben"] {
-      grid-column: span 4;
+    [data-status="backlog"],
+    [data-status="aufgaben"],
+    [data-status="done"] {
+      grid-column: span 2;
     }
 
     [data-status="done"] {
-      grid-column: span 2;
       border-right: 0;
+    }
+
+    [data-status="aufgaben"] {
+      position: relative;
+      transition:
+        background 140ms ease,
+        box-shadow 140ms ease;
+    }
+
+    [data-status="aufgaben"][data-drop-aktiv] {
+      background: #182b3c;
+      box-shadow: inset 0 0 0 2px #7edcf5;
+    }
+
+    .todo-drop-hinweis {
+      display: none;
+      margin: 0 0 10px;
+      color: #9ce8fb;
+      font-size: clamp(0.6rem, 0.82vw, 0.7rem);
+      font-weight: 720;
+    }
+
+    [data-status="aufgaben"][data-drop-aktiv] .todo-drop-hinweis {
+      display: block;
     }
 
     [data-anforderungsart],
@@ -845,7 +897,7 @@
     @media (max-width: 620px) {
       .dashboard-wall {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, minmax(0, 1fr));
+        grid-template-rows: repeat(5, minmax(0, 1fr));
       }
 
       .dashboard-fläche,
@@ -937,6 +989,10 @@
   <script defer>
     const filter = [
       {
+        element: "[data-status='backlog']",
+        passt: auftrag => auftrag.status === "backlog"
+      },
+      {
         element: "[data-status='aufgaben']",
         passt: auftrag =>
           auftrag.status === "todo" || auftrag.status === "doing"
@@ -950,6 +1006,8 @@
     const agentenregelnSpeicherschlüssel = "thors-core-admin-agentenregeln";
     const agentenzyklusSpeicherschlüssel = "thors-core-admin-agentenzyklus";
     const benutzerToDosSpeicherschlüssel = "thors-core-admin-benutzer-todos";
+    const auftragsStatusSpeicherschlüssel =
+      "thors-core-admin-auftragsstatus";
     const bisherigeAgentenzyklusStandardtexte = {
       start:
         "Agentenregeln lesen, das To Do eindeutig zuordnen und Ziel sowie Grenzen prüfen.",
@@ -987,6 +1045,11 @@
       const eintrag = document.createElement("li");
       eintrag.className = "auftrag";
       eintrag.dataset.auftragskennung = auftrag.kennung;
+      if (auftrag.status === "backlog") {
+        eintrag.dataset.ziehbar = "";
+        eintrag.title = "Nach To Do ziehen";
+        eintrag.addEventListener("pointerdown", backlogZeigerStarten);
+      }
       if (auftrag.lokal === true) {
         eintrag.dataset.auftragsquelle = "lokal";
       }
@@ -1223,6 +1286,7 @@
 
     function auftragsNummerDarstellen(auftrag) {
       const statusbezeichnungen = {
+        backlog: "Backlog",
         todo: "To Do",
         doing: "To Do"
       };
@@ -1305,6 +1369,124 @@
       });
     }
 
+    function auftragsStatusLaden() {
+      try {
+        const statusZuKennung = JSON.parse(
+          localStorage.getItem(auftragsStatusSpeicherschlüssel)
+        );
+        if (!statusZuKennung || Array.isArray(statusZuKennung)) return {};
+        return Object.fromEntries(
+          Object.entries(statusZuKennung).filter(
+            ([kennung, status]) =>
+              typeof kennung === "string" && status === "todo"
+          )
+        );
+      } catch {
+        return {};
+      }
+    }
+
+    function dateiAufträgeMitLokalemStatus() {
+      const statusZuKennung = auftragsStatusLaden();
+      return geladeneDateiAufträge.map(auftrag => {
+        if (
+          auftrag.status !== "backlog" ||
+          statusZuKennung[auftrag.kennung] !== "todo"
+        ) {
+          return auftrag;
+        }
+        return { ...auftrag, status: "todo" };
+      });
+    }
+
+    function zusammengesetzteAufträge() {
+      return [
+        ...dateiAufträgeMitLokalemStatus(),
+        ...benutzerToDosLaden()
+      ];
+    }
+
+    function dragDarstellungZurücksetzen() {
+      document
+        .querySelectorAll(".auftrag[data-wird-gezogen]")
+        .forEach(eintrag => delete eintrag.dataset.wirdGezogen);
+      delete document.querySelector("[data-status='aufgaben']")
+        .dataset.dropAktiv;
+    }
+
+    function auftragNachTodoVerschieben(kennung) {
+      const istBacklogAuftrag = geladeneDateiAufträge.some(
+        auftrag =>
+          auftrag.kennung === kennung && auftrag.status === "backlog"
+      );
+      if (!istBacklogAuftrag) return;
+
+      const statusZuKennung = auftragsStatusLaden();
+      statusZuKennung[kennung] = "todo";
+      localStorage.setItem(
+        auftragsStatusSpeicherschlüssel,
+        JSON.stringify(statusZuKennung)
+      );
+      alleAufträgeDarstellen();
+    }
+
+    function backlogZeigerStarten(ereignis) {
+      if (ereignis.button !== 0) return;
+      ereignis.preventDefault();
+      const eintrag = ereignis.currentTarget;
+      const startX = ereignis.clientX;
+      const startY = ereignis.clientY;
+      let wirdGezogen = false;
+
+      function zeigerBewegen(bewegung) {
+        const abstand = Math.hypot(
+          bewegung.clientX - startX,
+          bewegung.clientY - startY
+        );
+        if (!wirdGezogen && abstand < 6) return;
+        wirdGezogen = true;
+        bewegung.preventDefault();
+        eintrag.dataset.wirdGezogen = "";
+
+        const ziel = document.querySelector("[data-status='aufgaben']");
+        const rechteck = ziel.getBoundingClientRect();
+        const überZiel =
+          bewegung.clientX >= rechteck.left &&
+          bewegung.clientX <= rechteck.right &&
+          bewegung.clientY >= rechteck.top &&
+          bewegung.clientY <= rechteck.bottom;
+        ziel.toggleAttribute("data-drop-aktiv", überZiel);
+      }
+
+      function zeigerBeenden(ende) {
+        document.removeEventListener("pointermove", zeigerBewegen);
+        document.removeEventListener("pointerup", zeigerBeenden);
+        document.removeEventListener("pointercancel", zeigerAbbrechen);
+
+        const ziel = document.querySelector("[data-status='aufgaben']");
+        const rechteck = ziel.getBoundingClientRect();
+        const überZiel =
+          ende.clientX >= rechteck.left &&
+          ende.clientX <= rechteck.right &&
+          ende.clientY >= rechteck.top &&
+          ende.clientY <= rechteck.bottom;
+        const kennung = eintrag.dataset.auftragskennung;
+        dragDarstellungZurücksetzen();
+        if (wirdGezogen && überZiel && kennung) {
+          auftragNachTodoVerschieben(kennung);
+        }
+      }
+
+      function zeigerAbbrechen(ende) {
+        wirdGezogen = false;
+        zeigerBeenden(ende);
+      }
+
+      document.addEventListener("pointermove", zeigerBewegen);
+      document.addEventListener("pointerup", zeigerBeenden);
+      document.addEventListener("pointercancel", zeigerAbbrechen);
+    }
+
     function benutzerToDosLaden() {
       try {
         const gespeicherteToDos = JSON.parse(
@@ -1329,10 +1511,7 @@
 
     function alleAufträgeDarstellen() {
       listenSignaturen.clear();
-      listenAktualisieren([
-        ...geladeneDateiAufträge,
-        ...benutzerToDosLaden()
-      ]);
+      listenAktualisieren(zusammengesetzteAufträge());
     }
 
     function nächsteToDoNummer(benutzerToDos) {
@@ -1545,10 +1724,7 @@
         geladeneDateiAufträge = Array.isArray(daten.auftraege)
           ? daten.auftraege
           : [];
-        listenAktualisieren([
-          ...geladeneDateiAufträge,
-          ...benutzerToDosLaden()
-        ]);
+        listenAktualisieren(zusammengesetzteAufträge());
         document.documentElement.dataset.auftragsquelle = "bereit";
       } catch {
         document.documentElement.dataset.auftragsquelle = "fehler";
@@ -1577,6 +1753,10 @@
 </head>
 <body>
   <main class="dashboard-wall" aria-label="Dashboard-Flächenraster">
+    <section class="dashboard-fläche" data-status="backlog">
+      <span class="kachel-label">Backlog</span>
+      <ul class="auftragsliste"></ul>
+    </section>
     <section class="dashboard-fläche" data-status="aufgaben">
       <div class="todo-kopfzeile">
         <span class="kachel-label">To Do</span>
@@ -1613,6 +1793,9 @@
         </div>
         <p class="todo-rückmeldung" role="status" aria-live="polite"></p>
       </form>
+      <p class="todo-drop-hinweis" role="status">
+        Aufgabe hier ablegen
+      </p>
       <ul class="auftragsliste"></ul>
     </section>
     <section class="dashboard-fläche" data-status="done">
@@ -1635,6 +1818,23 @@
                 <span class="anforderungs-prüfkriterium">
                   <strong>Prüfkriterium:</strong>
                   Nur der Inhalt zwischen den App Bars bewegt sich beim Scrollen.
+                </span>
+                <span class="anforderungs-metadaten">
+                  <span>Funktional</span>
+                  <span>Must have</span>
+                </span>
+              </div>
+            </details>
+            <details class="anforderungs-eintrag">
+              <summary>Vault-Auswahl bewahrt Ansicht und Layout</summary>
+              <div class="anforderungs-inhalt">
+                <span class="anforderungs-titel">Vault-Auswahl bewahrt Ansicht und Layout</span>
+                <span class="anforderungs-kurztext">
+                  Bei jeder Auswahl im Vault ändert sich ausschließlich die Hervorhebung der passenden Elemente.
+                </span>
+                <span class="anforderungs-prüfkriterium">
+                  <strong>Prüfkriterium:</strong>
+                  Nach Lernfeld-, Kompetenz-, Cluster- oder Themenauswahl bleiben dieselbe Elementanordnung, Physik/Simulation sowie der aktuelle Pan- und Zoomzustand erhalten; nur die Hervorhebung wechselt.
                 </span>
                 <span class="anforderungs-metadaten">
                   <span>Funktional</span>

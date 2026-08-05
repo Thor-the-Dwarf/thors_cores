@@ -1,7 +1,7 @@
 {
   "schema_version": "3.0.0",
   "dataset_id": "de-fachinformatiker-lern-vault",
-  "updated_at": "2026-07-30",
+  "updated_at": "2026-08-05",
   "language": "de",
   "data_role": "Normalisierter Quellenkatalog",
   "reference_contract": "source_refs in Core-Ausprägungen müssen über source_id auf genau eine Quelle verweisen.",
@@ -183,6 +183,15 @@
       "url": "https://www.gesetze-im-internet.de/estg/__38.html",
       "authority": "offiziell",
       "relevance": "Rechtsgrundlage für die Erhebung und Einbehaltung der Lohnsteuer vom Arbeitslohn."
+    },
+    {
+      "id": "ITBP-PRUEFUNGSTHEMEN-2026",
+      "publisher": "Stefan Macke – IT-Berufe-Podcast",
+      "title": "Themen der schriftlichen IHK-Prüfungen der IT-Berufe",
+      "date": "2026-08-05",
+      "url": "https://it-berufe-podcast.de/vorbereitung-auf-die-ihk-abschlusspruefung-der-it-berufe/themen-der-schriftlichen-ihk-pruefungen-der-it-berufe/",
+      "authority": "fachlich",
+      "relevance": "Rückblickende Themen- und Punkteauswertung der bisherigen AP1-Prüfungen bis Frühjahr 2026 und der AP2-Prüfungen für FIAE bis Winter 2025; keine Prüfungsprognose und keine Primärquelle für die Lernfeldstruktur."
     }
   ]
 }

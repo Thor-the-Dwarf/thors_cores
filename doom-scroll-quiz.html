@@ -67,6 +67,8 @@
     }
 
     .quiz-app {
+      width: 100%;
+      min-width: 0;
       height: calc(100vh - var(--top-app-bar-höhe) - var(--app-bar-höhe));
       height: calc(100dvh - var(--top-app-bar-höhe) - var(--app-bar-höhe));
       margin-top: var(--top-app-bar-höhe);
@@ -80,12 +82,13 @@
 
     .quiz-kopf {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, auto);
       align-items: center;
+      gap: 16px;
     }
 
-    .dummy-chip {
-      justify-self: end;
+    .pool-chip {
+      min-width: 0;
       color: var(--cyan);
       font-size: 0.75rem;
       font-weight: 1000;
@@ -109,6 +112,7 @@
     .karten-spur {
       display: flex;
       width: 100%;
+      min-width: 0;
       height: 100%;
       will-change: transform;
       transition: transform 320ms cubic-bezier(0.22, 0.72, 0.18, 1);
@@ -119,7 +123,8 @@
     }
 
     .quiz-karte {
-      min-width: 100%;
+      width: 100%;
+      min-width: 0;
       height: 100%;
       flex: 0 0 100%;
       display: grid;
@@ -136,13 +141,16 @@
 
     .aufgabe {
       width: min(1080px, 100%);
+      min-width: 0;
       display: flex;
       flex-direction: column;
       gap: 18px;
     }
 
     .tag {
-      width: max-content;
+      width: fit-content;
+      max-width: 100%;
+      overflow-wrap: anywhere;
       color: var(--cyan);
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -153,8 +161,8 @@
     h1 {
       max-width: 980px;
       margin: 0;
-      font-size: clamp(40px, 6vw, 86px);
-      line-height: 0.98;
+      font-size: clamp(28px, 4vw, 56px);
+      line-height: 1.04;
       letter-spacing: -0.045em;
     }
 
@@ -178,6 +186,7 @@
       align-items: center;
       gap: 18px;
       min-height: 72px;
+      min-width: 0;
       padding: 14px 18px;
       border: 1.5px solid rgba(118, 157, 205, 0.52);
       border-radius: 20px;
@@ -200,6 +209,24 @@
       background: rgba(88, 45, 135, 0.34);
     }
 
+    .antwort.richtig,
+    .zuordnungszeile.richtig,
+    .lücke.richtig,
+    .sortierzeile.richtig,
+    .lückentext-satz select.richtig {
+      border-color: var(--green);
+      background: rgba(39, 132, 83, 0.28);
+    }
+
+    .antwort.falsch,
+    .zuordnungszeile.falsch,
+    .lücke.falsch,
+    .sortierzeile.falsch,
+    .lückentext-satz select.falsch {
+      border-color: #ff6f7d;
+      background: rgba(153, 37, 58, 0.3);
+    }
+
     .marke {
       width: 34px;
       height: 34px;
@@ -216,6 +243,8 @@
     }
 
     .antwort-text {
+      min-width: 0;
+      overflow-wrap: anywhere;
       font-size: clamp(20px, 1.7vw, 31px);
       font-weight: 900;
     }
@@ -224,12 +253,76 @@
       min-height: 24px;
       color: #d9c8f3;
       font-weight: 760;
+      line-height: 1.45;
+    }
+
+    .leerstand.erfolg { color: #7bf0aa; }
+    .leerstand.fehler { color: #ff9ca6; }
+
+    .quelle {
+      min-width: 0;
+      color: #91a4bd;
+      font-size: 0.82rem;
+      font-weight: 720;
     }
 
     .sortierliste,
-    .eingabe-muster {
+    .eingabe-muster,
+    .zuordnungsliste,
+    .lückentext {
       display: grid;
       gap: 12px;
+    }
+
+    .zuordnungszeile,
+    .lücke {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+      align-items: center;
+      gap: 14px;
+      min-height: 64px;
+      padding: 10px 14px;
+      border: 1.5px solid rgba(118, 157, 205, 0.52);
+      border-radius: 18px;
+      background: rgba(24, 40, 64, 0.82);
+    }
+
+    .zuordnungszeile strong,
+    .lücke strong {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .zuordnungszeile select,
+    .lücke select,
+    .lückentext-satz select {
+      min-height: 46px;
+      padding: 6px 38px 6px 12px;
+      border: 1px solid rgba(180, 205, 239, 0.46);
+      border-radius: 12px;
+      color: var(--text);
+      background: #13223a;
+      font: inherit;
+      font-weight: 780;
+    }
+
+    .zuordnungszeile select,
+    .lücke select {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .lückentext-satz {
+      color: var(--text);
+      font-size: clamp(18px, 1.7vw, 26px);
+      font-weight: 780;
+      line-height: 1.8;
+    }
+
+    .lückentext-satz select {
+      width: auto;
+      min-width: 150px;
+      margin: 0 6px;
     }
 
     .sortierzeile {
@@ -337,13 +430,22 @@
       font-weight: 900;
     }
 
+    .punktestand {
+      color: var(--muted);
+      font-weight: 900;
+    }
+
     @media (max-width: 720px) {
       .quiz-app { padding: 10px 12px; }
-      .dummy-chip { font-size: 0.68rem; }
+      .pool-chip { font-size: 0.68rem; }
       .quiz-karte { padding: 22px 10px; }
       .quiz-fuß { grid-template-columns: 1fr; }
-      .fortschritt { justify-self: center; }
+      .fortschritt,
+      .punktestand { justify-self: center; }
       .prüfen { min-width: 190px; }
+      .quiz-kopf { grid-template-columns: 1fr; }
+      .zuordnungszeile,
+      .lücke { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -367,62 +469,22 @@
   </div>
   <div class="quiz-app">
     <header class="quiz-kopf">
-      <div class="dummy-chip">UI-Dummy · keine Fachinhalte</div>
+      <div id="pool-info" class="pool-chip">Übungen werden geladen …</div>
+      <div id="quellen-info" class="quelle"></div>
     </header>
 
-    <main id="feed" class="feed" aria-label="Doom-Scroll-Quiz-Dummy">
-      <section class="quiz-karte" data-index="0">
-        <div class="aufgabe">
-          <div class="tag">Platzhalterkarte 01</div>
-          <h1>Noch keine Quizfrage hinterlegt.</h1>
-          <p class="hinweis">Diese Ansicht zeigt ausschließlich die spätere Bedien- und Gestaltungssprache. Es wurden keine fachlichen Inhalte erfunden.</p>
-          <div class="antworten" aria-label="Dummy-Antworten">
-            <button class="antwort" type="button"><span class="marke"></span><span class="antwort-text">Dummy-Auswahl A</span></button>
-            <button class="antwort" type="button"><span class="marke"></span><span class="antwort-text">Dummy-Auswahl B</span></button>
-            <button class="antwort" type="button"><span class="marke"></span><span class="antwort-text">Dummy-Auswahl C</span></button>
-          </div>
-          <div class="leerstand" role="status"></div>
-        </div>
-      </section>
-
-      <section class="quiz-karte" data-index="1">
-        <div class="aufgabe">
-          <div class="tag">Muster · Reihenfolge</div>
-          <h1>Bausteine in eine Reihenfolge bringen.</h1>
-          <p class="hinweis">Dieses fachfreie Muster vertritt Sortier-, Zuordnungs- und Ordnungsaufgaben aus dem Aufgabentypen-Prototyp.</p>
-          <div class="sortierliste" aria-label="Sortierbarer Dummy">
-            <div class="sortierzeile"><span class="griff">⋮⋮</span><strong>Dummy-Baustein A</strong><button type="button" aria-label="Baustein A nach oben">↑</button><button type="button" aria-label="Baustein A nach unten">↓</button></div>
-            <div class="sortierzeile"><span class="griff">⋮⋮</span><strong>Dummy-Baustein B</strong><button type="button" aria-label="Baustein B nach oben">↑</button><button type="button" aria-label="Baustein B nach unten">↓</button></div>
-            <div class="sortierzeile"><span class="griff">⋮⋮</span><strong>Dummy-Baustein C</strong><button type="button" aria-label="Baustein C nach oben">↑</button><button type="button" aria-label="Baustein C nach unten">↓</button></div>
-          </div>
-          <div class="leerstand" role="status"></div>
-        </div>
-      </section>
-
-      <section class="quiz-karte" data-index="2">
-        <div class="aufgabe">
-          <div class="tag">Muster · Eingabe und Skala</div>
-          <h1>Antwortform passend zur Frage wechseln.</h1>
-          <p class="hinweis">Text, Zahl, Skala und weitere Widgets werden später vom Aufgabentyp bestimmt. Der Dummy speichert und bewertet noch nichts.</p>
-          <div class="eingabe-muster">
-            <label for="dummy-text">Fachfreie Kurztexteingabe</label>
-            <input id="dummy-text" type="text" placeholder="Dummy-Antwort eintragen">
-            <label for="dummy-skala">Fachfreie Skala</label>
-            <input id="dummy-skala" type="range" min="1" max="5" value="3">
-          </div>
-          <div class="leerstand" role="status"></div>
-        </div>
-      </section>
+    <main id="feed" class="feed" aria-label="Doom School Quiz">
+      <div id="karten-spur" class="karten-spur"></div>
     </main>
 
     <footer class="quiz-fuß">
-      <div></div>
+      <div id="punktestand" class="punktestand">0 richtig</div>
       <div class="steuerung">
-        <button id="vorherige" class="nav" type="button" aria-label="Zur vorherigen Platzhalterkarte">↑</button>
-        <button id="prüfen" class="prüfen" type="button">Dummy prüfen</button>
-        <button id="nächste" class="nav" type="button" aria-label="Zur nächsten Platzhalterkarte">↓</button>
+        <button id="vorherige" class="nav" type="button" aria-label="Zur vorherigen Aufgabe">↑</button>
+        <button id="prüfen" class="prüfen" type="button">Prüfen</button>
+        <button id="nächste" class="nav" type="button" aria-label="Zur nächsten Aufgabe">↓</button>
       </div>
-      <div id="fortschritt" class="fortschritt">1 / 3</div>
+      <div id="fortschritt" class="fortschritt">0 / 0</div>
     </footer>
   </div>
   <footer class="bottom-app-bar" aria-label="App-Navigation">
@@ -456,140 +518,8 @@
     </nav>
   </footer>
 
-  <script>
-    (() => {
-      "use strict";
-      const feed = document.querySelector("#feed");
-      const karten = [...document.querySelectorAll(".quiz-karte")];
-      const fortschritt = document.querySelector("#fortschritt");
-      const vorherige = document.querySelector("#vorherige");
-      const prüfen = document.querySelector("#prüfen");
-      const nächste = document.querySelector("#nächste");
-      const kartenSpur = document.createElement("div");
-      kartenSpur.className = "karten-spur";
-      karten.forEach(karte => kartenSpur.append(karte));
-      feed.append(kartenSpur);
-      let aktiv = 0;
-      let zug = null;
-
-      function karteAnzeigen(index, { fokus = false, animiert = true } = {}) {
-        aktiv = Math.max(0, Math.min(karten.length - 1, index));
-        feed.classList.remove("zieht");
-        kartenSpur.style.transition = animiert ? "" : "none";
-        kartenSpur.style.transform = `translate3d(${-aktiv * 100}%, 0, 0)`;
-        if (!animiert) {
-          requestAnimationFrame(() => kartenSpur.style.removeProperty("transition"));
-        }
-        karten.forEach((karte, index) => {
-          const inaktiv = index !== aktiv;
-          karte.inert = inaktiv;
-          karte.setAttribute("aria-hidden", String(inaktiv));
-        });
-        vorherige.disabled = aktiv === 0;
-        nächste.disabled = aktiv === karten.length - 1;
-        fortschritt.textContent = `${aktiv + 1} / ${karten.length}`;
-        if (fokus) {
-          (nächste.disabled ? prüfen : nächste).focus({ preventScroll: true });
-        }
-      }
-
-      document.querySelectorAll(".antwort").forEach(antwort => {
-        antwort.addEventListener("click", () => {
-          antwort.closest(".antworten").querySelectorAll(".antwort").forEach(option => {
-            option.classList.toggle("ausgewählt", option === antwort);
-          });
-        });
-      });
-
-      vorherige.addEventListener("click", () => karteAnzeigen(aktiv - 1, { fokus: true }));
-      nächste.addEventListener("click", () => karteAnzeigen(aktiv + 1, { fokus: true }));
-      prüfen.addEventListener("click", () => {
-        const leerstand = karten[aktiv].querySelector(".leerstand");
-        leerstand.textContent = "Noch keine fachliche Auswertung hinterlegt.";
-      });
-      feed.addEventListener("pointerdown", ereignis => {
-        if (!ereignis.isPrimary || ereignis.button !== 0) return;
-        if (ereignis.target.closest("button, input, label, select, textarea")) return;
-        zug = {
-          pointerId: ereignis.pointerId,
-          startX: ereignis.clientX,
-          startY: ereignis.clientY,
-          horizontal: false
-        };
-      });
-
-      feed.addEventListener("pointermove", ereignis => {
-        if (!zug || zug.pointerId !== ereignis.pointerId) return;
-        const deltaX = ereignis.clientX - zug.startX;
-        const deltaY = ereignis.clientY - zug.startY;
-        if (!zug.horizontal) {
-          if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < 8) return;
-          if (Math.abs(deltaY) >= Math.abs(deltaX)) {
-            zug = null;
-            return;
-          }
-          zug.horizontal = true;
-          feed.classList.add("zieht");
-          feed.setPointerCapture(ereignis.pointerId);
-        }
-        ereignis.preventDefault();
-        const amRand =
-          (aktiv === 0 && deltaX > 0) ||
-          (aktiv === karten.length - 1 && deltaX < 0);
-        const verschiebung = amRand ? deltaX * 0.28 : deltaX;
-        kartenSpur.style.transform =
-          `translate3d(calc(${-aktiv * 100}% + ${verschiebung}px), 0, 0)`;
-      });
-
-      function zugBeenden(ereignis) {
-        if (!zug || zug.pointerId !== ereignis.pointerId) return;
-        const deltaX = ereignis.clientX - zug.startX;
-        const horizontal = zug.horizontal;
-        zug = null;
-        if (feed.hasPointerCapture(ereignis.pointerId)) {
-          feed.releasePointerCapture(ereignis.pointerId);
-        }
-        const schwelle = Math.min(100, feed.clientWidth * 0.14);
-        const richtung =
-          horizontal && Math.abs(deltaX) >= schwelle
-            ? (deltaX < 0 ? 1 : -1)
-            : 0;
-        karteAnzeigen(aktiv + richtung, { fokus: richtung !== 0 });
-      }
-
-      feed.addEventListener("pointerup", zugBeenden);
-      feed.addEventListener("pointercancel", zugBeenden);
-
-      document.addEventListener("keydown", ereignis => {
-        if (
-          ereignis.defaultPrevented ||
-          ereignis.altKey ||
-          ereignis.ctrlKey ||
-          ereignis.metaKey
-        ) return;
-        const ziel = ereignis.target;
-        if (
-          ziel.matches("input, textarea, select") ||
-          ziel.closest("[contenteditable='true']")
-        ) return;
-        if (ereignis.key === "ArrowLeft" && !vorherige.disabled) {
-          ereignis.preventDefault();
-          vorherige.click();
-        } else if (ereignis.key === "ArrowRight" && !nächste.disabled) {
-          ereignis.preventDefault();
-          nächste.click();
-        } else if (
-          ereignis.key === "Enter" &&
-          [vorherige, prüfen, nächste].includes(document.activeElement)
-        ) {
-          ereignis.preventDefault();
-          document.activeElement.click();
-        }
-      });
-
-      karteAnzeigen(0, { fokus: true, animiert: false });
-    })();
-  </script>
+  <script src="Quizfragen.js?v=20260801"></script>
+  <script src="doom-scroll-quiz.js?v=20260801"></script>
   <script src="app-page-navigation.js"></script>
 </body>
 </html>

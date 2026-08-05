@@ -27,6 +27,18 @@
    Ausbildungsordnung und ihrer betrieblichen Begriffe verwendet. Sie ersetzt
    weder die KMK-Zielformulierungen noch die Rechtsverordnung.
 
+## Ergänzende Prüfungsanalyse
+
+Stefan Macke: **Themen der schriftlichen IHK-Prüfungen der IT-Berufe**,
+IT-Berufe-Podcast
+https://it-berufe-podcast.de/vorbereitung-auf-die-ihk-abschlusspruefung-der-it-berufe/themen-der-schriftlichen-ihk-pruefungen-der-it-berufe/
+
+Die rückblickende Auswertung kennzeichnet bisher tatsächlich abgefragte AP1-
+und AP2-FIAE-Themen. Sie dient ausschließlich der Prüfungsrelevanz und ersetzt
+weder den KMK-Rahmenlehrplan noch die Ausbildungsordnung. Konkrete Dokumente,
+Modelle, Diagramme und andere Arbeitsergebnisse werden als Artefakte geführt;
+die zu ihrer Erstellung und Bewertung nötigen Kenntnisse bleiben Lerninhalte.
+
 ## Ableitungsregel
 
 Die offiziellen Quellen geben Lernfeldtitel, Stunden, Kompetenzsätze,

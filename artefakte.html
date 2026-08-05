@@ -14,7 +14,6 @@
       --cyan: #46d7ff;
       --flamme: #ff9f43;
       --top-app-bar-höhe: calc(52px + env(safe-area-inset-top, 0px));
-      --seiten-navigation-höhe: 60px;
       --app-bar-höhe: calc(62px + env(safe-area-inset-bottom, 0px));
     }
 
@@ -110,9 +109,9 @@
 
     .artefakte-raster {
       width: 100%;
-      height: calc(100vh - var(--top-app-bar-höhe) - var(--seiten-navigation-höhe) - var(--app-bar-höhe));
-      height: calc(100dvh - var(--top-app-bar-höhe) - var(--seiten-navigation-höhe) - var(--app-bar-höhe));
-      margin-top: calc(var(--top-app-bar-höhe) + var(--seiten-navigation-höhe));
+      height: calc(100vh - var(--top-app-bar-höhe) - var(--app-bar-höhe));
+      height: calc(100dvh - var(--top-app-bar-höhe) - var(--app-bar-höhe));
+      margin-top: var(--top-app-bar-höhe);
       min-height: 0;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -516,11 +515,14 @@
             "_Gantt_Diagramm.xlsx",
             "_Kostenplan.xlsx",
             "_Meilensteinplan.xlsx",
+            "_Mockup.drawio",
             "_Netzplan.xlsx",
             "_p-UML-Überblick.html",
             "_Projektstrukturplan.drawio",
             "_Qualitätssicherungsplan.docx",
+            "_Relationales_Datenmodell.puml",
             "_Risikobehandlungsplan.xlsx",
+            "_Struktogramm.html",
             "_Testplan.docx",
             "_Übergabeplan.docx",
             "FIAE_FIDP_Entity_Relationship_Diagramm.html",
@@ -597,6 +599,7 @@
             "_Testfallkatalog.xlsx",
             "_Testkonzept.docx",
             "_Teststrategie.docx",
+            "_Schreibtischtest.xlsx",
             "FIAE_FISI_Testumgebung.docx",
             "FIAE_test_deadline.py",
             "FIAE_test_login.py",

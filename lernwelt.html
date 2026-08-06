@@ -420,7 +420,8 @@
       text-decoration: none;
     }
 
-    .admin-dashboard-aktion {
+    .admin-dashboard-aktion,
+    .admin-bildgenerierung-aktion {
       width: 100%;
       min-height: 48px;
       margin-top: 12px;
@@ -438,7 +439,8 @@
       text-decoration: none;
     }
 
-    .admin-dashboard-aktion svg {
+    .admin-dashboard-aktion svg,
+    .admin-bildgenerierung-aktion svg {
       width: 23px;
       height: 23px;
       flex: 0 0 auto;
@@ -450,7 +452,9 @@
     }
 
     .admin-dashboard-aktion:hover,
-    .admin-dashboard-aktion:focus-visible {
+    .admin-dashboard-aktion:focus-visible,
+    .admin-bildgenerierung-aktion:hover,
+    .admin-bildgenerierung-aktion:focus-visible {
       border-color: rgba(70, 215, 255, 0.72);
       color: #ffffff;
       background: rgba(70, 215, 255, 0.16);
@@ -662,6 +666,15 @@
         <rect x="17" y="4" width="4" height="13" rx="1.5"></rect>
       </svg>
       <span>Admin-Dashboard</span>
+    </a>
+    <a class="admin-bildgenerierung-aktion" href="admin-bildgenerierung.html"
+       aria-label="Admin Bildgenerierung oeffnen" title="Admin Bildgenerierung">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3.5" y="5" width="17" height="14" rx="2"></rect>
+        <circle cx="9" cy="10" r="1.6"></circle>
+        <path d="m6.5 16 4.1-4.1 2.9 2.9 2.2-2.2 2.8 3.4"></path>
+      </svg>
+      <span>Admin Bildgenerierung</span>
     </a>
   </aside>
 

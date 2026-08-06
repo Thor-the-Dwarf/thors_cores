@@ -1,0 +1,808 @@
+﻿<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=10, user-scalable=yes">
+  <title>Admin Bildgenerierung | Thors Core</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08111d;
+      --panel: #0f1a2a;
+      --panel-2: #111f31;
+      --line: rgba(147, 181, 224, 0.24);
+      --text: #f5f7fb;
+      --muted: #a9b7cb;
+      --accent: #46d7ff;
+      --danger: #ff8d7b;
+      --danger-fill: rgba(255, 114, 86, 0.22);
+      --pause-fill: rgba(255, 179, 71, 0.16);
+      --top-app-bar-height: calc(56px + env(safe-area-inset-top, 0px));
+      --gap: 12px;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      color: var(--text);
+      background: radial-gradient(circle at top, #102033 0%, var(--bg) 54%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body.flowchart-open {
+      overflow: hidden;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    .top-app-bar {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 10;
+      min-height: var(--top-app-bar-height);
+      padding: calc(8px + env(safe-area-inset-top, 0px)) 12px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--line);
+      background: rgba(11, 21, 35, 0.9);
+      backdrop-filter: blur(12px);
+    }
+
+    .flow-button,
+    .panel-close,
+    .save-button {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: var(--panel-2);
+      cursor: pointer;
+    }
+
+    .flow-button {
+      min-width: min(320px, 100%);
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      box-shadow: 0 18px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .flow-button[aria-expanded="true"] {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(70, 215, 255, 0.2);
+    }
+
+    .layout {
+      min-height: calc(100vh - var(--top-app-bar-height));
+      min-height: calc(100dvh - var(--top-app-bar-height));
+      margin-top: var(--top-app-bar-height);
+      padding: var(--gap);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: var(--gap);
+    }
+
+    .steps {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      gap: var(--gap);
+    }
+
+    .step,
+    .versions {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(15, 26, 42, 0.92);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .step {
+      min-height: 0;
+      padding: 12px;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .step h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .step textarea {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--text);
+      background: var(--panel-2);
+      resize: none;
+      outline: none;
+      line-height: 1.5;
+    }
+
+    .step textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .versions {
+      min-width: 0;
+      min-height: 0;
+      padding: 12px;
+      display: grid;
+      align-content: start;
+      gap: var(--gap);
+    }
+
+    .save-button {
+      min-height: 40px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .version-list {
+      min-height: 0;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      overflow-y: auto;
+    }
+
+    .empty {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--muted);
+      background: var(--panel-2);
+    }
+
+    .version-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel-2);
+    }
+
+    .version-item[data-active="true"] {
+      border-color: var(--accent);
+    }
+
+    .version-load {
+      min-width: 0;
+      padding: 0;
+      display: grid;
+      gap: 4px;
+      border: 0;
+      color: var(--text);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .version-load time {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .version-load span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .version-edit {
+      min-height: 32px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .flowchart-panel {
+      position: fixed;
+      inset: 0;
+      z-index: 25;
+      padding: calc(var(--top-app-bar-height) + 16px) 16px 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(3, 8, 15, 0.9);
+      backdrop-filter: blur(10px);
+    }
+
+    .flowchart-panel[hidden] {
+      display: none;
+    }
+
+    .panel-close {
+      position: absolute;
+      top: calc(var(--top-app-bar-height) + 12px);
+      right: 16px;
+      width: 44px;
+      min-width: 44px;
+      padding: 0;
+      border-radius: 999px;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .flowchart-frame {
+      width: min(1420px, 100%);
+      max-height: calc(100vh - var(--top-app-bar-height) - 32px);
+      max-height: calc(100dvh - var(--top-app-bar-height) - 32px);
+      padding: 18px;
+      overflow: auto;
+      border: 1px solid rgba(70, 215, 255, 0.22);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(70, 215, 255, 0.08), transparent 42%),
+        rgba(8, 17, 29, 0.96);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    .flowchart-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .flow-line {
+      fill: none;
+      stroke: rgba(147, 181, 224, 0.72);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      marker-end: url(#arrow-head);
+    }
+
+    .flow-label {
+      fill: var(--muted);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .node-text {
+      fill: var(--text);
+      font-size: 24px;
+      font-weight: 800;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+
+    .node-process rect,
+    .node-progress rect,
+    .node-next rect {
+      fill: rgba(17, 31, 49, 0.96);
+      stroke: rgba(70, 215, 255, 0.75);
+      stroke-width: 4;
+    }
+
+    .node-decision polygon {
+      fill: rgba(17, 31, 49, 0.96);
+      stroke: rgba(143, 212, 255, 0.82);
+      stroke-width: 4;
+    }
+
+    .node-error rect {
+      fill: var(--danger-fill);
+      stroke: var(--danger);
+      stroke-width: 4;
+    }
+
+    .node-pause rect {
+      fill: var(--pause-fill);
+      stroke: #ffb347;
+      stroke-width: 4;
+    }
+
+    .version-edit:hover,
+    .version-edit:focus-visible,
+    .version-load:focus-visible,
+    .flow-button:focus-visible,
+    .panel-close:focus-visible,
+    .save-button:focus-visible {
+      outline: 1px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .steps {
+        grid-template-rows: repeat(3, minmax(220px, 1fr));
+      }
+
+      .versions {
+        min-height: 280px;
+      }
+
+      .flowchart-panel {
+        padding: calc(var(--top-app-bar-height) + 10px) 10px 10px;
+      }
+
+      .flowchart-frame {
+        padding: 10px;
+        border-radius: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-app-bar">
+    <button id="open-flowchart" class="flow-button" type="button" aria-expanded="false" aria-controls="flowchart-panel">
+      Programm-Ablaufplan
+    </button>
+  </header>
+
+  <main class="layout">
+    <div class="steps">
+      <section class="step">
+        <h2>Step One</h2>
+        <textarea id="step-one" placeholder="Promptbaustein fuer die Core-Auswahl oder Kontextvorbereitung"></textarea>
+      </section>
+      <section class="step">
+        <h2>Step Two</h2>
+        <textarea id="step-two" placeholder="Promptbaustein fuer Stil, Parameter oder weitere Instruktionen"></textarea>
+      </section>
+      <section class="step">
+        <h2>Step Three</h2>
+        <textarea id="step-three" placeholder="Promptbaustein fuer Pruefung, Ausgabe oder Nachbearbeitung"></textarea>
+      </section>
+    </div>
+
+    <aside class="versions">
+      <button id="save-version" class="save-button" type="button">Version speichern</button>
+      <div id="version-list" class="version-list"></div>
+    </aside>
+  </main>
+
+  <section id="flowchart-panel" class="flowchart-panel" hidden aria-modal="true" role="dialog" aria-label="Programm-Ablaufplan">
+    <button id="close-flowchart" class="panel-close" type="button" aria-label="Ablaufplan schliessen">&times;</button>
+    <div class="flowchart-frame">
+      <svg class="flowchart-svg" viewBox="0 0 1220 1260" role="img" aria-labelledby="flowchart-title">
+        <title id="flowchart-title">Visueller Ablaufplan der Bildgenerierung</title>
+        <defs>
+          <marker id="arrow-head" viewBox="0 0 18 18" refX="15" refY="9" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+            <path d="M 0 0 L 18 9 L 0 18 z" fill="rgba(147, 181, 224, 0.8)"></path>
+          </marker>
+        </defs>
+
+        <path class="flow-line" d="M 610 124 L 610 160"></path>
+        <path class="flow-line" d="M 610 244 L 610 280"></path>
+        <path class="flow-line" d="M 610 400 L 610 450"></path>
+        <path class="flow-line" d="M 610 534 L 610 580"></path>
+        <path class="flow-line" d="M 610 700 L 610 760"></path>
+        <path class="flow-line" d="M 610 844 L 610 880"></path>
+        <path class="flow-line" d="M 610 964 L 610 1010"></path>
+        <path class="flow-line" d="M 740 1070 L 790 1070 L 790 922 L 820 922"></path>
+        <path class="flow-line" d="M 970 964 L 970 1048"></path>
+        <path class="flow-line" d="M 970 1048 L 1142 1048 L 1142 82 L 760 82"></path>
+        <path class="flow-line" d="M 480 340 L 400 340 L 400 332 L 360 332"></path>
+        <path class="flow-line" d="M 480 640 L 400 640 L 400 652 L 360 652"></path>
+        <path class="flow-line" d="M 480 1070 L 400 1070 L 400 1060 L 360 1060"></path>
+        <path class="flow-line" d="M 220 374 L 220 1130"></path>
+        <path class="flow-line" d="M 220 694 L 220 1130"></path>
+        <path class="flow-line" d="M 220 1102 L 220 1130"></path>
+
+        <text class="flow-label" x="632" y="432">Ja</text>
+        <text class="flow-label" x="632" y="732">Ja</text>
+        <text class="flow-label" x="804" y="914">Ja</text>
+        <text class="flow-label" x="386" y="318">Nein</text>
+        <text class="flow-label" x="386" y="620">Nein</text>
+        <text class="flow-label" x="386" y="1042">Nein</text>
+
+        <g class="node-process">
+          <rect x="460" y="40" width="300" height="84" rx="24"></rect>
+          <text class="node-text" x="610" y="82">
+            <tspan x="610" dy="-0.45em">Fehlenden Core</tspan>
+            <tspan x="610" dy="1.1em">ermitteln</tspan>
+          </text>
+        </g>
+
+        <g class="node-process">
+          <rect x="460" y="160" width="300" height="84" rx="24"></rect>
+          <text class="node-text" x="610" y="202">
+            <tspan x="610" dy="-0.45em">16:9 / Dark-Mode</tspan>
+            <tspan x="610" dy="1.1em">Parameter festlegen</tspan>
+          </text>
+        </g>
+
+        <g class="node-decision">
+          <polygon points="610,280 740,340 610,400 480,340"></polygon>
+          <text class="node-text" x="610" y="340">
+            <tspan x="610" dy="-0.45em">Infrastruktur</tspan>
+            <tspan x="610" dy="1.1em">ok?</tspan>
+          </text>
+        </g>
+
+        <g class="node-error">
+          <rect x="80" y="290" width="280" height="84" rx="24"></rect>
+          <text class="node-text" x="220" y="332">
+            <tspan x="220" dy="-0.45em">Infrastruktur-</tspan>
+            <tspan x="220" dy="1.1em">fehler</tspan>
+          </text>
+        </g>
+
+        <g class="node-process">
+          <rect x="460" y="450" width="300" height="84" rx="24"></rect>
+          <text class="node-text" x="610" y="492">
+            <tspan x="610" dy="-0.45em">Direkte Bild-</tspan>
+            <tspan x="610" dy="1.1em">generierung</tspan>
+          </text>
+        </g>
+
+        <g class="node-decision">
+          <polygon points="610,580 740,640 610,700 480,640"></polygon>
+          <text class="node-text" x="610" y="640">
+            <tspan x="610" dy="-0.45em">Ergebnis</tspan>
+            <tspan x="610" dy="1.1em">vorhanden?</tspan>
+          </text>
+        </g>
+
+        <g class="node-error">
+          <rect x="80" y="610" width="280" height="84" rx="24"></rect>
+          <text class="node-text" x="220" y="652">
+            <tspan x="220" dy="-0.45em">Generierung</tspan>
+            <tspan x="220" dy="1.1em">fehlgeschlagen</tspan>
+          </text>
+        </g>
+
+        <g class="node-process">
+          <rect x="460" y="760" width="300" height="84" rx="24"></rect>
+          <text class="node-text" x="610" y="802">
+            <tspan x="610" dy="-0.45em">Datei in</tspan>
+            <tspan x="610" dy="1.1em">Infografiken speichern</tspan>
+          </text>
+        </g>
+
+        <g class="node-process">
+          <rect x="460" y="880" width="300" height="84" rx="24"></rect>
+          <text class="node-text" x="610" y="922">
+            <tspan x="610" dy="-0.45em">Datei / Format</tspan>
+            <tspan x="610" dy="1.1em">pruefen</tspan>
+          </text>
+        </g>
+
+        <g class="node-decision">
+          <polygon points="610,1010 740,1070 610,1130 480,1070"></polygon>
+          <text class="node-text" x="610" y="1070">
+            <tspan x="610" dy="-0.45em">Pruefung</tspan>
+            <tspan x="610" dy="1.1em">ok?</tspan>
+          </text>
+        </g>
+
+        <g class="node-error">
+          <rect x="80" y="1018" width="280" height="84" rx="24"></rect>
+          <text class="node-text" x="220" y="1060">
+            <tspan x="220" dy="-0.45em">Datei / Format</tspan>
+            <tspan x="220" dy="1.1em">fehlgeschlagen</tspan>
+          </text>
+        </g>
+
+        <g class="node-progress">
+          <rect x="820" y="880" width="300" height="84" rx="24"></rect>
+          <text class="node-text" x="970" y="922">
+            <tspan x="970" dy="-0.45em">Fortschritt</tspan>
+            <tspan x="970" dy="1.1em">sichern</tspan>
+          </text>
+        </g>
+
+        <g class="node-next">
+          <rect x="820" y="1048" width="300" height="84" rx="24"></rect>
+          <text class="node-text" x="970" y="1090">
+            <tspan x="970" dy="-0.45em">Naechster</tspan>
+            <tspan x="970" dy="1.1em">serieller Lauf</tspan>
+          </text>
+        </g>
+
+        <g class="node-pause">
+          <rect x="80" y="1130" width="280" height="84" rx="24"></rect>
+          <text class="node-text" x="220" y="1172">
+            <tspan x="220" dy="-0.45em">Dokumentieren</tspan>
+            <tspan x="220" dy="1.1em">und pausieren</tspan>
+          </text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const DRAFT_KEY = "thors-core.admin-bildgenerierung.entwurf.v1";
+      const VERSIONS_KEY = "thors-core.admin-bildgenerierung.versionen.v1";
+      const FLOW_HASH = "#flowchart";
+      const FIELDS = [
+        { id: "step-one", key: "stepOne", title: "Step One" },
+        { id: "step-two", key: "stepTwo", title: "Step Two" },
+        { id: "step-three", key: "stepThree", title: "Step Three" }
+      ];
+
+      const inputs = FIELDS.map(field => ({
+        ...field,
+        element: document.getElementById(field.id)
+      }));
+      const saveButton = document.getElementById("save-version");
+      const versionList = document.getElementById("version-list");
+      const openFlowchartButton = document.getElementById("open-flowchart");
+      const closeFlowchartButton = document.getElementById("close-flowchart");
+      const flowchartPanel = document.getElementById("flowchart-panel");
+      const timeFormat = new Intl.DateTimeFormat("de-DE", {
+        dateStyle: "medium",
+        timeStyle: "short"
+      });
+
+      let versions = readVersions();
+      let activeVersionId = "";
+
+      loadDraft();
+      renderVersions();
+      syncFlowchartFromHash();
+
+      inputs.forEach(({ element }) => {
+        element.addEventListener("input", () => {
+          writeDraft(readCurrentState());
+        });
+      });
+
+      saveButton.addEventListener("click", () => {
+        const state = readCurrentState();
+        writeDraft(state);
+        const version = {
+          id: createId(),
+          savedAt: state.updatedAt,
+          prompts: state.prompts
+        };
+        versions = [version, ...versions];
+        activeVersionId = version.id;
+        writeVersions();
+        renderVersions();
+      });
+
+      openFlowchartButton.addEventListener("click", () => {
+        if (window.location.hash !== FLOW_HASH) {
+          window.history.pushState(null, "", FLOW_HASH);
+        }
+        syncFlowchartFromHash();
+      });
+
+      closeFlowchartButton.addEventListener("click", () => {
+        if (window.location.hash === FLOW_HASH) {
+          window.history.pushState(null, "", `${window.location.pathname}${window.location.search}`);
+        }
+        syncFlowchartFromHash();
+        openFlowchartButton.focus();
+      });
+
+      window.addEventListener("hashchange", syncFlowchartFromHash);
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && !flowchartPanel.hidden) {
+          closeFlowchartButton.click();
+        }
+      });
+
+      versionList.addEventListener("click", event => {
+        const editButton = event.target.closest("[data-action='edit']");
+        if (editButton) {
+          renameVersion(editButton.dataset.versionId);
+          return;
+        }
+
+        const loadButton = event.target.closest("[data-action='load']");
+        if (!loadButton) {
+          return;
+        }
+
+        const version = versions.find(entry => entry.id === loadButton.dataset.versionId);
+        if (!version) {
+          return;
+        }
+
+        activeVersionId = version.id;
+        applyState({
+          updatedAt: new Date().toISOString(),
+          prompts: version.prompts
+        });
+        writeDraft(readCurrentState());
+        renderVersions();
+      });
+
+      function readCurrentState() {
+        const prompts = inputs.reduce((result, field) => {
+          result[field.key] = field.element.value;
+          return result;
+        }, {});
+
+        return {
+          updatedAt: new Date().toISOString(),
+          prompts
+        };
+      }
+
+      function applyState(state) {
+        inputs.forEach(field => {
+          field.element.value = state?.prompts?.[field.key] || "";
+        });
+      }
+
+      function loadDraft() {
+        try {
+          const draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null");
+          if (draft && typeof draft === "object") {
+            applyState(draft);
+          }
+        } catch {
+          applyState({ prompts: {} });
+        }
+      }
+
+      function writeDraft(state) {
+        try {
+          localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+        } catch {
+          // Ignore unavailable local storage.
+        }
+      }
+
+      function readVersions() {
+        try {
+          const stored = JSON.parse(localStorage.getItem(VERSIONS_KEY) || "[]");
+          return Array.isArray(stored) ? stored.filter(Boolean) : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function writeVersions() {
+        try {
+          localStorage.setItem(VERSIONS_KEY, JSON.stringify(versions));
+        } catch {
+          // Ignore unavailable local storage.
+        }
+      }
+
+      function renderVersions() {
+        versionList.textContent = "";
+
+        if (versions.length === 0) {
+          const empty = document.createElement("div");
+          empty.className = "empty";
+          empty.textContent = "Keine gespeicherten Versionen";
+          versionList.append(empty);
+          return;
+        }
+
+        versions.forEach(version => {
+          const item = document.createElement("div");
+          const loadButton = document.createElement("button");
+          const editButton = document.createElement("button");
+          const time = document.createElement("time");
+          const label = document.createElement("span");
+
+          item.className = "version-item";
+          item.dataset.active = String(version.id === activeVersionId);
+
+          loadButton.type = "button";
+          loadButton.className = "version-load";
+          loadButton.dataset.action = "load";
+          loadButton.dataset.versionId = version.id;
+          loadButton.setAttribute("aria-pressed", String(version.id === activeVersionId));
+          loadButton.setAttribute("aria-label", `${displayVersionLabel(version)} laden`);
+
+          editButton.type = "button";
+          editButton.className = "version-edit";
+          editButton.dataset.action = "edit";
+          editButton.dataset.versionId = version.id;
+          editButton.textContent = "Bearbeiten";
+          editButton.setAttribute("aria-label", `${displayVersionLabel(version)} umbenennen`);
+
+          time.dateTime = version.savedAt || "";
+          time.textContent = formatTime(version.savedAt);
+          label.textContent = displayVersionLabel(version);
+
+          loadButton.append(time, label);
+          item.append(loadButton, editButton);
+          versionList.append(item);
+        });
+      }
+
+      function renameVersion(versionId) {
+        const version = versions.find(entry => entry.id === versionId);
+        if (!version) {
+          return;
+        }
+
+        const currentLabel = displayVersionLabel(version);
+        const nextLabel = window.prompt("Versionsnamen bearbeiten", currentLabel);
+        if (nextLabel === null) {
+          return;
+        }
+
+        const trimmedLabel = nextLabel.trim();
+        if (trimmedLabel) {
+          version.customLabel = trimmedLabel;
+        } else {
+          delete version.customLabel;
+        }
+
+        writeVersions();
+        renderVersions();
+      }
+
+      function displayVersionLabel(version) {
+        if (typeof version?.customLabel === "string" && version.customLabel.trim()) {
+          return version.customLabel.trim();
+        }
+        return derivedVersionLabel(version?.prompts);
+      }
+
+      function derivedVersionLabel(prompts) {
+        for (const field of FIELDS) {
+          const firstLine = String(prompts?.[field.key] || "")
+            .split(/\r?\n/)
+            .map(line => line.trim())
+            .find(Boolean);
+          if (firstLine) {
+            return shorten(firstLine, 60);
+          }
+        }
+        return "Leere Version";
+      }
+
+      function shorten(text, length) {
+        return text.length <= length ? text : `${text.slice(0, length - 3).trimEnd()}...`;
+      }
+
+      function formatTime(value) {
+        const date = new Date(value);
+        return Number.isNaN(date.getTime()) ? "Zeitpunkt unbekannt" : timeFormat.format(date);
+      }
+
+      function createId() {
+        if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+          return crypto.randomUUID();
+        }
+        return `version-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+      }
+
+      function syncFlowchartFromHash() {
+        const isOpen = window.location.hash === FLOW_HASH;
+        flowchartPanel.hidden = !isOpen;
+        openFlowchartButton.setAttribute("aria-expanded", String(isOpen));
+        document.body.classList.toggle("flowchart-open", isOpen);
+      }
+    })();
+  </script>
+</body>
+</html>
